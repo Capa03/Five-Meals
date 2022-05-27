@@ -41,6 +41,14 @@ O projeto é sobre a automatização do processo de pedido de um restaurante
 - [x] Nested RecyclerView
 - [ ] Tarefa por concluir: QR code Reader
 
+## Tabela - Exemplo
+TO DO | In Progress | Done | 
+-----------|--------|------|
+Login | |
+Qr Code Reader | |
+Manual Code Insert | |
+Bottom Navigation and Fragments | |
+
 #### Para mais informação do processo de desenvolvimento ver [Desenvolvimento do projeto](https://github.com/Capa03/Five-Meals/projects/1)
 
 ##Links Importantes
