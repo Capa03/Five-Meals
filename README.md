@@ -21,7 +21,7 @@ O projeto é sobre a automatização do processo de pedido de um restaurante
 >
 #### RecyclerView
 > 
-> - Nested RecyclerView
+> - Menu View - Nested RecyclerView
 
 #### Room DataBase
 >
