@@ -51,7 +51,7 @@ Bottom Navigation and Fragments | |
 
 #### Para mais informação do processo de desenvolvimento ver [Desenvolvimento do projeto](https://github.com/Capa03/Five-Meals/projects/1)
 
-##Links Importantes
+## Links Importantes
 * [Tutorial Youtube](https://www.youtube.com/shorts/Lm5xToJkMWY)
 
 ```Java
@@ -66,7 +66,7 @@ public class Main {
 }
 ```
 
-## Tabela - Exemplo
+## Aplicações e Plugins Usados
 Applicação | Versão
 -----------|--------
 Android Studio | 2.23
