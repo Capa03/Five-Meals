@@ -5,7 +5,7 @@
 
 ## Descrição do Projeto
 
-O projeto é sobre 
+O projeto é sobre a automatização do processo de pedido de um restaurante
 
 ## Elementos da equipa:
 * David Capa
