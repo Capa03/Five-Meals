@@ -37,14 +37,10 @@ O projeto é sobre a automatização do processo de pedido de um restaurante
 
 
 ## Lista de Tarefas:
-- [x] Implementação de Layouts no Adobe XD
-- [x] Nested RecyclerView
-- [ ] Tarefa por concluir: QR code Reader
 
-## Tabela - Exemplo
 TO DO | In Progress | Done | 
 -----------|--------|------|
-Login | |
+Login | X|
 Qr Code Reader | |
 Manual Code Insert | |
 Bottom Navigation and Fragments | |
