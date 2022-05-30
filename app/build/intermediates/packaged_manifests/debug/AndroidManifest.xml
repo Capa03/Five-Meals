@@ -19,6 +19,9 @@
         android:testOnly="true"
         android:theme="@style/Theme.FiveMealsMobileProject" >
         <activity
+            android:name="com.example.fivemealsmobileproject.PreLoginActivity"
+            android:exported="false" />
+        <activity
             android:name="com.example.fivemealsmobileproject.ActivityLogin"
             android:exported="false" />
         <activity

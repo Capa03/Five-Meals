@@ -1,9 +1,9 @@
 -- Merging decision tree log ---
 manifest
-ADDED from C:\Users\David capa\AndroidStudioProjects\Projeto\FiveMeals\app\src\main\AndroidManifest.xml:2:1-26:12
-INJECTED from C:\Users\David capa\AndroidStudioProjects\Projeto\FiveMeals\app\src\main\AndroidManifest.xml:2:1-26:12
-INJECTED from C:\Users\David capa\AndroidStudioProjects\Projeto\FiveMeals\app\src\main\AndroidManifest.xml:2:1-26:12
-INJECTED from C:\Users\David capa\AndroidStudioProjects\Projeto\FiveMeals\app\src\main\AndroidManifest.xml:2:1-26:12
+ADDED from C:\Users\David capa\AndroidStudioProjects\Projeto\FiveMeals\app\src\main\AndroidManifest.xml:2:1-29:12
+INJECTED from C:\Users\David capa\AndroidStudioProjects\Projeto\FiveMeals\app\src\main\AndroidManifest.xml:2:1-29:12
+INJECTED from C:\Users\David capa\AndroidStudioProjects\Projeto\FiveMeals\app\src\main\AndroidManifest.xml:2:1-29:12
+INJECTED from C:\Users\David capa\AndroidStudioProjects\Projeto\FiveMeals\app\src\main\AndroidManifest.xml:2:1-29:12
 MERGED from [com.google.android.material:material:1.6.0] C:\Users\David capa\.gradle\caches\transforms-3\efcb57b63f917a8735f7b296fbd19cf4\transformed\material-1.6.0\AndroidManifest.xml:17:1-26:12
 MERGED from [androidx.constraintlayout:constraintlayout:2.1.4] C:\Users\David capa\.gradle\caches\transforms-3\5eafe7cafa3ec6df23ae54f9b76d3120\transformed\constraintlayout-2.1.4\AndroidManifest.xml:2:1-11:12
 MERGED from [androidx.appcompat:appcompat:1.4.1] C:\Users\David capa\.gradle\caches\transforms-3\02e0bd612fca2a22099e175f45d3c7d6\transformed\appcompat-1.4.1\AndroidManifest.xml:17:1-24:12
@@ -43,25 +43,25 @@ MERGED from [androidx.documentfile:documentfile:1.0.0] C:\Users\David capa\.grad
 MERGED from [androidx.localbroadcastmanager:localbroadcastmanager:1.0.0] C:\Users\David capa\.gradle\caches\transforms-3\188194eaa07a6d35d237de0dd9b6ac24\transformed\localbroadcastmanager-1.0.0\AndroidManifest.xml:17:1-22:12
 MERGED from [androidx.print:print:1.0.0] C:\Users\David capa\.gradle\caches\transforms-3\17156df85410c057d296e1b383c94b8c\transformed\print-1.0.0\AndroidManifest.xml:17:1-22:12
 MERGED from [androidx.annotation:annotation-experimental:1.1.0] C:\Users\David capa\.gradle\caches\transforms-3\4d28d0cf899581876e3788095fa1efd9\transformed\annotation-experimental-1.1.0\AndroidManifest.xml:17:1-24:12
-INJECTED from C:\Users\David capa\AndroidStudioProjects\Projeto\FiveMeals\app\src\main\AndroidManifest.xml:2:1-26:12
-INJECTED from C:\Users\David capa\AndroidStudioProjects\Projeto\FiveMeals\app\src\main\AndroidManifest.xml:2:1-26:12
-INJECTED from C:\Users\David capa\AndroidStudioProjects\Projeto\FiveMeals\app\src\main\AndroidManifest.xml:2:1-26:12
+INJECTED from C:\Users\David capa\AndroidStudioProjects\Projeto\FiveMeals\app\src\main\AndroidManifest.xml:2:1-29:12
+INJECTED from C:\Users\David capa\AndroidStudioProjects\Projeto\FiveMeals\app\src\main\AndroidManifest.xml:2:1-29:12
+INJECTED from C:\Users\David capa\AndroidStudioProjects\Projeto\FiveMeals\app\src\main\AndroidManifest.xml:2:1-29:12
 	package
 		ADDED from C:\Users\David capa\AndroidStudioProjects\Projeto\FiveMeals\app\src\main\AndroidManifest.xml:3:5-49
 		INJECTED from C:\Users\David capa\AndroidStudioProjects\Projeto\FiveMeals\app\src\main\AndroidManifest.xml
 		INJECTED from C:\Users\David capa\AndroidStudioProjects\Projeto\FiveMeals\app\src\main\AndroidManifest.xml
 	android:versionName
 		INJECTED from C:\Users\David capa\AndroidStudioProjects\Projeto\FiveMeals\app\src\main\AndroidManifest.xml
-		ADDED from C:\Users\David capa\AndroidStudioProjects\Projeto\FiveMeals\app\src\main\AndroidManifest.xml:2:1-26:12
+		ADDED from C:\Users\David capa\AndroidStudioProjects\Projeto\FiveMeals\app\src\main\AndroidManifest.xml:2:1-29:12
 		INJECTED from C:\Users\David capa\AndroidStudioProjects\Projeto\FiveMeals\app\src\main\AndroidManifest.xml
 	android:versionCode
 		INJECTED from C:\Users\David capa\AndroidStudioProjects\Projeto\FiveMeals\app\src\main\AndroidManifest.xml
-		ADDED from C:\Users\David capa\AndroidStudioProjects\Projeto\FiveMeals\app\src\main\AndroidManifest.xml:2:1-26:12
+		ADDED from C:\Users\David capa\AndroidStudioProjects\Projeto\FiveMeals\app\src\main\AndroidManifest.xml:2:1-29:12
 		INJECTED from C:\Users\David capa\AndroidStudioProjects\Projeto\FiveMeals\app\src\main\AndroidManifest.xml
 	xmlns:android
 		ADDED from C:\Users\David capa\AndroidStudioProjects\Projeto\FiveMeals\app\src\main\AndroidManifest.xml:2:11-69
 application
-ADDED from C:\Users\David capa\AndroidStudioProjects\Projeto\FiveMeals\app\src\main\AndroidManifest.xml:5:5-24:19
+ADDED from C:\Users\David capa\AndroidStudioProjects\Projeto\FiveMeals\app\src\main\AndroidManifest.xml:5:5-27:19
 MERGED from [com.google.android.material:material:1.6.0] C:\Users\David capa\.gradle\caches\transforms-3\efcb57b63f917a8735f7b296fbd19cf4\transformed\material-1.6.0\AndroidManifest.xml:24:5-20
 MERGED from [com.google.android.material:material:1.6.0] C:\Users\David capa\.gradle\caches\transforms-3\efcb57b63f917a8735f7b296fbd19cf4\transformed\material-1.6.0\AndroidManifest.xml:24:5-20
 MERGED from [androidx.constraintlayout:constraintlayout:2.1.4] C:\Users\David capa\.gradle\caches\transforms-3\5eafe7cafa3ec6df23ae54f9b76d3120\transformed\constraintlayout-2.1.4\AndroidManifest.xml:9:5-20
@@ -90,28 +90,34 @@ MERGED from [androidx.startup:startup-runtime:1.0.0] C:\Users\David capa\.gradle
 		ADDED from C:\Users\David capa\AndroidStudioProjects\Projeto\FiveMeals\app\src\main\AndroidManifest.xml:6:9-35
 	android:theme
 		ADDED from C:\Users\David capa\AndroidStudioProjects\Projeto\FiveMeals\app\src\main\AndroidManifest.xml:11:9-60
-activity#com.example.fivemealsmobileproject.ActivityLogin
+activity#com.example.fivemealsmobileproject.PreLoginActivity
 ADDED from C:\Users\David capa\AndroidStudioProjects\Projeto\FiveMeals\app\src\main\AndroidManifest.xml:12:9-14:40
 	android:exported
 		ADDED from C:\Users\David capa\AndroidStudioProjects\Projeto\FiveMeals\app\src\main\AndroidManifest.xml:14:13-37
 	android:name
-		ADDED from C:\Users\David capa\AndroidStudioProjects\Projeto\FiveMeals\app\src\main\AndroidManifest.xml:13:13-42
-activity#com.example.fivemealsmobileproject.LaunchActivity
-ADDED from C:\Users\David capa\AndroidStudioProjects\Projeto\FiveMeals\app\src\main\AndroidManifest.xml:15:9-23:20
+		ADDED from C:\Users\David capa\AndroidStudioProjects\Projeto\FiveMeals\app\src\main\AndroidManifest.xml:13:13-45
+activity#com.example.fivemealsmobileproject.ActivityLogin
+ADDED from C:\Users\David capa\AndroidStudioProjects\Projeto\FiveMeals\app\src\main\AndroidManifest.xml:15:9-17:40
 	android:exported
-		ADDED from C:\Users\David capa\AndroidStudioProjects\Projeto\FiveMeals\app\src\main\AndroidManifest.xml:17:13-36
+		ADDED from C:\Users\David capa\AndroidStudioProjects\Projeto\FiveMeals\app\src\main\AndroidManifest.xml:17:13-37
 	android:name
-		ADDED from C:\Users\David capa\AndroidStudioProjects\Projeto\FiveMeals\app\src\main\AndroidManifest.xml:16:13-43
+		ADDED from C:\Users\David capa\AndroidStudioProjects\Projeto\FiveMeals\app\src\main\AndroidManifest.xml:16:13-42
+activity#com.example.fivemealsmobileproject.LaunchActivity
+ADDED from C:\Users\David capa\AndroidStudioProjects\Projeto\FiveMeals\app\src\main\AndroidManifest.xml:18:9-26:20
+	android:exported
+		ADDED from C:\Users\David capa\AndroidStudioProjects\Projeto\FiveMeals\app\src\main\AndroidManifest.xml:20:13-36
+	android:name
+		ADDED from C:\Users\David capa\AndroidStudioProjects\Projeto\FiveMeals\app\src\main\AndroidManifest.xml:19:13-43
 intent-filter#action:name:android.intent.action.MAIN+category:name:android.intent.category.LAUNCHER
-ADDED from C:\Users\David capa\AndroidStudioProjects\Projeto\FiveMeals\app\src\main\AndroidManifest.xml:18:13-22:29
+ADDED from C:\Users\David capa\AndroidStudioProjects\Projeto\FiveMeals\app\src\main\AndroidManifest.xml:21:13-25:29
 action#android.intent.action.MAIN
-ADDED from C:\Users\David capa\AndroidStudioProjects\Projeto\FiveMeals\app\src\main\AndroidManifest.xml:19:17-69
+ADDED from C:\Users\David capa\AndroidStudioProjects\Projeto\FiveMeals\app\src\main\AndroidManifest.xml:22:17-69
 	android:name
-		ADDED from C:\Users\David capa\AndroidStudioProjects\Projeto\FiveMeals\app\src\main\AndroidManifest.xml:19:25-66
+		ADDED from C:\Users\David capa\AndroidStudioProjects\Projeto\FiveMeals\app\src\main\AndroidManifest.xml:22:25-66
 category#android.intent.category.LAUNCHER
-ADDED from C:\Users\David capa\AndroidStudioProjects\Projeto\FiveMeals\app\src\main\AndroidManifest.xml:21:17-77
+ADDED from C:\Users\David capa\AndroidStudioProjects\Projeto\FiveMeals\app\src\main\AndroidManifest.xml:24:17-77
 	android:name
-		ADDED from C:\Users\David capa\AndroidStudioProjects\Projeto\FiveMeals\app\src\main\AndroidManifest.xml:21:27-74
+		ADDED from C:\Users\David capa\AndroidStudioProjects\Projeto\FiveMeals\app\src\main\AndroidManifest.xml:24:27-74
 uses-sdk
 INJECTED from C:\Users\David capa\AndroidStudioProjects\Projeto\FiveMeals\app\src\main\AndroidManifest.xml reason: use-sdk injection requested
 INJECTED from C:\Users\David capa\AndroidStudioProjects\Projeto\FiveMeals\app\src\main\AndroidManifest.xml

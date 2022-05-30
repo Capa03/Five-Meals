@@ -3,4 +3,10 @@
     <string name="login_username_text">Username</string>
     <string name="login_password_text">Password</string>
     <string name="login_button_signIn">Sign In</string>
+    <string name="forgot_password">Forgot Password?</string>
+    <string name="textview">TextView</string>
+    <string name="todo">TODO</string>
+    <string name="dont_have_a_account_sign_up">Dont Have a Account? Sign Up!</string>
+    <string name="i_already_have_a_account">I Already Have A Account</string>
+    <string name="create_an_account">Create An Account</string>
 </resources>
