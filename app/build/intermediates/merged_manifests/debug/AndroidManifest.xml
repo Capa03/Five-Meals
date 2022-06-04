@@ -19,13 +19,13 @@
         android:testOnly="true"
         android:theme="@style/Theme.FiveMealsMobileProject" >
         <activity
-            android:name="com.example.fivemealsmobileproject.PreLoginActivity"
+            android:name="com.example.fivemealsmobileproject.login.CreateNewAccountActivity"
             android:exported="false" />
         <activity
-            android:name="com.example.fivemealsmobileproject.ActivityLogin"
+            android:name="com.example.fivemealsmobileproject.login.LoginActivity"
             android:exported="false" />
         <activity
-            android:name="com.example.fivemealsmobileproject.LaunchActivity"
+            android:name="com.example.fivemealsmobileproject.login.PreLoginActivity"
             android:exported="true" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

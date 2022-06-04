@@ -2,11 +2,10 @@ package com.example.fivemealsmobileproject.login;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 
-import com.example.fivemealsmobileproject.LaunchActivity;
 import com.example.fivemealsmobileproject.R;
 
 public class PreLoginActivity extends AppCompatActivity {
@@ -19,5 +18,13 @@ public class PreLoginActivity extends AppCompatActivity {
     }
 
 
+    public void onHaveAccountClicked(View view) {
+        LoginActivity.startActivity(this);
+        finish();
+    }
 
+    public void onNewAccountClicked(View view) {
+        CreateNewAccountActivity.startActivity(this);
+        finish();
+    }
 }

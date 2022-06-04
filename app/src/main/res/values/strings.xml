@@ -9,4 +9,7 @@
     <string name="dont_have_a_account_sign_up">Dont Have a Account? Sign Up!</string>
     <string name="i_already_have_a_account">I Already Have A Account</string>
     <string name="create_an_account">Create An Account</string>
+    <string name="emailCreateAccount">Email</string>
+    <string name="already_have_a_accountCreateAccount">Already Have a Account?</string>
+    <string name="sign_upCreateAccount">Sign Up</string>
 </resources>

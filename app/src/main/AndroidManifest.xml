@@ -10,13 +10,13 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.FiveMealsMobileProject">
         <activity
-            android:name=".PreLoginActivity"
+            android:name=".login.CreateNewAccountActivity"
             android:exported="false" />
         <activity
-            android:name=".ActivityLogin"
+            android:name=".login.LoginActivity"
             android:exported="false" />
         <activity
-            android:name=".LaunchActivity"
+            android:name=".login.PreLoginActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
