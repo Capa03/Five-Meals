@@ -44,8 +44,8 @@ public class LoginActivity extends AppCompatActivity {
 
             String hash = String.valueOf(password.hashCode());
 
-            Log.i("LoginActivityPW", hash);
-            Toast.makeText(this,hash,Toast.LENGTH_SHORT).show();
+            //Log.i("LoginActivityPW", hash);
+            //Toast.makeText(this,hash,Toast.LENGTH_SHORT).show();
 
         if (loggedInUser != null) {
             // user válido
