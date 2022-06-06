@@ -13,19 +13,23 @@
             android:name=".login.CreateNewAccountActivity"
             android:exported="false" />
         <activity
-            android:name=".qrcode.QRCodeActivity"
+            android:name=".qrcode.CodeActivity"
             android:exported="false" />
         <activity
             android:name=".login.LoginActivity"
             android:exported="false" />
         <activity
             android:name=".login.PreLoginActivity"
+            android:exported="false">
+        </activity>
+
+        <activity android:name=".SplashScreenLogo"
             android:exported="true">
             <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
+            <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
+            <category android:name="android.intent.category.LAUNCHER" />
+        </intent-filter>
         </activity>
     </application>
 

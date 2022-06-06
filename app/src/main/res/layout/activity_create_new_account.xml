@@ -23,7 +23,7 @@
         app:layout_constraintTop_toBottomOf="@+id/imageViewCreateAccountLogo" />
 
     <EditText
-        android:id="@+id/editTextLoginPassword"
+        android:id="@+id/editTextCreateAccountPassword"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="32dp"
@@ -43,12 +43,13 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="32dp"
         android:layout_marginBottom="32dp"
+        android:onClick="onSignUp"
         android:text="@string/sign_upCreateAccount"
         android:textColor="#000000"
         app:layout_constraintBottom_toTopOf="@+id/textViewCreateAccountHaveAccount"
-        app:layout_constraintEnd_toEndOf="@+id/editTextLoginPassword"
-        app:layout_constraintStart_toStartOf="@+id/editTextLoginPassword"
-        app:layout_constraintTop_toBottomOf="@+id/editTextLoginPassword" />
+        app:layout_constraintEnd_toEndOf="@+id/editTextCreateAccountPassword"
+        app:layout_constraintStart_toStartOf="@+id/editTextCreateAccountPassword"
+        app:layout_constraintTop_toBottomOf="@+id/editTextCreateAccountPassword" />
 
 
     <ImageView
