@@ -37,6 +37,7 @@ public class SessionManager {
         return getSharedPreferences(context).getBoolean("rememberMe", false);
     }
 
+    //logout
     public static void clearSession(Context context) {
         getSharedPreferences(context).edit().clear().apply();
     }

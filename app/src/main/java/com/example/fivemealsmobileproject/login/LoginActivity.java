@@ -31,6 +31,7 @@ public class LoginActivity extends AppCompatActivity {
         this.cacheViews();
 
         if(SessionManager.persistedSession(this)){
+            QRCodeActivity.startActivity(this);
             finish();
         }
 
@@ -50,8 +51,7 @@ public class LoginActivity extends AppCompatActivity {
             SessionManager.saveSession(this, username, false);
             Toast.makeText(this, "Successful Login", Toast.LENGTH_LONG).show();
 
-            Intent intent = new Intent(this, QRCodeActivity.class);
-            startActivity(intent);
+            QRCodeActivity.startActivity(this);
         } else {
             Toast.makeText(this, "Invalid credentials", Toast.LENGTH_LONG).show();
         }
