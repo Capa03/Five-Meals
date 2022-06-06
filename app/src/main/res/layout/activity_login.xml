@@ -2,13 +2,13 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/textViewLoginForgotPassword"
+
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".login.LoginActivity">
 
     <EditText
-        android:id="@+id/editTextCreateAccountUsername"
+        android:id="@+id/editTextLoginUsername"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="64dp"
@@ -22,7 +22,7 @@
         app:layout_constraintTop_toBottomOf="@+id/imageViewCreateAccountLogo" />
 
     <EditText
-        android:id="@+id/editTextCreateAccountPassword"
+        android:id="@+id/editTextLoginPassword"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="32dp"
@@ -31,19 +31,20 @@
         android:hint="@string/login_password_text"
         android:inputType="textPersonName"
         android:minHeight="48dp"
-        app:layout_constraintStart_toStartOf="@+id/editTextCreateAccountUsername"
-        app:layout_constraintTop_toBottomOf="@+id/editTextCreateAccountUsername" />
+        app:layout_constraintStart_toStartOf="@+id/editTextLoginUsername"
+        app:layout_constraintTop_toBottomOf="@+id/editTextLoginUsername" />
 
     <Button
-        android:id="@+id/buttonCreateAccountSiginUp"
+        android:id="@+id/buttonLoginSignUp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="32dp"
+        android:onClick="onSignIn"
         android:text="@string/login_button_signIn"
         android:textColor="#000000"
-        app:layout_constraintBottom_toTopOf="@+id/textViewCreatAccountHaveAccount"
-        app:layout_constraintEnd_toEndOf="@+id/textView"
-        app:layout_constraintStart_toStartOf="@+id/textView" />
+        app:layout_constraintBottom_toTopOf="@+id/textViewLoginHaveAccount"
+        app:layout_constraintEnd_toEndOf="@+id/textViewLoginForgotPassword"
+        app:layout_constraintStart_toStartOf="@+id/textViewLoginForgotPassword" />
 
     <ImageView
         android:id="@+id/imageViewCreateAccountLogo"
@@ -58,19 +59,20 @@
         tools:srcCompat="@tools:sample/avatars" />
 
     <TextView
-        android:id="@+id/textView"
+        android:id="@+id/textViewLoginForgotPassword"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="32dp"
         android:text="@string/forgot_password"
         android:textColor="#000000"
-        app:layout_constraintBottom_toTopOf="@+id/buttonCreateAccountSiginUp"
+        app:layout_constraintBottom_toTopOf="@+id/buttonLoginSignUp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextCreateAccountPassword" />
+        app:layout_constraintTop_toBottomOf="@+id/editTextLoginPassword" />
+
 
     <TextView
-        android:id="@+id/textViewCreatAccountHaveAccount"
+        android:id="@+id/textViewLoginHaveAccount"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="64dp"
@@ -78,6 +80,6 @@
         android:text="@string/dont_have_a_account_sign_up"
         android:textColor="#000000"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@+id/buttonCreateAccountSiginUp"
-        app:layout_constraintStart_toStartOf="@+id/buttonCreateAccountSiginUp" />
+        app:layout_constraintEnd_toEndOf="@+id/buttonLoginSignUp"
+        app:layout_constraintStart_toStartOf="@+id/buttonLoginSignUp" />
 </androidx.constraintlayout.widget.ConstraintLayout>
