@@ -4,6 +4,8 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 
+import com.example.fivemealsmobileproject.R;
+
 public class QRCodeActivity extends AppCompatActivity {
 
     @Override

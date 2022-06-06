@@ -13,8 +13,8 @@ public interface UserDAO {
     @Query("SELECT * FROM User")
     List<User> getAllUser();
 
-    @Query("SELECT * FROM User WHERE userId = :userId")
-    User getUserById(long userId);
+    @Query("SELECT * FROM User WHERE username = :username")
+    User getUserById(String username);
 
     @Insert
     void insert(User user);

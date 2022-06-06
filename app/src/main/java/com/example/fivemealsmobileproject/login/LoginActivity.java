@@ -39,34 +39,23 @@ public class LoginActivity extends AppCompatActivity {
         String username = this.editTextLoginUsername.getText().toString();
         String password = this.editTextLoginPassword.getText().toString();
 
-        List<User> loggedInUser = AppDataBase.getInstance(this).getUserDAO().getAllUser();
+        User loggedInUser = LoginManager.validateUser(username,password,this);
 
-        for (User user : loggedInUser) {
 
-            if (username.isEmpty()) {
+            String hash = String.valueOf(password.hashCode());
 
-                editTextLoginUsername.setError("Username cannot be empty!");
-                return;
-            }
+            Log.i("LoginActivityPW", hash);
+            Toast.makeText(this,hash,Toast.LENGTH_SHORT).show();
 
-            if (password.isEmpty()) {
-                editTextLoginPassword.setError("Password cannot be empty!");
-                return;
-            }
+        if (loggedInUser != null) {
+            // user válido
+            SessionManager.saveSession(this, username, checkBoxRemeberMe.isChecked());
+            Toast.makeText(this, "Login com sucesso", Toast.LENGTH_LONG).show();
 
-            Log.i("LoginActivityPW", String.valueOf(password.hashCode()));
-/*
-            if (loggedInUser != null) {
-                // user válido
-                SessionManager.saveSession(this, loggedInUser.get((int) user.getUserId()).getUsername(), checkBoxRemeberMe.isChecked());
-
-                Toast.makeText(this, "Login com sucesso", Toast.LENGTH_LONG).show();
-                Intent intent = new Intent(this, MainActivity.class);
-                startActivity(intent);
-            } else {
-                Toast.makeText(this, "Credenciais inválidas", Toast.LENGTH_LONG).show();
-            }
-*/
+            Intent intent = new Intent(this, MainActivity.class);
+            startActivity(intent);
+        } else {
+            Toast.makeText(this, "Credenciais inválidas", Toast.LENGTH_LONG).show();
         }
     }
 

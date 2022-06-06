@@ -1,12 +1,13 @@
 package com.example.fivemealsmobileproject.database;
 
+import androidx.annotation.NonNull;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
 @Entity
 public class User {
-    @PrimaryKey (autoGenerate = true)
-    private long userId;
+    @PrimaryKey
+    @NonNull
     private String username;
     private String email;
     private String password;
@@ -17,9 +18,7 @@ public class User {
         this.password = password;
     }
 
-    public long getUserId() {
-        return userId;
-    }
+
 
     public String getUsername() {
         return username;
@@ -33,9 +32,6 @@ public class User {
         return password;
     }
 
-    public void setUserId(long userId) {
-        this.userId = userId;
-    }
 
     public void setUsername(String username) {
         this.username = username;
