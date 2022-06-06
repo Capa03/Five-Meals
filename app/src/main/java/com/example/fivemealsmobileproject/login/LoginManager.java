@@ -7,15 +7,9 @@ import com.example.fivemealsmobileproject.database.User;
 
 public class LoginManager {
 
-    public static User validateUser(String username, String password, Context context) {
+    public static User validateUser(String username, int passwordHash, Context context) {
         User user = AppDataBase.getInstance(context).getUserDAO().getUserById(username);
         if (user == null) return null;
-        return user.getPassword().equals(password) ? user : null;
-
-//        if (user.getPassword().equals(password)) {
-//            return user;
-//        } else {
-//            return null;
-//        }
+        return user.getPassword() == passwordHash ? user : null;
     }
 }

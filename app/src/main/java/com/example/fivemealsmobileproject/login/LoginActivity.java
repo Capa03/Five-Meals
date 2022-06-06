@@ -11,6 +11,7 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.fivemealsmobileproject.R;
+import com.example.fivemealsmobileproject.database.AppDataBase;
 import com.example.fivemealsmobileproject.database.User;
 import com.example.fivemealsmobileproject.qrcode.QRCodeActivity;
 
@@ -30,9 +31,10 @@ public class LoginActivity extends AppCompatActivity {
         this.cacheViews();
 
         if(SessionManager.persistedSession(this)){
-
             finish();
         }
+
+
     }
 
     public void onSignIn(View view) {
@@ -40,23 +42,18 @@ public class LoginActivity extends AppCompatActivity {
         String username = this.editTextLoginUsername.getText().toString();
         String password = this.editTextLoginPassword.getText().toString();
 
-        User loggedInUser = LoginManager.validateUser(username,password,this);
-
-
-            String hash = String.valueOf(password.hashCode());
-
-            //Log.i("LoginActivityPW", hash);
-            //Toast.makeText(this,hash,Toast.LENGTH_SHORT).show();
+        User loggedInUser = LoginManager.validateUser(username, password.hashCode(),this);
+        password = "0";
 
         if (loggedInUser != null) {
             // user válido
             SessionManager.saveSession(this, username, false);
-            Toast.makeText(this, "Login com sucesso", Toast.LENGTH_LONG).show();
+            Toast.makeText(this, "Successful Login", Toast.LENGTH_LONG).show();
 
             Intent intent = new Intent(this, QRCodeActivity.class);
             startActivity(intent);
         } else {
-            Toast.makeText(this, "Credenciais inválidas", Toast.LENGTH_LONG).show();
+            Toast.makeText(this, "Invalid credentials", Toast.LENGTH_LONG).show();
         }
 
     }
