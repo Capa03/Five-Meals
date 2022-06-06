@@ -5,20 +5,22 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.widget.Toast;
 
 import com.example.fivemealsmobileproject.R;
-import com.example.fivemealsmobileproject.login.CreateNewAccountActivity;
 
-public class QRCodeActivity extends AppCompatActivity {
+public class CodeActivity extends AppCompatActivity {
 
     public static void startActivity(Context context) {
-        Intent intent = new Intent(context, QRCodeActivity.class);
+        Intent intent = new Intent(context, CodeActivity.class);
         context.startActivity(intent);
+
     }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_qrcode);
+        Toast.makeText(this, "QrCode", Toast.LENGTH_SHORT).show();
     }
 }

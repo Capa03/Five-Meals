@@ -5,14 +5,13 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
-import android.widget.Button;
 import android.widget.EditText;
 
 import com.example.fivemealsmobileproject.R;
 import com.example.fivemealsmobileproject.database.AppDataBase;
 import com.example.fivemealsmobileproject.database.User;
+import com.example.fivemealsmobileproject.qrcode.CodeActivity;
 
 public class CreateNewAccountActivity extends AppCompatActivity {
 
@@ -57,7 +56,9 @@ public class CreateNewAccountActivity extends AppCompatActivity {
             User user =  new User(username,email,password.hashCode());
             password = "0";
 
+            SessionManager.saveSession(this, username, false);
             AppDataBase.getInstance(this).getUserDAO().insert(user);
+            CodeActivity.startActivity(this);
             finish();
         }
     }

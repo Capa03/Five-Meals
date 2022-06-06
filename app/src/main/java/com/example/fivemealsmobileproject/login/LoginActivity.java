@@ -4,16 +4,14 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.util.Log;
 import android.widget.EditText;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.fivemealsmobileproject.R;
-import com.example.fivemealsmobileproject.database.AppDataBase;
 import com.example.fivemealsmobileproject.database.User;
-import com.example.fivemealsmobileproject.qrcode.QRCodeActivity;
+import com.example.fivemealsmobileproject.qrcode.CodeActivity;
 
 public class LoginActivity extends AppCompatActivity {
 
@@ -30,12 +28,6 @@ public class LoginActivity extends AppCompatActivity {
 
         this.cacheViews();
 
-        if(SessionManager.persistedSession(this)){
-            QRCodeActivity.startActivity(this);
-            finish();
-        }
-
-
     }
 
     public void onSignIn(View view) {
@@ -51,7 +43,7 @@ public class LoginActivity extends AppCompatActivity {
             SessionManager.saveSession(this, username, false);
             Toast.makeText(this, "Successful Login", Toast.LENGTH_LONG).show();
 
-            QRCodeActivity.startActivity(this);
+            CodeActivity.startActivity(this);
         } else {
             Toast.makeText(this, "Invalid credentials", Toast.LENGTH_LONG).show();
         }
