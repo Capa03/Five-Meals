@@ -16,6 +16,7 @@ import com.example.fivemealsmobileproject.qrcode.QRCodeActivity;
 
 public class LoginActivity extends AppCompatActivity {
 
+    // simular correcção issue Test
 
     private EditText editTextLoginUsername;
     private EditText editTextLoginPassword;
