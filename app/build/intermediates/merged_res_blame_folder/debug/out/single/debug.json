@@ -1,19 +1,27 @@
 [
     {
-        "merged": "C:\\Users\\David capa\\AndroidStudioProjects\\Projeto\\FiveMeals\\app\\build\\intermediates\\merged_res\\debug\\drawable_ic_launcher_background.xml.flat",
-        "source": "C:\\Users\\David capa\\AndroidStudioProjects\\Projeto\\FiveMeals\\app\\src\\main\\res\\drawable\\ic_launcher_background.xml"
-    },
-    {
         "merged": "C:\\Users\\David capa\\AndroidStudioProjects\\Projeto\\FiveMeals\\app\\build\\intermediates\\merged_res\\debug\\mipmap-xxxhdpi_ic_launcher_round.webp.flat",
         "source": "C:\\Users\\David capa\\AndroidStudioProjects\\Projeto\\FiveMeals\\app\\src\\main\\res\\mipmap-xxxhdpi\\ic_launcher_round.webp"
+    },
+    {
+        "merged": "C:\\Users\\David capa\\AndroidStudioProjects\\Projeto\\FiveMeals\\app\\build\\intermediates\\merged_res\\debug\\drawable_ic_launcher_background.xml.flat",
+        "source": "C:\\Users\\David capa\\AndroidStudioProjects\\Projeto\\FiveMeals\\app\\src\\main\\res\\drawable\\ic_launcher_background.xml"
     },
     {
         "merged": "C:\\Users\\David capa\\AndroidStudioProjects\\Projeto\\FiveMeals\\app\\build\\intermediates\\merged_res\\debug\\mipmap-xxhdpi_ic_launcher_round.webp.flat",
         "source": "C:\\Users\\David capa\\AndroidStudioProjects\\Projeto\\FiveMeals\\app\\src\\main\\res\\mipmap-xxhdpi\\ic_launcher_round.webp"
     },
     {
+        "merged": "C:\\Users\\David capa\\AndroidStudioProjects\\Projeto\\FiveMeals\\app\\build\\intermediates\\merged_res\\debug\\layout_activity_pre_login.xml.flat",
+        "source": "C:\\Users\\David capa\\AndroidStudioProjects\\Projeto\\FiveMeals\\app\\src\\main\\res\\layout\\activity_pre_login.xml"
+    },
+    {
         "merged": "C:\\Users\\David capa\\AndroidStudioProjects\\Projeto\\FiveMeals\\app\\build\\intermediates\\merged_res\\debug\\mipmap-hdpi_ic_launcher_round.webp.flat",
         "source": "C:\\Users\\David capa\\AndroidStudioProjects\\Projeto\\FiveMeals\\app\\src\\main\\res\\mipmap-hdpi\\ic_launcher_round.webp"
+    },
+    {
+        "merged": "C:\\Users\\David capa\\AndroidStudioProjects\\Projeto\\FiveMeals\\app\\build\\intermediates\\merged_res\\debug\\layout_activity_create_new_account.xml.flat",
+        "source": "C:\\Users\\David capa\\AndroidStudioProjects\\Projeto\\FiveMeals\\app\\src\\main\\res\\layout\\activity_create_new_account.xml"
     },
     {
         "merged": "C:\\Users\\David capa\\AndroidStudioProjects\\Projeto\\FiveMeals\\app\\build\\intermediates\\merged_res\\debug\\mipmap-xxxhdpi_ic_launcher.webp.flat",
@@ -48,6 +56,10 @@
         "source": "C:\\Users\\David capa\\AndroidStudioProjects\\Projeto\\FiveMeals\\app\\src\\main\\res\\mipmap-mdpi\\ic_launcher_round.webp"
     },
     {
+        "merged": "C:\\Users\\David capa\\AndroidStudioProjects\\Projeto\\FiveMeals\\app\\build\\intermediates\\merged_res\\debug\\layout_activity_launch.xml.flat",
+        "source": "C:\\Users\\David capa\\AndroidStudioProjects\\Projeto\\FiveMeals\\app\\src\\main\\res\\layout\\activity_launch.xml"
+    },
+    {
         "merged": "C:\\Users\\David capa\\AndroidStudioProjects\\Projeto\\FiveMeals\\app\\build\\intermediates\\merged_res\\debug\\layout_activity_login.xml.flat",
         "source": "C:\\Users\\David capa\\AndroidStudioProjects\\Projeto\\FiveMeals\\app\\src\\main\\res\\layout\\activity_login.xml"
     },
@@ -56,11 +68,15 @@
         "source": "C:\\Users\\David capa\\AndroidStudioProjects\\Projeto\\FiveMeals\\app\\src\\main\\res\\mipmap-xhdpi\\ic_launcher_round.webp"
     },
     {
-        "merged": "C:\\Users\\David capa\\AndroidStudioProjects\\Projeto\\FiveMeals\\app\\build\\intermediates\\merged_res\\debug\\layout_activity_main.xml.flat",
-        "source": "C:\\Users\\David capa\\AndroidStudioProjects\\Projeto\\FiveMeals\\app\\src\\main\\res\\layout\\activity_main.xml"
-    },
-    {
         "merged": "C:\\Users\\David capa\\AndroidStudioProjects\\Projeto\\FiveMeals\\app\\build\\intermediates\\merged_res\\debug\\mipmap-xxhdpi_ic_launcher.webp.flat",
         "source": "C:\\Users\\David capa\\AndroidStudioProjects\\Projeto\\FiveMeals\\app\\src\\main\\res\\mipmap-xxhdpi\\ic_launcher.webp"
+    },
+    {
+        "merged": "C:\\Users\\David capa\\AndroidStudioProjects\\Projeto\\FiveMeals\\app\\build\\intermediates\\merged_res\\debug\\drawable_slogan.png.flat",
+        "source": "C:\\Users\\David capa\\AndroidStudioProjects\\Projeto\\FiveMeals\\app\\src\\main\\res\\drawable\\slogan.png"
+    },
+    {
+        "merged": "C:\\Users\\David capa\\AndroidStudioProjects\\Projeto\\FiveMeals\\app\\build\\intermediates\\merged_res\\debug\\drawable_logofivemeals.png.flat",
+        "source": "C:\\Users\\David capa\\AndroidStudioProjects\\Projeto\\FiveMeals\\app\\src\\main\\res\\drawable\\logofivemeals.png"
     }
 ]
