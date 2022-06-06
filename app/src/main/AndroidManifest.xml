@@ -2,6 +2,12 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.fivemealsmobileproject">
 
+    <uses-permission android:name="android.permission.CAMERA" />
+
+    <uses-feature
+        android:name="android.hardware.camera"
+        android:required="false" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -9,6 +15,12 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.FiveMealsMobileProject">
+        <activity
+            android:name=".MainActivity"
+            android:exported="false" />
+        <activity
+            android:name=".qrcode.QrCodeActivity"
+            android:exported="false" />
         <activity
             android:name=".login.CreateNewAccountActivity"
             android:exported="false" />
@@ -20,16 +32,15 @@
             android:exported="false" />
         <activity
             android:name=".login.PreLoginActivity"
-            android:exported="false">
-        </activity>
-
-        <activity android:name=".SplashScreenLogo"
+            android:exported="false" />
+        <activity
+            android:name=".SplashScreenLogo"
             android:exported="true">
             <intent-filter>
-            <action android:name="android.intent.action.MAIN" />
+                <action android:name="android.intent.action.MAIN" />
 
-            <category android:name="android.intent.category.LAUNCHER" />
-        </intent-filter>
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
     </application>
 

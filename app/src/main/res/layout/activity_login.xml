@@ -9,9 +9,11 @@
 
     <EditText
         android:id="@+id/editTextLoginUsername"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginStart="64dp"
         android:layout_marginTop="64dp"
+        android:layout_marginEnd="64dp"
         android:autofillHints=""
         android:ems="10"
         android:hint="@string/login_username_text"
@@ -23,7 +25,7 @@
 
     <EditText
         android:id="@+id/editTextLoginPassword"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="32dp"
         android:autofillHints=""
@@ -31,20 +33,22 @@
         android:hint="@string/login_password_text"
         android:inputType="textPassword"
         android:minHeight="48dp"
+        app:layout_constraintEnd_toEndOf="@+id/editTextLoginUsername"
         app:layout_constraintStart_toStartOf="@+id/editTextLoginUsername"
         app:layout_constraintTop_toBottomOf="@+id/editTextLoginUsername" />
 
     <Button
         android:id="@+id/buttonLoginSignUp"
-        android:layout_width="wrap_content"
+        android:layout_width="128dp"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="32dp"
+        android:layout_marginTop="32dp"
         android:onClick="onSignIn"
         android:text="@string/login_button_signIn"
         android:textColor="#000000"
-        app:layout_constraintBottom_toTopOf="@+id/textViewLoginHaveAccount"
         app:layout_constraintEnd_toEndOf="@+id/textViewLoginForgotPassword"
-        app:layout_constraintStart_toStartOf="@+id/textViewLoginForgotPassword" />
+        app:layout_constraintHorizontal_bias="0.478"
+        app:layout_constraintStart_toStartOf="@+id/textViewLoginForgotPassword"
+        app:layout_constraintTop_toBottomOf="@+id/textViewLoginForgotPassword" />
 
     <ImageView
         android:id="@+id/imageViewCreateAccountLogo"
@@ -62,10 +66,9 @@
         android:id="@+id/textViewLoginForgotPassword"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="32dp"
+        android:layout_marginTop="16dp"
         android:text="@string/forgot_password"
         android:textColor="#000000"
-        app:layout_constraintBottom_toTopOf="@+id/buttonLoginSignUp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/editTextLoginPassword" />
@@ -75,7 +78,7 @@
         android:id="@+id/textViewLoginHaveAccount"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="64dp"
+        android:layout_marginBottom="16dp"
         android:onClick="onDontHaveAccountClicked"
         android:text="@string/dont_have_a_account_sign_up"
         android:textColor="#000000"
