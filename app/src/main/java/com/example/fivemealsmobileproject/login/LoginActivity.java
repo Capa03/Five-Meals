@@ -43,7 +43,7 @@ public class LoginActivity extends AppCompatActivity {
         String username = this.editTextLoginUsername.getText().toString();
         String password = this.editTextLoginPassword.getText().toString();
 
-        User loggedInUser = LoginManager.validateUser(username, password.hashCode(),this);
+        User loggedInUser = LoginManager.validateUser(this, username, password.hashCode());
         password = "0";
 
         if (loggedInUser != null) {

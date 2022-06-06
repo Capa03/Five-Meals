@@ -34,6 +34,7 @@ public class CreateNewAccountActivity extends AppCompatActivity {
     }
 
     public void onSignUp(View view) {
+        boolean somethingEmpty = false;
         String username = this.username.getText().toString();
         String email = this.email.getText().toString();
         String password = this.password.getText().toString();
@@ -41,17 +42,24 @@ public class CreateNewAccountActivity extends AppCompatActivity {
 
         if(username.isEmpty()){
             this.username.setError("Empty Username");
-        }else if(email.isEmpty()){
-            this.email.setError("Empty Email");
-        }else if(password.isEmpty()){
-            this.password.setError("Empty Password");
+            somethingEmpty = true;
         }
+        if(email.isEmpty()){
+            this.email.setError("Empty Email");
+            somethingEmpty = true;
+        }
+        if(password.isEmpty()){
+            this.password.setError("Empty Password");
+            somethingEmpty = true;
+        }
+        if(!somethingEmpty){
+            // TODO aplicação rebenta quando já exite um user igual
+            User user =  new User(username,email,password.hashCode());
+            password = "0";
 
-        User user =  new User(username,email,password.hashCode());
-        password = "0";
-
-        AppDataBase.getInstance(this).getUserDAO().insert(user);
-        finish();
+            AppDataBase.getInstance(this).getUserDAO().insert(user);
+            finish();
+        }
     }
 
     public void onHaveAccountClicked(View view) {
