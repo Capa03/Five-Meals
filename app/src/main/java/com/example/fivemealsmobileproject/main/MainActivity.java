@@ -31,7 +31,13 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        navigationController();
+
+        ActivityMainBinding binding;
+        binding = ActivityMainBinding.inflate(getLayoutInflater());
+        setContentView(binding.getRoot());
+        NavHostFragment navHostFragment = (NavHostFragment) getSupportFragmentManager().findFragmentById(R.id.fragmentContainerView);
+        NavigationUI.setupWithNavController(binding.bottomNavigationView, navHostFragment.getNavController());
+
         // TODO Fragments
         // TODO utilizar os extras para saber a mesa
         // TODO Room para as mesas e restaurantes
@@ -44,15 +50,6 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void navigationController(){
-        ActivityMainBinding binding;
 
-        binding = ActivityMainBinding.inflate(getLayoutInflater());
-        setContentView(binding.getRoot());
-
-        Fragment fragment = getSupportFragmentManager().findFragmentById(R.id.fragmentContainerView);
-
-        NavHostFragment navHostFragment = (NavHostFragment) fragment;
-
-        NavigationUI.setupWithNavController(binding.bottomNavigationView, navHostFragment.getNavController());
     }
 }
