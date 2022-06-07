@@ -16,9 +16,6 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.FiveMealsMobileProject">
         <activity
-            android:name=".MainActivity"
-            android:exported="false" />
-        <activity
             android:name=".qrcode.QrCodeActivity"
             android:exported="false" />
         <activity
@@ -32,6 +29,10 @@
             android:exported="false" />
         <activity
             android:name=".login.PreLoginActivity"
+            android:exported="false" />
+
+        <activity
+            android:name=".main.MainActivity"
             android:exported="false" />
         <activity
             android:name=".SplashScreenLogo"
