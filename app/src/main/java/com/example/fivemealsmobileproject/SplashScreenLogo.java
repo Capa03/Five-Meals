@@ -6,11 +6,16 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Context;
 import android.os.Bundle;
 import android.os.Handler;
+import android.util.Log;
 
+import com.example.fivemealsmobileproject.database.AppDataBase;
 import com.example.fivemealsmobileproject.database.MemoryDB;
+import com.example.fivemealsmobileproject.database.Table;
 import com.example.fivemealsmobileproject.login.PreLoginActivity;
 import com.example.fivemealsmobileproject.login.SessionManager;
 import com.example.fivemealsmobileproject.qrcode.CodeActivity;
+
+import java.util.List;
 
 
 public class SplashScreenLogo extends AppCompatActivity {
@@ -22,6 +27,12 @@ public class SplashScreenLogo extends AppCompatActivity {
         Context context = this;
 
         MemoryDB.populateRestaurantTables(this);
+
+        List<Table> tableList = AppDataBase.getInstance(this).getTableDAO().getAllTables();
+        for (Table table : tableList) {
+            Log.i("DBDebug", ("TableID: " + table.getTableID() + "/ RestaurantID: " + table.getRestaurantID()));
+        }
+
 
         ActionBar actionBar = getSupportActionBar();
         if (actionBar != null) {

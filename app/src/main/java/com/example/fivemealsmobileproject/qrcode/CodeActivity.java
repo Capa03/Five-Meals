@@ -13,7 +13,9 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.example.fivemealsmobileproject.MainActivity;
 import com.example.fivemealsmobileproject.R;
+import com.example.fivemealsmobileproject.database.AppDataBase;
 
 public class CodeActivity extends AppCompatActivity {
 
@@ -34,6 +36,7 @@ public class CodeActivity extends AppCompatActivity {
         setContentView(R.layout.activity_code_input);
         Toast.makeText(this, "QrCode", Toast.LENGTH_SHORT).show();
         cacheViews();
+        Context context = this;
         final int[] counter = new int[1];
 
         this.codeInput.addTextChangedListener(new TextWatcher() {
@@ -46,7 +49,11 @@ public class CodeActivity extends AppCompatActivity {
             public void onTextChanged(CharSequence s, int start, int before, int count) {
 
                 if(start == 7){
-                 // TODO DB Verification
+                    if(AppDataBase.getInstance(context).getTableDAO().getTableFromID(Long.parseLong(s.toString())) != null){
+                        MainActivity.startActivity(context, Long.parseLong(s.toString()));
+                    }else {
+                        Toast.makeText(context, "Invalid code", Toast.LENGTH_SHORT).show();
+                    }
                 }
             }
 

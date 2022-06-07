@@ -10,7 +10,7 @@ public class MainActivity extends AppCompatActivity {
 
     private static String KEY_CODE = "getCode";
 
-    public static void startActivity(Context context, String code) {
+    public static void startActivity(Context context, long code) {
         Intent intent = new Intent(context, MainActivity.class);
         intent.putExtra(KEY_CODE, code);
         context.startActivity(intent);

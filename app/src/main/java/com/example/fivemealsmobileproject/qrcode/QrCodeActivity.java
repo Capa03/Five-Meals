@@ -19,6 +19,7 @@ import com.budiyev.android.codescanner.DecodeCallback;
 import com.budiyev.android.codescanner.ScanMode;
 import com.example.fivemealsmobileproject.MainActivity;
 import com.example.fivemealsmobileproject.R;
+import com.example.fivemealsmobileproject.database.AppDataBase;
 import com.google.zxing.Result;
 
 public class QrCodeActivity extends AppCompatActivity {
@@ -43,10 +44,11 @@ public class QrCodeActivity extends AppCompatActivity {
                     @Override
                     public void run() {
                         String code = result.getText();
-                        // TODO DB Verification QRCODE
-
-                        //MainActivity.startActivity(context, code);
-                        Toast.makeText(context, ("Result: " + code), Toast.LENGTH_SHORT).show();
+                        if(AppDataBase.getInstance(context).getTableDAO().getTableFromID(Long.parseLong(code)) != null){
+                            MainActivity.startActivity(context, Long.parseLong(code));
+                        }else {
+                            Toast.makeText(context, "Invalid code", Toast.LENGTH_SHORT).show();
+                        }
                     }
                 });
             }
