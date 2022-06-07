@@ -60,7 +60,7 @@ public class QrCodeActivity extends AppCompatActivity {
         mCodeScanner.setCamera(CodeScanner.CAMERA_BACK);
         mCodeScanner.setFormats(CodeScanner.ALL_FORMATS);
         mCodeScanner.setAutoFocusMode(AutoFocusMode.SAFE);
-        mCodeScanner.setScanMode(ScanMode.SINGLE);
+        mCodeScanner.setScanMode(ScanMode.CONTINUOUS);
         mCodeScanner.setAutoFocusEnabled(true);
     }
 
