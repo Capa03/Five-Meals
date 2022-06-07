@@ -7,6 +7,7 @@ import android.content.Context;
 import android.os.Bundle;
 import android.os.Handler;
 
+import com.example.fivemealsmobileproject.database.MemoryDB;
 import com.example.fivemealsmobileproject.login.PreLoginActivity;
 import com.example.fivemealsmobileproject.login.SessionManager;
 import com.example.fivemealsmobileproject.qrcode.CodeActivity;
@@ -20,22 +21,21 @@ public class SplashScreenLogo extends AppCompatActivity {
         setContentView(R.layout.activity_launch);
         Context context = this;
 
+        MemoryDB.populateRestaurantTables(this);
+
         ActionBar actionBar = getSupportActionBar();
         if (actionBar != null) {
             actionBar.hide();
         }
 
-        Runnable r = new Runnable() {
-            @Override
-            public void run() {
+        Runnable r = () -> {
 
-                if(SessionManager.sessionExists(context)){
-                    CodeActivity.startActivity(context);
-                }else {
-                    PreLoginActivity.startActivity(context);
-                }
-                finish();
+            if(SessionManager.sessionExists(context)){
+                CodeActivity.startActivity(context);
+            }else {
+                PreLoginActivity.startActivity(context);
             }
+            finish();
         };
 
         Handler handler = new Handler();
