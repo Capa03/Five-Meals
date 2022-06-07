@@ -26,12 +26,14 @@ public class SplashScreenLogo extends AppCompatActivity {
         setContentView(R.layout.activity_launch);
         Context context = this;
 
+        /*
         MemoryDB.populateRestaurantTables(this);
 
         List<Table> tableList = AppDataBase.getInstance(this).getTableDAO().getAllTables();
         for (Table table : tableList) {
             Log.i("DBDebug", ("TableID: " + table.getTableID() + "/ RestaurantID: " + table.getRestaurantID()));
         }
+        */
 
 
         ActionBar actionBar = getSupportActionBar();

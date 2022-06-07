@@ -16,9 +16,6 @@ public class PreLoginActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_pre_login);
-
-        Toast.makeText(this, "PreLogin", Toast.LENGTH_SHORT).show();
-
     }
 
     public static void startActivity(Context context){
