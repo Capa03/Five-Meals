@@ -1,7 +1,6 @@
 # Five Meals Mobile
 
-
-![LogoTipoFiveMeals-01](https://user-images.githubusercontent.com/79425111/166903045-81d3276f-b219-4925-91d7-3f8325a36eb6.png )
+<img src="https://user-images.githubusercontent.com/79425111/166903045-81d3276f-b219-4925-91d7-3f8325a36eb6.png" alt="drawing" width="200"/>
 
 ## Descrição do Projeto
 
