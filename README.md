@@ -40,10 +40,14 @@ O projeto é sobre a automatização do processo de pedido de um restaurante
 
 TO DO | In Progress | Done | 
 -----------|--------|------|
-Login | X|
-Qr Code Reader | |
-Manual Code Insert | |
-Bottom Navigation and Fragments | |
+Login | |X
+Qr Code Reader | |X
+Manual Code Insert | |X
+Bottom Navigation and Fragments | |X
+Home Fragments |X |
+Order Fragments |X |
+Favorites Fragments |X |
+Account Fragments |X |
 
 #### Para mais informação do processo de desenvolvimento ver [Desenvolvimento do projeto](https://github.com/Capa03/Five-Meals/projects/1)
 
