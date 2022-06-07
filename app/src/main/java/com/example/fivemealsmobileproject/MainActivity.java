@@ -5,6 +5,10 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
+
+import com.example.fivemealsmobileproject.login.PreLoginActivity;
+import com.example.fivemealsmobileproject.login.SessionManager;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -24,5 +28,11 @@ public class MainActivity extends AppCompatActivity {
         // TODO Fragments
         // TODO utilizar os extras para saber a mesa
         // TODO Room para as mesas e restaurantes
+    }
+
+    public void onLogOutClick(View view) {
+        SessionManager.clearSession(this);
+        PreLoginActivity.startActivity(this);
+        finish();
     }
 }

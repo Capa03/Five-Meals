@@ -14,7 +14,10 @@ public interface UserDAO {
     List<User> getAllUser();
 
     @Query("SELECT * FROM User WHERE username = :username")
-    User getUserById(String username);
+    User getUserByUsername(String username);
+
+    @Query("SELECT * FROM User WHERE email = :email")
+    User getUserByEmail(String email);
 
     @Insert
     void insert(User user);

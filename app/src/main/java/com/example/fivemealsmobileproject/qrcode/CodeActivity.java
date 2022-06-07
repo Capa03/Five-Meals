@@ -32,7 +32,6 @@ public class CodeActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        // TODO Acabar o design
         setContentView(R.layout.activity_code_input);
         Toast.makeText(this, "QrCode", Toast.LENGTH_SHORT).show();
         cacheViews();
