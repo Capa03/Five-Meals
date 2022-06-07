@@ -43,8 +43,9 @@ public class QrCodeActivity extends AppCompatActivity {
                     @Override
                     public void run() {
                         String code = result.getText();
-                        // TODO debug activity não dá start
-                        MainActivity.startActivity(context, code);
+                        // TODO DB Verification QRCODE
+
+                        //MainActivity.startActivity(context, code);
                         Toast.makeText(context, ("Result: " + code), Toast.LENGTH_SHORT).show();
                     }
                 });
