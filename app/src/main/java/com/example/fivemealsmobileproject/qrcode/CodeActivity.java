@@ -37,7 +37,7 @@ public class CodeActivity extends AppCompatActivity {
         Toast.makeText(this, "QrCode", Toast.LENGTH_SHORT).show();
         cacheViews();
         Context context = this;
-        final int[] counter = new int[1];
+       
 
         this.codeInput.addTextChangedListener(new TextWatcher() {
             @Override
