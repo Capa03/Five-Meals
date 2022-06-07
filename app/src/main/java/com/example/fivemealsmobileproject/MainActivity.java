@@ -13,6 +13,7 @@ public class MainActivity extends AppCompatActivity {
     public static void startActivity(Context context, String code) {
         Intent intent = new Intent(context, MainActivity.class);
         intent.putExtra(KEY_CODE, code);
+        context.startActivity(intent);
     }
 
     @Override
