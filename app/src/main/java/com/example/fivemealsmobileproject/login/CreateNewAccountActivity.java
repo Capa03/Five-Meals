@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.example.fivemealsmobileproject.R;
 import com.example.fivemealsmobileproject.database.AppDataBase;
@@ -34,9 +35,9 @@ public class CreateNewAccountActivity extends AppCompatActivity {
 
     public void onSignUp(View view) {
         boolean somethingEmpty = false;
-        String username = this.username.getText().toString();
-        String email = this.email.getText().toString();
-        String password = this.password.getText().toString();
+        String username = this.username.getText().toString(); // TODO onTextChanged Warning
+        String email = this.email.getText().toString(); // TODO onTextChanged Warning
+        String password = this.password.getText().toString(); // TODO onTextChanged Warning
 
 
         if(username.isEmpty()){
@@ -52,14 +53,19 @@ public class CreateNewAccountActivity extends AppCompatActivity {
             somethingEmpty = true;
         }
         if(!somethingEmpty){
-            // TODO aplicação rebenta quando já exite um user igual
-            User user =  new User(username,email,password.hashCode());
-            password = "0";
+            if(!LoginManager.userExists(this, username)){
+                if(!LoginManager.emailExists(this, email)){
+                    User user =  new User(username,email,password.hashCode());
+                    password = "0";
 
-            SessionManager.saveSession(this, username, false);
-            AppDataBase.getInstance(this).getUserDAO().insert(user);
-            CodeActivity.startActivity(this);
-            finish();
+                    SessionManager.saveSession(this, username, false);
+                    AppDataBase.getInstance(this).getUserDAO().insert(user);
+                    CodeActivity.startActivity(this);
+                    finish();
+                }else Toast.makeText(this, "Email already being used", Toast.LENGTH_SHORT).show();
+
+            }else Toast.makeText(this, "User already exists", Toast.LENGTH_SHORT).show();
+
         }
     }
 
