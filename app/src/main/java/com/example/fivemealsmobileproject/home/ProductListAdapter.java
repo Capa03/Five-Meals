@@ -1,5 +1,6 @@
 package com.example.fivemealsmobileproject.home;
 
+import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,6 +10,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
 import com.example.fivemealsmobileproject.R;
 import com.example.fivemealsmobileproject.database.Product;
 
@@ -27,7 +29,7 @@ public class ProductListAdapter extends RecyclerView.Adapter<ProductListAdapter.
     @Override
     public ProductListViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View layout = LayoutInflater.from(parent.getContext()).inflate(R.layout.card_product_simple, parent, false);
-        return new ProductListViewHolder(layout);
+        return new ProductListViewHolder(layout, parent.getContext());
     }
 
     @Override
@@ -37,6 +39,9 @@ public class ProductListAdapter extends RecyclerView.Adapter<ProductListAdapter.
         holder.setName(product.getName());
         holder.setTime(String.valueOf(product.getAverageTime()));
         holder.setPrice(product.getPrice());
+
+        // TODO change link (DataBase Change)
+        holder.setImage("177tdRzmBQLgOSVb9M666YntVfEGZSeKj");
 
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -57,6 +62,7 @@ public class ProductListAdapter extends RecyclerView.Adapter<ProductListAdapter.
     }
 
     public class ProductListViewHolder extends RecyclerView.ViewHolder {
+        private final Context context;
         private ImageView productImage;
         private TextView textViewName;
         private TextView textViewTime;
@@ -64,13 +70,16 @@ public class ProductListAdapter extends RecyclerView.Adapter<ProductListAdapter.
         private View itemView;
 
 
-        public ProductListViewHolder(@NonNull View itemView) {
+        public ProductListViewHolder(@NonNull View itemView, Context context) {
             super(itemView);
+            this.context = context;
             this.itemView = itemView;
             this.productImage = itemView.findViewById(R.id.imageViewSimpleProduct);
             this.textViewName = itemView.findViewById(R.id.textViewSimpleProductName);
             this.textViewTime = itemView.findViewById(R.id.textViewSimpleAverageTime);
             this.textViewPrice = itemView.findViewById(R.id.textViewSimplePrice);
+
+            this.productImage.setClipToOutline(true);
         }
 
         public void setName(String name){
@@ -84,6 +93,10 @@ public class ProductListAdapter extends RecyclerView.Adapter<ProductListAdapter.
         }
         public void setImageSrc(String link){
             // TODO Glide implementation
+        }
+
+        public void setImage(String imageID){
+            Glide.with(this.context).load(("https://drive.google.com/uc?id=" + imageID)).into(this.productImage);
         }
     }
 

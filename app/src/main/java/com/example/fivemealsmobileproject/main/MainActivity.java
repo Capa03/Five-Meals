@@ -20,10 +20,6 @@ public class MainActivity extends AppCompatActivity {
     private static String KEY_CODE = "getCode";
     ActivityMainBinding binding;
 
-
-
-
-
     public static void startActivity(Context context, long code) {
         Intent intent = new Intent(context, com.example.fivemealsmobileproject.main.MainActivity.class);
         intent.putExtra(KEY_CODE, code);
@@ -37,7 +33,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(binding.getRoot());
         NavHostFragment navHostFragment = (NavHostFragment) getSupportFragmentManager().findFragmentById(binding.fragmentContainerView.getId());
         NavigationUI.setupWithNavController(binding.bottomNavigationView, navHostFragment.getNavController());
-
+        // TODO Remove ActionBar
         // TODO utilizar os extras para saber a mesa
 
     }
