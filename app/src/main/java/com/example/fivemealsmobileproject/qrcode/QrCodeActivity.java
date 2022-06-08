@@ -17,9 +17,9 @@ import com.budiyev.android.codescanner.CodeScanner;
 import com.budiyev.android.codescanner.CodeScannerView;
 import com.budiyev.android.codescanner.DecodeCallback;
 import com.budiyev.android.codescanner.ScanMode;
-import com.example.fivemealsmobileproject.MainActivity;
 import com.example.fivemealsmobileproject.R;
 import com.example.fivemealsmobileproject.database.AppDataBase;
+import com.example.fivemealsmobileproject.main.MainActivity;
 import com.google.zxing.Result;
 
 public class QrCodeActivity extends AppCompatActivity {
