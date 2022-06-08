@@ -9,6 +9,7 @@ import android.os.Handler;
 import android.util.Log;
 
 import com.example.fivemealsmobileproject.database.AppDataBase;
+import com.example.fivemealsmobileproject.database.Category;
 import com.example.fivemealsmobileproject.database.MemoryDB;
 import com.example.fivemealsmobileproject.database.Table;
 import com.example.fivemealsmobileproject.login.PreLoginActivity;
@@ -28,10 +29,16 @@ public class SplashScreenLogo extends AppCompatActivity {
 
 
         MemoryDB.populateRestaurantTables(this);
+        MemoryDB.populateCategoryTable(this);
 
         List<Table> tableList = AppDataBase.getInstance(this).getTableDAO().getAllTables();
         for (Table table : tableList) {
             Log.i("DBDebug", ("TableID: " + table.getTableID() + "/ RestaurantID: " + table.getRestaurantID()));
+        }
+
+        List<Category> categories = AppDataBase.getInstance(this).getCategoryDAO().getAllCategories();
+        for (Category category : categories) {
+            Log.i("DBDebug", ("Category: " + category.getCategoryName() ));
         }
 
 

@@ -18,6 +18,7 @@ import com.example.fivemealsmobileproject.login.SessionManager;
 public class MainActivity extends AppCompatActivity {
 
     private static String KEY_CODE = "getCode";
+    ActivityMainBinding binding;
 
 
 
@@ -30,17 +31,13 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-
-        ActivityMainBinding binding;
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
-        NavHostFragment navHostFragment = (NavHostFragment) getSupportFragmentManager().findFragmentById(R.id.fragmentContainerView);
+        NavHostFragment navHostFragment = (NavHostFragment) getSupportFragmentManager().findFragmentById(binding.fragmentContainerView.getId());
         NavigationUI.setupWithNavController(binding.bottomNavigationView, navHostFragment.getNavController());
 
-        // TODO Fragments
         // TODO utilizar os extras para saber a mesa
-        // TODO Room para as mesas e restaurantes
+
     }
 
     public void onLogOutClick(View view) {
@@ -49,7 +46,4 @@ public class MainActivity extends AppCompatActivity {
         finish();
     }
 
-    private void navigationController(){
-
-    }
 }
