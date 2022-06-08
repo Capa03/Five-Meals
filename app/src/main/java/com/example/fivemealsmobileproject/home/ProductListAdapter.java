@@ -16,8 +16,12 @@ import java.util.List;
 
 public class ProductListAdapter extends RecyclerView.Adapter<ProductListAdapter.ProductListViewHolder> {
 
-    List<Product> products;
+    private List<Product> products;
+    private ProductListEventListener productListEventListener;
 
+    public ProductListAdapter(ProductListEventListener productListEventListener){
+        this.productListEventListener = productListEventListener;
+    }
 
     @NonNull
     @Override
@@ -33,6 +37,13 @@ public class ProductListAdapter extends RecyclerView.Adapter<ProductListAdapter.
         holder.setName(product.getName());
         holder.setTime(String.valueOf(product.getAverageTime()));
         holder.setPrice(product.getPrice());
+
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                productListEventListener.onProductClick(product.getId());
+            }
+        });
     }
 
     @Override
@@ -50,10 +61,12 @@ public class ProductListAdapter extends RecyclerView.Adapter<ProductListAdapter.
         private TextView textViewName;
         private TextView textViewTime;
         private TextView textViewPrice;
+        private View itemView;
 
 
         public ProductListViewHolder(@NonNull View itemView) {
             super(itemView);
+            this.itemView = itemView;
             this.productImage = itemView.findViewById(R.id.imageViewSimpleProduct);
             this.textViewName = itemView.findViewById(R.id.textViewSimpleProductName);
             this.textViewTime = itemView.findViewById(R.id.textViewSimpleAverageTime);
@@ -64,7 +77,7 @@ public class ProductListAdapter extends RecyclerView.Adapter<ProductListAdapter.
             this.textViewName.setText(name);
         }
         public void setPrice(Float price){
-            this.textViewPrice.setText(String.valueOf(price));
+            this.textViewPrice.setText((String.valueOf(price) + " €"));
         }
         public void setTime(String time){
             this.textViewTime.setText(time);
@@ -72,5 +85,9 @@ public class ProductListAdapter extends RecyclerView.Adapter<ProductListAdapter.
         public void setImageSrc(String link){
             // TODO Glide implementation
         }
+    }
+
+    public interface ProductListEventListener{
+        void onProductClick(long productID);
     }
 }

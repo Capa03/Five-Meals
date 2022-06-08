@@ -17,19 +17,21 @@ import com.example.fivemealsmobileproject.database.Category;
 
 import java.util.List;
 
-public class CategoryListAdapter extends RecyclerView.Adapter<CategoryListAdapter.CategoryListViewHolder> {
+public class CategoryListAdapter extends RecyclerView.Adapter<CategoryListAdapter.CategoryListViewHolder> implements ProductListAdapter.ProductListEventListener {
 
     private List<Category> categories;
+    private CategoryListEventListener categoryEventListener;
 
-    public CategoryListAdapter(){
+    public CategoryListAdapter(CategoryListEventListener categoryEventListener) {
 
+        this.categoryEventListener = categoryEventListener;
     }
 
     @NonNull
     @Override
     public CategoryListViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View layout = LayoutInflater.from(parent.getContext()).inflate(R.layout.card_category, parent, false);
-        return new CategoryListViewHolder(layout, parent.getContext());
+        return new CategoryListViewHolder(layout, parent.getContext(), this);
     }
 
     @Override
@@ -37,6 +39,13 @@ public class CategoryListAdapter extends RecyclerView.Adapter<CategoryListAdapte
         String categoryName = categories.get(position).getCategoryName();
         holder.setTitle(categoryName);
         holder.adapter.updateData(AppDataBase.getInstance(holder.context).getProductDAO().getAllFromCategory(categoryName));
+
+        holder.textViewTitle.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                categoryEventListener.onCategoryClick(categoryName);
+            }
+        });
     }
 
     @Override
@@ -44,7 +53,7 @@ public class CategoryListAdapter extends RecyclerView.Adapter<CategoryListAdapte
         return this.categories.size();
     }
 
-    public void updateData(List<Category> categories){
+    public void updateData(List<Category> categories) {
         this.categories = categories;
         notifyDataSetChanged();
     }
@@ -54,19 +63,30 @@ public class CategoryListAdapter extends RecyclerView.Adapter<CategoryListAdapte
         private TextView textViewTitle;
         private ProductListAdapter adapter;
 
-        public CategoryListViewHolder(@NonNull View itemView, Context context) {
+        public CategoryListViewHolder(@NonNull View itemView, Context context, ProductListAdapter.ProductListEventListener productListEventListener) {
             super(itemView);
             this.context = context;
             this.textViewTitle = itemView.findViewById(R.id.textViewCardCategoryTitle);
-            this.adapter = new ProductListAdapter();
+            this.adapter = new ProductListAdapter(productListEventListener);
             RecyclerView recyclerView = itemView.findViewById(R.id.recyclerViewCardCategoryProductList);
             RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(itemView.getContext(), LinearLayoutManager.HORIZONTAL, false);
             recyclerView.setAdapter(this.adapter);
             recyclerView.setLayoutManager(layoutManager);
         }
 
-        public void setTitle(String title){
+        public void setTitle(String title) {
             this.textViewTitle.setText(title);
         }
+    }
+
+    @Override
+    public void onProductClick(long productID) {
+        this.categoryEventListener.onProductClick(productID);
+    }
+
+    public interface CategoryListEventListener {
+        // TODO Change "String categoryName" for "long categoryID" in future
+        void onCategoryClick(String categoryName);
+        void onProductClick(long productID);
     }
 }

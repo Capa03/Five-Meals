@@ -3,6 +3,7 @@ package com.example.fivemealsmobileproject.home;
 
 import android.content.Context;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,7 +18,7 @@ import com.example.fivemealsmobileproject.R;
 import com.example.fivemealsmobileproject.database.AppDataBase;
 
 
-public class HomeFragment extends Fragment {
+public class HomeFragment extends Fragment implements CategoryListAdapter.CategoryListEventListener {
 
     Context context;
     CategoryListAdapter adapter;
@@ -46,7 +47,7 @@ public class HomeFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         RecyclerView recyclerView = view.findViewById(R.id.recyclerViewHomeFragmentCategoryList);
-        this.adapter = new CategoryListAdapter();
+        this.adapter = new CategoryListAdapter(this);
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this.context);
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(layoutManager);
@@ -57,5 +58,17 @@ public class HomeFragment extends Fragment {
         super.onStart();
         this.adapter.updateData(AppDataBase.getInstance(this.context).getCategoryDAO().getAllCategories());
 
+    }
+
+    @Override
+    public void onCategoryClick(String categoryName) {
+        Log.i("ListenerDEBUG", ("Category: " + categoryName));
+        //TODO CategoryDetailsFragment + xml + Update Adapter to implement simple/detailed layout
+    }
+
+    @Override
+    public void onProductClick(long productID) {
+        Log.i("ListenerDEBUG", ("ProductID: " + productID));
+        //TODO ProductDetailsFragment + xml
     }
 }
