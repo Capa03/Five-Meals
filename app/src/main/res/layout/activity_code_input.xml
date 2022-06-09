@@ -24,7 +24,7 @@
         android:layout_marginTop="32dp"
         android:layout_marginEnd="128dp"
         android:onClick="onQrCodeScanClick"
-        android:text="Button"
+        android:text="@string/scan"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
@@ -55,4 +55,17 @@
         app:layout_constraintEnd_toEndOf="@+id/buttonCodeEnterQrCode"
         app:layout_constraintHorizontal_bias="0.505"
         app:layout_constraintStart_toStartOf="@+id/buttonCodeEnterQrCode" />
+
+    <Button
+        android:id="@+id/buttonToMainActivity"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="#ED0D0D"
+        android:backgroundTint="#C60000"
+        android:onClick="onDebug"
+        android:text="DEBUG"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>

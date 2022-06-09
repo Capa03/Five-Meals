@@ -72,4 +72,8 @@ public class CodeActivity extends AppCompatActivity {
         this.codeInput = findViewById(R.id.editTextCodeInput);
 
     }
+
+    public void onDebug(View view) {
+        MainActivity.startActivity(this,1);
+    }
 }
