@@ -13,9 +13,6 @@
         <action
             android:id="@+id/action_homeFragment_to_homeProductDetailsFragment"
             app:destination="@id/homeProductDetailsFragment" />
-        <action
-            android:id="@+id/action_homeFragment_to_homeCategoryDetailsFragment"
-            app:destination="@id/homeCategoryDetailsFragment" />
     </fragment>
     <fragment
         android:id="@+id/orderFragment"
@@ -43,14 +40,5 @@
         <action
             android:id="@+id/action_homeProductDetailsFragment_to_homeFragment"
             app:destination="@id/homeFragment" />
-    </fragment>
-    <fragment
-        android:id="@+id/homeCategoryDetailsFragment"
-        android:name="com.example.fivemealsmobileproject.home.HomeCategoryDetailsFragment"
-        android:label="fragment_home_category_details"
-        tools:layout="@layout/fragment_home_category_details" >
-        <argument
-            android:name="categoryName"
-            app:argType="string" />
     </fragment>
 </navigation>

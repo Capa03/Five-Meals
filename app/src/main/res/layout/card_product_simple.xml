@@ -4,33 +4,25 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="320dp"
     android:layout_height="wrap_content"
-    android:layout_marginEnd="4dp">
-
-    <ImageView
-        android:id="@+id/imageView2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintBottom_toBottomOf="@+id/textViewSimpleAverageTime"
-        app:layout_constraintStart_toEndOf="@+id/textViewSimpleAverageTime"
-        app:layout_constraintTop_toTopOf="@+id/textViewSimpleAverageTime"
-        app:srcCompat="@android:drawable/ic_menu_recent_history" />
+    android:background="@drawable/simple_card_product_shape">
 
     <ImageView
         android:id="@+id/imageViewSimpleProduct"
         android:layout_width="320dp"
         android:layout_height="160dp"
+        android:layout_marginStart="2dp"
+        android:layout_marginEnd="2dp"
         android:layout_marginBottom="32dp"
         android:background="@drawable/image_view_style"
         android:padding="2dp"
+        android:scaleType="centerCrop"
         app:circularflow_defaultRadius="2dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.0"
-        android:scaleType="centerCrop"
-        tools:srcCompat="@tools:sample/avatars"
-        />
+        tools:srcCompat="@tools:sample/avatars" />
 
     <TextView
         android:id="@+id/textViewSimpleProductName"

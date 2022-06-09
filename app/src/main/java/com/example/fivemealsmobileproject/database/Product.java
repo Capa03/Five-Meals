@@ -13,14 +13,15 @@ public class Product {
     private String description;
     private String category;
     private Float price;
-    private int averageTime;
+    private String averageTime;
     private String imgLink;
 
-    public Product(String name, Float price, int averageTime, String category) {
+    public Product(String name, Float price, String averageTime, String category, String imgLink) {
         this.name = name;
         this.price = price;
         this.averageTime = averageTime;
         this.category = category;
+        this.imgLink = imgLink;
     }
 
     public long getId() {
@@ -63,11 +64,11 @@ public class Product {
         this.price = price;
     }
 
-    public int getAverageTime() {
+    public String getAverageTime() {
         return averageTime;
     }
 
-    public void setAverageTime(int averageTime) {
+    public void setAverageTime(String averageTime) {
         this.averageTime = averageTime;
     }
 

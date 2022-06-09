@@ -41,7 +41,7 @@ public class ProductListAdapter extends RecyclerView.Adapter<ProductListAdapter.
         holder.setPrice(product.getPrice());
 
         // TODO change link (DataBase Change)
-        holder.setImage("177tdRzmBQLgOSVb9M666YntVfEGZSeKj");
+        holder.setImage(product.getImgLink());
 
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -89,14 +89,16 @@ public class ProductListAdapter extends RecyclerView.Adapter<ProductListAdapter.
             this.textViewPrice.setText((String.valueOf(price) + " €"));
         }
         public void setTime(String time){
-            this.textViewTime.setText(time);
+            this.textViewTime.setText(time + " min");
         }
         public void setImageSrc(String link){
             // TODO Glide implementation
         }
 
         public void setImage(String imageID){
-            Glide.with(this.context).load(("https://drive.google.com/uc?id=" + imageID)).into(this.productImage);
+            // https://drive.google.com/uc?id=
+            String link = "https://docs.google.com/uc?id=" + imageID;
+            Glide.with(this.context).load(link).into(this.productImage);
         }
     }
 

@@ -1,5 +1,6 @@
 package com.example.fivemealsmobileproject.main;
 
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.fragment.NavHostFragment;
@@ -33,6 +34,9 @@ public class MainActivity extends AppCompatActivity {
         setContentView(binding.getRoot());
         NavHostFragment navHostFragment = (NavHostFragment) getSupportFragmentManager().findFragmentById(binding.fragmentContainerView.getId());
         NavigationUI.setupWithNavController(binding.bottomNavigationView, navHostFragment.getNavController());
+
+        ActionBar actionBar = getSupportActionBar();
+        actionBar.hide();
         // TODO Remove ActionBar
         // TODO utilizar os extras para saber a mesa
 

@@ -14,6 +14,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.example.fivemealsmobileproject.R;
 import com.example.fivemealsmobileproject.database.AppDataBase;
 import com.example.fivemealsmobileproject.database.Product;
@@ -55,9 +56,14 @@ public class HomeProductDetailsFragment extends Fragment {
         });
 
         ImageView imageViewProduct = view.findViewById(R.id.imageViewProductDetailsImage);
+        imageViewProduct.setClipToOutline(true);
+
         TextView textViewTitle = view.findViewById(R.id.textViewProductDetailsTitle);
 
         Product product = AppDataBase.getInstance(view.getContext()).getProductDAO().getById(this.productID);
+
+        String link = "https://docs.google.com/uc?id=" + product.getImgLink();
+        Glide.with(view.getContext()).load(link).into(imageViewProduct);
 
         textViewTitle.setText(product.getName());
     }
