@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".home.HomeProductDetailsFragment">
+
+    <ImageView
+        android:id="@+id/imageViewProductDetailsImage"
+        android:layout_width="0dp"
+        android:layout_height="200dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:background="@drawable/image_view_style"
+        android:scaleType="centerCrop"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageViewProductDetailsGoBackButton"
+        tools:src="@tools:sample/avatars" />
+
+    <TextView
+        android:id="@+id/textViewProductDetailsTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="TextView"
+        android:textSize="24dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageViewProductDetailsImage" />
+
+    <ImageView
+        android:id="@+id/imageViewProductDetailsGoBackButton"
+        android:layout_width="32dp"
+        android:layout_height="32dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:src="@drawable/ic_baseline_arrow_back_ios_24"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="UsingOnClickInXml" />
+
+    <Button
+        android:id="@+id/buttonProductDetailsAddQuantity"
+        android:layout_width="64dp"
+        android:layout_height="64dp"
+        android:layout_marginStart="32dp"
+        android:gravity="center"
+        android:padding="0dp"
+        android:text="+"
+        android:textSize="30sp"
+        app:iconPadding="0dp"
+        app:layout_constraintBottom_toBottomOf="@+id/textViewProductDetailsQuantity"
+        app:layout_constraintStart_toEndOf="@+id/textViewProductDetailsQuantity"
+        app:layout_constraintTop_toTopOf="@+id/textViewProductDetailsQuantity" />
+
+    <Button
+        android:id="@+id/buttonProductDetailsRemoveQuantity"
+        android:layout_width="64dp"
+        android:layout_height="64dp"
+        android:layout_marginEnd="32dp"
+        android:gravity="center"
+        android:padding="0dp"
+        android:text="-"
+        android:textSize="30sp"
+        app:iconPadding="0dp"
+        app:layout_constraintBottom_toBottomOf="@+id/textViewProductDetailsQuantity"
+        app:layout_constraintEnd_toStartOf="@+id/textViewProductDetailsQuantity"
+        app:layout_constraintTop_toTopOf="@+id/textViewProductDetailsQuantity" />
+
+    <TextView
+        android:id="@+id/textViewProductDetailsQuantity"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="32dp"
+        android:text="1"
+        android:textSize="32sp"
+        app:layout_constraintBottom_toTopOf="@+id/buttonProductDetailsAddToOrder"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <Button
+        android:id="@+id/buttonProductDetailsAddToOrder"
+        android:layout_width="0dp"
+        android:layout_height="64dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginEnd="32dp"
+        android:layout_marginBottom="16dp"
+        android:text="@string/add_to_order"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+</androidx.constraintlayout.widget.ConstraintLayout>

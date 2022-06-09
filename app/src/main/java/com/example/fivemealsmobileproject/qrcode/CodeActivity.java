@@ -47,6 +47,7 @@ public class CodeActivity extends AppCompatActivity {
                 if(start == 7){
                     if(AppDataBase.getInstance(context).getTableDAO().getTableFromID(Long.parseLong(s.toString())) != null){
                         MainActivity.startActivity(context, Long.parseLong(s.toString()));
+                        // TODO finish();
                     }else {
                         Toast.makeText(context, "Invalid code", Toast.LENGTH_SHORT).show();
                     }
@@ -70,5 +71,9 @@ public class CodeActivity extends AppCompatActivity {
     private void cacheViews(){
         this.codeInput = findViewById(R.id.editTextCodeInput);
 
+    }
+
+    public void onDebug(View view) {
+        MainActivity.startActivity(this,1);
     }
 }

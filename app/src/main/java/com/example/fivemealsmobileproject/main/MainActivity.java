@@ -1,5 +1,6 @@
 package com.example.fivemealsmobileproject.main;
 
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.fragment.NavHostFragment;
@@ -12,14 +13,16 @@ import android.view.View;
 
 import com.example.fivemealsmobileproject.R;
 import com.example.fivemealsmobileproject.databinding.ActivityMainBinding;
+import com.example.fivemealsmobileproject.home.HomeFragment;
+import com.example.fivemealsmobileproject.home.HomeProductDetailsFragment;
 import com.example.fivemealsmobileproject.login.PreLoginActivity;
 import com.example.fivemealsmobileproject.login.SessionManager;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements HomeProductDetailsFragment.MainActivityNavBar, HomeFragment.MainActivityNavBar {
 
     private static String KEY_CODE = "getCode";
-
-
+    ActivityMainBinding binding;
 
     public static void startActivity(Context context, long code) {
         Intent intent = new Intent(context, com.example.fivemealsmobileproject.main.MainActivity.class);
@@ -30,17 +33,15 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-
-        ActivityMainBinding binding;
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
-        NavHostFragment navHostFragment = (NavHostFragment) getSupportFragmentManager().findFragmentById(R.id.fragmentContainerView);
+        NavHostFragment navHostFragment = (NavHostFragment) getSupportFragmentManager().findFragmentById(binding.fragmentContainerView.getId());
         NavigationUI.setupWithNavController(binding.bottomNavigationView, navHostFragment.getNavController());
 
-        // TODO Fragments
+        ActionBar actionBar = getSupportActionBar();
+        actionBar.hide();
+
         // TODO utilizar os extras para saber a mesa
-        // TODO Room para as mesas e restaurantes
     }
 
     public void onLogOutClick(View view) {
@@ -49,7 +50,14 @@ public class MainActivity extends AppCompatActivity {
         finish();
     }
 
-    private void navigationController(){
 
+    @Override
+    public void hideNavBar() {
+        binding.bottomNavigationView.setVisibility(View.GONE);
+    }
+
+    @Override
+    public void showNavBar() {
+        binding.bottomNavigationView.setVisibility(View.VISIBLE);
     }
 }
