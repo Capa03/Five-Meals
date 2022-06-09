@@ -13,10 +13,13 @@ import android.view.View;
 
 import com.example.fivemealsmobileproject.R;
 import com.example.fivemealsmobileproject.databinding.ActivityMainBinding;
+import com.example.fivemealsmobileproject.home.HomeFragment;
+import com.example.fivemealsmobileproject.home.HomeProductDetailsFragment;
 import com.example.fivemealsmobileproject.login.PreLoginActivity;
 import com.example.fivemealsmobileproject.login.SessionManager;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements HomeProductDetailsFragment.MainActivityNavBar, HomeFragment.MainActivityNavBar {
 
     private static String KEY_CODE = "getCode";
     ActivityMainBinding binding;
@@ -37,14 +40,24 @@ public class MainActivity extends AppCompatActivity {
 
         ActionBar actionBar = getSupportActionBar();
         actionBar.hide();
-        // TODO Remove ActionBar
-        // TODO utilizar os extras para saber a mesa
 
+        // TODO utilizar os extras para saber a mesa
     }
 
     public void onLogOutClick(View view) {
         SessionManager.clearSession(this);
         PreLoginActivity.startActivity(this);
         finish();
+    }
+
+
+    @Override
+    public void hideNavBar() {
+        binding.bottomNavigationView.setVisibility(View.GONE);
+    }
+
+    @Override
+    public void showNavBar() {
+        binding.bottomNavigationView.setVisibility(View.VISIBLE);
     }
 }

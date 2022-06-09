@@ -25,6 +25,7 @@ public class HomeFragment extends Fragment implements CategoryListAdapter.Catego
     private Context context;
     private CategoryListAdapter adapter;
     private View view;
+    private MainActivityNavBar mainActivityNavBar;
 
 
 
@@ -55,6 +56,13 @@ public class HomeFragment extends Fragment implements CategoryListAdapter.Catego
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this.context);
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(layoutManager);
+        mainActivityNavBar.showNavBar();
+    }
+
+    @Override
+    public void onAttach(@NonNull Context context) {
+        super.onAttach(context);
+        if (context instanceof MainActivityNavBar) this.mainActivityNavBar = (MainActivityNavBar) context;
     }
 
     @Override
@@ -76,5 +84,10 @@ public class HomeFragment extends Fragment implements CategoryListAdapter.Catego
         // TODO ProductDetailsFragment + xml
         NavDirections action = (NavDirections) HomeFragmentDirections.actionHomeFragmentToHomeProductDetailsFragment(productID);
         Navigation.findNavController(this.view).navigate(action);
+    }
+
+    public interface MainActivityNavBar{
+        void hideNavBar();
+        void showNavBar();
     }
 }
