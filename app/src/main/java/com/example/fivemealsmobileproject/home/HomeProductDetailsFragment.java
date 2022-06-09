@@ -11,6 +11,7 @@ import androidx.navigation.Navigation;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -46,6 +47,11 @@ public class HomeProductDetailsFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
+        Product product = AppDataBase.getInstance(view.getContext()).getProductDAO().getById(this.productID);
+
+        ImageView imageViewProduct = view.findViewById(R.id.imageViewProductDetailsImage);
+        imageViewProduct.setClipToOutline(true);
+        TextView textViewTitle = view.findViewById(R.id.textViewProductDetailsTitle);
         ImageView goBackButton = view.findViewById(R.id.imageViewProductDetailsGoBackButton);
         goBackButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -55,17 +61,36 @@ public class HomeProductDetailsFragment extends Fragment {
                 Navigation.findNavController(view).navigate(action);            }
         });
 
-        ImageView imageViewProduct = view.findViewById(R.id.imageViewProductDetailsImage);
-        imageViewProduct.setClipToOutline(true);
-
-        TextView textViewTitle = view.findViewById(R.id.textViewProductDetailsTitle);
-
-        Product product = AppDataBase.getInstance(view.getContext()).getProductDAO().getById(this.productID);
-
         String link = "https://docs.google.com/uc?id=" + product.getImgLink();
         Glide.with(view.getContext()).load(link).into(imageViewProduct);
-
         textViewTitle.setText(product.getName());
+
+
+        TextView textViewQuantity = view.findViewById(R.id.textViewProductDetailsQuantity);
+        Button addQuantityButton = view.findViewById(R.id.buttonProductDetailsAddQuantity);
+        Button removeQuantityButton = view.findViewById(R.id.buttonProductDetailsRemoveQuantity);
+        removeQuantityButton.setEnabled(false);
+
+        addQuantityButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                int quantity = Integer.parseInt(textViewQuantity.getText().toString()) + 1;
+                textViewQuantity.setText(String.valueOf(quantity));
+                removeQuantityButton.setEnabled(true);
+            }
+        });
+
+        removeQuantityButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                int quantity = Integer.parseInt(textViewQuantity.getText().toString())-1;
+                if (quantity == 1) removeQuantityButton.setEnabled(false);
+
+                textViewQuantity.setText(String.valueOf(quantity));
+
+            }
+        });
+
     }
 
 }

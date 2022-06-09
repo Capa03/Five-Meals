@@ -42,4 +42,43 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         tools:ignore="UsingOnClickInXml" />
+
+    <Button
+        android:id="@+id/buttonProductDetailsAddQuantity"
+        android:layout_width="64dp"
+        android:layout_height="64dp"
+        android:layout_marginStart="32dp"
+        android:gravity="center"
+        android:padding="0dp"
+        android:text="+"
+        android:textSize="30sp"
+        app:iconPadding="0dp"
+        app:layout_constraintBottom_toBottomOf="@+id/textViewProductDetailsQuantity"
+        app:layout_constraintStart_toEndOf="@+id/textViewProductDetailsQuantity"
+        app:layout_constraintTop_toTopOf="@+id/textViewProductDetailsQuantity" />
+
+    <Button
+        android:id="@+id/buttonProductDetailsRemoveQuantity"
+        android:layout_width="64dp"
+        android:layout_height="64dp"
+        android:layout_marginEnd="32dp"
+        android:gravity="center"
+        android:padding="0dp"
+        android:text="-"
+        android:textSize="30sp"
+        app:iconPadding="0dp"
+        app:layout_constraintBottom_toBottomOf="@+id/textViewProductDetailsQuantity"
+        app:layout_constraintEnd_toStartOf="@+id/textViewProductDetailsQuantity"
+        app:layout_constraintTop_toTopOf="@+id/textViewProductDetailsQuantity" />
+
+    <TextView
+        android:id="@+id/textViewProductDetailsQuantity"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp"
+        android:text="1"
+        android:textSize="32sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>
