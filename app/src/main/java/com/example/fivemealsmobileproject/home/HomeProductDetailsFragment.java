@@ -109,7 +109,6 @@ public class HomeProductDetailsFragment extends Fragment {
                 Navigation.findNavController(view).navigate(action);
             }
         });
-
         mainActivityNavBar.hideNavBar();
     }
 
