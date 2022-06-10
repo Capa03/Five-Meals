@@ -69,7 +69,6 @@ public class HomeFragment extends Fragment implements CategoryListAdapter.Catego
     public void onStart() {
         super.onStart();
         this.adapter.updateData(AppDataBase.getInstance(this.context).getCategoryDAO().getAllCategories());
-
     }
 
     @Override
