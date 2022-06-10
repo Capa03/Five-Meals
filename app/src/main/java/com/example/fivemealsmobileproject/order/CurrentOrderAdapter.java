@@ -35,18 +35,18 @@ public class CurrentOrderAdapter extends RecyclerView.Adapter<CurrentOrderAdapte
 
     @Override
     public void onBindViewHolder(@NonNull CurrentOrderViewHolder holder, int position) {
-        Product currentOrder = CurrentOrder.getCurrentOrder().get(position);
 
-        holder.setName(currentOrder.getName());
-        holder.setTime(currentOrder.getAverageTime());
-        holder.setPrice(currentOrder.getPrice());
-        holder.setImage(currentOrder.getImgLink());
+            Product currentOrder = CurrentOrder.getCurrentOrder().get(position);
+            holder.setName(currentOrder.getName());
+            holder.setTime(currentOrder.getAverageTime());
+            holder.setPrice(currentOrder.getPrice());
+            holder.setImage(currentOrder.getImgLink());
 
     }
 
     @Override
     public int getItemCount() {
-        return this.products.size();
+        return CurrentOrder.getCurrentOrder().size();
     }
 
     public void updateData(List<Product> products){
