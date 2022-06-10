@@ -22,14 +22,14 @@ public class CurrentOrderAdapter extends RecyclerView.Adapter<CurrentOrderAdapte
 
     private List<Product> products;
 
-    public CurrentOrderAdapter(List<Product> product){
-        this.products = product;
+    public CurrentOrderAdapter(){
+
     }
 
     @NonNull
     @Override
     public CurrentOrderViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View layout = LayoutInflater.from(parent.getContext()).inflate(R.layout.card_current_order,parent,false);
+        View layout = LayoutInflater.from(parent.getContext()).inflate(R.layout.card_order_waiting,parent,false);
         return new CurrentOrderViewHolder(layout, parent.getContext());
     }
 
@@ -38,7 +38,8 @@ public class CurrentOrderAdapter extends RecyclerView.Adapter<CurrentOrderAdapte
 
             Product currentOrder = CurrentOrder.getCurrentOrder().get(position);
             holder.setName(currentOrder.getName());
-            holder.setTime(currentOrder.getAverageTime());
+            String time =  currentOrder.getAverageTime();
+            if(!time.isEmpty() && !time.equals("0")) holder.setTime(time);
             holder.setPrice(currentOrder.getPrice());
             holder.setImage(currentOrder.getImgLink());
 

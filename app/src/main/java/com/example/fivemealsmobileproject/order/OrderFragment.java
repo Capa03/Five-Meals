@@ -49,7 +49,7 @@ public class OrderFragment extends Fragment {
 
         this.view = view;
         RecyclerView recyclerView = view.findViewById(R.id.recyclerViewCurrentOrder);
-        this.adapter = new CurrentOrderAdapter(AppDataBase.getInstance(this.context).getProductDAO().getAll());
+        this.adapter = new CurrentOrderAdapter();
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this.context);
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(layoutManager);
