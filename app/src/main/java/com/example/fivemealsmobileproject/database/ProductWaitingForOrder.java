@@ -6,12 +6,12 @@ import androidx.room.PrimaryKey;
 import java.util.ArrayList;
 import java.util.List;
 @Entity
-public class ProductWithQuantity {
+public class ProductWaitingForOrder {
     @PrimaryKey
     private long productID;
     private int quantity;
 
-    public ProductWithQuantity(long productID, int quantity) {
+    public ProductWaitingForOrder(long productID, int quantity) {
         this.productID = productID;
         this.quantity = quantity;
     }

@@ -74,13 +74,10 @@ public class HomeFragment extends Fragment implements CategoryListAdapter.Catego
     @Override
     public void onCategoryClick(String categoryName) {
         Log.i("ListenerDEBUG", ("Category: " + categoryName));
-        // TODO CategoryDetailsFragment + xml + Update Adapter to implement simple/detailed layout
     }
 
     @Override
     public void onProductClick(long productID) {
-        Log.i("ListenerDEBUG", ("ProductID: " + productID));
-        // TODO ProductDetailsFragment + xml
         NavDirections action = (NavDirections) HomeFragmentDirections.actionHomeFragmentToHomeProductDetailsFragment(productID);
         Navigation.findNavController(this.view).navigate(action);
     }

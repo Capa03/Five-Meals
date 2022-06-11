@@ -12,18 +12,18 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.example.fivemealsmobileproject.R;
-import com.example.fivemealsmobileproject.database.CurrentOrder;
+import com.example.fivemealsmobileproject.database.AppDataBase;
 import com.example.fivemealsmobileproject.database.Product;
+import com.example.fivemealsmobileproject.database.ProductWaitingForOrder;
 
 
 import java.util.List;
 
 public class CurrentOrderAdapter extends RecyclerView.Adapter<CurrentOrderAdapter.CurrentOrderViewHolder> {
 
-    private List<Product> products;
+    private List<ProductWaitingForOrder> products;
 
     public CurrentOrderAdapter(){
-
     }
 
     @NonNull
@@ -35,22 +35,23 @@ public class CurrentOrderAdapter extends RecyclerView.Adapter<CurrentOrderAdapte
 
     @Override
     public void onBindViewHolder(@NonNull CurrentOrderViewHolder holder, int position) {
-
-            Product currentOrder = CurrentOrder.getCurrentOrder().get(position);
-            holder.setName(currentOrder.getName());
-            String time =  currentOrder.getAverageTime();
+            // TODO
+            long id = products.get(position).getProductID();
+            Product product = AppDataBase.getInstance(holder.context).getProductDAO().getById(id);
+            holder.setName(product.getName());
+            String time =  product.getAverageTime();
             if(!time.isEmpty() && !time.equals("0")) holder.setTime(time);
-            holder.setPrice(currentOrder.getPrice());
-            holder.setImage(currentOrder.getImgLink());
-
+            holder.setPrice(product.getPrice());
+            holder.setImage(product.getImgLink());
+            holder.setQuantity(AppDataBase.getInstance(holder.context).getProductWithQuantityDAO().getQuantityFromID(id));
     }
 
     @Override
     public int getItemCount() {
-        return CurrentOrder.getCurrentOrder().size();
+        return products.size();
     }
 
-    public void updateData(List<Product> products){
+    public void updateData(List<ProductWaitingForOrder> products){
         this.products = products;
         notifyDataSetChanged();
     }
@@ -62,6 +63,7 @@ public class CurrentOrderAdapter extends RecyclerView.Adapter<CurrentOrderAdapte
         private TextView textViewName;
         private TextView textViewTime;
         private TextView textViewPrice;
+        private TextView textViewQuantity;
         private View itemView;
 
         public CurrentOrderViewHolder(@NonNull View itemView, Context context) {
@@ -69,11 +71,11 @@ public class CurrentOrderAdapter extends RecyclerView.Adapter<CurrentOrderAdapte
             this.context = context;
             this.itemView = itemView;
             this.currentOrderImage = itemView.findViewById(R.id.imageViewCurrentOrder);
+            this.currentOrderImage.setClipToOutline(true);
             this.textViewName = itemView.findViewById(R.id.textViewCurrentOrderName);
             this.textViewTime = itemView.findViewById(R.id.textViewCurrentOrderAverageTime);
             this.textViewPrice = itemView.findViewById(R.id.textViewCurrentOrderPrice);
-
-            this.currentOrderImage.setClipToOutline(true);
+            this.textViewQuantity = itemView.findViewById(R.id.textViewCurrentOrderQuantity);
         }
 
         public void setName(String name) {
@@ -96,6 +98,10 @@ public class CurrentOrderAdapter extends RecyclerView.Adapter<CurrentOrderAdapte
             // https://drive.google.com/uc?id=
             String link = "https://docs.google.com/uc?id=" + imageID;
             Glide.with(this.context).load(link).into(this.currentOrderImage);
+        }
+
+        public void setQuantity(int quantity){
+            this.textViewQuantity.setText(quantity + "x");
         }
     }
 }

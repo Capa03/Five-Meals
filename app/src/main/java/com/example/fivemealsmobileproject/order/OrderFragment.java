@@ -59,6 +59,6 @@ public class OrderFragment extends Fragment {
     @Override
     public void onStart() {
         super.onStart();
-        this.adapter.updateData(AppDataBase.getInstance(this.context).getProductDAO().getAll());
+        this.adapter.updateData(AppDataBase.getInstance(this.context).getProductWithQuantityDAO().getAllProducts());
     }
 }

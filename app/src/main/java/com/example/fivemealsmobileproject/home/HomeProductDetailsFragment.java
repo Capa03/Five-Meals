@@ -19,10 +19,9 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.example.fivemealsmobileproject.R;
 import com.example.fivemealsmobileproject.database.AppDataBase;
-import com.example.fivemealsmobileproject.database.CurrentOrder;
 import com.example.fivemealsmobileproject.database.Product;
-import com.example.fivemealsmobileproject.login.PreLoginActivity;
-import com.example.fivemealsmobileproject.login.SessionManager;
+import com.example.fivemealsmobileproject.database.ProductWaitingForOrder;
+import com.example.fivemealsmobileproject.database.ProductWaitingForOrderDAO;
 
 public class HomeProductDetailsFragment extends Fragment {
 
@@ -101,9 +100,15 @@ public class HomeProductDetailsFragment extends Fragment {
         buttonAddToOrder.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                int quantity = Integer.parseInt(textViewQuantity.getText().toString());
-                for(int i = 0; i < quantity; i++){
-                    CurrentOrder.addProduct(product);
+                int quantityToAdd = Integer.parseInt(textViewQuantity.getText().toString());
+                // TODO ProductWaitingForOrder.addProduct(product);
+                ProductWaitingForOrderDAO productWaitingForOrderDAO = AppDataBase.
+                        getInstance(getContext()).getProductWithQuantityDAO();
+                int quantityInDB = productWaitingForOrderDAO.getQuantityFromID(productID);
+                if(quantityInDB == 0){
+                    productWaitingForOrderDAO.insertProductQuantity(new ProductWaitingForOrder(productID, quantityToAdd));
+                }else {
+                    productWaitingForOrderDAO.updateQuantity(new ProductWaitingForOrder(productID, (quantityInDB + quantityToAdd)));
                 }
                 NavDirections action = (NavDirections) HomeProductDetailsFragmentDirections.actionHomeProductDetailsFragmentToHomeFragment();
                 Navigation.findNavController(view).navigate(action);

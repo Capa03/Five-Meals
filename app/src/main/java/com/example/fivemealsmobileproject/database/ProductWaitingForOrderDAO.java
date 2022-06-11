@@ -8,20 +8,20 @@ import androidx.room.Update;
 import java.util.List;
 
 @Dao
-public interface ProductWithQuantityDAO {
+public interface ProductWaitingForOrderDAO {
 
-    @Query("SELECT * FROM ProductWithQuantity")
-    List<ProductWithQuantity> getAllProducts();
+    @Query("SELECT * FROM ProductWaitingForOrder")
+    List<ProductWaitingForOrder> getAllProducts();
 
-    @Query("SELECT quantity FROM Productwithquantity WHERE productID = :productID")
+    @Query("SELECT quantity FROM ProductWaitingForOrder WHERE productID = :productID")
     int getQuantityFromID(long productID);
 
-    @Query("DELETE FROM ProductWithQuantity")
+    @Query("DELETE FROM ProductWaitingForOrder")
     void clearCurrentOrder();
 
     @Insert
-    void insertProductQuantity(ProductWithQuantity productWithQuantity);
+    void insertProductQuantity(ProductWaitingForOrder productWaitingForOrder);
 
     @Update
-    void updateQuantity(ProductWithQuantity productWithQuantity);
+    void updateQuantity(ProductWaitingForOrder productWaitingForOrder);
 }
