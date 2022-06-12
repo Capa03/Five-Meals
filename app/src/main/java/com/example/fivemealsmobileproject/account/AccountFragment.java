@@ -27,7 +27,8 @@ import java.util.Random;
 public class AccountFragment extends Fragment {
 
     private Context context;
-
+    private ImageView imageView;
+    private View view;
     private static String[] profilePictures = new String[] {
             "http://tcap.pbworks.com/f/1435170280/myAvatar.png",
             "https://www.f6s.com/content-resource/profiles/3072512_original.jpg",
@@ -60,11 +61,18 @@ public class AccountFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        ImageView imageView = view.findViewById(R.id.imageViewAccountImage);
+
         TextView username = view.findViewById(R.id.textViewAccountUsername);
         Glide.with(this.context).load(profilePictures[random.nextInt(profilePictures.length)]).into(imageView);
         String user = SessionManager.getActiveSession(this.context);
         username.setText(user);
+
         //TODO Trazer info completo do user
+    }
+
+
+    private void cacheViews(){
+        this.imageView = this.view.findViewById(R.id.imageViewAccountImage);
+        
     }
 }
