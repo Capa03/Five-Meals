@@ -52,8 +52,18 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="32dp"
+        android:onClick="onChangePassword"
         android:text="Alterar Password >"
         app:layout_constraintStart_toStartOf="@+id/textViewAccountEmail"
         app:layout_constraintTop_toBottomOf="@+id/textViewAccountEmail" />
+
+    <TextView
+        android:id="@+id/textViewAccountLogout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:text="Logout"
+        app:layout_constraintStart_toStartOf="@+id/textViewAccountChangePassword"
+        app:layout_constraintTop_toBottomOf="@+id/textViewAccountChangePassword" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
