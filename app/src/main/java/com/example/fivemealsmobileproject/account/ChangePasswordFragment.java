@@ -51,6 +51,7 @@ public class ChangePasswordFragment extends Fragment {
         TextView submit = view.findViewById(R.id.textViewChangePasswordSubmit);
         EditText oldPassword = view.findViewById(R.id.editTextChangePasswordOldPassword);
         EditText newPassword = view.findViewById(R.id.editTextChangePasswordNewPassword);
+        EditText newPasswordConfirmation = view.findViewById(R.id.editTextChangePasswordTypeAgain);
         Context context = view.getContext();
 
         submit.setOnClickListener(new View.OnClickListener() {
@@ -60,6 +61,7 @@ public class ChangePasswordFragment extends Fragment {
 
                 int newPasswordData = newPassword.getText().toString().hashCode();
                 int oldPasswordData = oldPassword.getText().toString().hashCode();
+                int newPasswordConfirmationData = newPasswordConfirmation.getText().toString().hashCode();
 
                 String activeSession = SessionManager.getActiveSession(context);
                 User user = AppDataBase.getInstance(context).getUserDAO().getUserByUsername(activeSession);
@@ -67,11 +69,15 @@ public class ChangePasswordFragment extends Fragment {
                 if (oldPasswordData == user.getPassword()){
                     if(oldPasswordData == newPasswordData){
                         newPassword.setError("New Password can't be equal to the old password");
-                    }else{
+
+                    }else if(newPasswordData == newPasswordConfirmationData){
                         user.setPassword(newPasswordData);
                         AppDataBase.getInstance(context).getUserDAO().update(user);
+
                         NavDirections action = (NavDirections) ChangePasswordFragmentDirections.actionChangePasswordFragment2ToAccountFragment();
                         Navigation.findNavController(view).navigate(action);
+                    }else{
+                        newPasswordConfirmation.setError("Password are different");
                     }
                 }else{
                     oldPassword.setError("Password is Wrong");
