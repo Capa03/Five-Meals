@@ -35,13 +35,12 @@ public class CurrentOrderAdapter extends RecyclerView.Adapter<CurrentOrderAdapte
 
     @Override
     public void onBindViewHolder(@NonNull CurrentOrderViewHolder holder, int position) {
-            // TODO
             long id = products.get(position).getProductID();
             Product product = AppDataBase.getInstance(holder.context).getProductDAO().getById(id);
             holder.setName(product.getName());
             String time =  product.getAverageTime();
             if(!time.isEmpty() && !time.equals("0")) holder.setTime(time);
-            holder.setPrice(product.getPrice());
+            holder.setPrice(product.getPrice() * AppDataBase.getInstance(holder.context).getProductWithQuantityDAO().getQuantityFromID(id));
             holder.setImage(product.getImgLink());
             holder.setQuantity(AppDataBase.getInstance(holder.context).getProductWithQuantityDAO().getQuantityFromID(id));
     }

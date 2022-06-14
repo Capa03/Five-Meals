@@ -43,7 +43,6 @@ public class HomeFragment extends Fragment implements CategoryListAdapter.Catego
                              Bundle savedInstanceState) {
         this.context = container.getContext();
         // TODO create ActionBar
-        // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_home, container, false);
     }
 

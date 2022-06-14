@@ -57,9 +57,7 @@ public class HomeProductDetailsFragment extends Fragment {
         buttonGoBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                // TODO guardar o estado do fragment
-                NavDirections action = (NavDirections) HomeProductDetailsFragmentDirections.actionHomeProductDetailsFragmentToHomeFragment();
-                Navigation.findNavController(view).navigate(action);
+                Navigation.findNavController(view).popBackStack();
             }
         });
 
@@ -71,7 +69,7 @@ public class HomeProductDetailsFragment extends Fragment {
         TextView textViewTitle = view.findViewById(R.id.textViewProductDetailsTitle);
         textViewTitle.setText(product.getName());
 
-
+        // TODO cacheviews or not????
         TextView textViewQuantity = view.findViewById(R.id.textViewProductDetailsQuantity);
         Button buttonAddQuantity = view.findViewById(R.id.buttonProductDetailsAddQuantity);
         Button buttonRemoveQuantity = view.findViewById(R.id.buttonProductDetailsRemoveQuantity);
@@ -101,7 +99,7 @@ public class HomeProductDetailsFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 int quantityToAdd = Integer.parseInt(textViewQuantity.getText().toString());
-                // TODO ProductWaitingForOrder.addProduct(product);
+                // TODO Check box to order later or not
                 ProductWaitingForOrderDAO productWaitingForOrderDAO = AppDataBase.
                         getInstance(getContext()).getProductWithQuantityDAO();
                 int quantityInDB = productWaitingForOrderDAO.getQuantityFromID(productID);
@@ -110,8 +108,7 @@ public class HomeProductDetailsFragment extends Fragment {
                 }else {
                     productWaitingForOrderDAO.updateQuantity(new ProductWaitingForOrder(productID, (quantityInDB + quantityToAdd)));
                 }
-                NavDirections action = (NavDirections) HomeProductDetailsFragmentDirections.actionHomeProductDetailsFragmentToHomeFragment();
-                Navigation.findNavController(view).navigate(action);
+                Navigation.findNavController(view).popBackStack();
             }
         });
         mainActivityNavBar.hideNavBar();
