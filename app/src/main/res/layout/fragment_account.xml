@@ -7,23 +7,127 @@
     android:layout_height="match_parent"
     tools:context=".account.AccountFragment">
 
-    <de.hdodenhof.circleimageview.CircleImageView
-        android:id="@+id/imageViewAccountImage"
-        android:layout_width="70dp"
-        android:layout_height="50dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
+    <ImageView
+        android:id="@+id/imageView5"
+        android:layout_width="36dp"
+        android:layout_height="35dp"
+        android:layout_marginEnd="8dp"
+        android:background="@drawable/ic_baseline_login_24"
+        app:layout_constraintBottom_toBottomOf="@+id/textViewAccountLogout"
+        app:layout_constraintEnd_toStartOf="@+id/textViewAccountLogout"
+        app:layout_constraintTop_toTopOf="@+id/textViewAccountLogout"
+        tools:src="@drawable/ic_baseline_login_24" />
+
+    <ImageView
+        android:id="@+id/imageView4"
+        android:layout_width="36dp"
+        android:layout_height="35dp"
+        android:layout_marginEnd="8dp"
+        android:background="@drawable/ic_baseline_security_24"
+        app:layout_constraintBottom_toBottomOf="@+id/textViewAccountChangePassword"
+        app:layout_constraintEnd_toStartOf="@+id/textViewAccountChangePassword"
+        app:layout_constraintTop_toTopOf="@+id/textViewAccountChangePassword"
+        tools:ignore="ImageContrastCheck"
         tools:src="@tools:sample/avatars" />
 
     <TextView
-        android:id="@+id/textViewAccountUsername"
+        android:id="@+id/textViewAccountHelp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="24dp"
-        android:layout_marginTop="24dp"
-        android:text="TextView"
-        app:layout_constraintStart_toEndOf="@+id/imageViewAccountImage"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:layout_marginTop="64dp"
+        android:text="@string/Help"
+        android:textColor="#000000"
+        android:textSize="16sp"
+        app:layout_constraintStart_toStartOf="@+id/textViewAccountChangePassword"
+        app:layout_constraintTop_toBottomOf="@+id/textViewAccountChangePassword" />
+
+    <ImageView
+        android:id="@+id/imageView3"
+        android:layout_width="36dp"
+        android:layout_height="35dp"
+        android:layout_marginEnd="8dp"
+        android:background="@drawable/ic_baseline_mail_outline_24"
+        app:layout_constraintBottom_toBottomOf="@+id/textViewAccountEmail"
+        app:layout_constraintEnd_toStartOf="@+id/textViewAccountEmail"
+        app:layout_constraintTop_toTopOf="@+id/textViewAccountEmail"
+        tools:src="@tools:sample/avatars" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/cardView"
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+            android:id="@+id/textViewAccountUsername"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:text="@string/username"
+            android:textColor="#000000"
+            android:textSize="16sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/imageViewAccountImage"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/imageViewAccountImage"
+            android:layout_width="62dp"
+            android:layout_height="52dp"
+            android:layout_marginStart="16dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:src="@tools:sample/avatars" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <TextView
+        android:id="@+id/textViewAccountEmail"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="64dp"
+        android:layout_marginTop="64dp"
+        android:text="@string/email"
+        android:textColor="#000000"
+        android:textSize="16sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/cardView" />
+
+    <TextView
+        android:id="@+id/textViewAccountChangePassword"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="64dp"
+        android:onClick="onChangePassword"
+        android:text="@string/changePassword"
+        android:textColor="#000000"
+        android:textSize="16sp"
+        app:layout_constraintStart_toStartOf="@+id/textViewAccountEmail"
+        app:layout_constraintTop_toBottomOf="@+id/textViewAccountEmail" />
+
+    <TextView
+        android:id="@+id/textViewAccountLogout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="64dp"
+        android:text="@string/logout"
+        android:textColor="#000000"
+        android:textSize="16sp"
+        app:layout_constraintStart_toStartOf="@+id/textViewAccountHelp"
+        app:layout_constraintTop_toBottomOf="@+id/textViewAccountHelp" />
+
+    <ImageView
+        android:id="@+id/imageView2"
+        android:layout_width="36dp"
+        android:layout_height="35dp"
+        android:layout_marginEnd="8dp"
+        android:background="@drawable/ic_baseline_support_24"
+        app:layout_constraintBottom_toBottomOf="@+id/textViewAccountHelp"
+        app:layout_constraintEnd_toStartOf="@+id/textViewAccountHelp"
+        app:layout_constraintTop_toTopOf="@+id/textViewAccountHelp"
+        tools:src="@drawable/ic_baseline_support_24" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
