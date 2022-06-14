@@ -71,6 +71,7 @@ public class AccountFragment extends Fragment {
         TextView email = view.findViewById(R.id.textViewAccountEmail);
         TextView password = view.findViewById(R.id.textViewAccountChangePassword);
         TextView logout = view.findViewById(R.id.textViewAccountLogout);
+        TextView help = view.findViewById(R.id.textViewAccountHelp);
 
         Glide.with(this.context).load(profilePictures[random.nextInt(profilePictures.length)]).into(imageView);
         String user = SessionManager.getActiveSession(this.context);
@@ -93,6 +94,14 @@ public class AccountFragment extends Fragment {
             public void onClick(View view) {
                     SessionManager.clearSession(context);
                     PreLoginActivity.startActivity(context);
+            }
+        });
+
+        help.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                NavDirections action = (NavDirections) AccountFragmentDirections.actionAccountFragmentToHelpFragment();
+                Navigation.findNavController(view).navigate(action);
             }
         });
 

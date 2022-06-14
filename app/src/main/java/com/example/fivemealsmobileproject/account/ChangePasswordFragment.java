@@ -13,6 +13,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -52,6 +53,7 @@ public class ChangePasswordFragment extends Fragment {
         EditText oldPassword = view.findViewById(R.id.editTextChangePasswordOldPassword);
         EditText newPassword = view.findViewById(R.id.editTextChangePasswordNewPassword);
         EditText newPasswordConfirmation = view.findViewById(R.id.editTextChangePasswordTypeAgain);
+        ImageView onBack = view.findViewById(R.id.imageViewHelpFragmentOnBack);
         Context context = view.getContext();
 
         submit.setOnClickListener(new View.OnClickListener() {
@@ -82,6 +84,14 @@ public class ChangePasswordFragment extends Fragment {
                 }else{
                     oldPassword.setError("Password is Wrong");
                 }
+            }
+        });
+
+        onBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                NavDirections action = (NavDirections) ChangePasswordFragmentDirections.actionChangePasswordFragment2ToAccountFragment();
+                Navigation.findNavController(view).navigate(action);
             }
         });
     }

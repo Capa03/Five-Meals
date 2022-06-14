@@ -27,14 +27,15 @@
         app:layout_constraintBottom_toBottomOf="@+id/textViewAccountChangePassword"
         app:layout_constraintEnd_toStartOf="@+id/textViewAccountChangePassword"
         app:layout_constraintTop_toTopOf="@+id/textViewAccountChangePassword"
+        tools:ignore="ImageContrastCheck"
         tools:src="@tools:sample/avatars" />
 
     <TextView
-        android:id="@+id/textViewAccountLogout2"
+        android:id="@+id/textViewAccountHelp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="64dp"
-        android:text="Ajuda"
+        android:text="@string/Help"
         android:textColor="#000000"
         android:textSize="16sp"
         app:layout_constraintStart_toStartOf="@+id/textViewAccountChangePassword"
@@ -64,7 +65,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
-            android:text="Username"
+            android:text="@string/username"
             android:textColor="#000000"
             android:textSize="16sp"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -89,7 +90,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="64dp"
         android:layout_marginTop="64dp"
-        android:text="Email"
+        android:text="@string/email"
         android:textColor="#000000"
         android:textSize="16sp"
         app:layout_constraintStart_toStartOf="parent"
@@ -101,7 +102,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="64dp"
         android:onClick="onChangePassword"
-        android:text="Alterar Password >"
+        android:text="@string/changePassword"
         android:textColor="#000000"
         android:textSize="16sp"
         app:layout_constraintStart_toStartOf="@+id/textViewAccountEmail"
@@ -112,11 +113,11 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="64dp"
-        android:text="Logout"
+        android:text="@string/logout"
         android:textColor="#000000"
         android:textSize="16sp"
-        app:layout_constraintStart_toStartOf="@+id/textViewAccountLogout2"
-        app:layout_constraintTop_toBottomOf="@+id/textViewAccountLogout2" />
+        app:layout_constraintStart_toStartOf="@+id/textViewAccountHelp"
+        app:layout_constraintTop_toBottomOf="@+id/textViewAccountHelp" />
 
     <ImageView
         android:id="@+id/imageView2"
@@ -124,9 +125,9 @@
         android:layout_height="35dp"
         android:layout_marginEnd="8dp"
         android:background="@drawable/ic_baseline_support_24"
-        app:layout_constraintBottom_toBottomOf="@+id/textViewAccountLogout2"
-        app:layout_constraintEnd_toStartOf="@+id/textViewAccountLogout2"
-        app:layout_constraintTop_toTopOf="@+id/textViewAccountLogout2"
+        app:layout_constraintBottom_toBottomOf="@+id/textViewAccountHelp"
+        app:layout_constraintEnd_toStartOf="@+id/textViewAccountHelp"
+        app:layout_constraintTop_toTopOf="@+id/textViewAccountHelp"
         tools:src="@drawable/ic_baseline_support_24" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

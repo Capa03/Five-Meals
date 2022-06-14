@@ -32,6 +32,9 @@
         <action
             android:id="@+id/action_accountFragment_to_changePasswordFragment2"
             app:destination="@id/changePasswordFragment2" />
+        <action
+            android:id="@+id/action_accountFragment_to_helpFragment"
+            app:destination="@id/helpFragment" />
     </fragment>
     <fragment
         android:id="@+id/homeProductDetailsFragment"
@@ -52,6 +55,15 @@
         tools:layout="@layout/fragment_change_password" >
         <action
             android:id="@+id/action_changePasswordFragment2_to_accountFragment"
+            app:destination="@id/accountFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/helpFragment"
+        android:name="com.example.fivemealsmobileproject.account.HelpFragment"
+        android:label="fragment_help"
+        tools:layout="@layout/fragment_help" >
+        <action
+            android:id="@+id/action_helpFragment_to_accountFragment"
             app:destination="@id/accountFragment" />
     </fragment>
 </navigation>
