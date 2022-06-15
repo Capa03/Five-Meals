@@ -6,22 +6,22 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.navigation.NavDirections;
 import androidx.navigation.Navigation;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.example.fivemealsmobileproject.R;
 import com.example.fivemealsmobileproject.database.AppDataBase;
+import com.example.fivemealsmobileproject.database.OrderProduct;
+import com.example.fivemealsmobileproject.database.OrderProductDAO;
 import com.example.fivemealsmobileproject.database.Product;
-import com.example.fivemealsmobileproject.database.ProductWaitingForOrder;
-import com.example.fivemealsmobileproject.database.ProductWaitingForOrderDAO;
 
 public class HomeProductDetailsFragment extends Fragment {
 
@@ -36,7 +36,6 @@ public class HomeProductDetailsFragment extends Fragment {
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        // TODO getArguments().getProductID (Project/.gradle/build/generated/navigation-args/.../home)
         if(getArguments() != null) {
             this.productID = HomeProductDetailsFragmentArgs.fromBundle(getArguments()).getProductID();
             //this.mainActivityNavBar = HomeProductDetailsFragmentArgs.fromBundle(getArguments()).get
@@ -94,19 +93,19 @@ public class HomeProductDetailsFragment extends Fragment {
             }
         });
 
+        CheckBox forLater = view.findViewById(R.id.checkBoxProductDetailsOrderLater);
         Button buttonAddToOrder = view.findViewById(R.id.buttonProductDetailsAddToOrder);
         buttonAddToOrder.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 int quantityToAdd = Integer.parseInt(textViewQuantity.getText().toString());
-                // TODO Check box to order later or not
-                ProductWaitingForOrderDAO productWaitingForOrderDAO = AppDataBase.
+                OrderProductDAO orderProductDAO = AppDataBase.
                         getInstance(getContext()).getProductWithQuantityDAO();
-                int quantityInDB = productWaitingForOrderDAO.getQuantityFromID(productID);
+                int quantityInDB = orderProductDAO.getQuantityFromID(productID);
                 if(quantityInDB == 0){
-                    productWaitingForOrderDAO.insertProductQuantity(new ProductWaitingForOrder(productID, quantityToAdd));
+                    orderProductDAO.insertProductQuantity(new OrderProduct(productID, quantityToAdd, forLater.isChecked()));
                 }else {
-                    productWaitingForOrderDAO.updateQuantity(new ProductWaitingForOrder(productID, (quantityInDB + quantityToAdd)));
+                    orderProductDAO.updateQuantity(new OrderProduct(productID, (quantityInDB + quantityToAdd), forLater.isChecked()));
                 }
                 Navigation.findNavController(view).popBackStack();
             }

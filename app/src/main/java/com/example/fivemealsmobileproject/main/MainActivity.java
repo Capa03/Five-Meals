@@ -19,7 +19,7 @@ import com.example.fivemealsmobileproject.login.PreLoginActivity;
 import com.example.fivemealsmobileproject.login.SessionManager;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
-public class MainActivity extends AppCompatActivity implements HomeProductDetailsFragment.MainActivityNavBar, HomeFragment.MainActivityNavBar {
+public class MainActivity extends AppCompatActivity implements HomeFragment.MainActivityNavBar, HomeProductDetailsFragment.MainActivityNavBar {
 
     private static String KEY_CODE = "getCode";
     ActivityMainBinding binding;

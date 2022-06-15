@@ -40,7 +40,6 @@ public class ProductListAdapter extends RecyclerView.Adapter<ProductListAdapter.
         holder.setTime(String.valueOf(product.getAverageTime()));
         holder.setPrice(product.getPrice());
 
-        // TODO change link (DataBase Change)
         holder.setImage(product.getImgLink());
 
         holder.itemView.setOnClickListener(new View.OnClickListener() {
@@ -90,9 +89,6 @@ public class ProductListAdapter extends RecyclerView.Adapter<ProductListAdapter.
         }
         public void setTime(String time){
             this.textViewTime.setText(time + " min");
-        }
-        public void setImageSrc(String link){
-            // TODO Glide implementation
         }
 
         public void setImage(String imageID){

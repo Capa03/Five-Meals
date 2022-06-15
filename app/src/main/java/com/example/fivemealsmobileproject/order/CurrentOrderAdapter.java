@@ -13,15 +13,15 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.example.fivemealsmobileproject.R;
 import com.example.fivemealsmobileproject.database.AppDataBase;
+import com.example.fivemealsmobileproject.database.OrderProduct;
 import com.example.fivemealsmobileproject.database.Product;
-import com.example.fivemealsmobileproject.database.ProductWaitingForOrder;
 
 
 import java.util.List;
 
 public class CurrentOrderAdapter extends RecyclerView.Adapter<CurrentOrderAdapter.CurrentOrderViewHolder> {
 
-    private List<ProductWaitingForOrder> products;
+    private List<OrderProduct> products;
 
     public CurrentOrderAdapter(){
     }
@@ -50,7 +50,7 @@ public class CurrentOrderAdapter extends RecyclerView.Adapter<CurrentOrderAdapte
         return products.size();
     }
 
-    public void updateData(List<ProductWaitingForOrder> products){
+    public void updateData(List<OrderProduct> products){
         this.products = products;
         notifyDataSetChanged();
     }
@@ -87,10 +87,6 @@ public class CurrentOrderAdapter extends RecyclerView.Adapter<CurrentOrderAdapte
 
         public void setTime(String time) {
             this.textViewTime.setText(time + " min");
-        }
-
-        public void setImageSrc(String link) {
-            // TODO Glide implementation
         }
 
         public void setImage(String imageID) {
