@@ -14,6 +14,8 @@ public interface CategoryDAO {
     @Query("SELECT * FROM Category")
     List<Category> getAllCategories();
 
+    // TODO getCategoryIDFromRestaurantIdAndCategoryName
+
     @Delete
     void deleteCategory(Category category);
 

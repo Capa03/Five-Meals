@@ -6,14 +6,24 @@ import androidx.room.PrimaryKey;
 import java.util.ArrayList;
 import java.util.List;
 @Entity
-public class ProductWaitingForOrder {
+public class OrderProduct {
     @PrimaryKey
     private long productID;
     private int quantity;
+    private boolean later;
 
-    public ProductWaitingForOrder(long productID, int quantity) {
+    public OrderProduct(long productID, int quantity, boolean later) {
         this.productID = productID;
         this.quantity = quantity;
+        this.later = later;
+    }
+
+    public boolean isLater() {
+        return later;
+    }
+
+    public void setLater(boolean later) {
+        this.later = later;
     }
 
     public long getProductID() {

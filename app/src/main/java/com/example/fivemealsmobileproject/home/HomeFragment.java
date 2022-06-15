@@ -20,7 +20,7 @@ import com.example.fivemealsmobileproject.R;
 import com.example.fivemealsmobileproject.database.AppDataBase;
 
 
-public class HomeFragment extends Fragment implements CategoryListAdapter.CategoryListEventListener {
+public class HomeFragment extends Fragment implements CategoryListAdapter.CategoryListEventListener{
 
     private Context context;
     private CategoryListAdapter adapter;
@@ -80,6 +80,7 @@ public class HomeFragment extends Fragment implements CategoryListAdapter.Catego
         NavDirections action = (NavDirections) HomeFragmentDirections.actionHomeFragmentToHomeProductDetailsFragment(productID);
         Navigation.findNavController(this.view).navigate(action);
     }
+
 
     public interface MainActivityNavBar{
         void hideNavBar();
