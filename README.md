@@ -43,7 +43,7 @@ Login | |X
 Qr Code Reader | |X
 Manual Code Insert | |X
 Bottom Navigation and Fragments | |X
-Home Fragments |X |
+Home Fragments | |X
 Order Fragments |X |
 Favorites Fragments |X |
 Account Fragments | |X
