@@ -46,7 +46,7 @@ Bottom Navigation and Fragments | |X
 Home Fragments |X |
 Order Fragments |X |
 Favorites Fragments |X |
-Account Fragments |X |
+Account Fragments | |X
 
 #### Para mais informação do processo de desenvolvimento ver [Desenvolvimento do projeto](https://github.com/Capa03/Five-Meals/projects/1)
 
