@@ -22,9 +22,9 @@ public class CategoryListAdapter extends RecyclerView.Adapter<CategoryListAdapte
     private List<Category> categories;
     private CategoryListEventListener categoryEventListener;
 
-    public CategoryListAdapter(CategoryListEventListener categoryEventListener) {
-
+    public CategoryListAdapter(CategoryListEventListener categoryEventListener, List<Category> categories) {
         this.categoryEventListener = categoryEventListener;
+        this.categories = categories;
     }
 
     @NonNull
@@ -38,6 +38,7 @@ public class CategoryListAdapter extends RecyclerView.Adapter<CategoryListAdapte
     public void onBindViewHolder(@NonNull CategoryListViewHolder holder, int position) {
         String categoryName = categories.get(position).getCategoryName();
         holder.setTitle(categoryName);
+        // TODO Razão da recycler view horizontal não manter a posição
         holder.adapter.updateData(AppDataBase.getInstance(holder.context).getProductDAO().getAllFromCategory(categoryName));
 
         holder.textViewTitle.setOnClickListener(new View.OnClickListener() {
@@ -53,10 +54,6 @@ public class CategoryListAdapter extends RecyclerView.Adapter<CategoryListAdapte
         return this.categories.size();
     }
 
-    public void updateData(List<Category> categories) {
-        this.categories = categories;
-        notifyDataSetChanged();
-    }
 
     public class CategoryListViewHolder extends RecyclerView.ViewHolder {
         private Context context;

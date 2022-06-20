@@ -3,7 +3,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    android:background="@drawable/top_line_shape">
 
     <ImageView
         android:id="@+id/imageViewCurrentOrder"
@@ -32,6 +33,8 @@
         android:textColor="@color/black"
         android:textSize="22sp"
         app:layout_constraintBottom_toBottomOf="@+id/imageViewCurrentOrder"
+        app:layout_constraintEnd_toStartOf="@+id/textViewCurrentOrderAverageTime"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toEndOf="@+id/textViewCurrentOrderQuantity"
         app:layout_constraintTop_toTopOf="@+id/imageViewCurrentOrder" />
 
@@ -39,7 +42,7 @@
         android:id="@+id/textViewCurrentOrderQuantity"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
+        android:layout_marginStart="8dp"
         android:background="@drawable/simple_product_title_shape"
         android:padding="4dp"
         android:text="1x"
@@ -70,5 +73,14 @@
         app:layout_constraintBottom_toBottomOf="@+id/textViewCurrentOrderName"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@+id/textViewCurrentOrderName" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerViewOrderSingleTypeProduct"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/imageViewCurrentOrder"
+        app:layout_constraintTop_toBottomOf="@+id/imageViewCurrentOrder" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -15,7 +15,7 @@ import androidx.room.RoomDatabase;
         public abstract RestaurantDAO getRestaurantDAO();
         public abstract ProductDAO getProductDAO();
         public abstract CategoryDAO getCategoryDAO();
-        public abstract OrderProductDAO getProductWithQuantityDAO();
+        public abstract OrderProductDAO getOrderProductDAO();
 
         private static AppDataBase INSTANCE;
 

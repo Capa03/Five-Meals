@@ -18,6 +18,9 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.fivemealsmobileproject.R;
 import com.example.fivemealsmobileproject.database.AppDataBase;
+import com.example.fivemealsmobileproject.database.Category;
+
+import java.util.List;
 
 
 public class HomeFragment extends Fragment implements CategoryListAdapter.CategoryListEventListener{
@@ -50,8 +53,9 @@ public class HomeFragment extends Fragment implements CategoryListAdapter.Catego
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         this.view = view;
+        List<Category> categories = AppDataBase.getInstance(this.context).getCategoryDAO().getAllCategories();
         RecyclerView recyclerView = view.findViewById(R.id.recyclerViewHomeFragmentCategoryList);
-        this.adapter = new CategoryListAdapter(this);
+        this.adapter = new CategoryListAdapter(this, categories);
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this.context);
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(layoutManager);
@@ -62,12 +66,6 @@ public class HomeFragment extends Fragment implements CategoryListAdapter.Catego
     public void onAttach(@NonNull Context context) {
         super.onAttach(context);
         if (context instanceof MainActivityNavBar) this.mainActivityNavBar = (MainActivityNavBar) context;
-    }
-
-    @Override
-    public void onStart() {
-        super.onStart();
-        this.adapter.updateData(AppDataBase.getInstance(this.context).getCategoryDAO().getAllCategories());
     }
 
     @Override

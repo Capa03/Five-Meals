@@ -7,23 +7,35 @@ import java.util.ArrayList;
 import java.util.List;
 @Entity
 public class OrderProduct {
-    @PrimaryKey
+
+    public static int PROCESSING_STATE = 0;
+    public static int PENDING_STATE = 1;
+    public static int WAITING_APPROVAL_STATE = 2;
+
+    @PrimaryKey(autoGenerate = true)
+    private long orderProductID;
     private long productID;
-    private int quantity;
-    private boolean later;
+    private int state;
 
-    public OrderProduct(long productID, int quantity, boolean later) {
+    public OrderProduct(long productID,int state) {
         this.productID = productID;
-        this.quantity = quantity;
-        this.later = later;
+        this.state = state;
     }
 
-    public boolean isLater() {
-        return later;
+    public void setOrderProductID(long orderProductID) {
+        this.orderProductID = orderProductID;
     }
 
-    public void setLater(boolean later) {
-        this.later = later;
+    public long getOrderProductID() {
+        return orderProductID;
+    }
+
+    public int getState() {
+        return state;
+    }
+
+    public void setState(int state) {
+        this.state = state;
     }
 
     public long getProductID() {
@@ -34,11 +46,5 @@ public class OrderProduct {
         this.productID = productID;
     }
 
-    public int getQuantity() {
-        return quantity;
-    }
 
-    public void setQuantity(int quantity) {
-        this.quantity = quantity;
-    }
 }

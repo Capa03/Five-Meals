@@ -15,12 +15,12 @@ import android.view.ViewGroup;
 
 import com.example.fivemealsmobileproject.R;
 import com.example.fivemealsmobileproject.database.AppDataBase;
+import com.example.fivemealsmobileproject.database.OrderProduct;
 
 
-public class OrderFragment extends Fragment {
+public class OrderFragment extends Fragment implements CurrentOrderAdapter.ParentProductEventListener {
 
     private Context context;
-    private CurrentOrderAdapter laterProductsAdapter;
     private CurrentOrderAdapter orderedProductsAdapter;
     private View view;
 
@@ -48,26 +48,26 @@ public class OrderFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        this.view = view;
-        RecyclerView laterRecyclerView = view.findViewById(R.id.recyclerViewOrderForLater);
-        this.laterProductsAdapter = new CurrentOrderAdapter();
-        RecyclerView.LayoutManager laterLayoutManager = new LinearLayoutManager(this.context);
-        laterRecyclerView.setAdapter(laterProductsAdapter);
-        laterRecyclerView.setLayoutManager(laterLayoutManager);
-
-        RecyclerView orderedRecyclerView = view.findViewById(R.id.recyclerViewOrderOrdered);
-        this.orderedProductsAdapter = new CurrentOrderAdapter();
+        RecyclerView orderedRecyclerView = view.findViewById(R.id.recyclerViewOrderFragment);
+        this.orderedProductsAdapter = new CurrentOrderAdapter(this);
         RecyclerView.LayoutManager orderedLayoutManager = new LinearLayoutManager(this.context);
         orderedRecyclerView.setAdapter(orderedProductsAdapter);
         orderedRecyclerView.setLayoutManager(orderedLayoutManager);
-
 
     }
 
     @Override
     public void onStart() {
         super.onStart();
-        this.orderedProductsAdapter.updateData(AppDataBase.getInstance(this.context).getProductWithQuantityDAO().getAllOrderedProducts());
-        this.laterProductsAdapter.updateData(AppDataBase.getInstance(this.context).getProductWithQuantityDAO().getAllLaterProducts());
+        this.orderedProductsAdapter.updateData(ParentProductDB.getAll(context));
+    }
+
+    @Override
+    public void onRemoveProductClick(OrderProduct orderProduct) {
+        // TODO Erro abre automaticamente os detalhes do item de baixo quando o de cima é eliminado
+        // ou fecha todos
+        AppDataBase.getInstance(context).getOrderProductDAO().deleteOrderProduct(orderProduct);
+        ParentProductDB.removeProduct(context, orderProduct.getProductID());
+        this.orderedProductsAdapter.updateData(ParentProductDB.getAll(context));
     }
 }

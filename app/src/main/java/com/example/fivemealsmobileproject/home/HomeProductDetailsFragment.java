@@ -22,6 +22,7 @@ import com.example.fivemealsmobileproject.database.AppDataBase;
 import com.example.fivemealsmobileproject.database.OrderProduct;
 import com.example.fivemealsmobileproject.database.OrderProductDAO;
 import com.example.fivemealsmobileproject.database.Product;
+import com.example.fivemealsmobileproject.order.ParentProductDB;
 
 public class HomeProductDetailsFragment extends Fragment {
 
@@ -100,12 +101,10 @@ public class HomeProductDetailsFragment extends Fragment {
             public void onClick(View view) {
                 int quantityToAdd = Integer.parseInt(textViewQuantity.getText().toString());
                 OrderProductDAO orderProductDAO = AppDataBase.
-                        getInstance(getContext()).getProductWithQuantityDAO();
-                int quantityInDB = orderProductDAO.getQuantityFromID(productID);
-                if(quantityInDB == 0){
-                    orderProductDAO.insertProductQuantity(new OrderProduct(productID, quantityToAdd, forLater.isChecked()));
-                }else {
-                    orderProductDAO.updateQuantity(new OrderProduct(productID, (quantityInDB + quantityToAdd), forLater.isChecked()));
+                        getInstance(getContext()).getOrderProductDAO();
+                for(int i = 1; i<=quantityToAdd; i++){
+                    orderProductDAO.insertOrderProduct(new OrderProduct(productID, OrderProduct.PENDING_STATE));
+                    ParentProductDB.addProduct(productID);
                 }
                 Navigation.findNavController(view).popBackStack();
             }
