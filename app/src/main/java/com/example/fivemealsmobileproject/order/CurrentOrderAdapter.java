@@ -17,6 +17,7 @@ import com.example.fivemealsmobileproject.R;
 import com.example.fivemealsmobileproject.database.AppDataBase;
 import com.example.fivemealsmobileproject.database.OrderProduct;
 import com.example.fivemealsmobileproject.database.Product;
+import com.example.fivemealsmobileproject.main.TimeHelper;
 
 
 import java.util.List;
@@ -37,6 +38,11 @@ public class CurrentOrderAdapter extends RecyclerView.Adapter<CurrentOrderAdapte
         return new CurrentOrderViewHolder(layout, parent.getContext(), this);
     }
 
+    @Override
+    public int getItemViewType(int position) {
+        return products.get(position).getState();
+    }
+
     @SuppressLint("WrongConstant")
     @Override
     public void onBindViewHolder(@NonNull CurrentOrderViewHolder holder, int position) {
@@ -45,8 +51,9 @@ public class CurrentOrderAdapter extends RecyclerView.Adapter<CurrentOrderAdapte
 
             Product product = AppDataBase.getInstance(holder.context).getProductDAO().getById(parentProduct.getProductID());
             holder.setName(product.getName());
-            String time =  product.getAverageTime();
-            if(!time.isEmpty() && !time.equals("0")) holder.setTime(time);
+            int minTime = (int) product.getMinAverageTime();
+            int maxTime = (int) product.getMaxAverageTime();
+            holder.setTime(TimeHelper.getTimeToString(minTime, maxTime));
             holder.setPrice(product.getPrice() * holder.adapter.getItemCount());
             holder.setImage(product.getImgLink());
             holder.setQuantity(holder.adapter.getItemCount());
@@ -119,6 +126,7 @@ public class CurrentOrderAdapter extends RecyclerView.Adapter<CurrentOrderAdapte
             RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this.context);
             this.recyclerView.setAdapter(this.adapter);
             this.recyclerView.setLayoutManager(layoutManager);
+
         }
 
         public void setName(String name) {

@@ -102,8 +102,11 @@ public class HomeProductDetailsFragment extends Fragment {
                 int quantityToAdd = Integer.parseInt(textViewQuantity.getText().toString());
                 OrderProductDAO orderProductDAO = AppDataBase.
                         getInstance(getContext()).getOrderProductDAO();
+
+                int state = forLater.isChecked() ? OrderProduct.WAITING_APPROVAL_STATE : OrderProduct.PENDING_STATE;
+
                 for(int i = 1; i<=quantityToAdd; i++){
-                    orderProductDAO.insertOrderProduct(new OrderProduct(productID, OrderProduct.PENDING_STATE));
+                    orderProductDAO.insertOrderProduct(new OrderProduct(productID, state, System.currentTimeMillis()));
                     ParentProductDB.addProduct(productID);
                 }
                 Navigation.findNavController(view).popBackStack();

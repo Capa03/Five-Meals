@@ -13,13 +13,15 @@ public class Product {
     private String description;
     private String category;
     private Float price;
-    private String averageTime;
+    private double minAverageTime;
+    private double maxAverageTime;
     private String imgLink;
 
-    public Product(String name, Float price, String averageTime, String category, String imgLink) {
+    public Product(String name, Float price, double minAverageTime, double maxAverageTime,  String category, String imgLink) {
         this.name = name;
         this.price = price;
-        this.averageTime = averageTime;
+        this.minAverageTime = minAverageTime;
+        this.maxAverageTime = maxAverageTime;
         this.category = category;
         this.imgLink = imgLink;
     }
@@ -64,12 +66,20 @@ public class Product {
         this.price = price;
     }
 
-    public String getAverageTime() {
-        return averageTime;
+    public double getMinAverageTime() {
+        return minAverageTime;
     }
 
-    public void setAverageTime(String averageTime) {
-        this.averageTime = averageTime;
+    public void setMinAverageTime(int minAverageTime) {
+        this.minAverageTime = minAverageTime;
+    }
+
+    public double getMaxAverageTime() {
+        return maxAverageTime;
+    }
+
+    public void setMaxAverageTime(int maxAverageTime) {
+        this.maxAverageTime = maxAverageTime;
     }
 
     public String getImgLink() {

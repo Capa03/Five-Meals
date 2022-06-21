@@ -11,15 +11,18 @@ public class OrderProduct {
     public static int PROCESSING_STATE = 0;
     public static int PENDING_STATE = 1;
     public static int WAITING_APPROVAL_STATE = 2;
+    public static int DELIVERED_STATE = 3;
 
     @PrimaryKey(autoGenerate = true)
     private long orderProductID;
     private long productID;
     private int state;
+    private long orderedTime;
 
-    public OrderProduct(long productID,int state) {
+    public OrderProduct(long productID,int state, long orderedTime) {
         this.productID = productID;
         this.state = state;
+        this.orderedTime = orderedTime;
     }
 
     public void setOrderProductID(long orderProductID) {
@@ -46,5 +49,11 @@ public class OrderProduct {
         this.productID = productID;
     }
 
+    public long getOrderedTime() {
+        return orderedTime;
+    }
 
+    public void setOrderedTime(long orderedTime) {
+        this.orderedTime = orderedTime;
+    }
 }

@@ -9,6 +9,7 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.os.Handler;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,17 +18,20 @@ import com.example.fivemealsmobileproject.R;
 import com.example.fivemealsmobileproject.database.AppDataBase;
 import com.example.fivemealsmobileproject.database.OrderProduct;
 
+import java.util.Timer;
+import java.util.TimerTask;
+
 
 public class OrderFragment extends Fragment implements CurrentOrderAdapter.ParentProductEventListener {
 
     private Context context;
     private CurrentOrderAdapter orderedProductsAdapter;
     private View view;
+    private RefreshAdapter refreshAdapter;
 
     public OrderFragment() {
         // Required empty public constructor
     }
-
 
 
     @Override
@@ -54,13 +58,24 @@ public class OrderFragment extends Fragment implements CurrentOrderAdapter.Paren
         orderedRecyclerView.setAdapter(orderedProductsAdapter);
         orderedRecyclerView.setLayoutManager(orderedLayoutManager);
 
+        refreshAdapter = new RefreshAdapter(this.orderedProductsAdapter);
     }
 
     @Override
     public void onStart() {
         super.onStart();
         this.orderedProductsAdapter.updateData(ParentProductDB.getAll(context));
+        Handler handler = new Handler();
+        Runnable runnable = new Runnable() {
+            @Override
+            public void run() {
+                orderedProductsAdapter.notifyDataSetChanged();
+                handler.postDelayed(this, 1000);
+            }
+        };
+        handler.post(runnable);
     }
+
 
     @Override
     public void onRemoveProductClick(OrderProduct orderProduct) {
