@@ -17,13 +17,14 @@ public class Product {
     private double maxAverageTime;
     private String imgLink;
 
-    public Product(String name, Float price, double minAverageTime, double maxAverageTime,  String category, String imgLink) {
+    public Product(String name, Float price, double minAverageTime, double maxAverageTime,  String category, String imgLink, String description) {
         this.name = name;
         this.price = price;
         this.minAverageTime = minAverageTime;
         this.maxAverageTime = maxAverageTime;
         this.category = category;
         this.imgLink = imgLink;
+        this.description = description;
     }
 
     public long getId() {
@@ -89,6 +90,7 @@ public class Product {
     public void setImgLink(String imgLink) {
         this.imgLink = imgLink;
     }
+
 
 
 }

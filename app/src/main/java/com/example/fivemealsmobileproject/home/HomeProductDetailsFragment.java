@@ -1,5 +1,6 @@
 package com.example.fivemealsmobileproject.home;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.os.Bundle;
 
@@ -29,6 +30,16 @@ public class HomeProductDetailsFragment extends Fragment {
     private long productID;
     private MainActivityNavBar mainActivityNavBar;
 
+    private ImageView imageViewProduct;
+    private TextView textViewTitle;
+    private TextView textViewDescription;
+    private TextView textViewPrice;
+    private TextView textViewQuantity;
+    private Button buttonAddQuantity;
+    private Button buttonRemoveQuantity;
+    private CheckBox forLater;
+    private Button buttonAddToOrder;
+
     public HomeProductDetailsFragment() {
         // Required empty public constructor
     }
@@ -48,41 +59,38 @@ public class HomeProductDetailsFragment extends Fragment {
         return inflater.inflate(R.layout.fragment_home_product_details, container, false);
     }
 
+    @SuppressLint("SetTextI18n")
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         Product product = AppDataBase.getInstance(view.getContext()).getProductDAO().getById(this.productID);
 
-        ImageView buttonGoBack = view.findViewById(R.id.imageViewProductDetailsGoBackButton);
-        buttonGoBack.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Navigation.findNavController(view).popBackStack();
-            }
-        });
+        cacheViews(view);
 
         String link = "https://docs.google.com/uc?id=" + product.getImgLink();
-        ImageView imageViewProduct = view.findViewById(R.id.imageViewProductDetailsImage);
         imageViewProduct.setClipToOutline(true);
-
         Glide.with(view.getContext()).load(link).into(imageViewProduct);
-        TextView textViewTitle = view.findViewById(R.id.textViewProductDetailsTitle);
+
         textViewTitle.setText(product.getName());
+        textViewDescription.setText(product.getDescription());
+        textViewPrice.setText(product.getPrice() + " $");
 
-        // TODO cacheviews or not????
-        TextView textViewQuantity = view.findViewById(R.id.textViewProductDetailsQuantity);
-        Button buttonAddQuantity = view.findViewById(R.id.buttonProductDetailsAddQuantity);
-        Button buttonRemoveQuantity = view.findViewById(R.id.buttonProductDetailsRemoveQuantity);
+        int quantityToAdd = Integer.parseInt(textViewQuantity.getText().toString());
+        buttonAddToOrder.setText("Add " + quantityToAdd + " to cart " + quantityToAdd * product.getPrice()+ " $");
+
         buttonRemoveQuantity.setEnabled(false);
-
+        //Add Quantity
         buttonAddQuantity.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 int quantity = Integer.parseInt(textViewQuantity.getText().toString()) + 1;
                 textViewQuantity.setText(String.valueOf(quantity));
                 buttonRemoveQuantity.setEnabled(true);
+                buttonAddToOrder.setText("Add " + quantity + " to cart " + quantity * product.getPrice()+ " $");
             }
         });
+
+        //Remove Quantity
 
         buttonRemoveQuantity.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -90,12 +98,10 @@ public class HomeProductDetailsFragment extends Fragment {
                 int quantity = Integer.parseInt(textViewQuantity.getText().toString())-1;
                 if (quantity == 1) buttonRemoveQuantity.setEnabled(false);
                 textViewQuantity.setText(String.valueOf(quantity));
-
+                buttonAddToOrder.setText("Add " + quantity + " to cart " + quantity * product.getPrice()+ " $");
             }
         });
 
-        CheckBox forLater = view.findViewById(R.id.checkBoxProductDetailsOrderLater);
-        Button buttonAddToOrder = view.findViewById(R.id.buttonProductDetailsAddToOrder);
         buttonAddToOrder.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -124,6 +130,18 @@ public class HomeProductDetailsFragment extends Fragment {
     public interface MainActivityNavBar{
         void hideNavBar();
         void showNavBar();
+    }
+
+    private void cacheViews(View view){
+        this.imageViewProduct = view.findViewById(R.id.imageViewProductDetailsImage);
+        this.textViewTitle = view.findViewById(R.id.textViewProductDetailsTitle);
+        this.textViewDescription = view.findViewById(R.id.textViewProductDetailsDescription);
+        this.textViewPrice = view.findViewById(R.id.textViewProductDetailsPrice);
+        this.textViewQuantity = view.findViewById(R.id.textViewProductDetailsQuantity);
+        this.buttonAddQuantity = view.findViewById(R.id.buttonProductDetailsAddQuantity);
+        this.buttonRemoveQuantity = view.findViewById(R.id.buttonProductDetailsRemoveQuantity);
+        this.forLater = view.findViewById(R.id.checkBoxProductDetailsOrderLater);
+        this.buttonAddToOrder = view.findViewById(R.id.buttonProductDetailsAddToOrder);
     }
 
 }
