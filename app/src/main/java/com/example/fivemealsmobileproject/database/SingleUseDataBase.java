@@ -65,7 +65,6 @@ public class SingleUseDataBase {
             productDAO.insertProduct(new Product("Azeitoas", 1f, 1, 0, "Entradas",
                     "1GJ-RYLa646927CSjglz5YFjtri_LcS13",description));
         }
-
-
     }
+
 }

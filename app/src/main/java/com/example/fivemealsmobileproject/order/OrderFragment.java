@@ -14,14 +14,14 @@ import android.os.Handler;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 
 import com.example.fivemealsmobileproject.R;
 import com.example.fivemealsmobileproject.database.AppDataBase;
 import com.example.fivemealsmobileproject.database.OrderProduct;
-
-import java.util.Timer;
-import java.util.TimerTask;
+import com.example.fivemealsmobileproject.payment.PaymentActivity;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 
 public class OrderFragment extends Fragment implements CurrentOrderAdapter.ParentProductEventListener {
@@ -69,6 +69,15 @@ public class OrderFragment extends Fragment implements CurrentOrderAdapter.Paren
         orderedRecyclerView.setLayoutManager(orderedLayoutManager);
 
         refreshAdapter = new RefreshAdapter(this.orderedProductsAdapter);
+
+        FloatingActionButton payButton = view.findViewById(R.id.FABOrderFragmentPayButton);
+
+        payButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                PaymentActivity.startActivity(context);
+            }
+        });
     }
 
     @Override
