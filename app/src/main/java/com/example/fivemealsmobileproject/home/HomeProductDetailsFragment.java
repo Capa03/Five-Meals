@@ -39,6 +39,7 @@ public class HomeProductDetailsFragment extends Fragment {
     private Button buttonRemoveQuantity;
     private CheckBox forLater;
     private Button buttonAddToOrder;
+    private ImageView imageViewGoBack;
 
     public HomeProductDetailsFragment() {
         // Required empty public constructor
@@ -59,13 +60,19 @@ public class HomeProductDetailsFragment extends Fragment {
         return inflater.inflate(R.layout.fragment_home_product_details, container, false);
     }
 
-    @SuppressLint("SetTextI18n")
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         Product product = AppDataBase.getInstance(view.getContext()).getProductDAO().getById(this.productID);
 
         cacheViews(view);
+
+        this.imageViewGoBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Navigation.findNavController(view).popBackStack();
+            }
+        });
 
         String link = "https://docs.google.com/uc?id=" + product.getImgLink();
         imageViewProduct.setClipToOutline(true);
@@ -76,7 +83,7 @@ public class HomeProductDetailsFragment extends Fragment {
         textViewPrice.setText(product.getPrice() + " $");
 
         int quantityToAdd = Integer.parseInt(textViewQuantity.getText().toString());
-        buttonAddToOrder.setText("Add " + quantityToAdd + " to cart " + quantityToAdd * product.getPrice()+ " $");
+        buttonAddToOrder.setText(String.format("Add %d to cart %s $", quantityToAdd, quantityToAdd * product.getPrice()));
 
         buttonRemoveQuantity.setEnabled(false);
         //Add Quantity
@@ -142,6 +149,7 @@ public class HomeProductDetailsFragment extends Fragment {
         this.buttonRemoveQuantity = view.findViewById(R.id.buttonProductDetailsRemoveQuantity);
         this.forLater = view.findViewById(R.id.checkBoxProductDetailsOrderLater);
         this.buttonAddToOrder = view.findViewById(R.id.buttonProductDetailsAddToOrder);
+        this.imageViewGoBack = view.findViewById(R.id.imageViewToolBarGoBack);
     }
 
 }

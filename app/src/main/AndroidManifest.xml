@@ -16,6 +16,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.FiveMealsMobileProject">
+
         <activity
             android:name=".qrcode.QrCodeActivity"
             android:exported="false" />

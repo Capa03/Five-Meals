@@ -7,5 +7,8 @@
     <color name="teal_700">#FF018786</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+    <color name="red">#92E42C2C</color>
+    <color name="blue">#922EA0CD</color>
+    <color name="green">#9246FA05</color>
     <color name="splashScreenBackgroundColor">#FF000000</color>
 </resources>

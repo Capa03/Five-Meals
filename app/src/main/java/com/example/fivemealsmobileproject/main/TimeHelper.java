@@ -5,6 +5,7 @@ import java.util.Calendar;
 import java.util.Date;
 
 public class TimeHelper {
+    private static final int thirtySecondsInMillis = 30000;
 
     private static final SimpleDateFormat minutesSeconds = new SimpleDateFormat("mm:ss");
 
@@ -33,6 +34,18 @@ public class TimeHelper {
         }else {
             return "DONE";
         }
+    }
 
+    public static int getRemainingCancelTime(long orderTimeInMillis){
+        return (int) ((System.currentTimeMillis() - orderTimeInMillis) * 100 / thirtySecondsInMillis);
+    }
+
+    public static String getRemainingCancelTimeInTimeStamp(long orderTimeInMillis){
+        long differenceInMillis = System.currentTimeMillis() - orderTimeInMillis;
+        if (differenceInMillis < thirtySecondsInMillis){
+            return minutesSeconds.format(new Date(thirtySecondsInMillis - differenceInMillis));
+        }else {
+            return "00:00";
+        }
     }
 }

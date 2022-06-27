@@ -7,6 +7,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -29,6 +30,7 @@ public class HomeFragment extends Fragment implements CategoryListAdapter.Catego
     private CategoryListAdapter adapter;
     private View view;
     private MainActivityNavBar mainActivityNavBar;
+    ViewGroup container;
 
 
 
@@ -45,6 +47,7 @@ public class HomeFragment extends Fragment implements CategoryListAdapter.Catego
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         this.context = container.getContext();
+        this.container = container;
         // TODO create ActionBar
         return inflater.inflate(R.layout.fragment_home, container, false);
     }
@@ -53,6 +56,15 @@ public class HomeFragment extends Fragment implements CategoryListAdapter.Catego
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         this.view = view;
+
+        ImageView imageViewGoBack = view.findViewById(R.id.imageViewToolBarGoBack);
+        imageViewGoBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+            }
+        });
+
         List<Category> categories = AppDataBase.getInstance(this.context).getCategoryDAO().getAllCategories();
         RecyclerView recyclerView = view.findViewById(R.id.recyclerViewHomeFragmentCategoryList);
         this.adapter = new CategoryListAdapter(this, categories);

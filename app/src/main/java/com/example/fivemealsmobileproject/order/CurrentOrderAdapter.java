@@ -17,6 +17,7 @@ import com.example.fivemealsmobileproject.R;
 import com.example.fivemealsmobileproject.database.AppDataBase;
 import com.example.fivemealsmobileproject.database.OrderProduct;
 import com.example.fivemealsmobileproject.database.Product;
+import com.example.fivemealsmobileproject.main.MainActivity;
 import com.example.fivemealsmobileproject.main.TimeHelper;
 
 
@@ -38,10 +39,6 @@ public class CurrentOrderAdapter extends RecyclerView.Adapter<CurrentOrderAdapte
         return new CurrentOrderViewHolder(layout, parent.getContext(), this);
     }
 
-    @Override
-    public int getItemViewType(int position) {
-        return products.get(position).getState();
-    }
 
     @SuppressLint("WrongConstant")
     @Override
@@ -63,7 +60,7 @@ public class CurrentOrderAdapter extends RecyclerView.Adapter<CurrentOrderAdapte
                 @Override
                 public void onClick(View view) {
                     int currentState = holder.recyclerView.getVisibility();
-                    switch (currentState){
+                    switch (currentState) {
                         case View.GONE:
                             parentProduct.setState(View.VISIBLE);
                             holder.recyclerView.setVisibility(View.VISIBLE);
@@ -90,7 +87,6 @@ public class CurrentOrderAdapter extends RecyclerView.Adapter<CurrentOrderAdapte
     @Override
     public void onRemoveProductClick(OrderProduct orderProduct) {
         parentProductEventListener.onRemoveProductClick(orderProduct);
-        notifyDataSetChanged();
     }
 
     public interface ParentProductEventListener{
@@ -112,21 +108,20 @@ public class CurrentOrderAdapter extends RecyclerView.Adapter<CurrentOrderAdapte
 
         public CurrentOrderViewHolder(@NonNull View itemView, Context context, SingleProductAdapter.SingleProductEventListener eventListener) {
             super(itemView);
-            this.context = context;
-            this.itemView = itemView;
-            this.currentOrderImage = itemView.findViewById(R.id.imageViewCurrentOrder);
-            this.currentOrderImage.setClipToOutline(true);
-            this.textViewName = itemView.findViewById(R.id.textViewCurrentOrderName);
-            this.textViewTime = itemView.findViewById(R.id.textViewCurrentOrderAverageTime);
-            this.textViewPrice = itemView.findViewById(R.id.textViewCurrentOrderPrice);
-            this.textViewQuantity = itemView.findViewById(R.id.textViewCurrentOrderQuantity);
+                this.context = context;
+                this.itemView = itemView;
+                this.currentOrderImage = itemView.findViewById(R.id.imageViewCurrentOrder);
+                this.currentOrderImage.setClipToOutline(true);
+                this.textViewName = itemView.findViewById(R.id.textViewCurrentOrderName);
+                this.textViewTime = itemView.findViewById(R.id.textViewCurrentOrderAverageTime);
+                this.textViewPrice = itemView.findViewById(R.id.textViewCurrentOrderPrice);
+                this.textViewQuantity = itemView.findViewById(R.id.textViewCurrentOrderQuantity);
 
-           this.recyclerView = itemView.findViewById(R.id.recyclerViewOrderSingleTypeProduct);
-            this.adapter = new SingleProductAdapter(eventListener);
-            RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this.context);
-            this.recyclerView.setAdapter(this.adapter);
-            this.recyclerView.setLayoutManager(layoutManager);
-
+                this.recyclerView = itemView.findViewById(R.id.recyclerViewOrderSingleTypeProduct);
+                this.adapter = new SingleProductAdapter(eventListener);
+                RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this.context);
+                this.recyclerView.setAdapter(this.adapter);
+                this.recyclerView.setLayoutManager(layoutManager);
         }
 
         public void setName(String name) {

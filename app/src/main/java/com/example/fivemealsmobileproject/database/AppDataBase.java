@@ -22,7 +22,7 @@ import androidx.room.RoomDatabase;
         public static AppDataBase getInstance(Context context) {
             if (INSTANCE == null) {
                 INSTANCE = Room.databaseBuilder(context.getApplicationContext(),
-                                AppDataBase.class, "ChatBotDatabase")
+                                AppDataBase.class, "AppDatabase")
                         .allowMainThreadQueries()
                         .build();
             }
