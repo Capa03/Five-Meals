@@ -17,12 +17,6 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.FiveMealsMobileProject">
         <activity
-            android:name=".payment.MbWayPaymentActivity"
-            android:exported="false" />
-        <activity
-            android:name=".payment.DebitCardActivity"
-            android:exported="false" />
-        <activity
             android:name=".payment.PaymentActivity"
             android:exported="false" />
         <activity

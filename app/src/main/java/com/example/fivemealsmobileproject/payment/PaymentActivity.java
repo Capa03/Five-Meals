@@ -86,11 +86,6 @@ public class PaymentActivity extends AppCompatActivity implements AdapterView.On
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
         PaymentMethod paymentMethod = (PaymentMethod) parent.getSelectedItem();
 
-        if(paymentMethod.getSpinnerTitle().equals("Debit Card")){
-            DebitCardActivity.startActivity(this);
-        }else if(paymentMethod.getSpinnerTitle().equals("MBWay")){
-            MbWayPaymentActivity.startActivity(this);
-        }
     }
 
     @Override

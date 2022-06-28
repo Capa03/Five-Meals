@@ -4,6 +4,7 @@ import android.annotation.SuppressLint;
 import android.content.Context;
 import android.os.Bundle;
 
+import androidx.activity.OnBackPressedCallback;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
@@ -23,6 +24,7 @@ import com.example.fivemealsmobileproject.database.AppDataBase;
 import com.example.fivemealsmobileproject.database.OrderProduct;
 import com.example.fivemealsmobileproject.database.OrderProductDAO;
 import com.example.fivemealsmobileproject.database.Product;
+import com.example.fivemealsmobileproject.main.MainActivity;
 import com.example.fivemealsmobileproject.order.ParentProductDB;
 
 public class HomeProductDetailsFragment extends Fragment {
@@ -40,7 +42,7 @@ public class HomeProductDetailsFragment extends Fragment {
     private CheckBox forLater;
     private Button buttonAddToOrder;
     private ImageView imageViewGoBack;
-
+    private Context context;
     public HomeProductDetailsFragment() {
         // Required empty public constructor
     }
@@ -52,6 +54,17 @@ public class HomeProductDetailsFragment extends Fragment {
         if(getArguments() != null) {
             this.productID = HomeProductDetailsFragmentArgs.fromBundle(getArguments()).getProductID();
             //this.mainActivityNavBar = HomeProductDetailsFragmentArgs.fromBundle(getArguments()).get
+            // This callback will only be called when MyFragment is at least Started.
+            OnBackPressedCallback callback = new OnBackPressedCallback(true /* enabled by default */) {
+                @Override
+                public void handleOnBackPressed() {
+                    // Handle the back button event
+                    MainActivity.startActivity(context,0);
+                }
+            };
+            requireActivity().getOnBackPressedDispatcher().addCallback(this, callback);
+
+            // The callback can be enabled or disabled here or in handleOnBackPressed()
         }
     }
 

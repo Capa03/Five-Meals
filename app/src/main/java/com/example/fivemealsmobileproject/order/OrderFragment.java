@@ -3,6 +3,7 @@ package com.example.fivemealsmobileproject.order;
 import android.content.Context;
 import android.os.Bundle;
 
+import androidx.activity.OnBackPressedCallback;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
@@ -20,6 +21,7 @@ import android.widget.ImageView;
 import com.example.fivemealsmobileproject.R;
 import com.example.fivemealsmobileproject.database.AppDataBase;
 import com.example.fivemealsmobileproject.database.OrderProduct;
+import com.example.fivemealsmobileproject.main.MainActivity;
 import com.example.fivemealsmobileproject.payment.PaymentActivity;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
@@ -39,7 +41,17 @@ public class OrderFragment extends Fragment implements CurrentOrderAdapter.Paren
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        // This callback will only be called when MyFragment is at least Started.
+        OnBackPressedCallback callback = new OnBackPressedCallback(true /* enabled by default */) {
+            @Override
+            public void handleOnBackPressed() {
+                // Handle the back button event
+                MainActivity.startActivity(context,0);
+            }
+        };
+        requireActivity().getOnBackPressedDispatcher().addCallback(this, callback);
 
+        // The callback can be enabled or disabled here or in handleOnBackPressed()
     }
 
     @Override
