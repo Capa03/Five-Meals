@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/top_line_shape">
+
+    <ImageView
+        android:id="@+id/imageViewCurrentOrder"
+        android:layout_width="64dp"
+        android:layout_height="64dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginBottom="16dp"
+        android:background="@drawable/image_view_style_order_card"
+        android:padding="2dp"
+        android:scaleType="centerCrop"
+        app:circularflow_defaultRadius="2dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0"
+        tools:srcCompat="@tools:sample/avatars" />
+
+    <TextView
+        android:id="@+id/textViewCurrentOrderName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/simple_product_title_shape"
+        android:padding="4dp"
+        android:text="ProductName"
+        android:textColor="@color/black"
+        android:textSize="22sp"
+        app:layout_constraintBottom_toBottomOf="@+id/imageViewCurrentOrder"
+        app:layout_constraintEnd_toStartOf="@+id/textViewCurrentOrderAverageTime"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toEndOf="@+id/textViewCurrentOrderQuantity"
+        app:layout_constraintTop_toTopOf="@+id/imageViewCurrentOrder" />
+
+    <TextView
+        android:id="@+id/textViewCurrentOrderQuantity"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:background="@drawable/simple_product_title_shape"
+        android:padding="4dp"
+        android:text="1x"
+        android:textColor="@color/black"
+        android:textSize="22sp"
+        app:layout_constraintBottom_toBottomOf="@+id/imageViewCurrentOrder"
+        app:layout_constraintStart_toEndOf="@+id/imageViewCurrentOrder"
+        app:layout_constraintTop_toTopOf="@+id/imageViewCurrentOrder" />
+
+    <TextView
+        android:id="@+id/textViewCurrentOrderAverageTime"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="16dp"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toBottomOf="@+id/textViewCurrentOrderPrice"
+        app:layout_constraintEnd_toStartOf="@+id/textViewCurrentOrderPrice"
+        app:layout_constraintTop_toTopOf="@+id/textViewCurrentOrderPrice"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <TextView
+        android:id="@+id/textViewCurrentOrderPrice"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="16dp"
+        android:text="0€"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toBottomOf="@+id/textViewCurrentOrderName"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/textViewCurrentOrderName" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerViewOrderSingleTypeProduct"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="72dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageViewCurrentOrder" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

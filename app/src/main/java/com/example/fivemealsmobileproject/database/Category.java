@@ -7,6 +7,9 @@ import androidx.room.PrimaryKey;
 @Entity
 public class Category {
 
+
+    // TODO RestaurantID
+    // TODO categoryID (PrimaryKEY)
     @PrimaryKey
     @NonNull
     private String categoryName;

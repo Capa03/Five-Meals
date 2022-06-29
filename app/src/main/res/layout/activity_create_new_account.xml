@@ -7,6 +7,16 @@
     android:layout_height="match_parent"
     tools:context=".login.CreateNewAccountActivity">
 
+    <TextView
+        android:id="@+id/textViewCreateAccountPasswordShowOrHide1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:background="@drawable/show_hide_password"
+        app:layout_constraintBottom_toBottomOf="@+id/editTextCreateAccountPassword"
+        app:layout_constraintStart_toEndOf="@+id/editTextCreateAccountPassword"
+        app:layout_constraintTop_toTopOf="@+id/editTextCreateAccountPassword" />
+
     <EditText
         android:id="@+id/editTextCreateAccountUsername"
         android:layout_width="wrap_content"
@@ -37,6 +47,7 @@
         app:layout_constraintStart_toStartOf="@+id/editTextCreateAccountEmail"
         app:layout_constraintTop_toBottomOf="@+id/editTextCreateAccountEmail" />
 
+
     <Button
         android:id="@+id/buttonCreateAccountSignUp"
         android:layout_width="wrap_content"
@@ -45,10 +56,9 @@
         android:onClick="onSignUp"
         android:text="@string/sign_upCreateAccount"
         android:textColor="#000000"
-        app:layout_constraintEnd_toEndOf="@+id/editTextCreateAccountPassword"
-        app:layout_constraintStart_toStartOf="@+id/editTextCreateAccountPassword"
-        app:layout_constraintTop_toBottomOf="@+id/editTextCreateAccountPassword" />
-
+        app:layout_constraintEnd_toEndOf="@+id/editTextCreateAccountConfirmPassword"
+        app:layout_constraintStart_toStartOf="@+id/editTextCreateAccountConfirmPassword"
+        app:layout_constraintTop_toBottomOf="@+id/editTextCreateAccountConfirmPassword" />
 
     <ImageView
         android:id="@+id/imageViewCreateAccountLogo"
@@ -89,5 +99,28 @@
         app:layout_constraintEnd_toEndOf="@+id/editTextCreateAccountUsername"
         app:layout_constraintStart_toStartOf="@+id/editTextCreateAccountUsername"
         app:layout_constraintTop_toBottomOf="@+id/editTextCreateAccountUsername" />
+
+    <EditText
+        android:id="@+id/editTextCreateAccountConfirmPassword"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:ems="10"
+        android:hint="Confirm password"
+        android:inputType="textPassword"
+        app:layout_constraintEnd_toEndOf="@+id/editTextCreateAccountPassword"
+        app:layout_constraintStart_toStartOf="@+id/editTextCreateAccountPassword"
+        app:layout_constraintTop_toBottomOf="@+id/editTextCreateAccountPassword" />
+
+    <TextView
+        android:id="@+id/textViewCreateAccountPasswordShowOrHide2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:background="@drawable/show_hide_password"
+        app:layout_constraintBottom_toBottomOf="@+id/editTextCreateAccountConfirmPassword"
+        app:layout_constraintStart_toEndOf="@+id/editTextCreateAccountConfirmPassword"
+        app:layout_constraintTop_toTopOf="@+id/editTextCreateAccountConfirmPassword"
+        app:layout_constraintVertical_bias="0.461" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

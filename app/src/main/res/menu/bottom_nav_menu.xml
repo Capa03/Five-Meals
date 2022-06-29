@@ -7,7 +7,7 @@
         />
 
     <item android:title="Order"
-        android:icon="@drawable/ic_baseline_reorder_24"
+        android:icon="@drawable/ic_order"
         android:id="@+id/orderFragment"/>
 
     <item android:title="Favorites"

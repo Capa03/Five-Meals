@@ -8,20 +8,22 @@ public class Product {
     @PrimaryKey(autoGenerate = true)
     private long id;
 
-
     private String name;
     private String description;
     private String category;
     private Float price;
-    private String averageTime;
+    private double minAverageTime;
+    private double maxAverageTime;
     private String imgLink;
 
-    public Product(String name, Float price, String averageTime, String category, String imgLink) {
+    public Product(String name, Float price, double minAverageTime, double maxAverageTime,  String category, String imgLink, String description) {
         this.name = name;
         this.price = price;
-        this.averageTime = averageTime;
+        this.minAverageTime = minAverageTime;
+        this.maxAverageTime = maxAverageTime;
         this.category = category;
         this.imgLink = imgLink;
+        this.description = description;
     }
 
     public long getId() {
@@ -64,12 +66,20 @@ public class Product {
         this.price = price;
     }
 
-    public String getAverageTime() {
-        return averageTime;
+    public double getMinAverageTime() {
+        return minAverageTime;
     }
 
-    public void setAverageTime(String averageTime) {
-        this.averageTime = averageTime;
+    public void setMinAverageTime(int minAverageTime) {
+        this.minAverageTime = minAverageTime;
+    }
+
+    public double getMaxAverageTime() {
+        return maxAverageTime;
+    }
+
+    public void setMaxAverageTime(int maxAverageTime) {
+        this.maxAverageTime = maxAverageTime;
     }
 
     public String getImgLink() {
@@ -79,6 +89,7 @@ public class Product {
     public void setImgLink(String imgLink) {
         this.imgLink = imgLink;
     }
+
 
 
 }

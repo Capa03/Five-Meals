@@ -9,6 +9,7 @@
         android:id="@+id/textViewCardCategoryTitle"
         android:layout_width="match_parent"
         android:layout_height="32dp"
+        android:background="@drawable/top_line_shape"
         android:gravity="center_vertical"
         android:paddingStart="16dp"
         android:text="TextView"

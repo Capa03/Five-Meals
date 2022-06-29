@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.example.fivemealsmobileproject.R;
 import com.example.fivemealsmobileproject.database.Product;
+import com.example.fivemealsmobileproject.main.TimeHelper;
 
 import java.util.List;
 
@@ -37,10 +38,11 @@ public class ProductListAdapter extends RecyclerView.Adapter<ProductListAdapter.
         Product product = this.products.get(position);
 
         holder.setName(product.getName());
-        holder.setTime(String.valueOf(product.getAverageTime()));
+        int minTime = (int) product.getMinAverageTime();
+        int maxTime = (int) product.getMaxAverageTime();
+        holder.setTime(TimeHelper.getTimeToString(minTime, maxTime));
         holder.setPrice(product.getPrice());
 
-        // TODO change link (DataBase Change)
         holder.setImage(product.getImgLink());
 
         holder.itemView.setOnClickListener(new View.OnClickListener() {
@@ -90,9 +92,6 @@ public class ProductListAdapter extends RecyclerView.Adapter<ProductListAdapter.
         }
         public void setTime(String time){
             this.textViewTime.setText(time + " min");
-        }
-        public void setImageSrc(String link){
-            // TODO Glide implementation
         }
 
         public void setImage(String imageID){

@@ -3,6 +3,7 @@ package com.example.fivemealsmobileproject.account;
 import android.content.Context;
 import android.os.Bundle;
 
+import androidx.activity.OnBackPressedCallback;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
@@ -23,6 +24,7 @@ import com.example.fivemealsmobileproject.database.User;
 import com.example.fivemealsmobileproject.home.HomeProductDetailsFragmentDirections;
 import com.example.fivemealsmobileproject.login.PreLoginActivity;
 import com.example.fivemealsmobileproject.login.SessionManager;
+import com.example.fivemealsmobileproject.main.MainActivity;
 
 import java.util.List;
 import java.util.Random;

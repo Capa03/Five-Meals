@@ -6,61 +6,75 @@
     android:layout_height="match_parent"
     tools:context=".home.HomeProductDetailsFragment">
 
+    <include
+        android:id="@+id/include"
+        layout="@layout/tool_bar"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/textViewProductDetailsDescription"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="32dp"
+        android:layout_marginEnd="32dp"
+        android:text="TextView"
+        android:textAlignment="viewStart"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textViewProductDetailsPrice" />
+
     <ImageView
         android:id="@+id/imageViewProductDetailsImage"
         android:layout_width="0dp"
         android:layout_height="200dp"
         android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
         android:layout_marginEnd="16dp"
-        android:background="@drawable/image_view_style"
+        android:background="@drawable/image_view_style_product_card"
         android:scaleType="centerCrop"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageViewProductDetailsGoBackButton"
+        app:layout_constraintTop_toBottomOf="@+id/include"
         tools:src="@tools:sample/avatars" />
 
     <TextView
         android:id="@+id/textViewProductDetailsTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
         android:layout_marginTop="16dp"
         android:text="TextView"
+        android:textColor="#000000"
         android:textSize="24dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintHorizontal_bias="0.05"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageViewProductDetailsImage" />
 
-    <ImageView
-        android:id="@+id/imageViewProductDetailsGoBackButton"
-        android:layout_width="32dp"
-        android:layout_height="32dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
-        android:src="@drawable/ic_baseline_arrow_back_ios_24"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:ignore="UsingOnClickInXml" />
-
     <Button
         android:id="@+id/buttonProductDetailsAddQuantity"
-        android:layout_width="64dp"
-        android:layout_height="64dp"
-        android:layout_marginStart="32dp"
+        android:layout_width="32dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="16dp"
         android:gravity="center"
         android:padding="0dp"
         android:text="+"
         android:textSize="30sp"
         app:iconPadding="0dp"
         app:layout_constraintBottom_toBottomOf="@+id/textViewProductDetailsQuantity"
-        app:layout_constraintStart_toEndOf="@+id/textViewProductDetailsQuantity"
+        app:layout_constraintEnd_toEndOf="@+id/buttonProductDetailsAddToOrder"
         app:layout_constraintTop_toTopOf="@+id/textViewProductDetailsQuantity" />
 
     <Button
         android:id="@+id/buttonProductDetailsRemoveQuantity"
-        android:layout_width="64dp"
-        android:layout_height="64dp"
+        android:layout_width="32dp"
+        android:layout_height="wrap_content"
         android:layout_marginEnd="32dp"
         android:gravity="center"
         android:padding="0dp"
@@ -75,12 +89,12 @@
         android:id="@+id/textViewProductDetailsQuantity"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginEnd="32dp"
         android:layout_marginBottom="32dp"
         android:text="1"
         android:textSize="32sp"
         app:layout_constraintBottom_toTopOf="@+id/buttonProductDetailsAddToOrder"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintEnd_toStartOf="@+id/buttonProductDetailsAddQuantity" />
 
     <Button
         android:id="@+id/buttonProductDetailsAddToOrder"
@@ -93,4 +107,29 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
+
+    <CheckBox
+        android:id="@+id/checkBoxProductDetailsOrderLater"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginBottom="32dp"
+        android:text="Order later"
+        app:layout_constraintBottom_toTopOf="@+id/buttonProductDetailsAddToOrder"
+        app:layout_constraintStart_toStartOf="@+id/buttonProductDetailsAddToOrder" />
+
+    <TextView
+        android:id="@+id/textViewProductDetailsPrice"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="16dp"
+        android:text="TextView"
+        android:textColor="#292626"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="@+id/textViewProductDetailsTitle"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/textViewProductDetailsTitle"
+        app:layout_constraintTop_toBottomOf="@+id/textViewProductDetailsTitle" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

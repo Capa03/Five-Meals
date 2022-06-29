@@ -1,15 +1,16 @@
 package com.example.fivemealsmobileproject.main;
 
-import androidx.appcompat.app.ActionBar;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.Fragment;
-import androidx.navigation.fragment.NavHostFragment;
-import androidx.navigation.ui.NavigationUI;
-
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+
+
+import androidx.appcompat.app.ActionBar;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+import androidx.navigation.fragment.NavHostFragment;
+import androidx.navigation.ui.NavigationUI;
 
 import com.example.fivemealsmobileproject.R;
 import com.example.fivemealsmobileproject.databinding.ActivityMainBinding;
@@ -17,11 +18,11 @@ import com.example.fivemealsmobileproject.home.HomeFragment;
 import com.example.fivemealsmobileproject.home.HomeProductDetailsFragment;
 import com.example.fivemealsmobileproject.login.PreLoginActivity;
 import com.example.fivemealsmobileproject.login.SessionManager;
-import com.google.android.material.bottomnavigation.BottomNavigationView;
 
-public class MainActivity extends AppCompatActivity implements HomeProductDetailsFragment.MainActivityNavBar, HomeFragment.MainActivityNavBar {
+public class MainActivity extends AppCompatActivity implements HomeFragment.MainActivityNavBar, HomeProductDetailsFragment.MainActivityNavBar {
 
     private static String KEY_CODE = "getCode";
+    public static int FIRST_ITEM = 1234;
     ActivityMainBinding binding;
 
     public static void startActivity(Context context, long code) {
@@ -37,9 +38,17 @@ public class MainActivity extends AppCompatActivity implements HomeProductDetail
         setContentView(binding.getRoot());
         NavHostFragment navHostFragment = (NavHostFragment) getSupportFragmentManager().findFragmentById(binding.fragmentContainerView.getId());
         NavigationUI.setupWithNavController(binding.bottomNavigationView, navHostFragment.getNavController());
-
+        /*
         ActionBar actionBar = getSupportActionBar();
         actionBar.hide();
+        */
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+
+        if (toolbar != null)
+        {
+            setSupportActionBar(toolbar);
+
+        }
 
         // TODO utilizar os extras para saber a mesa
     }

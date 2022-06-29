@@ -7,7 +7,7 @@ import androidx.room.Room;
 import androidx.room.RoomDatabase;
 
 
-    @Database(entities = {User.class, Table.class, Restaurant.class, Product.class, Category.class}, version = 1)
+    @Database(entities = {User.class, Table.class, Restaurant.class, Product.class, Category.class, OrderProduct.class}, version = 1)
     public abstract class AppDataBase extends RoomDatabase {
 
         public abstract UserDAO getUserDAO();
@@ -15,13 +15,14 @@ import androidx.room.RoomDatabase;
         public abstract RestaurantDAO getRestaurantDAO();
         public abstract ProductDAO getProductDAO();
         public abstract CategoryDAO getCategoryDAO();
+        public abstract OrderProductDAO getOrderProductDAO();
 
         private static AppDataBase INSTANCE;
 
         public static AppDataBase getInstance(Context context) {
             if (INSTANCE == null) {
                 INSTANCE = Room.databaseBuilder(context.getApplicationContext(),
-                                AppDataBase.class, "ChatBotDatabase")
+                                AppDataBase.class, "AppDatabase")
                         .allowMainThreadQueries()
                         .build();
             }
