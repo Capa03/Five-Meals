@@ -132,4 +132,14 @@
         app:layout_constraintStart_toStartOf="@+id/textViewProductDetailsTitle"
         app:layout_constraintTop_toBottomOf="@+id/textViewProductDetailsTitle" />
 
+    <ImageView
+        android:id="@+id/toggleButtonProductDetailsFavorite"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_marginEnd="32dp"
+        android:background="@drawable/ic_baseline_favorite_border_24"
+        app:layout_constraintBottom_toBottomOf="@+id/textViewProductDetailsPrice"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/textViewProductDetailsPrice" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
