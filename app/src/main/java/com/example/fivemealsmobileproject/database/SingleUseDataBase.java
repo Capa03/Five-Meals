@@ -32,7 +32,7 @@ public class SingleUseDataBase {
             categoryDAO.insertCategory(new Category("Carne"));
             productDAO.insertProduct(new Product("Bifana", 3.5f, 0.5, 1, "Carne",
                     "1_0zXE1wScxdn0DbOXYKE-CgpM7y1BtFI",description));
-            productDAO.insertProduct( new Product("Hamburguer", 4.5f, 10, 20, "Carne",
+            productDAO.insertProduct( new Product("Burger", 4.5f, 10, 20, "Carne",
                     "1c-MFHH_qZew23MctTSD5awnbXInElt9S",description));
             productDAO.insertProduct(new Product("Bitoque", 6f, 15, 0, "Carne",
                     "1LQGxf3P06aSjaF1CsdYDb0xPnA2jp5_p",description));

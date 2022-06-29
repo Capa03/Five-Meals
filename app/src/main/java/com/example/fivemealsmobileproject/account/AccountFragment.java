@@ -2,31 +2,25 @@ package com.example.fivemealsmobileproject.account;
 
 import android.content.Context;
 import android.os.Bundle;
-
-import androidx.activity.OnBackPressedCallback;
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.fragment.app.Fragment;
-import androidx.navigation.NavDirections;
-import androidx.navigation.Navigation;
-
-import android.view.ContentInfo;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
+import androidx.navigation.NavDirections;
+import androidx.navigation.Navigation;
+
 import com.bumptech.glide.Glide;
 import com.example.fivemealsmobileproject.R;
 import com.example.fivemealsmobileproject.database.AppDataBase;
 import com.example.fivemealsmobileproject.database.User;
-import com.example.fivemealsmobileproject.home.HomeProductDetailsFragmentDirections;
 import com.example.fivemealsmobileproject.login.PreLoginActivity;
 import com.example.fivemealsmobileproject.login.SessionManager;
-import com.example.fivemealsmobileproject.main.MainActivity;
 
-import java.util.List;
 import java.util.Random;
 
 
