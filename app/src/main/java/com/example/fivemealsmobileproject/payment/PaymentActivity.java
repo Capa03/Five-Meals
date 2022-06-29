@@ -37,7 +37,6 @@ public class PaymentActivity extends AppCompatActivity implements AdapterView.On
         context.startActivity(intent);
     }
 
-    @SuppressLint("SetTextI18n")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -65,7 +64,7 @@ public class PaymentActivity extends AppCompatActivity implements AdapterView.On
         imageViewGoBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                MainActivity.startActivity(context,0);
+                finish();
             }
         });
 
@@ -73,18 +72,17 @@ public class PaymentActivity extends AppCompatActivity implements AdapterView.On
 
     private void calculateTotalPrice(){
         float total = 0;
-        for(int i = 0; i< this.paymentProducts.size();i++){
-            float unitPrice = this.paymentProducts.get(i).getUnitPrice();
-            float quantityProduct = this.paymentProducts.get(i).getQuantity();
+        for (PaymentProduct paymentProduct : this.paymentProducts) {
+            float unitPrice = paymentProduct.getUnitPrice();
+            float quantityProduct = paymentProduct.getQuantity();
             float totalPriceProduct = unitPrice * quantityProduct;
             total = total + totalPriceProduct;
-            this.totalSummary.setText("Total: " + total);
+            this.totalSummary.setText(String.format("Total: %s€", total));
         }
     }
 
     @Override
-    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-        PaymentMethod paymentMethod = (PaymentMethod) parent.getSelectedItem();
+    public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
 
     }
 
@@ -94,6 +92,5 @@ public class PaymentActivity extends AppCompatActivity implements AdapterView.On
     private void cacheViews(){
         this.spinnerMethod = findViewById(R.id.spinnerActivityPaymentPaymentMethod);
         this.totalSummary = findViewById(R.id.textViewActivityPaymentTotal);
-        this.taxSummary = findViewById(R.id.textViewActivityPaymentTax);
     }
 }

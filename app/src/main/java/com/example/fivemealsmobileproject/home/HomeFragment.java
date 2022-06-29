@@ -58,12 +58,7 @@ public class HomeFragment extends Fragment implements CategoryListAdapter.Catego
         this.view = view;
 
         ImageView imageViewGoBack = view.findViewById(R.id.imageViewToolBarGoBack);
-        imageViewGoBack.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-            }
-        });
+        imageViewGoBack.setVisibility(View.GONE);
 
         List<Category> categories = AppDataBase.getInstance(this.context).getCategoryDAO().getAllCategories();
         RecyclerView recyclerView = view.findViewById(R.id.recyclerViewHomeFragmentCategoryList);

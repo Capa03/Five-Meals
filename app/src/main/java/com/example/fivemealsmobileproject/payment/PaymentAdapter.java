@@ -64,7 +64,7 @@ public class PaymentAdapter extends RecyclerView.Adapter<PaymentAdapter.PaymentV
         }
 
         public void setQuantity(int quantity){
-            this.quantity.setText(quantity + "x");
+            this.quantity.setText(String.format("%sx", quantity));
         }
 
         public void setName(String name){
@@ -72,11 +72,11 @@ public class PaymentAdapter extends RecyclerView.Adapter<PaymentAdapter.PaymentV
         }
 
         public void setUnitPrice(float price){
-            this.priceUnit.setText((price + " €/unit"));
+            this.priceUnit.setText((String.format("%s €", price)));
         }
 
         public void setTotalPrice(float price){
-            this.priceTotal.setText(("Total: " + price + " €"));
+            this.priceTotal.setText((String.format("%s €", price)));
         }
     }
 }

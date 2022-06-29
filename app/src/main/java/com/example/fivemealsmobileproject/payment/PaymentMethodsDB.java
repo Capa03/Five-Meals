@@ -12,10 +12,11 @@ public class PaymentMethodsDB {
     private PaymentMethodsDB(){}
 
     public static ArrayList<PaymentMethod> getPaymentMethods(){
-        paymentMethod = new ArrayList<>();
-        paymentMethod.add(new PaymentMethod("MBWay",R.drawable.ic_mbway_seeklogo_com));
-        paymentMethod.add(new PaymentMethod("Cash",R.drawable.ic_cash_svgrepo_com));
-        paymentMethod.add(new PaymentMethod("Debit Card",R.drawable.ic_credit_card_svgrepo_com));
+        if(paymentMethod.isEmpty()) {
+            paymentMethod.add(new PaymentMethod("MBWay", R.drawable.ic_mbway_seeklogo_com));
+            paymentMethod.add(new PaymentMethod("Cash", R.drawable.ic_cash_svgrepo_com));
+            paymentMethod.add(new PaymentMethod("Debit Card", R.drawable.ic_credit_card_svgrepo_com));
+        }
         return paymentMethod;
     }
 }
