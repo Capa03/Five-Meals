@@ -45,6 +45,7 @@ public class HomeProductDetailsFragment extends Fragment {
     private Context context;
     private ImageView favorite;
     private boolean favoriteOn = true;
+    private View view;
 
     public HomeProductDetailsFragment() {
         // Required empty public constructor
@@ -62,8 +63,7 @@ public class HomeProductDetailsFragment extends Fragment {
         OnBackPressedCallback callback = new OnBackPressedCallback(true /* enabled by default */) {
             @Override
             public void handleOnBackPressed() {
-                // Handle the back button event
-                MainActivity.startActivity(context, 0);
+                Navigation.findNavController(view).popBackStack();
             }
         };
         requireActivity().getOnBackPressedDispatcher().addCallback(this, callback);
@@ -80,6 +80,7 @@ public class HomeProductDetailsFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        this.view = view;
         Product product = AppDataBase.getInstance(view.getContext()).getProductDAO().getById(this.productID);
         cacheViews(view);
 
@@ -121,7 +122,7 @@ public class HomeProductDetailsFragment extends Fragment {
                 int quantity = Integer.parseInt(textViewQuantity.getText().toString()) - 1;
                 if (quantity == 1) buttonRemoveQuantity.setEnabled(false);
                 textViewQuantity.setText(String.valueOf(quantity));
-                buttonAddToOrder.setText("Add " + quantity + " to cart " + quantity * product.getPrice() + " $");
+                buttonAddToOrder.setText(String.format("Add %s to cart %s $", quantity, quantity * product.getPrice()));
             }
         });
 
@@ -129,6 +130,9 @@ public class HomeProductDetailsFragment extends Fragment {
         FavoriteProduct exist = AppDataBase.getInstance(this.context).getFavoriteProductDAO().getFromId(productID);
         if (exist == null) {
             favoriteOn = false;
+            favorite.setImageResource(R.drawable.ic_baseline_favorite_border_24);
+        }else {
+            favorite.setImageResource(R.drawable.ic_baseline_favorite_24);
         }
 
         favorite.setOnClickListener(new View.OnClickListener() {
@@ -165,7 +169,6 @@ public class HomeProductDetailsFragment extends Fragment {
             }
         });
         mainActivityNavBar.hideNavBar();
-
 
     }
 

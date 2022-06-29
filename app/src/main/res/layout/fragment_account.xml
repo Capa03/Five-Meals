@@ -7,6 +7,12 @@
     android:layout_height="match_parent"
     tools:context=".account.AccountFragment">
 
+    <include
+        android:id="@+id/include4"
+        layout="@layout/tool_bar"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <ImageView
         android:id="@+id/imageView5"
         android:layout_width="36dp"
@@ -58,7 +64,7 @@
         android:layout_height="80dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toBottomOf="@+id/include4">
 
         <TextView
             android:id="@+id/textViewAccountUsername"
@@ -77,6 +83,9 @@
             android:layout_width="62dp"
             android:layout_height="52dp"
             android:layout_marginStart="16dp"
+            app:civ_border_color="#000000"
+            app:civ_border_overlay="true"
+            app:civ_border_width="1dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"

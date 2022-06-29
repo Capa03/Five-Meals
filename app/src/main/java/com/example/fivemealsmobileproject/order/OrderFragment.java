@@ -46,12 +46,11 @@ public class OrderFragment extends Fragment implements CurrentOrderAdapter.Paren
             @Override
             public void handleOnBackPressed() {
                 // Handle the back button event
-                MainActivity.startActivity(context,0);
+                Navigation.findNavController(view).popBackStack();
             }
         };
         requireActivity().getOnBackPressedDispatcher().addCallback(this, callback);
 
-        // The callback can be enabled or disabled here or in handleOnBackPressed()
     }
 
     @Override
@@ -65,7 +64,7 @@ public class OrderFragment extends Fragment implements CurrentOrderAdapter.Paren
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-
+        this.view = view;
         ImageView imageViewGoBack = view.findViewById(R.id.imageViewToolBarGoBack);
         imageViewGoBack.setOnClickListener(new View.OnClickListener() {
             @Override

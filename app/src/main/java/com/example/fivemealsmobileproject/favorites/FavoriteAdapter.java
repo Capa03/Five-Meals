@@ -40,7 +40,6 @@ public class FavoriteAdapter extends RecyclerView.Adapter<FavoriteAdapter.Favori
         FavoriteProduct favoriteProduct = this.favoriteProducts.get(position);
 
             holder.setName(favoriteProduct.getProductName());
-            holder.setPrice(favoriteProduct.getProductPrice());
             holder.setImage(favoriteProduct.getProductImage());
             holder.productImage.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -68,15 +67,11 @@ public class FavoriteAdapter extends RecyclerView.Adapter<FavoriteAdapter.Favori
             this.context = itemView.getContext();
             this.productImage = itemView.findViewById(R.id.imageViewFavoriteProduct);
             this.textViewName = itemView.findViewById(R.id.textViewFavoriteProductName);
-            this.textViewPrice = itemView.findViewById(R.id.textViewFavoritePrice);
             this.productImage.setClipToOutline(true);
         }
 
         public void setName(String name){
             this.textViewName.setText(name);
-        }
-        public void setPrice(Float price){
-            this.textViewPrice.setText((String.valueOf(price) + " €"));
         }
 
         public void setImage(String imageID){
