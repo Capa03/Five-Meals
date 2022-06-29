@@ -76,7 +76,7 @@
     <TextView
         android:id="@+id/textViewCreateAccountHaveAccount"
         android:layout_width="wrap_content"
-        android:layout_height="32dp"
+        android:layout_height="48dp"
         android:layout_marginBottom="16dp"
         android:minHeight="48dp"
         android:onClick="onHaveAccountClicked"
@@ -94,7 +94,7 @@
         android:autofillHints=""
         android:ems="10"
         android:hint="@string/emailCreateAccount"
-        android:inputType="textWebEmailAddress"
+        android:inputType="textWebEmailAddress|textEmailAddress|textEmailSubject"
         android:minHeight="48dp"
         app:layout_constraintEnd_toEndOf="@+id/editTextCreateAccountUsername"
         app:layout_constraintStart_toStartOf="@+id/editTextCreateAccountUsername"

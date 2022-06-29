@@ -86,7 +86,7 @@ public class CreateNewAccountActivity extends AppCompatActivity {
             this.email.setError("Empty Email");
             somethingEmpty = true;
         }
-        if(password.isEmpty()){
+        if(password == 0){
             this.password.setError("Empty Password");
             somethingEmpty = true;
         }
@@ -98,8 +98,7 @@ public class CreateNewAccountActivity extends AppCompatActivity {
         if(!somethingEmpty){
             if(!LoginManager.userExists(this, username)){
                 if(!LoginManager.emailExists(this, email)){
-                    User user =  new User(username,email,password.hashCode());
-                    password = "0";
+                    User user =  new User(username,email,password);
 
                     SessionManager.saveSession(this, username, false);
                     AppDataBase.getInstance(this).getUserDAO().insert(user);

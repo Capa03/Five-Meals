@@ -42,7 +42,6 @@ public class SplashScreenLogo extends AppCompatActivity {
         }
 
 
-
         ActionBar actionBar = getSupportActionBar();
         if (actionBar != null) {
             actionBar.hide();
