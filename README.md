@@ -4,7 +4,13 @@
 
 ## Descrição do Projeto
 
-O projeto é sobre a automatização do processo de pedido de um restaurante
+No presente projeto  desenvolvidas aplicação que visa servir de base (e 
+protótipo) para uma aplicação cujo objetivo será diminuir o processo da realização de um pedido 
+em um restaurante tradicional, mediante uma solução de evoluir o processo, melhorando e 
+agilizando o pedido através da utilização de QRCode, evitando todo o processo tradicional. Como 
+amostra dos grandes centros urbanos que experienciam a problemática ligada à mobilidade e 
+agilidade social, existem poucas soluções no mercado. Perante o problema, o objetivo da nossa 
+aplicação é diminuir todo esse processo, através da utilização de dispositivo movel.
 
 ## Elementos da equipa:
 * David Capa
@@ -31,7 +37,7 @@ O projeto é sobre a automatização do processo de pedido de um restaurante
 #### Localização Restaurante / Mesa: 
 >
 > - Localização por Mapa para demonstrar a localização do restaurante quando lido o code QR ou Introduzido o codigo da mesa manualmente.
-> - 
+
 
 
 
@@ -56,7 +62,7 @@ Account Fragments | |X
 ## Aplicações e Plugins Usados
 Applicação | Versão
 -----------|--------
-Android Studio | 2.23
+Android Studio | 2021.2.1
 AdobeXD | 2022
 Room | 2.4.2
 
