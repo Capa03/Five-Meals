@@ -17,6 +17,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.example.fivemealsmobileproject.R;
 import com.example.fivemealsmobileproject.database.AppDataBase;
@@ -31,7 +32,6 @@ public class OrderFragment extends Fragment implements CurrentOrderAdapter.Paren
     private Context context;
     private CurrentOrderAdapter orderedProductsAdapter;
     private View view;
-    private RefreshAdapter refreshAdapter;
 
     public OrderFragment() {
         // Required empty public constructor
@@ -79,8 +79,6 @@ public class OrderFragment extends Fragment implements CurrentOrderAdapter.Paren
         orderedRecyclerView.setAdapter(orderedProductsAdapter);
         orderedRecyclerView.setLayoutManager(orderedLayoutManager);
 
-        refreshAdapter = new RefreshAdapter(this.orderedProductsAdapter);
-
         FloatingActionButton payButton = view.findViewById(R.id.FABOrderFragmentPayButton);
 
         payButton.setOnClickListener(new View.OnClickListener() {
@@ -89,12 +87,14 @@ public class OrderFragment extends Fragment implements CurrentOrderAdapter.Paren
                 PaymentActivity.startActivity(context);
             }
         });
+
     }
 
     @Override
     public void onStart() {
         super.onStart();
         this.orderedProductsAdapter.updateData(ParentProductDB.getAll(context));
+
         Handler handler = new Handler();
         Runnable runnable = new Runnable() {
             @Override
@@ -104,15 +104,25 @@ public class OrderFragment extends Fragment implements CurrentOrderAdapter.Paren
             }
         };
         handler.post(runnable);
+
+        checkIfIsEmpty();
     }
 
 
     @Override
     public void onRemoveProductClick(OrderProduct orderProduct) {
-        // TODO Erro abre automaticamente os detalhes do item de baixo quando o de cima é eliminado
-        // ou fecha todos
         AppDataBase.getInstance(context).getOrderProductDAO().deleteOrderProduct(orderProduct);
         ParentProductDB.removeProduct(context, orderProduct.getProductID());
         this.orderedProductsAdapter.updateData(ParentProductDB.getAll(context));
+        checkIfIsEmpty();
+    }
+
+    private void checkIfIsEmpty(){
+        TextView empty = view.findViewById(R.id.textViewEmptyOrderMessage);
+        if(this.orderedProductsAdapter.getItemCount() == 0){
+            empty.setVisibility(View.VISIBLE);
+        }else {
+            empty.setVisibility(View.GONE);
+        }
     }
 }

@@ -16,6 +16,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.example.fivemealsmobileproject.R;
 import com.example.fivemealsmobileproject.database.AppDataBase;
@@ -54,7 +55,6 @@ public class FavoritesFragment extends Fragment implements FavoriteAdapter.Favor
         };
         requireActivity().getOnBackPressedDispatcher().addCallback(this, callback);
 
-        // The callback can be enabled or disabled here or in handleOnBackPressed()
     }
 
     @Override
@@ -86,6 +86,8 @@ public class FavoritesFragment extends Fragment implements FavoriteAdapter.Favor
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this.context);
         recyclerView.setAdapter(this.adapter);
         recyclerView.setLayoutManager(layoutManager);
+
+        checkIfIsEmpty();
     }
 
     @Override
@@ -98,5 +100,15 @@ public class FavoritesFragment extends Fragment implements FavoriteAdapter.Favor
     public void onAttach(@NonNull Context context) {
         super.onAttach(context);
         if (context instanceof FavoritesFragment.MainActivityNavBar) this.mainActivityNavBar = (FavoritesFragment.MainActivityNavBar) context;
+    }
+
+
+    private void checkIfIsEmpty(){
+        TextView empty = view.findViewById(R.id.textViewEmptyFavoritesMessage);
+        if(this.adapter.getItemCount() == 0){
+            empty.setVisibility(View.VISIBLE);
+        }else {
+            empty.setVisibility(View.GONE);
+        }
     }
 }
