@@ -53,29 +53,10 @@ Account Fragments | |X
 ## Links Importantes
 * [Tutorial Youtube](https://www.youtube.com/shorts/Lm5xToJkMWY)
 
-```Java
-public class Main {
-  public static void main(String[] args) {
-    int myInt = 9;
-    double myDouble = myInt; // Automatic casting: int to double
-
-    System.out.println(myInt);      // Outputs 9
-    System.out.println(myDouble);   // Outputs 9.0
-  }
-}
-```
-
 ## Aplicações e Plugins Usados
 Applicação | Versão
 -----------|--------
 Android Studio | 2.23
 AdobeXD | 2022
-Room | 1.34
+Room | 2.4.2
 
-*Itálico* 
-
-**Negrito**
-
-~~Riscado~~
-
-🥇
