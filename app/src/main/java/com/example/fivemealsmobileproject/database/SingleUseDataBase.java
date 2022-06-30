@@ -17,7 +17,7 @@ public class SingleUseDataBase {
             Restaurant restaurant1 = new Restaurant(1, "Pulo do Lobo");
             restaurantDAO.insertRestaurant(restaurant1);
 
-            Restaurant restaurant2 = new Restaurant(2, "Canto do Rossio");
+            Restaurant restaurant2 = new Restaurant(2, "Burger King do Rossio");
             restaurantDAO.insertRestaurant(restaurant2);
 
             for(int i= 0; i < 10; i++){
@@ -74,41 +74,41 @@ public class SingleUseDataBase {
                     "1GJ-RYLa646927CSjglz5YFjtri_LcS13",description));
 
 
-            categoryDAO.insertCategory(new Category(2, "Meat"));
-            productDAO.insertProduct(new Product("Bifana", 3.5f, 0.5, 1, "Meat",2,
-                    "1_0zXE1wScxdn0DbOXYKE-CgpM7y1BtFI",description));
-            productDAO.insertProduct( new Product("Burger", 4.5f, 10, 20, "Meat",2,
-                    "1c-MFHH_qZew23MctTSD5awnbXInElt9S",description));
-            productDAO.insertProduct(new Product("Bitoque", 6f, 15, 0, "Meat",2,
-                    "1LQGxf3P06aSjaF1CsdYDb0xPnA2jp5_p",description));
-            productDAO.insertProduct(new Product("Pica Pau", 7f, 15, 0, "Meat",2,
-                    "147cNPkB0OcP5u4bRthoR6ci7At0CujhA",description));
+            categoryDAO.insertCategory(new Category(2, "Originals"));
+            productDAO.insertProduct(new Product("Menu Ibérico", 3.5f, 0.5, 1, "Originals",2,
+                    "1yDivLVMYY9FgvhG6fqwBSwvSl_2MzBo8",description));
+            productDAO.insertProduct( new Product("Quejo & Caramelo", 4.5f, 10, 20, "Originals",2,
+                    "1oSZzEgefXK7nk3BpSmMm2ksjCVbPycs6",description));
+            productDAO.insertProduct(new Product("The King Bacon", 6f, 15, 0, "Originals",2,
+                    "1irHfyy4KQW1WkWEraT6yARnt3FSDYkBN",description));
+            productDAO.insertProduct(new Product("Whopper", 7f, 15, 0, "Originals",2,
+                    "14NcggEzWaZSXlu1mP6UMmmtVkMoSVpWz",description));
 
-            categoryDAO.insertCategory(new Category(2, "Fish"));
-            productDAO.insertProduct(new Product("Salmão", 5.5f, 10, 0, "Fish",2,
-                    "1SmNbsAumK8EyMUYKMcckzNmqJJpDHO1B",description));
-            productDAO.insertProduct(new Product("Cavala", 5f, 10, 0, "Fish",2,
-                    "1wLjDQC0r2HDlwEOE7ESL3dQ3rxSOdIfo",description));
-            productDAO.insertProduct(new Product("Sardinhas", 7f, 15, 0, "Fish",2,
-                    "1LIxNKqxd4Pm4BIW6LQD0lyIZKG7-N2jw",description));
+            categoryDAO.insertCategory(new Category(2, "Chicken"));
+            productDAO.insertProduct(new Product("Queen Cheese", 5.5f, 10, 0, "Chicken",2,
+                    "148-H-K9QZ8yufY75BeRMa6gS5EKliPLE",description));
+            productDAO.insertProduct(new Product("Chicken Tendercrisp", 5f, 10, 0, "Chicken",2,
+                    "1x4YXrc0aVZIqtNOoy97dPbH8EROH8qB5",description));
+            productDAO.insertProduct(new Product("Nuggets(x9)", 7f, 15, 0, "Chicken",2,
+                    "1J5A9m0qxk8v9bplpG0uJrEMtJHVh9Mb-",description));
 
             categoryDAO.insertCategory(new Category(2, "Vegan"));
-            productDAO.insertProduct(new Product("Tofu", 6f, 10, 0, "Vegan",2,
-                    "1el9d-UigHTeofLidLGsUdzvgAUcJVF2n",description));
-            productDAO.insertProduct(new Product("Salada", 3f, 5, 0, "Vegan",2,
-                    "1oVeMz6LFflskxZTCNgP9TWAwkoFhpnyo",description));
+            productDAO.insertProduct(new Product("Long Vegan", 6f, 10, 0, "Vegan",2,
+                    "1ViTJa45GgjrPNah9RaoOIgFkrIPBN62e",description));
+            productDAO.insertProduct(new Product("Big King Vegan", 3f, 5, 0, "Vegan",2,
+                    "1lS6JgpyTzvn2_fLD7SoCjHGqFymoGgox",description));
 
             categoryDAO.insertCategory(new Category(2, "Drinks"));
             productDAO.insertProduct(new Product("Coca-cola", 1.5f, 0, 0, "Drinks",2,
                     "1NiqopfKfi1T3jkdmk22o-uEqVyiKD-Je",description));
-            productDAO.insertProduct(new Product("Sumol", 1.5f, 0, 0, "Drinks",2,
-                    "1QZRDXI3wP1fbrnD0nB-75GDj13e-0-iZ",description));
+            productDAO.insertProduct(new Product("Orange Juice", 1.5f, 0, 0, "Drinks",2,
+                    "1WEIwlyMseu58y9K1sd2caFMERsTHxbdw",description));
 
             categoryDAO.insertCategory(new Category(2, "Entries"));
-            productDAO.insertProduct(new Product("Queijo", 2f, 2, 0, "Entries",2,
-                    "1ZsxgrHaG2WZGrqoOqE32kDmhQ4XhTLMf",description));
-            productDAO.insertProduct(new Product("Azeitoas", 1f, 1, 0, "Entries",2,
-                    "1GJ-RYLa646927CSjglz5YFjtri_LcS13",description));
+            productDAO.insertProduct(new Product("Cheese Bites", 2f, 2, 0, "Entries",2,
+                    "1vHo-ne7LfEH5826NDfkJmnZxHGUaxUGg",description));
+            productDAO.insertProduct(new Product("Bucket", 1f, 1, 0, "Entries",2,
+                    "1s90-bd7774dTZHtwckMj-pgC7epgB21P",description));
         }
     }
 
