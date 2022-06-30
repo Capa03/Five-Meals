@@ -7,6 +7,16 @@
     android:layout_height="match_parent"
     tools:context=".login.LoginActivity">
 
+    <TextView
+        android:id="@+id/textViewLoginPasswordShowOrHide1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:background="@drawable/show_hide_password"
+        app:layout_constraintBottom_toBottomOf="@+id/editTextLoginPassword"
+        app:layout_constraintStart_toEndOf="@+id/editTextLoginPassword"
+        app:layout_constraintTop_toTopOf="@+id/editTextLoginPassword" />
+
     <EditText
         android:id="@+id/editTextLoginUsername"
         android:layout_width="0dp"

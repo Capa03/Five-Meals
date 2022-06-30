@@ -73,9 +73,9 @@ public class CreateNewAccountActivity extends AppCompatActivity {
 
     public void onSignUp(View view) {
         boolean somethingEmpty = false;
-        String username = this.username.getText().toString(); // TODO onTextChanged Warning
-        String email = this.email.getText().toString(); // TODO onTextChanged Warning
-        int password = this.password.getText().toString().hashCode(); // TODO onTextChanged Warning
+        String username = this.username.getText().toString();
+        String email = this.email.getText().toString();
+        int password = this.password.getText().toString().hashCode();
         int confirmPassword = this.confirmPassword.getText().toString().hashCode();
 
         if(username.isEmpty()){

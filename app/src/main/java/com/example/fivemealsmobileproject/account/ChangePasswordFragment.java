@@ -1,5 +1,6 @@
 package com.example.fivemealsmobileproject.account;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.os.Bundle;
 
@@ -9,7 +10,9 @@ import androidx.fragment.app.Fragment;
 import androidx.navigation.NavDirections;
 import androidx.navigation.Navigation;
 
+import android.text.InputType;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
@@ -55,6 +58,8 @@ public class ChangePasswordFragment extends Fragment {
         EditText newPasswordConfirmation = view.findViewById(R.id.editTextChangePasswordTypeAgain);
         ImageView onBack = view.findViewById(R.id.imageViewToolBarGoBack);
         Context context = view.getContext();
+        TextView showHidePassword = view.findViewById(R.id.textViewChangePasswordShowOrHide1);
+        TextView showHideConfirmPassword = view.findViewById(R.id.textViewChangePasswordShowOrHide2);
 
         submit.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -86,6 +91,42 @@ public class ChangePasswordFragment extends Fragment {
                 }
             }
         });
+
+
+        showHidePassword.setOnTouchListener(new View.OnTouchListener() {
+            @SuppressLint("ClickableViewAccessibility")
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                switch ( event.getAction() ) {
+
+                    case MotionEvent.ACTION_UP:
+                        newPassword.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD);
+                        break;
+                    case MotionEvent.ACTION_DOWN:
+                        newPassword.setInputType(InputType.TYPE_CLASS_TEXT);
+                        break;
+                }
+                return true;
+            }
+        });
+
+        showHideConfirmPassword.setOnTouchListener(new View.OnTouchListener() {
+            @SuppressLint("ClickableViewAccessibility")
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                switch ( event.getAction() ) {
+
+                    case MotionEvent.ACTION_UP:
+                        newPasswordConfirmation.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD);
+                        break;
+                    case MotionEvent.ACTION_DOWN:
+                        newPasswordConfirmation.setInputType(InputType.TYPE_CLASS_TEXT);
+                        break;
+                }
+                return true;
+            }
+        });
+
 
         onBack.setOnClickListener(new View.OnClickListener() {
             @Override

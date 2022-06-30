@@ -1,6 +1,8 @@
 package com.example.fivemealsmobileproject.order;
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -8,6 +10,7 @@ import android.widget.CheckBox;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -74,8 +77,24 @@ public class SingleProductAdapter extends RecyclerView.Adapter<SingleProductAdap
             pendingProductViewHolder.removeButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    // TODO AlertDialog
-                    singleProductEventListener.onRemoveProductClick(orderProduct);
+
+                    AlertDialog.Builder builder = new AlertDialog.Builder(context);
+                    builder.setTitle("Eliminar o pedido");
+                    builder.setMessage("Deseja eliminar este pedido?");
+                    builder.setPositiveButton("Sim", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            singleProductEventListener.onRemoveProductClick(orderProduct);
+                        }
+                    });
+                    builder.setNegativeButton("Cancelar", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            dialog.dismiss();
+                        }
+                    });
+                    AlertDialog dialog = builder.create();
+                    dialog.show();
                 }
             });
             pendingProductViewHolder.setProgress(progress);
@@ -92,8 +111,25 @@ public class SingleProductAdapter extends RecyclerView.Adapter<SingleProductAdap
             waitingProductViewHolder.removeButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    // TODO AlertDialog
-                    singleProductEventListener.onRemoveProductClick(orderProduct);
+
+                    AlertDialog.Builder builder = new AlertDialog.Builder(context);
+                    builder.setTitle("Eleminar pedido");
+                    builder.setMessage("Deseja eliminar este pedido?");
+                    builder.setPositiveButton("Sim", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            singleProductEventListener.onRemoveProductClick(orderProduct);
+                        }
+                    });
+                    builder.setNegativeButton("Cancelar", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            dialog.dismiss();
+                        }
+                    });
+                    AlertDialog dialog = builder.create();
+                    dialog.show();
+
                 }
             });
             if (waitingProductViewHolder.checkBox.isChecked()) {
