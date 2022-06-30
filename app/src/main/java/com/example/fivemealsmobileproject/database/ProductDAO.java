@@ -14,8 +14,8 @@ public interface ProductDAO {
     @Query("SELECT * FROM Product ")
     List<Product> getAll();
 
-    @Query("SELECT * FROM Product WHERE category = :category")
-    List<Product> getAllFromCategory(String category);
+    @Query("SELECT * FROM Product WHERE category = :category AND restaurantId = :restaurantId")
+    List<Product> getAllFromCategoryAndRestaurant(String category, long restaurantId);
 
     @Query("SELECT * FROM Product WHERE id = :id")
     Product getById(long id);

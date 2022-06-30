@@ -13,6 +13,8 @@ import androidx.navigation.fragment.NavHostFragment;
 import androidx.navigation.ui.NavigationUI;
 
 import com.example.fivemealsmobileproject.R;
+import com.example.fivemealsmobileproject.database.AppDataBase;
+import com.example.fivemealsmobileproject.database.Table;
 import com.example.fivemealsmobileproject.databinding.ActivityMainBinding;
 import com.example.fivemealsmobileproject.favorites.FavoritesFragment;
 import com.example.fivemealsmobileproject.home.HomeFragment;
@@ -47,6 +49,15 @@ public class MainActivity extends AppCompatActivity implements HomeFragment.Main
         }
 
         // TODO utilizar os extras para saber a mesa
+
+        Bundle bundle = getIntent().getExtras();
+        if(bundle != null)
+        {
+            Table table = AppDataBase.getInstance(this).getTableDAO().getTableFromID(bundle.getLong(KEY_CODE));
+            TableInfo.setTable(table);
+            TableInfo.setRestaurant(AppDataBase.getInstance(this)
+                    .getRestaurantDAO().getRestaurantFromID(table.getRestaurantID()));
+        }
     }
 
     public void onLogOutClick(View view) {

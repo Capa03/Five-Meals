@@ -31,17 +31,6 @@ public class SplashScreenLogo extends AppCompatActivity {
         SingleUseDataBase.populateRestaurantTables(this);
         SingleUseDataBase.populateCategoryTable(this);
 
-        List<Table> tableList = AppDataBase.getInstance(this).getTableDAO().getAllTables();
-        for (Table table : tableList) {
-            Log.i("DBDebug", ("TableID: " + table.getTableID() + "/ RestaurantID: " + table.getRestaurantID()));
-        }
-
-        List<Category> categories = AppDataBase.getInstance(this).getCategoryDAO().getAllCategories();
-        for (Category category : categories) {
-            Log.i("DBDebug", ("Category: " + category.getCategoryName() ));
-        }
-
-
         ActionBar actionBar = getSupportActionBar();
         if (actionBar != null) {
             actionBar.hide();

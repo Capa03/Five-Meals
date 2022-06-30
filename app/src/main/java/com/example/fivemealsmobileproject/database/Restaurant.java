@@ -10,7 +10,9 @@ public class Restaurant {
     private long restaurantID;
     private String restaurantName;
 
-    public Restaurant() {
+    public Restaurant(long restaurantID, String restaurantName) {
+        this.restaurantID = restaurantID;
+        this.restaurantName = restaurantName;
     }
 
     public long getRestaurantID() {
