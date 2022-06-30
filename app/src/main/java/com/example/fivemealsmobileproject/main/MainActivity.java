@@ -14,12 +14,13 @@ import androidx.navigation.ui.NavigationUI;
 
 import com.example.fivemealsmobileproject.R;
 import com.example.fivemealsmobileproject.databinding.ActivityMainBinding;
+import com.example.fivemealsmobileproject.favorites.FavoritesFragment;
 import com.example.fivemealsmobileproject.home.HomeFragment;
 import com.example.fivemealsmobileproject.home.HomeProductDetailsFragment;
 import com.example.fivemealsmobileproject.login.PreLoginActivity;
 import com.example.fivemealsmobileproject.login.SessionManager;
 
-public class MainActivity extends AppCompatActivity implements HomeFragment.MainActivityNavBar, HomeProductDetailsFragment.MainActivityNavBar {
+public class MainActivity extends AppCompatActivity implements HomeFragment.MainActivityNavBar, HomeProductDetailsFragment.MainActivityNavBar, FavoritesFragment.MainActivityNavBar {
 
     private static String KEY_CODE = "getCode";
     public static int FIRST_ITEM = 1234;
@@ -38,16 +39,11 @@ public class MainActivity extends AppCompatActivity implements HomeFragment.Main
         setContentView(binding.getRoot());
         NavHostFragment navHostFragment = (NavHostFragment) getSupportFragmentManager().findFragmentById(binding.fragmentContainerView.getId());
         NavigationUI.setupWithNavController(binding.bottomNavigationView, navHostFragment.getNavController());
-        /*
-        ActionBar actionBar = getSupportActionBar();
-        actionBar.hide();
-        */
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
 
         if (toolbar != null)
         {
             setSupportActionBar(toolbar);
-
         }
 
         // TODO utilizar os extras para saber a mesa

@@ -7,7 +7,7 @@ import androidx.room.Room;
 import androidx.room.RoomDatabase;
 
 
-    @Database(entities = {User.class, Table.class, Restaurant.class, Product.class, Category.class, OrderProduct.class}, version = 1)
+    @Database(entities = {User.class, Table.class, Restaurant.class, Product.class, Category.class, OrderProduct.class, FavoriteProduct.class}, version = 1)
     public abstract class AppDataBase extends RoomDatabase {
 
         public abstract UserDAO getUserDAO();
@@ -16,6 +16,7 @@ import androidx.room.RoomDatabase;
         public abstract ProductDAO getProductDAO();
         public abstract CategoryDAO getCategoryDAO();
         public abstract OrderProductDAO getOrderProductDAO();
+        public abstract FavoriteProductDAO getFavoriteProductDAO();
 
         private static AppDataBase INSTANCE;
 

@@ -7,21 +7,41 @@ import androidx.activity.OnBackPressedCallback;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.navigation.NavDirections;
+import androidx.navigation.Navigation;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.example.fivemealsmobileproject.R;
+import com.example.fivemealsmobileproject.database.AppDataBase;
+import com.example.fivemealsmobileproject.database.FavoriteProduct;
+import com.example.fivemealsmobileproject.home.HomeFragment;
+import com.example.fivemealsmobileproject.home.HomeFragmentDirections;
+import com.example.fivemealsmobileproject.home.HomeProductDetailsFragmentArgs;
 import com.example.fivemealsmobileproject.main.MainActivity;
 
-public class FavoritesFragment extends Fragment {
+import java.util.List;
+
+public class FavoritesFragment extends Fragment implements FavoriteAdapter.FavoriteEventListener {
     private Context context;
+    private FavoriteAdapter adapter;
+    private View view;
+    private MainActivityNavBar mainActivityNavBar;
+
+    public interface MainActivityNavBar{
+        void hideNavBar();
+        void showNavBar();
+    }
 
     public FavoritesFragment() {
         // Required empty public constructor
     }
-
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -30,24 +50,65 @@ public class FavoritesFragment extends Fragment {
         OnBackPressedCallback callback = new OnBackPressedCallback(true /* enabled by default */) {
             @Override
             public void handleOnBackPressed() {
-                // Handle the back button event
-                MainActivity.startActivity(context,0);
+                Navigation.findNavController(view).popBackStack();
             }
         };
         requireActivity().getOnBackPressedDispatcher().addCallback(this, callback);
 
-        // The callback can be enabled or disabled here or in handleOnBackPressed()
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
+        this.context = container.getContext();
         return inflater.inflate(R.layout.fragment_favorites, container, false);
     }
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        this.view = view;
+
+        mainActivityNavBar.showNavBar();
+
+        ImageView imageViewGoBack = view.findViewById(R.id.imageViewToolBarGoBack);
+        imageViewGoBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Navigation.findNavController(view).popBackStack();
+            }
+        });
+
+        RecyclerView recyclerView = view.findViewById(R.id.RecyclerViewfavoriteFragment);
+        List<FavoriteProduct> favoriteProducts = AppDataBase.getInstance(this.context).getFavoriteProductDAO().getAllFavorite();
+        this.adapter = new FavoriteAdapter(this,favoriteProducts);
+        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this.context);
+        recyclerView.setAdapter(this.adapter);
+        recyclerView.setLayoutManager(layoutManager);
+
+        checkIfIsEmpty();
+    }
+
+    @Override
+    public void onFavoriteClick(long productID) {
+        NavDirections action = (NavDirections) FavoritesFragmentDirections.actionFavoritesFragmentToHomeProductDetailsFragment(productID);
+        Navigation.findNavController(this.view).navigate(action);
+    }
+
+    @Override
+    public void onAttach(@NonNull Context context) {
+        super.onAttach(context);
+        if (context instanceof FavoritesFragment.MainActivityNavBar) this.mainActivityNavBar = (FavoritesFragment.MainActivityNavBar) context;
+    }
+
+
+    private void checkIfIsEmpty(){
+        TextView empty = view.findViewById(R.id.textViewEmptyFavoritesMessage);
+        if(this.adapter.getItemCount() == 0){
+            empty.setVisibility(View.VISIBLE);
+        }else {
+            empty.setVisibility(View.GONE);
+        }
     }
 }

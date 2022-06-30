@@ -26,11 +26,11 @@ public class SingleProductAdapter extends RecyclerView.Adapter<SingleProductAdap
     private Context context;
     private final SingleProductEventListener singleProductEventListener;
 
-    public interface SingleProductEventListener{
+    public interface SingleProductEventListener {
         void onRemoveProductClick(OrderProduct orderProduct);
     }
 
-    public SingleProductAdapter(SingleProductEventListener singleProductEventListener){
+    public SingleProductAdapter(SingleProductEventListener singleProductEventListener) {
         this.singleProductEventListener = singleProductEventListener;
     }
 
@@ -39,16 +39,16 @@ public class SingleProductAdapter extends RecyclerView.Adapter<SingleProductAdap
     public BaseProductViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         this.context = parent.getContext();
 
-        if(viewType == OrderProduct.PENDING_STATE) {
+        if (viewType == OrderProduct.PENDING_STATE) {
             View layout = LayoutInflater.from(parent.getContext()).inflate(R.layout.card_order_single_product_type_pending, parent, false);
             return new PendingProductViewHolder(layout);
-        }else if(viewType == OrderProduct.WAITING_APPROVAL_STATE){
+        } else if (viewType == OrderProduct.WAITING_APPROVAL_STATE) {
             View layout = LayoutInflater.from(parent.getContext()).inflate(R.layout.card_order_single_product_type_waiting_for_approval, parent, false);
             return new WaitingProductViewHolder(layout);
-        }else if(viewType == OrderProduct.PROCESSING_STATE){
+        } else if (viewType == OrderProduct.PROCESSING_STATE) {
             View layout = LayoutInflater.from(parent.getContext()).inflate(R.layout.card_order_single_product_type_processing, parent, false);
             return new ProcessingProductViewHolder(layout);
-        }else {
+        } else {
             View layout = LayoutInflater.from(parent.getContext()).inflate(R.layout.card_order_single_product_type_delivered, parent, false);
             return new DeliveredProductViewHolder(layout);
         }
@@ -65,7 +65,7 @@ public class SingleProductAdapter extends RecyclerView.Adapter<SingleProductAdap
         Product product = AppDataBase.getInstance(this.context).getProductDAO().getById(orderProduct.getProductID());
 
 
-        if(holder instanceof PendingProductViewHolder){
+        if (holder instanceof PendingProductViewHolder) {
             PendingProductViewHolder pendingProductViewHolder = (PendingProductViewHolder) holder;
             pendingProductViewHolder.setName(product.getName());
             pendingProductViewHolder.setPrice(product.getPrice());
@@ -80,12 +80,12 @@ public class SingleProductAdapter extends RecyclerView.Adapter<SingleProductAdap
             });
             pendingProductViewHolder.setProgress(progress);
             pendingProductViewHolder.setTime(TimeHelper.getRemainingCancelTimeInTimeStamp(orderProduct.getOrderedTime()));
-            if(progress >= 100){
+            if (progress >= 100) {
                 orderProduct.setState(OrderProduct.PROCESSING_STATE);
                 AppDataBase.getInstance(context).getOrderProductDAO().updateOrderProduct(orderProduct);
             }
 
-        }else if(holder instanceof WaitingProductViewHolder){
+        } else if (holder instanceof WaitingProductViewHolder) {
             WaitingProductViewHolder waitingProductViewHolder = (WaitingProductViewHolder) holder;
             waitingProductViewHolder.setName(product.getName());
             waitingProductViewHolder.setPrice(product.getPrice());
@@ -96,12 +96,12 @@ public class SingleProductAdapter extends RecyclerView.Adapter<SingleProductAdap
                     singleProductEventListener.onRemoveProductClick(orderProduct);
                 }
             });
-            if(waitingProductViewHolder.checkBox.isChecked()){
+            if (waitingProductViewHolder.checkBox.isChecked()) {
                 orderProduct.setState(OrderProduct.PENDING_STATE);
                 orderProduct.setOrderedTime(System.currentTimeMillis());
                 AppDataBase.getInstance(context).getOrderProductDAO().updateOrderProduct(orderProduct);
             }
-        }else if(holder instanceof ProcessingProductViewHolder){
+        } else if (holder instanceof ProcessingProductViewHolder) {
             ProcessingProductViewHolder processingProductViewHolder = (ProcessingProductViewHolder) holder;
             processingProductViewHolder.setName(product.getName());
             processingProductViewHolder.setPrice(product.getPrice());
@@ -111,11 +111,11 @@ public class SingleProductAdapter extends RecyclerView.Adapter<SingleProductAdap
             processingProductViewHolder.setProgress(progress);
             processingProductViewHolder.setTime(TimeHelper.getProgressInTimeStamp(
                     product.getMinAverageTime(), product.getMaxAverageTime(), orderProduct.getOrderedTime()));
-            if(progress >= 100){
+            if (progress >= 100) {
                 orderProduct.setState(OrderProduct.DELIVERED_STATE);
                 AppDataBase.getInstance(context).getOrderProductDAO().updateOrderProduct(orderProduct);
             }
-        }else {
+        } else {
             DeliveredProductViewHolder deliveredProductViewHolder = (DeliveredProductViewHolder) holder;
             deliveredProductViewHolder.setName(product.getName());
             deliveredProductViewHolder.setPrice(product.getPrice());
@@ -128,7 +128,7 @@ public class SingleProductAdapter extends RecyclerView.Adapter<SingleProductAdap
         return products.size();
     }
 
-    public void updateData(List<OrderProduct> products){
+    public void updateData(List<OrderProduct> products) {
         this.products = products;
         notifyDataSetChanged();
     }
@@ -140,10 +140,11 @@ public class SingleProductAdapter extends RecyclerView.Adapter<SingleProductAdap
         }
 
         public abstract void setName(String name);
+
         public abstract void setPrice(float price);
     }
 
-    public class PendingProductViewHolder extends BaseProductViewHolder{
+    public class PendingProductViewHolder extends BaseProductViewHolder {
         private final TextView textViewName;
         private final TextView textViewPrice;
         private final TextView textViewTimePassed;
@@ -160,19 +161,24 @@ public class SingleProductAdapter extends RecyclerView.Adapter<SingleProductAdap
             this.textViewTimePassed = itemView.findViewById(R.id.textViewOrderSingleProductTimePassed);
         }
 
-        public void setName(String name){
+        public void setName(String name) {
             this.textViewName.setText(name);
         }
-        public void setPrice(float price){ this.textViewPrice.setText((price + " €"));}
-        public void setProgress(int progress){
+
+        public void setPrice(float price) {
+            this.textViewPrice.setText((price + " €"));
+        }
+
+        public void setProgress(int progress) {
             this.progressBar.setProgress(progress);
         }
-        public void setTime(String time){
+
+        public void setTime(String time) {
             this.textViewTimePassed.setText(time);
         }
     }
 
-    public class WaitingProductViewHolder extends BaseProductViewHolder{
+    public class WaitingProductViewHolder extends BaseProductViewHolder {
         private final TextView textViewName;
         private final TextView textViewPrice;
         private final ImageView removeButton;
@@ -186,14 +192,17 @@ public class SingleProductAdapter extends RecyclerView.Adapter<SingleProductAdap
             this.checkBox = itemView.findViewById(R.id.checkBoxSingleProductOrderNow);
         }
 
-        public void setName(String name){
+        public void setName(String name) {
             this.textViewName.setText(name);
         }
-        public void setPrice(float price){ this.textViewPrice.setText((price + " €"));}
+
+        public void setPrice(float price) {
+            this.textViewPrice.setText((price + " €"));
+        }
 
     }
 
-    public class ProcessingProductViewHolder extends BaseProductViewHolder{
+    public class ProcessingProductViewHolder extends BaseProductViewHolder {
         private final TextView textViewName;
         private final TextView textViewPrice;
         private final TextView textViewTimePassed;
@@ -207,19 +216,24 @@ public class SingleProductAdapter extends RecyclerView.Adapter<SingleProductAdap
             this.textViewTimePassed = itemView.findViewById(R.id.textViewOrderSingleProductTimePassed);
         }
 
-        public void setName(String name){
+        public void setName(String name) {
             this.textViewName.setText(name);
         }
-        public void setPrice(float price){ this.textViewPrice.setText((price + " €"));}
-        public void setProgress(int progress){
+
+        public void setPrice(float price) {
+            this.textViewPrice.setText((price + " €"));
+        }
+
+        public void setProgress(int progress) {
             this.progressBar.setProgress(progress);
         }
-        public void setTime(String time){
+
+        public void setTime(String time) {
             this.textViewTimePassed.setText(time);
         }
     }
 
-    public class DeliveredProductViewHolder extends BaseProductViewHolder{
+    public class DeliveredProductViewHolder extends BaseProductViewHolder {
         private final TextView textViewName;
         private final TextView textViewPrice;
 
@@ -229,9 +243,12 @@ public class SingleProductAdapter extends RecyclerView.Adapter<SingleProductAdap
             this.textViewPrice = itemView.findViewById(R.id.textViewOrderSingleProductPrice);
         }
 
-        public void setName(String name){
+        public void setName(String name) {
             this.textViewName.setText(name);
         }
-        public void setPrice(float price){ this.textViewPrice.setText((String.valueOf(price) + " €"));}
+
+        public void setPrice(float price) {
+            this.textViewPrice.setText((String.valueOf(price) + " €"));
+        }
     }
 }

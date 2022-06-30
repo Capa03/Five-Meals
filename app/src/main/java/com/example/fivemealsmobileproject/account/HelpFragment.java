@@ -42,13 +42,12 @@ public class HelpFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        ImageView onBack = view.findViewById(R.id.imageViewHelpFragmentOnBack);
+        ImageView onBack = view.findViewById(R.id.imageViewToolBarGoBack);
 
         onBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                NavDirections action = (NavDirections) HelpFragmentDirections.actionHelpFragmentToAccountFragment();
-                Navigation.findNavController(view).navigate(action);
+                Navigation.findNavController(view).popBackStack();
             }
         });
     }

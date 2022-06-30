@@ -23,7 +23,11 @@
         android:id="@+id/favoritesFragment"
         android:name="com.example.fivemealsmobileproject.favorites.FavoritesFragment"
         android:label="fragment_favorites"
-        tools:layout="@layout/fragment_favorites" />
+        tools:layout="@layout/fragment_favorites" >
+        <action
+            android:id="@+id/action_favoritesFragment_to_homeProductDetailsFragment"
+            app:destination="@id/homeProductDetailsFragment" />
+    </fragment>
     <fragment
         android:id="@+id/accountFragment"
         android:name="com.example.fivemealsmobileproject.account.AccountFragment"

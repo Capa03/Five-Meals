@@ -1,6 +1,5 @@
 package com.example.fivemealsmobileproject.home;
 
-import android.annotation.SuppressLint;
 import android.content.Context;
 import android.os.Bundle;
 
@@ -21,6 +20,7 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.example.fivemealsmobileproject.R;
 import com.example.fivemealsmobileproject.database.AppDataBase;
+import com.example.fivemealsmobileproject.database.FavoriteProduct;
 import com.example.fivemealsmobileproject.database.OrderProduct;
 import com.example.fivemealsmobileproject.database.OrderProductDAO;
 import com.example.fivemealsmobileproject.database.Product;
@@ -43,6 +43,10 @@ public class HomeProductDetailsFragment extends Fragment {
     private Button buttonAddToOrder;
     private ImageView imageViewGoBack;
     private Context context;
+    private ImageView favorite;
+    private boolean favoriteOn = true;
+    private View view;
+
     public HomeProductDetailsFragment() {
         // Required empty public constructor
     }
@@ -51,33 +55,33 @@ public class HomeProductDetailsFragment extends Fragment {
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if(getArguments() != null) {
+        if (getArguments() != null) {
             this.productID = HomeProductDetailsFragmentArgs.fromBundle(getArguments()).getProductID();
             //this.mainActivityNavBar = HomeProductDetailsFragmentArgs.fromBundle(getArguments()).get
-            // This callback will only be called when MyFragment is at least Started.
-            OnBackPressedCallback callback = new OnBackPressedCallback(true /* enabled by default */) {
-                @Override
-                public void handleOnBackPressed() {
-                    // Handle the back button event
-                    MainActivity.startActivity(context,0);
-                }
-            };
-            requireActivity().getOnBackPressedDispatcher().addCallback(this, callback);
 
-            // The callback can be enabled or disabled here or in handleOnBackPressed()
         }
+        OnBackPressedCallback callback = new OnBackPressedCallback(true /* enabled by default */) {
+            @Override
+            public void handleOnBackPressed() {
+                Navigation.findNavController(view).popBackStack();
+            }
+        };
+        requireActivity().getOnBackPressedDispatcher().addCallback(this, callback);
+
+        // The callback can be enabled or disabled here or in handleOnBackPressed()
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        this.context = container.getContext();
         return inflater.inflate(R.layout.fragment_home_product_details, container, false);
     }
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        this.view = view;
         Product product = AppDataBase.getInstance(view.getContext()).getProductDAO().getById(this.productID);
-
         cacheViews(view);
 
         this.imageViewGoBack.setOnClickListener(new View.OnClickListener() {
@@ -106,7 +110,7 @@ public class HomeProductDetailsFragment extends Fragment {
                 int quantity = Integer.parseInt(textViewQuantity.getText().toString()) + 1;
                 textViewQuantity.setText(String.valueOf(quantity));
                 buttonRemoveQuantity.setEnabled(true);
-                buttonAddToOrder.setText("Add " + quantity + " to cart " + quantity * product.getPrice()+ " $");
+                buttonAddToOrder.setText("Add " + quantity + " to cart " + quantity * product.getPrice() + " $");
             }
         });
 
@@ -115,10 +119,36 @@ public class HomeProductDetailsFragment extends Fragment {
         buttonRemoveQuantity.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                int quantity = Integer.parseInt(textViewQuantity.getText().toString())-1;
+                int quantity = Integer.parseInt(textViewQuantity.getText().toString()) - 1;
                 if (quantity == 1) buttonRemoveQuantity.setEnabled(false);
                 textViewQuantity.setText(String.valueOf(quantity));
-                buttonAddToOrder.setText("Add " + quantity + " to cart " + quantity * product.getPrice()+ " $");
+                buttonAddToOrder.setText(String.format("Add %s to cart %s $", quantity, quantity * product.getPrice()));
+            }
+        });
+
+
+        FavoriteProduct exist = AppDataBase.getInstance(this.context).getFavoriteProductDAO().getFromId(productID);
+        if (exist == null) {
+            favoriteOn = false;
+            favorite.setImageResource(R.drawable.ic_baseline_favorite_border_24);
+        }else {
+            favorite.setImageResource(R.drawable.ic_baseline_favorite_24);
+        }
+
+        favorite.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                FavoriteProduct favoriteProduct = new FavoriteProduct(productID, product.getName(), product.getPrice(), product.getImgLink());
+                if (!favoriteOn) {
+                    favoriteOn = true;
+                    favorite.setImageResource(R.drawable.ic_baseline_favorite_24);
+                    AppDataBase.getInstance(context).getFavoriteProductDAO().insertFavorite(favoriteProduct);
+
+                } else {
+                    favoriteOn = false;
+                    favorite.setImageResource(R.drawable.ic_baseline_favorite_border_24);
+                    AppDataBase.getInstance(context).getFavoriteProductDAO().deleteFavorite(favoriteProduct);
+                }
             }
         });
 
@@ -131,7 +161,7 @@ public class HomeProductDetailsFragment extends Fragment {
 
                 int state = forLater.isChecked() ? OrderProduct.WAITING_APPROVAL_STATE : OrderProduct.PENDING_STATE;
 
-                for(int i = 1; i<=quantityToAdd; i++){
+                for (int i = 1; i <= quantityToAdd; i++) {
                     orderProductDAO.insertOrderProduct(new OrderProduct(productID, state, System.currentTimeMillis()));
                     ParentProductDB.addProduct(productID);
                 }
@@ -139,20 +169,23 @@ public class HomeProductDetailsFragment extends Fragment {
             }
         });
         mainActivityNavBar.hideNavBar();
+
     }
 
     @Override
     public void onAttach(@NonNull Context context) {
         super.onAttach(context);
-        if(context instanceof MainActivityNavBar) this.mainActivityNavBar = (MainActivityNavBar) context;
+        if (context instanceof MainActivityNavBar)
+            this.mainActivityNavBar = (MainActivityNavBar) context;
     }
 
-    public interface MainActivityNavBar{
+    public interface MainActivityNavBar {
         void hideNavBar();
+
         void showNavBar();
     }
 
-    private void cacheViews(View view){
+    private void cacheViews(View view) {
         this.imageViewProduct = view.findViewById(R.id.imageViewProductDetailsImage);
         this.textViewTitle = view.findViewById(R.id.textViewProductDetailsTitle);
         this.textViewDescription = view.findViewById(R.id.textViewProductDetailsDescription);
@@ -163,6 +196,7 @@ public class HomeProductDetailsFragment extends Fragment {
         this.forLater = view.findViewById(R.id.checkBoxProductDetailsOrderLater);
         this.buttonAddToOrder = view.findViewById(R.id.buttonProductDetailsAddToOrder);
         this.imageViewGoBack = view.findViewById(R.id.imageViewToolBarGoBack);
+        this.favorite = view.findViewById(R.id.toggleButtonProductDetailsFavorite);
     }
 
 }

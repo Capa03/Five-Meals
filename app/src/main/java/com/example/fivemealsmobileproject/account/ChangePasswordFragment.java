@@ -53,7 +53,7 @@ public class ChangePasswordFragment extends Fragment {
         EditText oldPassword = view.findViewById(R.id.editTextChangePasswordOldPassword);
         EditText newPassword = view.findViewById(R.id.editTextChangePasswordNewPassword);
         EditText newPasswordConfirmation = view.findViewById(R.id.editTextChangePasswordTypeAgain);
-        ImageView onBack = view.findViewById(R.id.imageViewHelpFragmentOnBack);
+        ImageView onBack = view.findViewById(R.id.imageViewToolBarGoBack);
         Context context = view.getContext();
 
         submit.setOnClickListener(new View.OnClickListener() {
@@ -90,8 +90,7 @@ public class ChangePasswordFragment extends Fragment {
         onBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                NavDirections action = (NavDirections) ChangePasswordFragmentDirections.actionChangePasswordFragment2ToAccountFragment();
-                Navigation.findNavController(view).navigate(action);
+                Navigation.findNavController(view).popBackStack();
             }
         });
     }
