@@ -1,10 +1,14 @@
 package com.example.fivemealsmobileproject.login;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.InputType;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -19,7 +23,7 @@ public class LoginActivity extends AppCompatActivity {
 
     private EditText editTextLoginUsername;
     private EditText editTextLoginPassword;
-
+    private TextView showHidePassword;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,6 +31,24 @@ public class LoginActivity extends AppCompatActivity {
         setContentView(R.layout.activity_login);
 
         this.cacheViews();
+
+        this.showHidePassword.setOnTouchListener(new View.OnTouchListener() {
+            @SuppressLint("ClickableViewAccessibility")
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                switch ( event.getAction() ) {
+
+                    case MotionEvent.ACTION_UP:
+                        editTextLoginPassword.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD);
+                        break;
+                    case MotionEvent.ACTION_DOWN:
+                        editTextLoginPassword.setInputType(InputType.TYPE_CLASS_TEXT);
+                        break;
+                }
+                return true;
+            }
+        });
+
 
     }
 
@@ -63,6 +85,7 @@ public class LoginActivity extends AppCompatActivity {
     private void cacheViews(){
         this.editTextLoginUsername = findViewById(R.id.editTextLoginUsername);
         this.editTextLoginPassword = findViewById(R.id.editTextLoginPassword);
+        this.showHidePassword = findViewById(R.id.textViewLoginPasswordShowOrHide1);
     }
 
 }
