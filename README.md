@@ -4,13 +4,15 @@
 
 ## Descrição do Projeto
 
-No presente projeto  desenvolvidas aplicação que visa servir de base (e 
-protótipo) para uma aplicação cujo objetivo será diminuir o processo da realização de um pedido 
+No presente projeto foi desenvolvida uma aplicação que visa servir de protótipo/base 
+para uma futura expansão da mesma, cujo objetivo será diminuir o tempo da realização de um pedido 
 em um restaurante tradicional, mediante uma solução de evoluir o processo, melhorando e 
-agilizando o pedido através da utilização de QRCode, evitando todo o processo tradicional. Como 
-amostra dos grandes centros urbanos que experienciam a problemática ligada à mobilidade e 
-agilidade social, existem poucas soluções no mercado. Perante o problema, o objetivo da nossa 
-aplicação é diminuir todo esse processo, através da utilização de dispositivo movel.
+agilizando o pedido através da utilização da tecnologia. Como 
+observado nos grandes centros urbanos, estes experienciam um grande problema ligado à mobilidade e 
+agilidade social, existem poucas soluções no mercado que resolvem este problema da mesma maneira que nós. 
+Perante o desafio, o objetivo da nossa aplicação é diminuir todo esse processo, através da utilização de 
+uma app mobile que servirá de comunicação direta entre o cliente e a cozinha do restaurante melhorando a 
+qualidade e velocidade da informação em ambos.
 
 ## Elementos da equipa:
 * David Capa
