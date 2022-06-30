@@ -47,7 +47,6 @@ public class CodeActivity extends AppCompatActivity {
                 if(start == 7){
                     if(AppDataBase.getInstance(context).getTableDAO().getTableFromID(Long.parseLong(s.toString())) != null){
                         MainActivity.startActivity(context, Long.parseLong(s.toString()));
-                        // TODO finish();
                     }else {
                         Toast.makeText(context, "Invalid code", Toast.LENGTH_SHORT).show();
                     }

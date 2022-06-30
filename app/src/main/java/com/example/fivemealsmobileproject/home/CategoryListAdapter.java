@@ -52,7 +52,6 @@ public class CategoryListAdapter extends RecyclerView.Adapter<CategoryListAdapte
         if(getItemViewType(position) != MainActivity.FIRST_ITEM) {
             String categoryName = categories.get(position).getCategoryName();
             holder.setTitle(categoryName);
-            // TODO Razão da recycler view horizontal não manter a posição
             holder.adapter.updateData(AppDataBase.getInstance(holder.context).getProductDAO().getAllFromCategory(categoryName));
 
             holder.textViewTitle.setOnClickListener(new View.OnClickListener() {
