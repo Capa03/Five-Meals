@@ -100,9 +100,6 @@ public class AccountFragment extends Fragment {
                 Navigation.findNavController(view).navigate(action);
             }
         });
-
-
-        //TODO Trazer info completo do user
     }
 
 }
