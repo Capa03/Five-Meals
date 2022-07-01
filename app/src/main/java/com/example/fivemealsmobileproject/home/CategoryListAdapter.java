@@ -54,13 +54,6 @@ public class CategoryListAdapter extends RecyclerView.Adapter<CategoryListAdapte
             holder.setTitle(categoryName);
             holder.adapter.updateData(AppDataBase.getInstance(holder.context).getProductDAO()
                             .getAllFromCategoryAndRestaurant(categoryName, TableInfo.getRestaurant().getRestaurantID()));
-
-            holder.textViewTitle.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    categoryEventListener.onCategoryClick(categoryName);
-                }
-            });
         }
     }
 
@@ -99,8 +92,6 @@ public class CategoryListAdapter extends RecyclerView.Adapter<CategoryListAdapte
     }
 
     public interface CategoryListEventListener {
-        // TODO Change "String categoryName" for "long categoryID" in future
-        void onCategoryClick(String categoryName);
         void onProductClick(long productID);
     }
 }

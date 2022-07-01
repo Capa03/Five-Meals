@@ -4,6 +4,8 @@ import android.content.Context;
 
 import com.example.fivemealsmobileproject.database.AppDataBase;
 import com.example.fivemealsmobileproject.database.OrderProduct;
+import com.example.fivemealsmobileproject.login.SessionManager;
+import com.example.fivemealsmobileproject.main.TableInfo;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -16,7 +18,10 @@ public class ParentProductDB {
 
     public static List<ParentProduct> getAll(Context context){
         if(products.isEmpty()){
-            List<OrderProduct> orderProducts = AppDataBase.getInstance(context).getOrderProductDAO().getAllProductsNoDupes();
+            List<OrderProduct> orderProducts = AppDataBase.getInstance(context).getOrderProductDAO().getAllProductsNoDupes(
+                    SessionManager.getActiveSession(context),
+                    TableInfo.getRestaurant().getRestaurantID()
+            );
             for(OrderProduct product: orderProducts){
                 products.add(new ParentProduct(product.getProductID()));
             }
@@ -49,7 +54,8 @@ public class ParentProductDB {
                 }
             }
         }
-
-
+    }
+    public static void clear(){
+        products = new ArrayList<>();
     }
 }

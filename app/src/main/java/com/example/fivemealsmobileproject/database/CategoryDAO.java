@@ -17,7 +17,6 @@ public interface CategoryDAO {
     @Query("SELECT * FROM Category WHERE RestaurantID = :restaurantID")
     List<Category> getAllCategoriesFromRestaurant(long restaurantID);
 
-    // TODO getCategoryIDFromRestaurantIdAndCategoryName
     @Query("SELECT categoryID FROM Category WHERE RestaurantID = :restaurantID AND categoryName = :categoryName")
     long getCategoryIDFromRestaurantIdAndCategoryName(long restaurantID, String categoryName);
 

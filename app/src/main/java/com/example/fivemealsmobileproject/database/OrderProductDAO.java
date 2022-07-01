@@ -16,8 +16,8 @@ public interface OrderProductDAO {
     @Query("SELECT * FROM OrderProduct")
     List<OrderProduct> getAllProducts();
 
-    @Query("SELECT * FROM OrderProduct GROUP BY productID")
-    List<OrderProduct> getAllProductsNoDupes();
+    @Query("SELECT * FROM OrderProduct WHERE username = :username AND restaurantId = :restaurantId GROUP BY productID")
+    List<OrderProduct> getAllProductsNoDupes(String username, long restaurantId);
 
     @Query("SELECT * FROM OrderProduct WHERE productID = :productID")
     List<OrderProduct> getAllFromID(long productID);

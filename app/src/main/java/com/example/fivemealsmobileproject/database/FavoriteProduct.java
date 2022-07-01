@@ -9,12 +9,16 @@ import com.example.fivemealsmobileproject.favorites.FavoriteAdapter;
 public class FavoriteProduct {
     @PrimaryKey
     private long productID;
+    private String username;
+    private long restaurantID;
     private String productName;
     private float productPrice;
     private String productImage;
 
-    public FavoriteProduct(long productID, String productName, float productPrice, String productImage) {
+    public FavoriteProduct(long productID, String username, long restaurantID, String productName, float productPrice, String productImage) {
         this.productID = productID;
+        this.username = username;
+        this.restaurantID = restaurantID;
         this.productName = productName;
         this.productPrice = productPrice;
         this.productImage = productImage;
@@ -26,6 +30,22 @@ public class FavoriteProduct {
 
     public void setProductID(long productID) {
         this.productID = productID;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public long getRestaurantID() {
+        return restaurantID;
+    }
+
+    public void setRestaurantID(long restaurantID) {
+        this.restaurantID = restaurantID;
     }
 
     public String getProductName() {

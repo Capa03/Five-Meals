@@ -24,7 +24,9 @@ import com.example.fivemealsmobileproject.database.FavoriteProduct;
 import com.example.fivemealsmobileproject.home.HomeFragment;
 import com.example.fivemealsmobileproject.home.HomeFragmentDirections;
 import com.example.fivemealsmobileproject.home.HomeProductDetailsFragmentArgs;
+import com.example.fivemealsmobileproject.login.SessionManager;
 import com.example.fivemealsmobileproject.main.MainActivity;
+import com.example.fivemealsmobileproject.main.TableInfo;
 
 import java.util.List;
 
@@ -81,7 +83,10 @@ public class FavoritesFragment extends Fragment implements FavoriteAdapter.Favor
         });
 
         RecyclerView recyclerView = view.findViewById(R.id.RecyclerViewfavoriteFragment);
-        List<FavoriteProduct> favoriteProducts = AppDataBase.getInstance(this.context).getFavoriteProductDAO().getAllFavorite();
+        List<FavoriteProduct> favoriteProducts = AppDataBase.getInstance(this.context).getFavoriteProductDAO().getAllFavorite(
+                SessionManager.getActiveSession(context),
+                TableInfo.getRestaurant().getRestaurantID()
+        );
         this.adapter = new FavoriteAdapter(this,favoriteProducts);
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this.context);
         recyclerView.setAdapter(this.adapter);

@@ -46,6 +46,7 @@ public class QrCodeActivity extends AppCompatActivity {
                         String code = result.getText();
                         if(AppDataBase.getInstance(context).getTableDAO().getTableFromID(Long.parseLong(code)) != null){
                             MainActivity.startActivity(context, Long.parseLong(code));
+                            finish();
                         }else {
                             Toast.makeText(context, "Invalid code", Toast.LENGTH_SHORT).show();
                         }
