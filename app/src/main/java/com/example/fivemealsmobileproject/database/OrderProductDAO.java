@@ -25,8 +25,13 @@ public interface OrderProductDAO {
     @Query("DELETE FROM OrderProduct")
     void clearCurrentOrder();
 
-    @Query("SELECT Product.name as productName, COUNT(OrderProduct.productID) as quantity, Product.price as unitPrice FROM OrderProduct  INNER JOIN Product ON Product.id = OrderProduct.productID GROUP BY productID")
-    List<PaymentProduct> getAllPaymentProducts();
+    @Query("SELECT Product.name as productName, COUNT(OrderProduct.productID) as quantity, Product.price as unitPrice " +
+            "FROM OrderProduct " +
+            "INNER JOIN Product ON " +
+            "Product.id = OrderProduct.productID " +
+            "WHERE OrderProduct.username = :username AND OrderProduct.restaurantId = :restaurantId " +
+            "GROUP BY productID")
+    List<PaymentProduct> getAllPaymentProducts(String username, long restaurantId);
 
 
 

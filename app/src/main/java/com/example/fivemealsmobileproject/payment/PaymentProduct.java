@@ -6,6 +6,7 @@ public class PaymentProduct {
     private int quantity;
     private float unitPrice;
 
+
     public PaymentProduct(String productName, int quantity, float unitPrice) {
         this.productName = productName;
         this.quantity = quantity;

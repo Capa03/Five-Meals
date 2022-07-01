@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
@@ -34,6 +35,10 @@ public class CodeActivity extends AppCompatActivity {
         setContentView(R.layout.activity_code_input);
         cacheViews();
         Context context = this;
+
+        // TODO Debug Button
+        Button debugButton = findViewById(R.id.buttonToMainActivity);
+        debugButton.setVisibility(View.GONE);
 
         this.codeInput.addTextChangedListener(new TextWatcher() {
             @Override
