@@ -34,8 +34,6 @@ public class CodeActivity extends AppCompatActivity {
         setContentView(R.layout.activity_code_input);
         cacheViews();
         Context context = this;
-        ParentProductDB.clear();
-       
 
         this.codeInput.addTextChangedListener(new TextWatcher() {
             @Override
@@ -65,7 +63,11 @@ public class CodeActivity extends AppCompatActivity {
 
     }
 
-
+    @Override
+    protected void onStart() {
+        super.onStart();
+        ParentProductDB.clear();
+    }
 
     public void onQrCodeScanClick(View view) {
         QrCodeActivity.startActivity(this);

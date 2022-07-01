@@ -75,7 +75,7 @@ public class HomeFragment extends Fragment implements CategoryListAdapter.Catego
         super.onAttach(context);
         if (context instanceof MainActivityNavBar) this.mainActivityNavBar = (MainActivityNavBar) context;
     }
-    
+
     @Override
     public void onProductClick(long productID) {
         NavDirections action = (NavDirections) HomeFragmentDirections.actionHomeFragmentToHomeProductDetailsFragment(productID);
