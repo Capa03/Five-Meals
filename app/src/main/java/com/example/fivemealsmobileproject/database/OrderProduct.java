@@ -17,14 +17,14 @@ public class OrderProduct {
     private long orderProductID;
     private long productID;
     private String username;
-    private long restaurantId;
+    private long tableID;
     private int state;
     private long orderedTime;
 
-    public OrderProduct(long productID, String username, long restaurantId, int state, long orderedTime) {
+    public OrderProduct(long productID, String username, long tableID, int state, long orderedTime) {
         this.productID = productID;
         this.username = username;
-        this.restaurantId = restaurantId;
+        this.tableID = tableID;
         this.state = state;
         this.orderedTime = orderedTime;
     }
@@ -70,11 +70,11 @@ public class OrderProduct {
         this.username = username;
     }
 
-    public long getRestaurantId() {
-        return restaurantId;
+    public long getTableID() {
+        return tableID;
     }
 
-    public void setRestaurantId(long restaurantId) {
-        this.restaurantId = restaurantId;
+    public void setTableID(long restaurantId) {
+        this.tableID = restaurantId;
     }
 }

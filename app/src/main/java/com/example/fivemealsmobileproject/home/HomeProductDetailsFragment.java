@@ -177,7 +177,7 @@ public class HomeProductDetailsFragment extends Fragment {
                     orderProductDAO.insertOrderProduct(new OrderProduct(
                             productID,
                             SessionManager.getActiveSession(context),
-                            TableInfo.getRestaurant().getRestaurantID(),
+                            TableInfo.getTable().getTableID(),
                             state,
                             System.currentTimeMillis()));
                     ParentProductDB.addProduct(productID);

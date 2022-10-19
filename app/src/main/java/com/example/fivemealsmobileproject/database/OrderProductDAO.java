@@ -16,8 +16,8 @@ public interface OrderProductDAO {
     @Query("SELECT * FROM OrderProduct")
     List<OrderProduct> getAllProducts();
 
-    @Query("SELECT * FROM OrderProduct WHERE username = :username AND restaurantId = :restaurantId GROUP BY productID")
-    List<OrderProduct> getAllProductsNoDupes(String username, long restaurantId);
+    @Query("SELECT * FROM OrderProduct WHERE username = :username AND tableID = :tableID GROUP BY productID")
+    List<OrderProduct> getAllProductsNoDupes(String username, long tableID);
 
     @Query("SELECT * FROM OrderProduct WHERE productID = :productID")
     List<OrderProduct> getAllFromID(long productID);
@@ -29,7 +29,7 @@ public interface OrderProductDAO {
             "FROM OrderProduct " +
             "INNER JOIN Product ON " +
             "Product.id = OrderProduct.productID " +
-            "WHERE OrderProduct.username = :username AND OrderProduct.restaurantId = :restaurantId " +
+            "WHERE OrderProduct.username = :username AND OrderProduct.tableID = :restaurantId " +
             "GROUP BY productID")
     List<PaymentProduct> getAllPaymentProducts(String username, long restaurantId);
 
