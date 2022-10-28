@@ -14,7 +14,11 @@ public interface CategoryDAO {
     @Query("SELECT * FROM Category")
     List<Category> getAllCategories();
 
-    // TODO getCategoryIDFromRestaurantIdAndCategoryName
+    @Query("SELECT * FROM Category WHERE RestaurantID = :restaurantID")
+    List<Category> getAllCategoriesFromRestaurant(long restaurantID);
+
+    @Query("SELECT categoryID FROM Category WHERE RestaurantID = :restaurantID AND categoryName = :categoryName")
+    long getCategoryIDFromRestaurantIdAndCategoryName(long restaurantID, String categoryName);
 
     @Delete
     void deleteCategory(Category category);

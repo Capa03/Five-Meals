@@ -15,8 +15,9 @@ public class Product {
     private double minAverageTime;
     private double maxAverageTime;
     private String imgLink;
+    private long restaurantId;
 
-    public Product(String name, Float price, double minAverageTime, double maxAverageTime,  String category, String imgLink, String description) {
+    public Product(String name, Float price, double minAverageTime, double maxAverageTime,  String category, long restaurantId, String imgLink, String description) {
         this.name = name;
         this.price = price;
         this.minAverageTime = minAverageTime;
@@ -24,6 +25,7 @@ public class Product {
         this.category = category;
         this.imgLink = imgLink;
         this.description = description;
+        this.restaurantId = restaurantId;
     }
 
     public long getId() {
@@ -90,6 +92,19 @@ public class Product {
         this.imgLink = imgLink;
     }
 
+    public void setMinAverageTime(double minAverageTime) {
+        this.minAverageTime = minAverageTime;
+    }
 
+    public void setMaxAverageTime(double maxAverageTime) {
+        this.maxAverageTime = maxAverageTime;
+    }
 
+    public long getRestaurantId() {
+        return restaurantId;
+    }
+
+    public void setRestaurantId(long restaurantId) {
+        this.restaurantId = restaurantId;
+    }
 }

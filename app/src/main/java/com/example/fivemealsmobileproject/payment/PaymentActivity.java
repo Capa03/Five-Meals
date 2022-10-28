@@ -19,7 +19,9 @@ import android.widget.Toast;
 
 import com.example.fivemealsmobileproject.R;
 import com.example.fivemealsmobileproject.database.AppDataBase;
+import com.example.fivemealsmobileproject.login.SessionManager;
 import com.example.fivemealsmobileproject.main.MainActivity;
+import com.example.fivemealsmobileproject.main.TableInfo;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -50,7 +52,10 @@ public class PaymentActivity extends AppCompatActivity implements AdapterView.On
             spinnerMethod.setOnItemSelectedListener(this);
         }
 
-        this.paymentProducts = AppDataBase.getInstance(this).getOrderProductDAO().getAllPaymentProducts();
+        this.paymentProducts = AppDataBase.getInstance(this).getOrderProductDAO().getAllPaymentProducts(
+                SessionManager.getActiveSession(this),
+                TableInfo.getRestaurant().getRestaurantID()
+        );
 
         RecyclerView recyclerView = findViewById(R.id.recyclerViewActivityPayment);
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this);

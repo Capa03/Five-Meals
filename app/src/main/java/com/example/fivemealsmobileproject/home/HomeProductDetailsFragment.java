@@ -24,7 +24,9 @@ import com.example.fivemealsmobileproject.database.FavoriteProduct;
 import com.example.fivemealsmobileproject.database.OrderProduct;
 import com.example.fivemealsmobileproject.database.OrderProductDAO;
 import com.example.fivemealsmobileproject.database.Product;
+import com.example.fivemealsmobileproject.login.SessionManager;
 import com.example.fivemealsmobileproject.main.MainActivity;
+import com.example.fivemealsmobileproject.main.TableInfo;
 import com.example.fivemealsmobileproject.order.ParentProductDB;
 
 public class HomeProductDetailsFragment extends Fragment {
@@ -127,7 +129,11 @@ public class HomeProductDetailsFragment extends Fragment {
         });
 
 
-        FavoriteProduct exist = AppDataBase.getInstance(this.context).getFavoriteProductDAO().getFromId(productID);
+        FavoriteProduct exist = AppDataBase.getInstance(this.context).getFavoriteProductDAO().getFromId(
+                productID,
+                SessionManager.getActiveSession(context),
+                product.getRestaurantId()
+                );
         if (exist == null) {
             favoriteOn = false;
             favorite.setImageResource(R.drawable.ic_baseline_favorite_border_24);
@@ -138,7 +144,13 @@ public class HomeProductDetailsFragment extends Fragment {
         favorite.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                FavoriteProduct favoriteProduct = new FavoriteProduct(productID, product.getName(), product.getPrice(), product.getImgLink());
+                FavoriteProduct favoriteProduct = new FavoriteProduct(
+                        productID,
+                        SessionManager.getActiveSession(context),
+                        product.getRestaurantId(),
+                        product.getName(),
+                        product.getPrice(),
+                        product.getImgLink());
                 if (!favoriteOn) {
                     favoriteOn = true;
                     favorite.setImageResource(R.drawable.ic_baseline_favorite_24);
@@ -162,7 +174,12 @@ public class HomeProductDetailsFragment extends Fragment {
                 int state = forLater.isChecked() ? OrderProduct.WAITING_APPROVAL_STATE : OrderProduct.PENDING_STATE;
 
                 for (int i = 1; i <= quantityToAdd; i++) {
-                    orderProductDAO.insertOrderProduct(new OrderProduct(productID, state, System.currentTimeMillis()));
+                    orderProductDAO.insertOrderProduct(new OrderProduct(
+                            productID,
+                            SessionManager.getActiveSession(context),
+                            TableInfo.getTable().getTableID(),
+                            state,
+                            System.currentTimeMillis()));
                     ParentProductDB.addProduct(productID);
                 }
                 Navigation.findNavController(view).popBackStack();

@@ -113,7 +113,7 @@ public class SingleProductAdapter extends RecyclerView.Adapter<SingleProductAdap
                 public void onClick(View view) {
 
                     AlertDialog.Builder builder = new AlertDialog.Builder(context);
-                    builder.setTitle("Eleminar pedido");
+                    builder.setTitle("Eliminar pedido");
                     builder.setMessage("Deseja eliminar este pedido?");
                     builder.setPositiveButton("Sim", new DialogInterface.OnClickListener() {
                         @Override

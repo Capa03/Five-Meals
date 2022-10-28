@@ -16,8 +16,8 @@ public interface OrderProductDAO {
     @Query("SELECT * FROM OrderProduct")
     List<OrderProduct> getAllProducts();
 
-    @Query("SELECT * FROM OrderProduct GROUP BY productID")
-    List<OrderProduct> getAllProductsNoDupes();
+    @Query("SELECT * FROM OrderProduct WHERE username = :username AND tableID = :tableID GROUP BY productID")
+    List<OrderProduct> getAllProductsNoDupes(String username, long tableID);
 
     @Query("SELECT * FROM OrderProduct WHERE productID = :productID")
     List<OrderProduct> getAllFromID(long productID);
@@ -25,8 +25,13 @@ public interface OrderProductDAO {
     @Query("DELETE FROM OrderProduct")
     void clearCurrentOrder();
 
-    @Query("SELECT Product.name as productName, COUNT(OrderProduct.productID) as quantity, Product.price as unitPrice FROM OrderProduct  INNER JOIN Product ON Product.id = OrderProduct.productID GROUP BY productID")
-    List<PaymentProduct> getAllPaymentProducts();
+    @Query("SELECT Product.name as productName, COUNT(OrderProduct.productID) as quantity, Product.price as unitPrice " +
+            "FROM OrderProduct " +
+            "INNER JOIN Product ON " +
+            "Product.id = OrderProduct.productID " +
+            "WHERE OrderProduct.username = :username AND OrderProduct.tableID = :restaurantId " +
+            "GROUP BY productID")
+    List<PaymentProduct> getAllPaymentProducts(String username, long restaurantId);
 
 
 

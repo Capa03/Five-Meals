@@ -3,6 +3,7 @@ package com.example.fivemealsmobileproject.main;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 
 
@@ -13,12 +14,17 @@ import androidx.navigation.fragment.NavHostFragment;
 import androidx.navigation.ui.NavigationUI;
 
 import com.example.fivemealsmobileproject.R;
+import com.example.fivemealsmobileproject.database.AppDataBase;
+import com.example.fivemealsmobileproject.database.OrderProduct;
+import com.example.fivemealsmobileproject.database.Table;
 import com.example.fivemealsmobileproject.databinding.ActivityMainBinding;
 import com.example.fivemealsmobileproject.favorites.FavoritesFragment;
 import com.example.fivemealsmobileproject.home.HomeFragment;
 import com.example.fivemealsmobileproject.home.HomeProductDetailsFragment;
 import com.example.fivemealsmobileproject.login.PreLoginActivity;
 import com.example.fivemealsmobileproject.login.SessionManager;
+
+import java.util.List;
 
 public class MainActivity extends AppCompatActivity implements HomeFragment.MainActivityNavBar, HomeProductDetailsFragment.MainActivityNavBar, FavoritesFragment.MainActivityNavBar {
 
@@ -46,7 +52,15 @@ public class MainActivity extends AppCompatActivity implements HomeFragment.Main
             setSupportActionBar(toolbar);
         }
 
-        // TODO utilizar os extras para saber a mesa
+
+        Bundle bundle = getIntent().getExtras();
+        if(bundle != null)
+        {
+            Table table = AppDataBase.getInstance(this).getTableDAO().getTableFromID(bundle.getLong(KEY_CODE));
+            TableInfo.setTable(table);
+            TableInfo.setRestaurant(AppDataBase.getInstance(this)
+                    .getRestaurantDAO().getRestaurantFromID(table.getRestaurantID()));
+        }
     }
 
     public void onLogOutClick(View view) {

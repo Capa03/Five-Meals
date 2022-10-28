@@ -1,7 +1,6 @@
 package com.example.fivemealsmobileproject.home;
 
 import android.content.Context;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,6 +14,7 @@ import com.example.fivemealsmobileproject.R;
 import com.example.fivemealsmobileproject.database.AppDataBase;
 import com.example.fivemealsmobileproject.database.Category;
 import com.example.fivemealsmobileproject.main.MainActivity;
+import com.example.fivemealsmobileproject.main.TableInfo;
 
 import java.util.List;
 
@@ -27,7 +27,7 @@ public class CategoryListAdapter extends RecyclerView.Adapter<CategoryListAdapte
         this.categoryEventListener = categoryEventListener;
         this.categories = categories;
         // Empty card to give spacing from the toolBar
-        this.categories.add(0, new Category(""));
+        this.categories.add(0, new Category(0,""));
     }
 
     @NonNull
@@ -52,14 +52,8 @@ public class CategoryListAdapter extends RecyclerView.Adapter<CategoryListAdapte
         if(getItemViewType(position) != MainActivity.FIRST_ITEM) {
             String categoryName = categories.get(position).getCategoryName();
             holder.setTitle(categoryName);
-            holder.adapter.updateData(AppDataBase.getInstance(holder.context).getProductDAO().getAllFromCategory(categoryName));
-
-            holder.textViewTitle.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    categoryEventListener.onCategoryClick(categoryName);
-                }
-            });
+            holder.adapter.updateData(AppDataBase.getInstance(holder.context).getProductDAO()
+                            .getAllFromCategoryAndRestaurant(categoryName, TableInfo.getRestaurant().getRestaurantID()));
         }
     }
 
@@ -79,6 +73,8 @@ public class CategoryListAdapter extends RecyclerView.Adapter<CategoryListAdapte
             if(viewType != MainActivity.FIRST_ITEM) {
                 this.context = context;
                 this.textViewTitle = itemView.findViewById(R.id.textViewCardCategoryTitle);
+                //TODO Resolver o bug de não guardar o estado da recycler view
+                // (possivelmente focar no ultimo item clicado)
                 this.adapter = new ProductListAdapter(productListEventListener);
                 RecyclerView recyclerView = itemView.findViewById(R.id.recyclerViewCardCategoryProductList);
                 RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(itemView.getContext(), LinearLayoutManager.HORIZONTAL, false);
@@ -98,8 +94,6 @@ public class CategoryListAdapter extends RecyclerView.Adapter<CategoryListAdapte
     }
 
     public interface CategoryListEventListener {
-        // TODO Change "String categoryName" for "long categoryID" in future
-        void onCategoryClick(String categoryName);
         void onProductClick(long productID);
     }
 }

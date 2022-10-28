@@ -7,14 +7,15 @@ import androidx.room.PrimaryKey;
 @Entity
 public class Category {
 
+    @PrimaryKey (autoGenerate = true)
+    private long categoryID;
 
-    // TODO RestaurantID
-    // TODO categoryID (PrimaryKEY)
-    @PrimaryKey
+    private long restaurantID;
     @NonNull
     private String categoryName;
 
-    public Category(String categoryName) {
+    public Category(long restaurantID, @NonNull String categoryName) {
+        this.restaurantID = restaurantID;
         this.categoryName = categoryName;
     }
 
@@ -26,4 +27,19 @@ public class Category {
         this.categoryName = categoryName;
     }
 
+    public long getCategoryID() {
+        return this.categoryID;
+    }
+
+    public void setCategoryID(long categoryID) {
+        this.categoryID = categoryID;
+    }
+
+    public long getRestaurantID() {
+        return restaurantID;
+    }
+
+    public void setRestaurantID(long restaurantID) {
+        this.restaurantID = restaurantID;
+    }
 }

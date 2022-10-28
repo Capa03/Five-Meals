@@ -20,6 +20,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.fivemealsmobileproject.R;
 import com.example.fivemealsmobileproject.database.AppDataBase;
 import com.example.fivemealsmobileproject.database.Category;
+import com.example.fivemealsmobileproject.main.TableInfo;
 
 import java.util.List;
 
@@ -59,7 +60,7 @@ public class HomeFragment extends Fragment implements CategoryListAdapter.Catego
         ImageView imageViewGoBack = view.findViewById(R.id.imageViewToolBarGoBack);
         imageViewGoBack.setVisibility(View.GONE);
 
-        List<Category> categories = AppDataBase.getInstance(this.context).getCategoryDAO().getAllCategories();
+        List<Category> categories = getCategories();
         RecyclerView recyclerView = view.findViewById(R.id.recyclerViewHomeFragmentCategoryList);
         this.adapter = new CategoryListAdapter(this, categories);
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this.context);
@@ -68,15 +69,15 @@ public class HomeFragment extends Fragment implements CategoryListAdapter.Catego
         mainActivityNavBar.showNavBar();
     }
 
+    private List<Category> getCategories() {
+        return AppDataBase.getInstance(this.context).getCategoryDAO()
+                .getAllCategoriesFromRestaurant(TableInfo.getRestaurant().getRestaurantID());
+    }
+
     @Override
     public void onAttach(@NonNull Context context) {
         super.onAttach(context);
         if (context instanceof MainActivityNavBar) this.mainActivityNavBar = (MainActivityNavBar) context;
-    }
-
-    @Override
-    public void onCategoryClick(String categoryName) {
-        Log.i("ListenerDEBUG", ("Category: " + categoryName));
     }
 
     @Override

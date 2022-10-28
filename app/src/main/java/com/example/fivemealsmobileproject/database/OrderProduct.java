@@ -16,14 +16,19 @@ public class OrderProduct {
     @PrimaryKey(autoGenerate = true)
     private long orderProductID;
     private long productID;
+    private String username;
+    private long tableID;
     private int state;
     private long orderedTime;
 
-    public OrderProduct(long productID,int state, long orderedTime) {
+    public OrderProduct(long productID, String username, long tableID, int state, long orderedTime) {
         this.productID = productID;
+        this.username = username;
+        this.tableID = tableID;
         this.state = state;
         this.orderedTime = orderedTime;
     }
+
 
     public void setOrderProductID(long orderProductID) {
         this.orderProductID = orderProductID;
@@ -55,5 +60,21 @@ public class OrderProduct {
 
     public void setOrderedTime(long orderedTime) {
         this.orderedTime = orderedTime;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public long getTableID() {
+        return tableID;
+    }
+
+    public void setTableID(long restaurantId) {
+        this.tableID = restaurantId;
     }
 }
