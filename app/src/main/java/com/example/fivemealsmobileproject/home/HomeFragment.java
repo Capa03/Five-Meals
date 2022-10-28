@@ -60,14 +60,18 @@ public class HomeFragment extends Fragment implements CategoryListAdapter.Catego
         ImageView imageViewGoBack = view.findViewById(R.id.imageViewToolBarGoBack);
         imageViewGoBack.setVisibility(View.GONE);
 
-        List<Category> categories = AppDataBase.getInstance(this.context).getCategoryDAO()
-                .getAllCategoriesFromRestaurant(TableInfo.getRestaurant().getRestaurantID());
+        List<Category> categories = getCategories();
         RecyclerView recyclerView = view.findViewById(R.id.recyclerViewHomeFragmentCategoryList);
         this.adapter = new CategoryListAdapter(this, categories);
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this.context);
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(layoutManager);
         mainActivityNavBar.showNavBar();
+    }
+
+    private List<Category> getCategories() {
+        return AppDataBase.getInstance(this.context).getCategoryDAO()
+                .getAllCategoriesFromRestaurant(TableInfo.getRestaurant().getRestaurantID());
     }
 
     @Override

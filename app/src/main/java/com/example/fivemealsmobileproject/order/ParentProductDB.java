@@ -20,7 +20,7 @@ public class ParentProductDB {
         if(products.isEmpty()){
             List<OrderProduct> orderProducts = AppDataBase.getInstance(context).getOrderProductDAO().getAllProductsNoDupes(
                     SessionManager.getActiveSession(context),
-                    TableInfo.getRestaurant().getRestaurantID()
+                    TableInfo.getTable().getTableID()
             );
             for(OrderProduct product: orderProducts){
                 products.add(new ParentProduct(product.getProductID()));
@@ -32,8 +32,9 @@ public class ParentProductDB {
     public static void addProduct(long productID){
         boolean exists = false;
         for (ParentProduct product:products) {
-            if(product.getProductID() == productID){
+            if (product.getProductID() == productID) {
                 exists = true;
+                break;
             }
         }
         if(!exists){
