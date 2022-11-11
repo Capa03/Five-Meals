@@ -1,16 +1,23 @@
 package com.example.fivemealsmobileproject.home;
 
 import android.content.Context;
+import android.graphics.drawable.Drawable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.DataSource;
+import com.bumptech.glide.load.engine.GlideException;
+import com.bumptech.glide.request.RequestListener;
+import com.bumptech.glide.request.target.Target;
 import com.example.fivemealsmobileproject.R;
 import com.example.fivemealsmobileproject.database.Product;
 import com.example.fivemealsmobileproject.main.TimeHelper;
@@ -70,6 +77,7 @@ public class ProductListAdapter extends RecyclerView.Adapter<ProductListAdapter.
         private TextView textViewTime;
         private TextView textViewPrice;
         private View itemView;
+        private final ProgressBar progressBar;
 
 
         public ProductListViewHolder(@NonNull View itemView, Context context) {
@@ -80,6 +88,7 @@ public class ProductListAdapter extends RecyclerView.Adapter<ProductListAdapter.
             this.textViewName = itemView.findViewById(R.id.textViewSimpleProductName);
             this.textViewTime = itemView.findViewById(R.id.textViewSimpleAverageTime);
             this.textViewPrice = itemView.findViewById(R.id.textViewSimplePrice);
+            this.progressBar = (ProgressBar) itemView.findViewById(R.id.progress);
 
             this.productImage.setClipToOutline(true);
         }
@@ -97,7 +106,20 @@ public class ProductListAdapter extends RecyclerView.Adapter<ProductListAdapter.
         public void setImage(String imageID){
             // https://drive.google.com/uc?id=
             String link = "https://docs.google.com/uc?id=" + imageID;
-            Glide.with(this.context).load(link).into(this.productImage);
+            Glide.with(this.context).load(link).listener(new RequestListener<Drawable>() {
+                @Override
+                public boolean onLoadFailed(@Nullable GlideException e, Object model, Target<Drawable> target, boolean isFirstResource) {
+                    System.out.println(e.getMessage());
+                    progressBar.setVisibility(View.GONE);
+                    return false;
+                }
+
+                @Override
+                public boolean onResourceReady(Drawable resource, Object model, Target<Drawable> target, DataSource dataSource, boolean isFirstResource) {
+                    progressBar.setVisibility(View.GONE);
+                    return false;
+                }
+            }).into(this.productImage);
         }
     }
 

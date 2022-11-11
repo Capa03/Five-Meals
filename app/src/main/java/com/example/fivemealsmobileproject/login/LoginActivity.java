@@ -25,6 +25,7 @@ public class LoginActivity extends AppCompatActivity {
     private EditText editTextLoginPassword;
     private TextView showHidePassword;
 
+    @SuppressLint("ClickableViewAccessibility")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

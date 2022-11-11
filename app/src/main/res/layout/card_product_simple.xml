@@ -6,6 +6,16 @@
     android:layout_height="wrap_content"
     android:background="@drawable/simple_card_product_shape">
 
+    <ProgressBar
+        android:id="@+id/progress"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:visibility="visible"
+        app:layout_constraintBottom_toBottomOf="@+id/imageViewSimpleProduct"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <ImageView
         android:id="@+id/imageViewSimpleProduct"
         android:layout_width="320dp"
