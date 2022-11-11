@@ -17,25 +17,25 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.FiveMealsMobileProject">
         <activity
-            android:name=".payment.PaymentActivity"
+            android:name=".ui.payment.PaymentActivity"
             android:exported="false" />
         <activity
-            android:name=".qrcode.QrCodeActivity"
+            android:name=".ui.qrcode.QrCodeActivity"
             android:exported="false" />
         <activity
-            android:name=".login.CreateNewAccountActivity"
+            android:name=".ui.login.CreateNewAccountActivity"
             android:exported="false" />
         <activity
-            android:name=".qrcode.CodeActivity"
+            android:name=".ui.qrcode.CodeActivity"
             android:exported="false" />
         <activity
-            android:name=".login.LoginActivity"
+            android:name=".ui.login.LoginActivity"
             android:exported="false" />
         <activity
-            android:name=".login.PreLoginActivity"
+            android:name=".ui.login.PreLoginActivity"
             android:exported="false" />
         <activity
-            android:name=".main.MainActivity"
+            android:name=".ui.main.MainActivity"
             android:exported="false" />
         <activity
             android:name=".SplashScreenLogo"

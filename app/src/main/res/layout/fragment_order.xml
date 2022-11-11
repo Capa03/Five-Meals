@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/top_line_shape"
-    tools:context=".order.OrderFragment">
+    tools:context=".ui.order.OrderFragment">
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerViewOrderFragment"

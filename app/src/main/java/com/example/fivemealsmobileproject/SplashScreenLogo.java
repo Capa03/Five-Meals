@@ -6,17 +6,11 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Context;
 import android.os.Bundle;
 import android.os.Handler;
-import android.util.Log;
 
-import com.example.fivemealsmobileproject.database.AppDataBase;
-import com.example.fivemealsmobileproject.database.Category;
-import com.example.fivemealsmobileproject.database.SingleUseDataBase;
-import com.example.fivemealsmobileproject.database.Table;
-import com.example.fivemealsmobileproject.login.PreLoginActivity;
-import com.example.fivemealsmobileproject.login.SessionManager;
-import com.example.fivemealsmobileproject.qrcode.CodeActivity;
-
-import java.util.List;
+import com.example.fivemealsmobileproject.datasource.room.SingleUseDataBase;
+import com.example.fivemealsmobileproject.ui.login.PreLoginActivity;
+import com.example.fivemealsmobileproject.ui.login.SessionManager;
+import com.example.fivemealsmobileproject.ui.qrcode.CodeActivity;
 
 
 public class SplashScreenLogo extends AppCompatActivity {
