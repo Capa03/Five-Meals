@@ -79,6 +79,7 @@ public class HomeFragment extends Fragment implements CategoryListAdapter.Catego
         if (context instanceof MainActivityNavBar) this.mainActivityNavBar = (MainActivityNavBar) context;
     }
 
+    // TODO usar product em vez de ID
     @Override
     public void onProductClick(long productID) {
         NavDirections action = (NavDirections) HomeFragmentDirections.actionHomeFragmentToHomeProductDetailsFragment(productID);

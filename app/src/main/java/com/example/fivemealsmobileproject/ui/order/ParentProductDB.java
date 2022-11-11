@@ -15,9 +15,10 @@ public class ParentProductDB {
     private static List<ParentProduct> products = new ArrayList<>();
 
     private ParentProductDB(){}
-
+    // TODO Passar para o Domain
     public static List<ParentProduct> getAll(Context context){
         if(products.isEmpty()){
+            // TODO rever conceito de getAllProductsNoDupes()
             List<OrderProduct> orderProducts = AppDataBase.getInstance(context).getOrderProductDAO().getAllProductsNoDupes(
                     SessionManager.getActiveSession(context),
                     TableInfo.getTable().getTableID()

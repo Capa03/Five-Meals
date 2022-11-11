@@ -14,6 +14,7 @@ public interface UserDAO {
     @Query("SELECT * FROM User")
     List<User> getAllUser();
 
+    // TODO implemetar através de cache
     @Query("SELECT * FROM User WHERE username = :username")
     User getUserByUsername(String username);
 

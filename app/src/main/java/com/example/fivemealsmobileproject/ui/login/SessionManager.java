@@ -5,6 +5,7 @@ import android.content.SharedPreferences;
 
 public class SessionManager {
 
+    // TODO passar para o dataSource implementar mesa/restaurante
     private SessionManager(){
 
     }

@@ -55,6 +55,7 @@ public class ProductListAdapter extends RecyclerView.Adapter<ProductListAdapter.
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                // TODO passar um product completo em vez do ID
                 productListEventListener.onProductClick(product.getId());
             }
         });

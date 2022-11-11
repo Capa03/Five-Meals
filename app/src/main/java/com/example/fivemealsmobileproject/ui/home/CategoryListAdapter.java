@@ -74,7 +74,7 @@ public class CategoryListAdapter extends RecyclerView.Adapter<CategoryListAdapte
                 this.context = context;
                 this.textViewTitle = itemView.findViewById(R.id.textViewCardCategoryTitle);
                 //TODO Resolver o bug de não guardar o estado da recycler view
-                // (possivelmente focar no ultimo item clicado)
+                //                // (possivelmente focar no ultimo item clicado)
                 this.adapter = new ProductListAdapter(productListEventListener);
                 RecyclerView recyclerView = itemView.findViewById(R.id.recyclerViewCardCategoryProductList);
                 RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(itemView.getContext(), LinearLayoutManager.HORIZONTAL, false);
