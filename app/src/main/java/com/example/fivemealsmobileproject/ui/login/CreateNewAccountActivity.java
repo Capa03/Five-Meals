@@ -1,7 +1,5 @@
 package com.example.fivemealsmobileproject.ui.login;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
@@ -12,6 +10,8 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.fivemealsmobileproject.R;
 import com.example.fivemealsmobileproject.datasource.room.AppDataBase;
@@ -101,7 +101,10 @@ public class CreateNewAccountActivity extends AppCompatActivity {
         }
 
         if(!somethingEmpty){
+            // TODO criar user
+            // boolean success = Domain.getInstance().createUser(new UserCreateDTO(username, email, String.valueOf(password)));
             if(!LoginManager.userExists(this, username)){
+
                 if(!LoginManager.emailExists(this, email)){
                     User user =  new User(username,email,password);
 

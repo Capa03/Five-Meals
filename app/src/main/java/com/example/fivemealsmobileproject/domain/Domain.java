@@ -6,7 +6,7 @@ import com.example.fivemealsmobileproject.datasource.room.Product;
 import com.example.fivemealsmobileproject.datasource.room.Restaurant;
 import com.example.fivemealsmobileproject.datasource.room.Table;
 import com.example.fivemealsmobileproject.domain.models.CategoryWithProducts;
-import com.example.fivemealsmobileproject.domain.models.Login;
+import com.example.fivemealsmobileproject.domain.models.LoginCreateDTO;
 import com.example.fivemealsmobileproject.domain.models.UserCreateDTO;
 import com.example.fivemealsmobileproject.domain.models.UserShowDTO;
 import com.example.fivemealsmobileproject.ui.order.ParentProduct;
@@ -15,13 +15,19 @@ import java.util.List;
 
 public class Domain implements IDomain{
 
+    private static Domain INSTANCE;
+    private final IData iData;
+    private Domain(IData iData){
+        this.iData = iData;
+    }
+
     @Override
     public boolean createUser(UserCreateDTO userCreateDTO) {
         return false;
     }
 
     @Override
-    public boolean checkLogin(Login login) {
+    public boolean checkLogin(LoginCreateDTO loginCreateDTO) {
         return false;
     }
 

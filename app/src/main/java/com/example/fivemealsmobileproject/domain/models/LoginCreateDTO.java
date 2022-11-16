@@ -1,11 +1,11 @@
 package com.example.fivemealsmobileproject.domain.models;
 
-public class Login {
+public class LoginCreateDTO {
 
     private String identifier;
     private String passwordHash;
 
-    public Login() {
+    public LoginCreateDTO() {
 
     }
 

@@ -4,7 +4,7 @@ import com.example.fivemealsmobileproject.datasource.room.Category;
 import com.example.fivemealsmobileproject.datasource.room.OrderProduct;
 import com.example.fivemealsmobileproject.datasource.room.Product;
 import com.example.fivemealsmobileproject.domain.models.CategoryWithProducts;
-import com.example.fivemealsmobileproject.domain.models.Login;
+import com.example.fivemealsmobileproject.domain.models.LoginCreateDTO;
 import com.example.fivemealsmobileproject.domain.models.UserCreateDTO;
 import com.example.fivemealsmobileproject.datasource.room.Restaurant;
 import com.example.fivemealsmobileproject.datasource.room.Table;
@@ -16,7 +16,7 @@ import java.util.List;
 public interface IDomain {
 
     boolean createUser(UserCreateDTO userCreateDTO);
-    boolean checkLogin(Login login);
+    boolean checkLogin(LoginCreateDTO loginCreateDTO);
     UserShowDTO getCurrentUser();
 
 
