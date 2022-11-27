@@ -1,4 +1,4 @@
-package com.example.fivemealsmobileproject.ui.order;
+package com.example.fivemealsmobileproject.ui.order.adapter;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
@@ -9,6 +9,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.lifecycle.LifecycleOwner;
+import androidx.lifecycle.Observer;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -16,18 +18,21 @@ import com.bumptech.glide.Glide;
 import com.example.fivemealsmobileproject.R;
 import com.example.fivemealsmobileproject.datasource.room.AppDataBase;
 import com.example.fivemealsmobileproject.datasource.room.OrderProduct;
-import com.example.fivemealsmobileproject.datasource.room.Product;
 import com.example.fivemealsmobileproject.ui.main.TimeHelper;
+import com.example.fivemealsmobileproject.ui.order.ParentOrderProduct;
 
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class CurrentOrderAdapter extends RecyclerView.Adapter<CurrentOrderAdapter.CurrentOrderViewHolder> implements SingleProductAdapter.SingleProductEventListener {
 
     private final ParentProductEventListener parentProductEventListener;
-    private List<ParentProduct> products;
+    private List<ParentOrderProduct> products = new ArrayList<>();
+    private LifecycleOwner observerOwner;
 
-    public CurrentOrderAdapter(ParentProductEventListener parentProductEventListener){
+    public CurrentOrderAdapter(LifecycleOwner observerOwner, ParentProductEventListener parentProductEventListener){
+        this.observerOwner = observerOwner;
         this.parentProductEventListener = parentProductEventListener;
     }
 
@@ -39,57 +44,62 @@ public class CurrentOrderAdapter extends RecyclerView.Adapter<CurrentOrderAdapte
     }
 
 
+
     @SuppressLint("WrongConstant")
     @Override
     public void onBindViewHolder(@NonNull CurrentOrderViewHolder holder, int position) {
-            ParentProduct parentProduct = products.get(position);
-            holder.adapter.updateData(AppDataBase.getInstance(holder.context).getOrderProductDAO().getAllFromID(parentProduct.getProductID()));
 
-            Product product = AppDataBase.getInstance(holder.context).getProductDAO().getById(parentProduct.getProductID());
-            holder.setName(product.getName());
-            int minTime = (int) product.getMinAverageTime();
-            int maxTime = (int) product.getMaxAverageTime();
+            ParentOrderProduct parentOrderProduct = products.get(position);
+
+            parentOrderProduct.getOrderProductsLiveData().observe(this.observerOwner, orderProducts -> {
+                holder.adapter.updateData(orderProducts);
+            });
+
+            parentOrderProduct.getQuantity().observe(this.observerOwner, quantity -> {
+                if(quantity != null) holder.setQuantity(quantity);
+            });
+
+            holder.setName(parentOrderProduct.getProductName());
+            int minTime = (int) parentOrderProduct.getProductMinTime();
+            int maxTime = (int) parentOrderProduct.getProductMaxTime();
+
             holder.setTime(TimeHelper.getTimeToString(minTime, maxTime));
-            holder.setPrice(product.getPrice() * holder.adapter.getItemCount());
-            holder.setImage(product.getImgLink());
-            holder.setQuantity(holder.adapter.getItemCount());
-            holder.recyclerView.setVisibility(parentProduct.getState());
+            holder.setPrice(parentOrderProduct.getProductPrice() * holder.adapter.getItemCount());
+            holder.setImage(parentOrderProduct.getImgLink());
+            holder.recyclerView.setVisibility(parentOrderProduct.getState());
 
-            holder.itemView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    int currentState = holder.recyclerView.getVisibility();
-                    switch (currentState) {
-                        case View.GONE:
-                            parentProduct.setState(View.VISIBLE);
-                            holder.recyclerView.setVisibility(View.VISIBLE);
-                            break;
-                        case View.VISIBLE:
-                            parentProduct.setState(View.GONE);
-                            holder.recyclerView.setVisibility(View.GONE);
-                            break;
-                    }
+            holder.itemView.setOnClickListener(view -> {
+                int currentState = holder.recyclerView.getVisibility();
+                switch (currentState) {
+                    case View.GONE:
+                        parentOrderProduct.setState(View.VISIBLE);
+                        holder.recyclerView.setVisibility(View.VISIBLE);
+                        break;
+                    case View.VISIBLE:
+                        parentOrderProduct.setState(View.GONE);
+                        holder.recyclerView.setVisibility(View.GONE);
+                        break;
                 }
             });
     }
 
-    @Override
+        @Override
     public int getItemCount() {
         return products.size();
     }
 
-    public void updateData(List<ParentProduct> products){
+    public void updateData(List<ParentOrderProduct> products){
         this.products = products;
         notifyDataSetChanged();
     }
 
     @Override
-    public void onRemoveProductClick(OrderProduct orderProduct) {
-        parentProductEventListener.onRemoveProductClick(orderProduct);
+    public void onRemoveProductClick(OrderProduct orderProduct, int position) {
+        parentProductEventListener.onRemoveProductClick(orderProduct, position);
     }
 
     public interface ParentProductEventListener{
-        void onRemoveProductClick(OrderProduct orderProduct);
+        void onRemoveProductClick(OrderProduct orderProduct, int position);
     }
 
     public class CurrentOrderViewHolder extends RecyclerView.ViewHolder {
@@ -102,7 +112,7 @@ public class CurrentOrderAdapter extends RecyclerView.Adapter<CurrentOrderAdapte
         private TextView textViewQuantity;
         private View itemView;
         private SingleProductAdapter adapter;
-        private RecyclerView recyclerView;
+        public RecyclerView recyclerView;
 
 
         public CurrentOrderViewHolder(@NonNull View itemView, Context context, SingleProductAdapter.SingleProductEventListener eventListener) {

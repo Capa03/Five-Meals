@@ -13,66 +13,76 @@ public class OrderProduct {
 
     @PrimaryKey(autoGenerate = true)
     private long orderProductID;
-    private long productID;
     private String username;
     private long tableID;
     private int state;
     private long orderedTime;
 
-    public OrderProduct(long productID, String username, long tableID, int state, long orderedTime) {
-        this.productID = productID;
+    private long productID;
+    private String productName;
+    private Float productPrice;
+    private float productMinAverageTime;
+    private float productMaxAverageTime;
+    private String imgLink;
+
+    public OrderProduct(String username, long tableID, int state, long orderedTime, long productID, String productName, float productPrice, float productMinAverageTime, float productMaxAverageTime, String imgLink) {
         this.username = username;
         this.tableID = tableID;
         this.state = state;
         this.orderedTime = orderedTime;
+        this.productID = productID;
+        this.productName = productName;
+        this.productPrice = productPrice;
+        this.productMinAverageTime = productMinAverageTime;
+        this.productMaxAverageTime = productMaxAverageTime;
+        this.imgLink = imgLink;
     }
-
 
     public void setOrderProductID(long orderProductID) {
         this.orderProductID = orderProductID;
+    }
+
+    public String getImgLink() {
+        return imgLink;
     }
 
     public long getOrderProductID() {
         return orderProductID;
     }
 
-    public int getState() {
-        return state;
-    }
-
-    public void setState(int state) {
-        this.state = state;
-    }
-
-    public long getProductID() {
-        return productID;
-    }
-
-    public void setProductID(long productID) {
-        this.productID = productID;
-    }
-
-    public long getOrderedTime() {
-        return orderedTime;
-    }
-
-    public void setOrderedTime(long orderedTime) {
-        this.orderedTime = orderedTime;
-    }
-
     public String getUsername() {
         return username;
-    }
-
-    public void setUsername(String username) {
-        this.username = username;
     }
 
     public long getTableID() {
         return tableID;
     }
 
-    public void setTableID(long restaurantId) {
-        this.tableID = restaurantId;
+    public int getState() {
+        return state;
+    }
+
+    public long getOrderedTime() {
+        return orderedTime;
+    }
+
+    public long getProductID() {
+        return productID;
+    }
+
+    public String getProductName() {
+        return productName;
+    }
+
+    public Float getProductPrice() {
+        return productPrice;
+    }
+
+    public float getProductMinAverageTime() {
+        return productMinAverageTime;
+    }
+
+    public float getProductMaxAverageTime() {
+        return productMaxAverageTime;
     }
 }

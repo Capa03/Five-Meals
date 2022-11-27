@@ -9,7 +9,7 @@ import com.example.fivemealsmobileproject.domain.models.UserCreateDTO;
 import com.example.fivemealsmobileproject.datasource.room.Restaurant;
 import com.example.fivemealsmobileproject.datasource.room.Table;
 import com.example.fivemealsmobileproject.domain.models.UserShowDTO;
-import com.example.fivemealsmobileproject.ui.order.ParentProduct;
+import com.example.fivemealsmobileproject.ui.order.ParentOrderProduct;
 
 import java.util.List;
 
@@ -36,6 +36,6 @@ public interface IDomain {
     void removeOrderProduct(long orderProductId);
     void orderProductNow(long orderProductId);
     List<OrderProduct> getAllOrderProductsFromID(long productID);
-    List<ParentProduct> getAllParentProducts();
+    List<ParentOrderProduct> getAllParentProducts();
 
 }

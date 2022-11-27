@@ -1,4 +1,4 @@
-package com.example.fivemealsmobileproject.ui.order;
+package com.example.fivemealsmobileproject.ui.order.adapter;
 
 import android.app.AlertDialog;
 import android.content.Context;
@@ -15,21 +15,20 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.fivemealsmobileproject.R;
-import com.example.fivemealsmobileproject.datasource.room.AppDataBase;
 import com.example.fivemealsmobileproject.datasource.room.OrderProduct;
-import com.example.fivemealsmobileproject.datasource.room.Product;
 import com.example.fivemealsmobileproject.ui.main.TimeHelper;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class SingleProductAdapter extends RecyclerView.Adapter<SingleProductAdapter.BaseProductViewHolder> {
 
-    private List<OrderProduct> products;
+    private List<OrderProduct> products = new ArrayList<>();
     private Context context;
     private final SingleProductEventListener singleProductEventListener;
 
     public interface SingleProductEventListener {
-        void onRemoveProductClick(OrderProduct orderProduct);
+        void onRemoveProductClick(OrderProduct orderProduct, int position);
     }
 
     public SingleProductAdapter(SingleProductEventListener singleProductEventListener) {
@@ -64,6 +63,16 @@ public class SingleProductAdapter extends RecyclerView.Adapter<SingleProductAdap
     @Override
     public void onBindViewHolder(@NonNull BaseProductViewHolder holder, int position) {
         OrderProduct orderProduct = products.get(position);
+
+        holder.setName(orderProduct.getProductName());
+        holder.setPrice(orderProduct.getProductPrice());
+        PendingProductViewHolder pendingProductViewHolder  = (PendingProductViewHolder) holder;
+        pendingProductViewHolder.removeButton.setOnClickListener(view -> {
+            singleProductEventListener.onRemoveProductClick(orderProduct, position);
+        });
+
+        // TODO rever os states
+        /*
         Product product = AppDataBase.getInstance(this.context).getProductDAO().getById(orderProduct.getProductID());
 
 
@@ -155,7 +164,7 @@ public class SingleProductAdapter extends RecyclerView.Adapter<SingleProductAdap
             deliveredProductViewHolder.setName(product.getName());
             deliveredProductViewHolder.setPrice(product.getPrice());
         }
-
+        */
     }
 
     @Override

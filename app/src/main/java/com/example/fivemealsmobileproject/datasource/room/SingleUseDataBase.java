@@ -38,7 +38,7 @@ public class SingleUseDataBase {
         String description = "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.";
         if(categoryDAO.getAllCategories().isEmpty()){
             categoryDAO.insertCategory(new Category(1, "Carne"));
-            productDAO.insertProduct(new Product("Bifana", 3.5f, 0.5, 1, "Carne", 1,
+            productDAO.insertProduct(new Product("Bifana", 3.5f, 0.5f, 1, "Carne", 1,
                     "1_0zXE1wScxdn0DbOXYKE-CgpM7y1BtFI",description));
             productDAO.insertProduct( new Product("Burger", 4.5f, 10, 20, "Carne",1,
                     "1c-MFHH_qZew23MctTSD5awnbXInElt9S",description));
@@ -75,7 +75,7 @@ public class SingleUseDataBase {
 
 
             categoryDAO.insertCategory(new Category(2, "Originals"));
-            productDAO.insertProduct(new Product("Menu Ibérico", 3.5f, 0.5, 1, "Originals",2,
+            productDAO.insertProduct(new Product("Menu Ibérico", 3.5f, 0.5f, 1, "Originals",2,
                     "1yDivLVMYY9FgvhG6fqwBSwvSl_2MzBo8",description));
             productDAO.insertProduct( new Product("Quejo & Caramelo", 4.5f, 10, 20, "Originals",2,
                     "1oSZzEgefXK7nk3BpSmMm2ksjCVbPycs6",description));

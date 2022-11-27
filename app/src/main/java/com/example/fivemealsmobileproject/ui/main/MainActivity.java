@@ -16,15 +16,15 @@ import com.example.fivemealsmobileproject.datasource.room.AppDataBase;
 import com.example.fivemealsmobileproject.datasource.room.Table;
 import com.example.fivemealsmobileproject.databinding.ActivityMainBinding;
 import com.example.fivemealsmobileproject.ui.favorites.FavoritesFragment;
-import com.example.fivemealsmobileproject.ui.home.HomeFragment;
-import com.example.fivemealsmobileproject.ui.home.HomeProductDetailsFragment;
+import com.example.fivemealsmobileproject.ui.home.fragment.HomeFragment;
+import com.example.fivemealsmobileproject.ui.home.fragment.HomeProductDetailsFragment;
 import com.example.fivemealsmobileproject.ui.login.PreLoginActivity;
 import com.example.fivemealsmobileproject.ui.login.SessionManager;
+import com.example.fivemealsmobileproject.ui.order.ParentProductDB;
 
 public class MainActivity extends AppCompatActivity implements HomeFragment.MainActivityNavBar, HomeProductDetailsFragment.MainActivityNavBar, FavoritesFragment.MainActivityNavBar {
 
     private static String KEY_CODE = "getCode";
-    public static int FIRST_ITEM = 1234;
     ActivityMainBinding binding;
 
     public static void startActivity(Context context, long code) {
@@ -51,6 +51,8 @@ public class MainActivity extends AppCompatActivity implements HomeFragment.Main
         Bundle bundle = getIntent().getExtras();
         if(bundle != null)
         {
+            // TODO meter num repositório
+            ParentProductDB.clearInstance();
             Table table = AppDataBase.getInstance(this).getTableDAO().getTableFromID(bundle.getLong(KEY_CODE));
             TableInfo.setTable(table);
             TableInfo.setRestaurant(AppDataBase.getInstance(this)

@@ -1,5 +1,6 @@
 package com.example.fivemealsmobileproject.datasource.room;
 
+import androidx.lifecycle.LiveData;
 import androidx.room.Dao;
 import androidx.room.Delete;
 import androidx.room.Insert;
@@ -15,7 +16,7 @@ public interface CategoryDAO {
     List<Category> getAllCategories();
 
     @Query("SELECT * FROM Category WHERE RestaurantID = :restaurantID")
-    List<Category> getAllCategoriesFromRestaurant(long restaurantID);
+    LiveData<List<Category>> getAllCategoriesFromRestaurant(long restaurantID);
 
     @Query("SELECT categoryID FROM Category WHERE RestaurantID = :restaurantID AND categoryName = :categoryName")
     long getCategoryIDFromRestaurantIdAndCategoryName(long restaurantID, String categoryName);

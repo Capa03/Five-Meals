@@ -9,7 +9,7 @@ import com.example.fivemealsmobileproject.domain.models.CategoryWithProducts;
 import com.example.fivemealsmobileproject.domain.models.LoginCreateDTO;
 import com.example.fivemealsmobileproject.domain.models.UserCreateDTO;
 import com.example.fivemealsmobileproject.domain.models.UserShowDTO;
-import com.example.fivemealsmobileproject.ui.order.ParentProduct;
+import com.example.fivemealsmobileproject.ui.order.ParentOrderProduct;
 
 import java.util.List;
 
@@ -97,7 +97,7 @@ public class Domain implements IDomain{
     }
 
     @Override
-    public List<ParentProduct> getAllParentProducts() {
+    public List<ParentOrderProduct> getAllParentProducts() {
         return null;
     }
 }

@@ -12,12 +12,12 @@ public class Product {
     private String description;
     private String category;
     private Float price;
-    private double minAverageTime;
-    private double maxAverageTime;
+    private float minAverageTime;
+    private float maxAverageTime;
     private String imgLink;
     private long restaurantId;
 
-    public Product(String name, Float price, double minAverageTime, double maxAverageTime,  String category, long restaurantId, String imgLink, String description) {
+    public Product(String name, Float price, float minAverageTime, float maxAverageTime,  String category, long restaurantId, String imgLink, String description) {
         this.name = name;
         this.price = price;
         this.minAverageTime = minAverageTime;
@@ -40,71 +40,31 @@ public class Product {
         return name;
     }
 
-    public void setName(String name) {
-        this.name = name;
-    }
-
     public String getDescription() {
         return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
     }
 
     public String getCategory() {
         return category;
     }
 
-    public void setCategory(String category) {
-        this.category = category;
-    }
-
     public Float getPrice() {
         return price;
     }
 
-    public void setPrice(Float price) {
-        this.price = price;
-    }
-
-    public double getMinAverageTime() {
+    public float getMinAverageTime() {
         return minAverageTime;
     }
 
-    public void setMinAverageTime(int minAverageTime) {
-        this.minAverageTime = minAverageTime;
-    }
-
-    public double getMaxAverageTime() {
+    public float getMaxAverageTime() {
         return maxAverageTime;
-    }
-
-    public void setMaxAverageTime(int maxAverageTime) {
-        this.maxAverageTime = maxAverageTime;
     }
 
     public String getImgLink() {
         return imgLink;
     }
 
-    public void setImgLink(String imgLink) {
-        this.imgLink = imgLink;
-    }
-
-    public void setMinAverageTime(double minAverageTime) {
-        this.minAverageTime = minAverageTime;
-    }
-
-    public void setMaxAverageTime(double maxAverageTime) {
-        this.maxAverageTime = maxAverageTime;
-    }
-
     public long getRestaurantId() {
         return restaurantId;
-    }
-
-    public void setRestaurantId(long restaurantId) {
-        this.restaurantId = restaurantId;
     }
 }

@@ -1,4 +1,4 @@
-package com.example.fivemealsmobileproject.ui.home;
+package com.example.fivemealsmobileproject.ui.home.fragment;
 
 import android.content.Context;
 import android.os.Bundle;
@@ -7,6 +7,8 @@ import androidx.activity.OnBackPressedCallback;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.Navigation;
 
 import android.view.LayoutInflater;
@@ -24,19 +26,27 @@ import com.example.fivemealsmobileproject.datasource.room.FavoriteProduct;
 import com.example.fivemealsmobileproject.datasource.room.OrderProduct;
 import com.example.fivemealsmobileproject.datasource.room.OrderProductDAO;
 import com.example.fivemealsmobileproject.datasource.room.Product;
+import com.example.fivemealsmobileproject.ui.home.viewmodel.HomeProductDetailsFragmentViewModel;
 import com.example.fivemealsmobileproject.ui.login.SessionManager;
 import com.example.fivemealsmobileproject.ui.main.TableInfo;
 import com.example.fivemealsmobileproject.ui.order.ParentProductDB;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
+
+import java.util.Locale;
 
 public class HomeProductDetailsFragment extends Fragment {
 
     private long productID;
     private MainActivityNavBar mainActivityNavBar;
+    private HomeProductDetailsFragmentViewModel viewModel;
 
     private ImageView imageViewProduct;
     private TextView textViewTitle;
     private TextView textViewDescription;
     private TextView textViewPrice;
+
+
+
     private TextView textViewQuantity;
     private Button buttonAddQuantity;
     private Button buttonRemoveQuantity;
@@ -56,11 +66,9 @@ public class HomeProductDetailsFragment extends Fragment {
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            this.productID = HomeProductDetailsFragmentArgs.fromBundle(getArguments()).getProductID();
-            //this.mainActivityNavBar = HomeProductDetailsFragmentArgs.fromBundle(getArguments()).get
+        this.productID = HomeProductDetailsFragmentArgs.fromBundle(getArguments()).getProductId();
+        this.viewModel = new ViewModelProvider(requireActivity()).get(HomeProductDetailsFragmentViewModel.class);
 
-        }
         OnBackPressedCallback callback = new OnBackPressedCallback(true /* enabled by default */) {
             @Override
             public void handleOnBackPressed() {
@@ -82,52 +90,49 @@ public class HomeProductDetailsFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         this.view = view;
-        Product product = AppDataBase.getInstance(view.getContext()).getProductDAO().getById(this.productID);
         cacheViews(view);
 
-        this.imageViewGoBack.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Navigation.findNavController(view).popBackStack();
-            }
-        });
+        this.imageViewGoBack.setOnClickListener(imageViewGoBackView -> Navigation.findNavController(imageViewGoBackView).popBackStack());
 
-        String link = "https://docs.google.com/uc?id=" + product.getImgLink();
-        imageViewProduct.setClipToOutline(true);
-        Glide.with(view.getContext()).load(link).into(imageViewProduct);
+        this.viewModel.getProduct(this.productID).observe(requireActivity(), product -> {
+            textViewTitle.setText(product.getName());
+            textViewDescription.setText(product.getDescription());
+            textViewPrice.setText(String.format("%s $", product.getPrice()));
+            imageViewProduct.setClipToOutline(true);
 
-        textViewTitle.setText(product.getName());
-        textViewDescription.setText(product.getDescription());
-        textViewPrice.setText(product.getPrice() + " $");
+            // TODO remover o prefixo do link
+            Glide.with(view.getContext()).load("https://docs.google.com/uc?id=" + product.getImgLink()).into(imageViewProduct);
 
-        int quantityToAdd = Integer.parseInt(textViewQuantity.getText().toString());
-        buttonAddToOrder.setText(String.format("Add %d to cart %s $", quantityToAdd, quantityToAdd * product.getPrice()));
+            viewModel.resetQuantity();
+            viewModel.getQuantity().observe(requireActivity(), quantity -> {
+                buttonRemoveQuantity.setEnabled(quantity > 1);
 
-        buttonRemoveQuantity.setEnabled(false);
-        //Add Quantity
-        buttonAddQuantity.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                int quantity = Integer.parseInt(textViewQuantity.getText().toString()) + 1;
+                // Add to order button text
+                buttonAddToOrder.setText(String.format(Locale.getDefault(),
+                        "Add %d to cart : %s $",
+                        quantity, quantity * product.getPrice()));
                 textViewQuantity.setText(String.valueOf(quantity));
-                buttonRemoveQuantity.setEnabled(true);
-                buttonAddToOrder.setText("Add " + quantity + " to cart " + quantity * product.getPrice() + " $");
-            }
+
+                // Add Quantity
+                buttonAddQuantity.setOnClickListener(buttonAddQuantityView -> viewModel.incrementQuantity());
+
+                // Remove Quantity
+                buttonRemoveQuantity.setOnClickListener(buttonRemoveQuantityView -> viewModel.decrementQuantity());
+
+            });
+
         });
 
-        //Remove Quantity
-
-        buttonRemoveQuantity.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                int quantity = Integer.parseInt(textViewQuantity.getText().toString()) - 1;
-                if (quantity == 1) buttonRemoveQuantity.setEnabled(false);
-                textViewQuantity.setText(String.valueOf(quantity));
-                buttonAddToOrder.setText(String.format("Add %s to cart %s $", quantity, quantity * product.getPrice()));
-            }
+        buttonAddToOrder.setOnClickListener(buttonAddToOrderView -> {
+            // forLater.isChecked();
+            viewModel.addProducts(false);
+            Navigation.findNavController(view).popBackStack();
         });
+        mainActivityNavBar.hideNavBar();
 
 
+
+        /*
         FavoriteProduct exist = AppDataBase.getInstance(this.context).getFavoriteProductDAO().getFromId(
                 productID,
                 SessionManager.getActiveSession(context),
@@ -162,30 +167,7 @@ public class HomeProductDetailsFragment extends Fragment {
                 }
             }
         });
-
-        buttonAddToOrder.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                int quantityToAdd = Integer.parseInt(textViewQuantity.getText().toString());
-                OrderProductDAO orderProductDAO = AppDataBase.
-                        getInstance(getContext()).getOrderProductDAO();
-
-                int state = forLater.isChecked() ? OrderProduct.WAITING_APPROVAL_STATE : OrderProduct.PENDING_STATE;
-
-                for (int i = 1; i <= quantityToAdd; i++) {
-                    orderProductDAO.insertOrderProduct(new OrderProduct(
-                            productID,
-                            SessionManager.getActiveSession(context),
-                            TableInfo.getTable().getTableID(),
-                            state,
-                            System.currentTimeMillis()));
-                    ParentProductDB.addProduct(productID);
-                }
-                Navigation.findNavController(view).popBackStack();
-            }
-        });
-        mainActivityNavBar.hideNavBar();
-
+    */
     }
 
     @Override
@@ -197,7 +179,6 @@ public class HomeProductDetailsFragment extends Fragment {
 
     public interface MainActivityNavBar {
         void hideNavBar();
-
         void showNavBar();
     }
 

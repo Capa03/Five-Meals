@@ -1,4 +1,4 @@
-package com.example.fivemealsmobileproject.ui.home;
+package com.example.fivemealsmobileproject.ui.home.adapter;
 
 import android.content.Context;
 import android.graphics.drawable.Drawable;
@@ -22,12 +22,13 @@ import com.example.fivemealsmobileproject.R;
 import com.example.fivemealsmobileproject.datasource.room.Product;
 import com.example.fivemealsmobileproject.ui.main.TimeHelper;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class ProductListAdapter extends RecyclerView.Adapter<ProductListAdapter.ProductListViewHolder> {
 
-    private List<Product> products;
-    private ProductListEventListener productListEventListener;
+    private List<Product> products = new ArrayList<>();
+    private final ProductListEventListener productListEventListener;
 
     public ProductListAdapter(ProductListEventListener productListEventListener){
         this.productListEventListener = productListEventListener;
@@ -55,7 +56,6 @@ public class ProductListAdapter extends RecyclerView.Adapter<ProductListAdapter.
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                // TODO passar um product completo em vez do ID
                 productListEventListener.onProductClick(product.getId());
             }
         });
@@ -125,6 +125,6 @@ public class ProductListAdapter extends RecyclerView.Adapter<ProductListAdapter.
     }
 
     public interface ProductListEventListener{
-        void onProductClick(long productID);
+        void onProductClick(long productId);
     }
 }

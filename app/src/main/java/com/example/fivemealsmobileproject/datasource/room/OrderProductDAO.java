@@ -1,5 +1,6 @@
 package com.example.fivemealsmobileproject.datasource.room;
 
+import androidx.lifecycle.LiveData;
 import androidx.room.Dao;
 import androidx.room.Delete;
 import androidx.room.Insert;
@@ -16,11 +17,14 @@ public interface OrderProductDAO {
     @Query("SELECT * FROM OrderProduct")
     List<OrderProduct> getAllProducts();
 
-    @Query("SELECT * FROM OrderProduct WHERE username = :username AND tableID = :tableID GROUP BY productID")
-    List<OrderProduct> getAllProductsNoDupes(String username, long tableID);
+    @Query("SELECT * FROM OrderProduct WHERE tableID = :tableID GROUP BY productID")
+    LiveData<List<OrderProduct>> getAllProductsNoDupes(long tableID);
+
+    @Query("SELECT COUNT(productID) FROM OrderProduct WHERE productID = :productID GROUP BY productID")
+    LiveData<Integer> getQuantityFromID(long productID);
 
     @Query("SELECT * FROM OrderProduct WHERE productID = :productID")
-    List<OrderProduct> getAllFromID(long productID);
+    LiveData<List<OrderProduct>> getAllFromID(long productID);
 
     @Query("DELETE FROM OrderProduct")
     void clearCurrentOrder();

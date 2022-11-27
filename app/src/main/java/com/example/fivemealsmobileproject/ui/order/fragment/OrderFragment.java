@@ -1,17 +1,18 @@
-package com.example.fivemealsmobileproject.ui.order;
+package com.example.fivemealsmobileproject.ui.order.fragment;
 
-import android.content.Context;
 import android.os.Bundle;
 
 import androidx.activity.OnBackPressedCallback;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.LifecycleOwner;
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.os.Handler;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -21,15 +22,21 @@ import android.widget.TextView;
 import com.example.fivemealsmobileproject.R;
 import com.example.fivemealsmobileproject.datasource.room.AppDataBase;
 import com.example.fivemealsmobileproject.datasource.room.OrderProduct;
+import com.example.fivemealsmobileproject.ui.order.ParentOrderProduct;
+import com.example.fivemealsmobileproject.ui.order.adapter.CurrentOrderAdapter;
+import com.example.fivemealsmobileproject.ui.order.ParentProductDB;
+import com.example.fivemealsmobileproject.ui.order.viewmodel.OrderFragmentViewModel;
 import com.example.fivemealsmobileproject.ui.payment.PaymentActivity;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
+import java.util.List;
 
-public class OrderFragment extends Fragment implements CurrentOrderAdapter.ParentProductEventListener {
 
-    private Context context;
+public class OrderFragment extends Fragment {
+
     private CurrentOrderAdapter orderedProductsAdapter;
     private View view;
+    private OrderFragmentViewModel viewModel;
 
     public OrderFragment() {
         // Required empty public constructor
@@ -48,20 +55,19 @@ public class OrderFragment extends Fragment implements CurrentOrderAdapter.Paren
             }
         };
         requireActivity().getOnBackPressedDispatcher().addCallback(this, callback);
-
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        this.context = container.getContext();
-        // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_order, container, false);
     }
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        this.viewModel = new ViewModelProvider(requireActivity()).get(OrderFragmentViewModel.class);
+
         this.view = view;
         ImageView imageViewGoBack = view.findViewById(R.id.imageViewToolBarGoBack);
         imageViewGoBack.setOnClickListener(new View.OnClickListener() {
@@ -71,19 +77,25 @@ public class OrderFragment extends Fragment implements CurrentOrderAdapter.Paren
             }
         });
 
-        RecyclerView orderedRecyclerView = view.findViewById(R.id.recyclerViewOrderFragment);
-        this.orderedProductsAdapter = new CurrentOrderAdapter(this);
-        RecyclerView.LayoutManager orderedLayoutManager = new LinearLayoutManager(this.context);
-        orderedRecyclerView.setAdapter(orderedProductsAdapter);
-        orderedRecyclerView.setLayoutManager(orderedLayoutManager);
 
-        FloatingActionButton payButton = view.findViewById(R.id.FABOrderFragmentPayButton);
-
-        payButton.setOnClickListener(new View.OnClickListener() {
+        this.orderedProductsAdapter = new CurrentOrderAdapter(requireActivity(), new CurrentOrderAdapter.ParentProductEventListener() {
             @Override
-            public void onClick(View v) {
-                PaymentActivity.startActivity(context);
+            public void onRemoveProductClick(OrderProduct orderProduct, int position) {
+                AppDataBase.getInstance(view.getContext()).getOrderProductDAO().deleteOrderProduct(orderProduct);
+                checkIfIsEmpty();
             }
+        });
+        RecyclerView orderedRecyclerView = view.findViewById(R.id.recyclerViewOrderFragment);
+        orderedRecyclerView.setAdapter(orderedProductsAdapter);
+        orderedRecyclerView.setLayoutManager(new LinearLayoutManager(view.getContext()));
+
+        view.findViewById(R.id.FABOrderFragmentPayButton).setOnClickListener(
+                v -> PaymentActivity.startActivity(view.getContext())
+        );
+
+        this.viewModel.getParentOrderProducts(requireActivity()).observe(requireActivity(), parentOrderProducts -> {
+            orderedProductsAdapter.updateData(parentOrderProducts);
+            checkIfIsEmpty();
         });
 
     }
@@ -91,8 +103,8 @@ public class OrderFragment extends Fragment implements CurrentOrderAdapter.Paren
     @Override
     public void onStart() {
         super.onStart();
-        this.orderedProductsAdapter.updateData(ParentProductDB.getAll(context));
-
+        // "Refresh"
+        /*
         Handler handler = new Handler();
         Runnable runnable = new Runnable() {
             @Override
@@ -102,16 +114,7 @@ public class OrderFragment extends Fragment implements CurrentOrderAdapter.Paren
             }
         };
         handler.post(runnable);
-
-        checkIfIsEmpty();
-    }
-
-
-    @Override
-    public void onRemoveProductClick(OrderProduct orderProduct) {
-        AppDataBase.getInstance(context).getOrderProductDAO().deleteOrderProduct(orderProduct);
-        ParentProductDB.removeProduct(context, orderProduct.getProductID());
-        this.orderedProductsAdapter.updateData(ParentProductDB.getAll(context));
+        */
         checkIfIsEmpty();
     }
 

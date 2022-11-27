@@ -2,8 +2,13 @@ package com.example.fivemealsmobileproject.ui.order;
 
 import android.content.Context;
 
+import androidx.lifecycle.LifecycleOwner;
+import androidx.lifecycle.LiveData;
+import androidx.lifecycle.MutableLiveData;
+
 import com.example.fivemealsmobileproject.datasource.room.AppDataBase;
 import com.example.fivemealsmobileproject.datasource.room.OrderProduct;
+import com.example.fivemealsmobileproject.datasource.room.OrderProductDAO;
 import com.example.fivemealsmobileproject.ui.login.SessionManager;
 import com.example.fivemealsmobileproject.ui.main.TableInfo;
 
@@ -12,52 +17,58 @@ import java.util.List;
 
 public class ParentProductDB {
 
-    private static List<ParentProduct> products = new ArrayList<>();
+    private static ParentProductDB INSTANCE;
+    private MutableLiveData<List<ParentOrderProduct>> parentOrderProductLiveData = new MutableLiveData<>();
+    private OrderProductDAO orderProductDAO;
 
-    private ParentProductDB(){}
-    // TODO Passar para o Domain
-    public static List<ParentProduct> getAll(Context context){
-        if(products.isEmpty()){
-            // TODO rever conceito de getAllProductsNoDupes()
-            List<OrderProduct> orderProducts = AppDataBase.getInstance(context).getOrderProductDAO().getAllProductsNoDupes(
-                    SessionManager.getActiveSession(context),
-                    TableInfo.getTable().getTableID()
-            );
-            for(OrderProduct product: orderProducts){
-                products.add(new ParentProduct(product.getProductID()));
-            }
-        }
-        return products;
+    private ParentProductDB(Context context, LifecycleOwner observerOwner){
+        this.orderProductDAO = AppDataBase.getInstance(context).getOrderProductDAO();
+        this.orderProductDAO.getAllProductsNoDupes(TableInfo.getTable().getTableID()).
+                observe(observerOwner, orderProducts -> {
+                    List<ParentOrderProduct> results = new ArrayList<>();
+                    for (OrderProduct queryOrderProduct: orderProducts) {
+                        boolean exists = false;
+                        if(parentOrderProductLiveData.getValue() != null)
+                            for (ParentOrderProduct parentOrderProduct: parentOrderProductLiveData.getValue()) {
+                                if(queryOrderProduct.getProductID() == parentOrderProduct.getProductID()){
+                                    exists = true;
+                                    results.add(parentOrderProduct);
+                                    break;
+                                }
+
+                            }
+                        if(!exists) {
+                            ParentOrderProduct productToAdd = new ParentOrderProduct(
+                                    queryOrderProduct.getProductID(),
+                                    queryOrderProduct.getProductName(),
+                                    queryOrderProduct.getProductPrice(),
+                                    queryOrderProduct.getProductMinAverageTime(),
+                                    queryOrderProduct.getProductMaxAverageTime(),
+                                    orderProductDAO.getQuantityFromID(queryOrderProduct.getProductID()),
+                                    orderProductDAO.getAllFromID(queryOrderProduct.getProductID()),
+                                    queryOrderProduct.getImgLink()
+                            );
+                            results.add(productToAdd);
+                        }
+                    }
+                    parentOrderProductLiveData.postValue(results);
+                });
+
     }
 
-    public static void addProduct(long productID){
-        boolean exists = false;
-        for (ParentProduct product:products) {
-            if (product.getProductID() == productID) {
-                exists = true;
-                break;
-            }
-        }
-        if(!exists){
-            products.add(new ParentProduct(productID));
-        }
+    public LiveData<List<ParentOrderProduct>> getAllLiveData(){
+        return parentOrderProductLiveData;
     }
 
-
-    public static void removeProduct(Context context, long productID){
-        int quantity = AppDataBase.getInstance(context).getOrderProductDAO().getAllFromID(productID).size();
-        if(quantity == 0){
-            for (int i = 0; i< products.size(); i++) {
-                ParentProduct product = products.get(i);
-                if(product.getProductID() == productID){
-                    // AVOID "java.util.ConcurrentModificationException"
-                    products.remove(i);
-                    i--;
-                }
-            }
+    public static ParentProductDB getInstance(Context context, LifecycleOwner observerOwner){
+        if(INSTANCE == null){
+            INSTANCE = new ParentProductDB(context, observerOwner);
         }
+        return INSTANCE;
     }
-    public static void clear(){
-        products = new ArrayList<>();
+
+    public static void clearInstance(){
+        INSTANCE = null;
     }
+
 }

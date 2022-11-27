@@ -71,7 +71,6 @@ public class CodeActivity extends AppCompatActivity {
     @Override
     protected void onStart() {
         super.onStart();
-        ParentProductDB.clear();
     }
 
     public void onQrCodeScanClick(View view) {
