@@ -12,8 +12,6 @@ import java.util.List;
 @Dao
 public interface ProductDAO {
 
-    @Query("SELECT * FROM Product ")
-    List<Product> getAll();
 
     @Query("SELECT * FROM Product WHERE category = :category AND restaurantId = :restaurantId")
     LiveData<List<Product>> getAllFromCategoryAndRestaurant(String category, long restaurantId);

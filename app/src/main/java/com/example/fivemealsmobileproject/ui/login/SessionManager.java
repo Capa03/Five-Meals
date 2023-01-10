@@ -17,7 +17,6 @@ public class SessionManager {
         if(sharedPreferences == null){
             sharedPreferences = context.getSharedPreferences("sessionPreferences",Context.MODE_PRIVATE);
         }
-
         return sharedPreferences;
     }
 
