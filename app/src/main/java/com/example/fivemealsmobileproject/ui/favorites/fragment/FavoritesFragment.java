@@ -1,4 +1,4 @@
-package com.example.fivemealsmobileproject.ui.favorites;
+package com.example.fivemealsmobileproject.ui.favorites.fragment;
 
 import android.content.Context;
 import android.os.Bundle;
@@ -7,6 +7,8 @@ import androidx.activity.OnBackPressedCallback;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.NavDirections;
 import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -21,16 +23,18 @@ import android.widget.TextView;
 import com.example.fivemealsmobileproject.R;
 import com.example.fivemealsmobileproject.datasource.room.AppDataBase;
 import com.example.fivemealsmobileproject.datasource.room.FavoriteProduct;
-import com.example.fivemealsmobileproject.ui.login.SessionManager;
+import com.example.fivemealsmobileproject.ui.favorites.adapter.FavoriteAdapter;
+import com.example.fivemealsmobileproject.ui.favorites.viewmodel.FavoritesFragmentViewModel;
+import com.example.fivemealsmobileproject.ui.home.viewmodel.HomeFragmentViewModel;
 import com.example.fivemealsmobileproject.ui.main.TableInfo;
 
 import java.util.List;
 
-public class FavoritesFragment extends Fragment implements FavoriteAdapter.FavoriteEventListener {
-    private Context context;
+public class FavoritesFragment extends Fragment {
     private FavoriteAdapter adapter;
     private View view;
     private MainActivityNavBar mainActivityNavBar;
+    private FavoritesFragmentViewModel viewModel;
 
     public interface MainActivityNavBar{
         void hideNavBar();
@@ -59,7 +63,6 @@ public class FavoritesFragment extends Fragment implements FavoriteAdapter.Favor
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        this.context = container.getContext();
         return inflater.inflate(R.layout.fragment_favorites, container, false);
     }
 
@@ -67,40 +70,35 @@ public class FavoritesFragment extends Fragment implements FavoriteAdapter.Favor
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         this.view = view;
+        this.viewModel = new ViewModelProvider(requireActivity()).get(FavoritesFragmentViewModel.class);
 
         mainActivityNavBar.showNavBar();
 
-        ImageView imageViewGoBack = view.findViewById(R.id.imageViewToolBarGoBack);
-        imageViewGoBack.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Navigation.findNavController(view).popBackStack();
-            }
+        view.findViewById(R.id.imageViewToolBarGoBack).setOnClickListener(
+                goBackView -> Navigation.findNavController(goBackView).popBackStack());
+
+
+        this.adapter = new FavoriteAdapter(favoriteId -> {
+            NavDirections action = FavoritesFragmentDirections.actionFavoritesFragmentToHomeProductDetailsFragment(favoriteId);
+            Navigation.findNavController(view).navigate(action);
         });
 
         RecyclerView recyclerView = view.findViewById(R.id.RecyclerViewfavoriteFragment);
-        List<FavoriteProduct> favoriteProducts = AppDataBase.getInstance(this.context).getFavoriteProductDAO().getAllFavorite(
-                SessionManager.getActiveSession(context),
-                TableInfo.getRestaurant().getRestaurantID()
-        );
-        this.adapter = new FavoriteAdapter(this,favoriteProducts);
-        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this.context);
         recyclerView.setAdapter(this.adapter);
-        recyclerView.setLayoutManager(layoutManager);
+        recyclerView.setLayoutManager(new LinearLayoutManager(view.getContext()));
 
-        checkIfIsEmpty();
-    }
-
-    @Override
-    public void onFavoriteClick(long productID) {
-        NavDirections action = (NavDirections) FavoritesFragmentDirections.actionFavoritesFragmentToHomeProductDetailsFragment(productID);
-        Navigation.findNavController(this.view).navigate(action);
+        this.viewModel.getFavoritesLiveData().observe(requireActivity(), favoriteProducts -> {
+            adapter.updateData(favoriteProducts);
+            checkIfIsEmpty();
+        });
     }
 
     @Override
     public void onAttach(@NonNull Context context) {
         super.onAttach(context);
-        if (context instanceof FavoritesFragment.MainActivityNavBar) this.mainActivityNavBar = (FavoritesFragment.MainActivityNavBar) context;
+        if (context instanceof FavoritesFragment.MainActivityNavBar) {
+            this.mainActivityNavBar = (FavoritesFragment.MainActivityNavBar) context;
+        }
     }
 
 

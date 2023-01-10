@@ -60,6 +60,7 @@ public class HomeFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        this.viewModel = new ViewModelProvider(requireActivity()).get(HomeFragmentViewModel.class);
 
         // Hide go back button
         view.findViewById(R.id.imageViewToolBarGoBack).setVisibility(View.GONE);
@@ -82,7 +83,7 @@ public class HomeFragment extends Fragment {
         recyclerView.setLayoutManager(new LinearLayoutManager(view.getContext()));
         mainActivityNavBar.showNavBar();
 
-        this.viewModel = new ViewModelProvider(requireActivity()).get(HomeFragmentViewModel.class);
+
         // TODO rever lifecycle e fazer com que o código rode apenas uma vez
         this.viewModel.getCategories().observe(requireActivity(), categories -> {
             if (adapter != null) adapter.updateData(categories);

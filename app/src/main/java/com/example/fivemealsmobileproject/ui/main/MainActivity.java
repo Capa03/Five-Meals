@@ -15,7 +15,7 @@ import com.example.fivemealsmobileproject.R;
 import com.example.fivemealsmobileproject.databinding.ActivityMainBinding;
 import com.example.fivemealsmobileproject.datasource.room.AppDataBase;
 import com.example.fivemealsmobileproject.datasource.room.Table;
-import com.example.fivemealsmobileproject.ui.favorites.FavoritesFragment;
+import com.example.fivemealsmobileproject.ui.favorites.fragment.FavoritesFragment;
 import com.example.fivemealsmobileproject.ui.home.fragment.HomeFragment;
 import com.example.fivemealsmobileproject.ui.home.fragment.HomeProductDetailsFragment;
 import com.example.fivemealsmobileproject.ui.login.view.PreLoginActivity;

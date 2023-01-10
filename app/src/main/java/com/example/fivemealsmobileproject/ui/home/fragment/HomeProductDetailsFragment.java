@@ -132,42 +132,18 @@ public class HomeProductDetailsFragment extends Fragment {
 
 
 
-        /*
-        FavoriteProduct exist = AppDataBase.getInstance(this.context).getFavoriteProductDAO().getFromId(
-                productID,
-                SessionManager.getActiveSession(context),
-                product.getRestaurantId()
-                );
-        if (exist == null) {
-            favoriteOn = false;
-            favorite.setImageResource(R.drawable.ic_baseline_favorite_border_24);
-        }else {
-            favorite.setImageResource(R.drawable.ic_baseline_favorite_24);
-        }
-
-        favorite.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                FavoriteProduct favoriteProduct = new FavoriteProduct(
-                        productID,
-                        SessionManager.getActiveSession(context),
-                        product.getRestaurantId(),
-                        product.getName(),
-                        product.getPrice(),
-                        product.getImgLink());
-                if (!favoriteOn) {
-                    favoriteOn = true;
-                    favorite.setImageResource(R.drawable.ic_baseline_favorite_24);
-                    AppDataBase.getInstance(context).getFavoriteProductDAO().insertFavorite(favoriteProduct);
-
-                } else {
-                    favoriteOn = false;
-                    favorite.setImageResource(R.drawable.ic_baseline_favorite_border_24);
-                    AppDataBase.getInstance(context).getFavoriteProductDAO().deleteFavorite(favoriteProduct);
-                }
+        this.viewModel.getFavoriteProduct().observe(requireActivity(), favoriteProduct -> {
+            if(favoriteProduct != null){
+                favorite.setImageResource(R.drawable.ic_baseline_favorite_24);
+            }else {
+                favorite.setImageResource(R.drawable.ic_baseline_favorite_border_24);
             }
         });
-    */
+
+        favorite.setOnClickListener(v -> {
+            viewModel.favoriteClicked();
+        });
+
     }
 
     @Override

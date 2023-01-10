@@ -1,4 +1,4 @@
-package com.example.fivemealsmobileproject.ui.favorites;
+package com.example.fivemealsmobileproject.ui.favorites.adapter;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -14,17 +14,17 @@ import com.bumptech.glide.Glide;
 import com.example.fivemealsmobileproject.R;
 import com.example.fivemealsmobileproject.datasource.room.FavoriteProduct;
 
+import java.util.ArrayList;
 import java.util.List;
 
 
 public class FavoriteAdapter extends RecyclerView.Adapter<FavoriteAdapter.FavoriteViewHolder> {
 
-    private List<FavoriteProduct> favoriteProducts;
+    private List<FavoriteProduct> favoriteProducts = new ArrayList<>();
     private FavoriteEventListener eventListener;
 
-    public FavoriteAdapter(FavoriteEventListener favoriteEventListener, List<FavoriteProduct> favoriteProducts){
+    public FavoriteAdapter(FavoriteEventListener favoriteEventListener){
         this.eventListener = favoriteEventListener;
-        this.favoriteProducts = favoriteProducts;
     }
 
 
@@ -53,6 +53,11 @@ public class FavoriteAdapter extends RecyclerView.Adapter<FavoriteAdapter.Favori
     @Override
     public int getItemCount() {
         return this.favoriteProducts.size();
+    }
+
+    public void updateData(List<FavoriteProduct> favoriteProducts){
+        this.favoriteProducts = favoriteProducts;
+        notifyDataSetChanged();
     }
 
     public class FavoriteViewHolder extends RecyclerView.ViewHolder {
