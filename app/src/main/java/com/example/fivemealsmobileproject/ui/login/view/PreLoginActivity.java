@@ -1,4 +1,4 @@
-package com.example.fivemealsmobileproject.ui.login;
+package com.example.fivemealsmobileproject.ui.login.view;
 
 import androidx.appcompat.app.AppCompatActivity;
 

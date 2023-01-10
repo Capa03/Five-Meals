@@ -18,7 +18,7 @@ import androidx.navigation.Navigation;
 import com.example.fivemealsmobileproject.R;
 import com.example.fivemealsmobileproject.datasource.room.AppDataBase;
 import com.example.fivemealsmobileproject.datasource.room.User;
-import com.example.fivemealsmobileproject.ui.login.PreLoginActivity;
+import com.example.fivemealsmobileproject.ui.login.view.PreLoginActivity;
 import com.example.fivemealsmobileproject.ui.login.SessionManager;
 
 import java.util.Random;

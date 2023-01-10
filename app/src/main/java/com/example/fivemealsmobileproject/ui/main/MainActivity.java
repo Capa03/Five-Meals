@@ -12,13 +12,13 @@ import androidx.navigation.fragment.NavHostFragment;
 import androidx.navigation.ui.NavigationUI;
 
 import com.example.fivemealsmobileproject.R;
+import com.example.fivemealsmobileproject.databinding.ActivityMainBinding;
 import com.example.fivemealsmobileproject.datasource.room.AppDataBase;
 import com.example.fivemealsmobileproject.datasource.room.Table;
-import com.example.fivemealsmobileproject.databinding.ActivityMainBinding;
 import com.example.fivemealsmobileproject.ui.favorites.FavoritesFragment;
 import com.example.fivemealsmobileproject.ui.home.fragment.HomeFragment;
 import com.example.fivemealsmobileproject.ui.home.fragment.HomeProductDetailsFragment;
-import com.example.fivemealsmobileproject.ui.login.PreLoginActivity;
+import com.example.fivemealsmobileproject.ui.login.view.PreLoginActivity;
 import com.example.fivemealsmobileproject.ui.login.SessionManager;
 import com.example.fivemealsmobileproject.ui.order.ParentProductDB;
 
@@ -36,10 +36,13 @@ public class MainActivity extends AppCompatActivity implements HomeFragment.Main
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+
         NavHostFragment navHostFragment = (NavHostFragment) getSupportFragmentManager().findFragmentById(binding.fragmentContainerView.getId());
         NavigationUI.setupWithNavController(binding.bottomNavigationView, navHostFragment.getNavController());
+
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
 
         if (toolbar != null)

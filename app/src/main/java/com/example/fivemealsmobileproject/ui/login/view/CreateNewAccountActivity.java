@@ -1,4 +1,4 @@
-package com.example.fivemealsmobileproject.ui.login;
+package com.example.fivemealsmobileproject.ui.login.view;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
@@ -12,10 +12,14 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.ViewModelProvider;
 
 import com.example.fivemealsmobileproject.R;
 import com.example.fivemealsmobileproject.datasource.room.AppDataBase;
 import com.example.fivemealsmobileproject.datasource.room.User;
+import com.example.fivemealsmobileproject.domain.models.UserCreateDTO;
+import com.example.fivemealsmobileproject.ui.login.SessionManager;
+import com.example.fivemealsmobileproject.ui.login.viewmodels.ViewModelCreateAccount;
 import com.example.fivemealsmobileproject.ui.qrcode.CodeActivity;
 
 public class CreateNewAccountActivity extends AppCompatActivity {
@@ -26,8 +30,10 @@ public class CreateNewAccountActivity extends AppCompatActivity {
     private EditText confirmPassword;
     private TextView showHidePassword;
     private TextView showHideConfirmPassword;
+
+    private ViewModelCreateAccount viewModel;
     public static void startActivity(Context context) {
-        Intent intent = new Intent(context,CreateNewAccountActivity.class);
+        Intent intent = new Intent(context, CreateNewAccountActivity.class);
         context.startActivity(intent);
     }
 
@@ -38,10 +44,12 @@ public class CreateNewAccountActivity extends AppCompatActivity {
         setContentView(R.layout.activity_create_new_account);
         cacheViews();
 
+        this.viewModel = new ViewModelProvider(this).get(ViewModelCreateAccount.class);
+
         this.showHidePassword.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
-                switch ( event.getAction() ) {
+                switch (event.getAction()) {
 
                     case MotionEvent.ACTION_UP:
                         password.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD);
@@ -57,7 +65,7 @@ public class CreateNewAccountActivity extends AppCompatActivity {
         this.showHideConfirmPassword.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
-                switch ( event.getAction() ) {
+                switch (event.getAction()) {
 
                     case MotionEvent.ACTION_UP:
                         confirmPassword.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD);
@@ -78,44 +86,34 @@ public class CreateNewAccountActivity extends AppCompatActivity {
         int password = this.password.getText().toString().hashCode();
         int confirmPassword = this.confirmPassword.getText().toString().hashCode();
 
-        if(username.isEmpty()){
+        if (username.isEmpty()) {
             this.username.setError("Empty Username");
             somethingEmpty = true;
         }
-        if(email.isEmpty()){
+        if (email.isEmpty()) {
             this.email.setError("Empty Email");
             somethingEmpty = true;
         }
-        if(password == 0){
+        if (password == 0) {
             this.password.setError("Empty Password");
             somethingEmpty = true;
         }
-        if(confirmPassword == 0 ){
+        if (confirmPassword == 0) {
             this.confirmPassword.setError("Password empty");
             somethingEmpty = true;
         }
 
-        if(confirmPassword != password){
+        if (confirmPassword != password) {
             this.confirmPassword.setError("Password does not match");
             somethingEmpty = true;
         }
 
-        if(!somethingEmpty){
-            // TODO criar user
-            // boolean success = Domain.getInstance().createUser(new UserCreateDTO(username, email, String.valueOf(password)));
-            if(!LoginManager.userExists(this, username)){
-
-                if(!LoginManager.emailExists(this, email)){
-                    User user =  new User(username,email,password);
-
-                    SessionManager.saveSession(this, username, false);
-                    AppDataBase.getInstance(this).getUserDAO().insert(user);
-                    CodeActivity.startActivity(this);
-                    finish();
-                }else Toast.makeText(this, "Email already being used", Toast.LENGTH_SHORT).show();
-
-            }else Toast.makeText(this, "User already exists", Toast.LENGTH_SHORT).show();
-
+        if (!somethingEmpty) {
+            UserCreateDTO user = new UserCreateDTO(username,email,String.valueOf(password));
+            if(this.viewModel.createUser(user)){
+                CodeActivity.startActivity(this);
+                finish();
+            }
         }
     }
 

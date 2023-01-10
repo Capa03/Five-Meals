@@ -1,4 +1,4 @@
-package com.example.fivemealsmobileproject.ui.login;
+package com.example.fivemealsmobileproject.ui.login.view;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
@@ -14,7 +14,7 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.fivemealsmobileproject.R;
-import com.example.fivemealsmobileproject.datasource.room.User;
+import com.example.fivemealsmobileproject.ui.login.SessionManager;
 import com.example.fivemealsmobileproject.ui.qrcode.CodeActivity;
 
 public class LoginActivity extends AppCompatActivity {
@@ -58,17 +58,13 @@ public class LoginActivity extends AppCompatActivity {
         String username = this.editTextLoginUsername.getText().toString();
         int password = this.editTextLoginPassword.getText().toString().hashCode();
 
-        User loggedInUser = LoginManager.validateUser(this, username, password);
-
-        if (loggedInUser != null) {
             // user válido
+        //TODO
             SessionManager.saveSession(this, username, false);
             Toast.makeText(this, "Successful Login", Toast.LENGTH_LONG).show();
 
             CodeActivity.startActivity(this);
-        } else {
-            Toast.makeText(this, "Invalid credentials", Toast.LENGTH_LONG).show();
-        }
+
 
     }
 

@@ -1,5 +1,6 @@
 package com.example.fivemealsmobileproject.datasource.room;
 
+import androidx.lifecycle.LiveData;
 import androidx.room.Dao;
 import androidx.room.Delete;
 import androidx.room.Insert;
@@ -22,7 +23,7 @@ public interface UserDAO {
     User getUserByEmail(String email);
 
     @Insert
-    void insert(User user);
+    void insertUser(User user);
 
     @Delete
     void delete(User user);

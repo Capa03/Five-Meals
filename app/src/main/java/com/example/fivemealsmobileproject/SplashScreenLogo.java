@@ -8,7 +8,7 @@ import android.os.Bundle;
 import android.os.Handler;
 
 import com.example.fivemealsmobileproject.datasource.room.SingleUseDataBase;
-import com.example.fivemealsmobileproject.ui.login.PreLoginActivity;
+import com.example.fivemealsmobileproject.ui.login.view.PreLoginActivity;
 import com.example.fivemealsmobileproject.ui.login.SessionManager;
 import com.example.fivemealsmobileproject.ui.qrcode.CodeActivity;
 

@@ -10,4 +10,6 @@ public class UserCreateDTO {
         this.email = email;
         this.password = password;
     }
+
+
 }
