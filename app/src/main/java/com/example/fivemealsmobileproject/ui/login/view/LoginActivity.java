@@ -11,14 +11,12 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.example.fivemealsmobileproject.R;
 import com.example.fivemealsmobileproject.datasource.models.auth.GetTokenRequest;
-import com.example.fivemealsmobileproject.ui.login.viewmodels.ViewModelCreateAccount;
 import com.example.fivemealsmobileproject.ui.login.viewmodels.ViewModelLogin;
-import com.example.fivemealsmobileproject.ui.qrcode.CodeActivity;
+import com.example.fivemealsmobileproject.ui.qrcode.view.CodeActivity;
 
 public class LoginActivity extends AppCompatActivity {
 
@@ -66,8 +64,8 @@ public class LoginActivity extends AppCompatActivity {
         String email = this.editTextLoginEmail.getText().toString();
         int password = this.editTextLoginPassword.getText().toString().hashCode();
         GetTokenRequest getTokenRequest = new GetTokenRequest(email, String.valueOf(password));
-        this.viewModel.getToken(getTokenRequest).observe(this, token -> {
-            if(!token.equals("")){
+        this.viewModel.getToken(getTokenRequest).observe(this, tokenSuccess -> {
+            if(tokenSuccess){
                 CodeActivity.startActivity(context);
                 finish();
             }

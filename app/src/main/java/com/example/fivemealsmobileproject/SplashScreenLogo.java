@@ -1,16 +1,15 @@
 package com.example.fivemealsmobileproject;
 
-import androidx.appcompat.app.ActionBar;
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Context;
 import android.os.Bundle;
 import android.os.Handler;
 
-import com.example.fivemealsmobileproject.datasource.room.SingleUseDataBase;
-import com.example.fivemealsmobileproject.ui.login.view.PreLoginActivity;
+import androidx.appcompat.app.ActionBar;
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.example.fivemealsmobileproject.ui.login.SessionManager;
-import com.example.fivemealsmobileproject.ui.qrcode.CodeActivity;
+import com.example.fivemealsmobileproject.ui.login.view.PreLoginActivity;
+import com.example.fivemealsmobileproject.ui.qrcode.view.CodeActivity;
 
 
 public class SplashScreenLogo extends AppCompatActivity {
@@ -21,9 +20,8 @@ public class SplashScreenLogo extends AppCompatActivity {
         setContentView(R.layout.activity_launch);
         Context context = this;
 
-
-        SingleUseDataBase.populateRestaurantTables(this);
-        SingleUseDataBase.populateCategoryTable(this);
+        //SingleUseDataBase.populateRestaurantTables(this);
+        //SingleUseDataBase.populateCategoryTable(this);
 
         ActionBar actionBar = getSupportActionBar();
         if (actionBar != null) {

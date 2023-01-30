@@ -23,7 +23,7 @@ public class ViewModelCreateAccount extends AndroidViewModel {
         return this.repository.createUser(user);
     }
 
-    public LiveData<String> getToken() {
+    public LiveData<Boolean> getToken() {
         GetTokenRequest getTokenRequest = new GetTokenRequest(
                 this.repository.getSavedEmail(),
                 this.repository.getSavedPasswordHash());

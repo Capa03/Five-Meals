@@ -14,7 +14,7 @@ import androidx.navigation.ui.NavigationUI;
 import com.example.fivemealsmobileproject.R;
 import com.example.fivemealsmobileproject.databinding.ActivityMainBinding;
 import com.example.fivemealsmobileproject.datasource.room.AppDataBase;
-import com.example.fivemealsmobileproject.datasource.room.Table;
+import com.example.fivemealsmobileproject.datasource.models.Table;
 import com.example.fivemealsmobileproject.ui.favorites.fragment.FavoritesFragment;
 import com.example.fivemealsmobileproject.ui.home.fragment.HomeFragment;
 import com.example.fivemealsmobileproject.ui.home.fragment.HomeProductDetailsFragment;
@@ -24,12 +24,10 @@ import com.example.fivemealsmobileproject.ui.order.ParentProductDB;
 
 public class MainActivity extends AppCompatActivity implements HomeFragment.MainActivityNavBar, HomeProductDetailsFragment.MainActivityNavBar, FavoritesFragment.MainActivityNavBar {
 
-    private static String KEY_CODE = "getCode";
     ActivityMainBinding binding;
 
-    public static void startActivity(Context context, long code) {
+    public static void startActivity(Context context) {
         Intent intent = new Intent(context, com.example.fivemealsmobileproject.ui.main.MainActivity.class);
-        intent.putExtra(KEY_CODE, code);
         context.startActivity(intent);
     }
 
@@ -50,17 +48,7 @@ public class MainActivity extends AppCompatActivity implements HomeFragment.Main
             setSupportActionBar(toolbar);
         }
 
-
-        Bundle bundle = getIntent().getExtras();
-        if(bundle != null)
-        {
-            // TODO meter num repositório
-            ParentProductDB.clearInstance();
-            Table table = AppDataBase.getInstance(this).getTableDAO().getTableFromID(bundle.getLong(KEY_CODE));
-            TableInfo.setTable(table);
-            TableInfo.setRestaurant(AppDataBase.getInstance(this)
-                    .getRestaurantDAO().getRestaurantFromID(table.getRestaurantID()));
-        }
+        ParentProductDB.clearInstance();
     }
 
     public void onLogOutClick(View view) {

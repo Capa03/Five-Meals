@@ -17,8 +17,7 @@ public class ViewModelLogin extends AndroidViewModel {
         this.repository = new AuthRepository(application.getApplicationContext());
     }
 
-    public LiveData<String> getToken(GetTokenRequest getTokenRequest) {
-
+    public LiveData<Boolean> getToken(GetTokenRequest getTokenRequest) {
         return this.repository.fetchToken(getTokenRequest);
     }
 }

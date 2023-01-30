@@ -29,8 +29,8 @@ public class AuthRepository {
     private final String KEY_PASS = "keyPassHash";
     private final String KEY_TOKEN = "keyToken";
 
-    private MutableLiveData<String> tokenLiveData = new MutableLiveData<>();
-    private MutableLiveData<Boolean> successLiveData = new MutableLiveData<>();
+    private MutableLiveData<Boolean> fetchTokenLiveData = new MutableLiveData<>();
+    private MutableLiveData<Boolean> createUserLiveData = new MutableLiveData<>();
 
     private final Context context;
     private final AuthService authService;
@@ -54,7 +54,7 @@ public class AuthRepository {
         return this.sharedPreferences.getString(KEY_EMAIL, "");
     }
 
-    public void savePasswordHash(String hash){
+    private void savePasswordHash(String hash){
         this.sharedPreferences.edit().putString(KEY_PASS, hash).apply();
     }
 
@@ -62,7 +62,7 @@ public class AuthRepository {
         return this.sharedPreferences.getString(KEY_PASS, "");
     }
 
-    public void saveToken(String token){
+    private void saveToken(String token){
         this.sharedPreferences.edit().putString(KEY_TOKEN, token).apply();
     }
 
@@ -71,11 +71,10 @@ public class AuthRepository {
     }
 
     public String getSavedToken(){
-        return this.sharedPreferences.getString(KEY_TOKEN, "");
+        return "Bearer " + this.sharedPreferences.getString(KEY_TOKEN, "");
     }
 
     public LiveData<Boolean> createUser(UserCreateDTO userIn){
-
         this.authService.createUser(userIn).enqueue(new Callback<UserShowDTO>() {
             @Override
             public void onResponse(Call<UserShowDTO> call, Response<UserShowDTO> response) {
@@ -84,7 +83,7 @@ public class AuthRepository {
                 }else {
                     saveEmail(userIn.getEmail());
                     savePasswordHash(userIn.getPassword());
-                    successLiveData.postValue(true);
+                    createUserLiveData.postValue(true);
                 }
             }
 
@@ -95,12 +94,12 @@ public class AuthRepository {
                 Toast.makeText(context, "There was a connection Error", Toast.LENGTH_LONG).show();
             }
         });
-        return this.successLiveData;
+        return this.createUserLiveData;
     }
 
-    public LiveData<String> fetchToken(GetTokenRequest getTokenRequest){
-        if(getTokenRequest.getEmail().equals("") || getSavedPasswordHash().equals("")){
-            return this.tokenLiveData;
+    public LiveData<Boolean> fetchToken(GetTokenRequest getTokenRequest){
+        if(getTokenRequest.getEmail().equals("") || getTokenRequest.getPassword().equals("")){
+            return this.fetchTokenLiveData;
         }
 
         this.authService.getToken(getTokenRequest).enqueue(new Callback<GetTokenResponse>() {
@@ -109,10 +108,12 @@ public class AuthRepository {
                 if(!response.isSuccessful()){
                     Toast.makeText(context, "Wrong credentials", Toast.LENGTH_LONG).show();
                 }else {
-                    tokenLiveData.postValue(response.body().getToken());
+                    saveToken(response.body().getToken());
+                    saveEmail(getTokenRequest.getEmail());
+                    savePasswordHash(getTokenRequest.getPassword());
+                    fetchTokenLiveData.postValue(true);
                 }
             }
-
             @Override
             public void onFailure(Call<GetTokenResponse> call, Throwable t) {
                 t.getStackTrace();
@@ -120,6 +121,6 @@ public class AuthRepository {
                 Toast.makeText(context, "There was a connection Error", Toast.LENGTH_LONG).show();
             }
         });
-        return this.tokenLiveData;
+        return this.fetchTokenLiveData;
     }
 }

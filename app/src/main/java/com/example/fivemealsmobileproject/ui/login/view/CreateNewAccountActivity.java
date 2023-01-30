@@ -11,13 +11,12 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.example.fivemealsmobileproject.R;
 import com.example.fivemealsmobileproject.datasource.models.auth.UserCreateDTO;
 import com.example.fivemealsmobileproject.ui.login.viewmodels.ViewModelCreateAccount;
-import com.example.fivemealsmobileproject.ui.qrcode.CodeActivity;
+import com.example.fivemealsmobileproject.ui.qrcode.view.CodeActivity;
 
 public class CreateNewAccountActivity extends AppCompatActivity {
 
@@ -109,8 +108,8 @@ public class CreateNewAccountActivity extends AppCompatActivity {
             UserCreateDTO user = new UserCreateDTO(username, String.valueOf(password), email);
             this.viewModel.createUser(user).observe(this, success -> {
                 if(success){
-                    this.viewModel.getToken().observe(this, token -> {
-                        if(!token.equals("")){
+                    this.viewModel.getToken().observe(this, tokenSuccess -> {
+                        if(tokenSuccess){
                             CodeActivity.startActivity(getApplicationContext());
                             finish();
                         }

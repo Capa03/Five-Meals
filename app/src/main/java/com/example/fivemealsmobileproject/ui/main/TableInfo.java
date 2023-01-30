@@ -1,7 +1,7 @@
 package com.example.fivemealsmobileproject.ui.main;
 
 import com.example.fivemealsmobileproject.datasource.room.Restaurant;
-import com.example.fivemealsmobileproject.datasource.room.Table;
+import com.example.fivemealsmobileproject.datasource.models.Table;
 
 public class TableInfo {
     private static Table table;

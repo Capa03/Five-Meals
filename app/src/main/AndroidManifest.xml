@@ -21,13 +21,13 @@
             android:name=".ui.payment.PaymentActivity"
             android:exported="false" />
         <activity
-            android:name=".ui.qrcode.QrCodeActivity"
+            android:name=".ui.qrcode.view.QrCodeActivity"
             android:exported="false" />
         <activity
             android:name=".ui.login.view.CreateNewAccountActivity"
             android:exported="false" />
         <activity
-            android:name=".ui.qrcode.CodeActivity"
+            android:name=".ui.qrcode.view.CodeActivity"
             android:exported="false" />
         <activity
             android:name=".ui.login.view.LoginActivity"

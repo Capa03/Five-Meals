@@ -1,4 +1,4 @@
-package com.example.fivemealsmobileproject.ui.qrcode;
+package com.example.fivemealsmobileproject.ui.qrcode.view;
 
 import android.Manifest;
 import android.content.Context;
@@ -11,6 +11,8 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
+import androidx.lifecycle.LifecycleOwner;
+import androidx.lifecycle.ViewModelProvider;
 
 import com.budiyev.android.codescanner.AutoFocusMode;
 import com.budiyev.android.codescanner.CodeScanner;
@@ -20,6 +22,7 @@ import com.budiyev.android.codescanner.ScanMode;
 import com.example.fivemealsmobileproject.R;
 import com.example.fivemealsmobileproject.datasource.room.AppDataBase;
 import com.example.fivemealsmobileproject.ui.main.MainActivity;
+import com.example.fivemealsmobileproject.ui.qrcode.viewmodels.QrCodeActivityViewModel;
 import com.google.zxing.Result;
 
 public class QrCodeActivity extends AppCompatActivity {
@@ -33,23 +36,26 @@ public class QrCodeActivity extends AppCompatActivity {
         setContentView(R.layout.code_scanner_view);
         setupPermissions();
         this.context = this;
-
+        LifecycleOwner lifecycleOwner = this;
         this.scannerView = findViewById(R.id.scanner_view);
         setUpScanner();
 
+        QrCodeActivityViewModel viewModel = new ViewModelProvider(this).get(QrCodeActivityViewModel.class);
+        viewModel.initializeRepository(this);
         mCodeScanner.setDecodeCallback(new DecodeCallback() {
             @Override
             public void onDecoded(@NonNull final Result result) {
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        String code = result.getText();
-                        if(AppDataBase.getInstance(context).getTableDAO().getTableFromID(Long.parseLong(code)) != null){
-                            MainActivity.startActivity(context, Long.parseLong(code));
-                            finish();
-                        }else {
-                            Toast.makeText(context, "Invalid code", Toast.LENGTH_SHORT).show();
-                        }
+                        int code = Integer.parseInt(result.getText());
+                        viewModel.getTableFromId(code).observe(lifecycleOwner, success -> {
+                            if(success){
+                                MainActivity.startActivity(context);
+                            }else {
+                                Toast.makeText(context, "Invalid code", Toast.LENGTH_SHORT).show();
+                            }
+                        });
                     }
                 });
             }
