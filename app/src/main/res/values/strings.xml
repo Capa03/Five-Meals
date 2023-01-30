@@ -1,6 +1,7 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <string name="app_name">FiveMealsMobileProject</string>
     <string name="login_username_text">Username</string>
+    <string name="login_email_text">Email</string>
     <string name="login_password_text">Password</string>
     <string name="login_button_signIn">Sign In</string>
     <string name="forgot_password">Forgot Password?</string>

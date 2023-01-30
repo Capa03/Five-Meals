@@ -31,7 +31,6 @@ public class SplashScreenLogo extends AppCompatActivity {
         }
 
         Runnable r = () -> {
-
             if(SessionManager.sessionExists(context)){
                 CodeActivity.startActivity(context);
             }else {

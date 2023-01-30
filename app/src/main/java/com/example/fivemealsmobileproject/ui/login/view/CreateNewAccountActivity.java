@@ -9,16 +9,13 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.example.fivemealsmobileproject.R;
-import com.example.fivemealsmobileproject.datasource.room.AppDataBase;
-import com.example.fivemealsmobileproject.datasource.room.User;
-import com.example.fivemealsmobileproject.domain.models.UserCreateDTO;
-import com.example.fivemealsmobileproject.ui.login.SessionManager;
+import com.example.fivemealsmobileproject.datasource.models.auth.UserCreateDTO;
 import com.example.fivemealsmobileproject.ui.login.viewmodels.ViewModelCreateAccount;
 import com.example.fivemealsmobileproject.ui.qrcode.CodeActivity;
 
@@ -109,11 +106,17 @@ public class CreateNewAccountActivity extends AppCompatActivity {
         }
 
         if (!somethingEmpty) {
-            UserCreateDTO user = new UserCreateDTO(username,email,String.valueOf(password));
-            if(this.viewModel.createUser(user)){
-                CodeActivity.startActivity(this);
-                finish();
-            }
+            UserCreateDTO user = new UserCreateDTO(username, String.valueOf(password), email);
+            this.viewModel.createUser(user).observe(this, success -> {
+                if(success){
+                    this.viewModel.getToken().observe(this, token -> {
+                        if(!token.equals("")){
+                            CodeActivity.startActivity(getApplicationContext());
+                            finish();
+                        }
+                    });
+                }
+            });
         }
     }
 

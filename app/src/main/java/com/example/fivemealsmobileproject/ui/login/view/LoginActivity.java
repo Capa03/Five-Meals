@@ -9,21 +9,26 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProvider;
 
 import com.example.fivemealsmobileproject.R;
-import com.example.fivemealsmobileproject.ui.login.SessionManager;
+import com.example.fivemealsmobileproject.datasource.models.auth.GetTokenRequest;
+import com.example.fivemealsmobileproject.ui.login.viewmodels.ViewModelCreateAccount;
+import com.example.fivemealsmobileproject.ui.login.viewmodels.ViewModelLogin;
 import com.example.fivemealsmobileproject.ui.qrcode.CodeActivity;
 
 public class LoginActivity extends AppCompatActivity {
 
     // simular correcção issue Test
 
-    private EditText editTextLoginUsername;
+    private EditText editTextLoginEmail;
     private EditText editTextLoginPassword;
     private TextView showHidePassword;
+    private ViewModelLogin viewModel;
+    private Context context;
 
     @SuppressLint("ClickableViewAccessibility")
     @Override
@@ -32,6 +37,9 @@ public class LoginActivity extends AppCompatActivity {
         setContentView(R.layout.activity_login);
 
         this.cacheViews();
+        this.context = this;
+
+        this.viewModel = new ViewModelProvider(this).get(ViewModelLogin.class);
 
         this.showHidePassword.setOnTouchListener(new View.OnTouchListener() {
             @SuppressLint("ClickableViewAccessibility")
@@ -55,17 +63,15 @@ public class LoginActivity extends AppCompatActivity {
 
     public void onSignIn(View view) {
 
-        String username = this.editTextLoginUsername.getText().toString();
+        String email = this.editTextLoginEmail.getText().toString();
         int password = this.editTextLoginPassword.getText().toString().hashCode();
-
-            // user válido
-        //TODO
-            SessionManager.saveSession(this, username, false);
-            Toast.makeText(this, "Successful Login", Toast.LENGTH_LONG).show();
-
-            CodeActivity.startActivity(this);
-
-
+        GetTokenRequest getTokenRequest = new GetTokenRequest(email, String.valueOf(password));
+        this.viewModel.getToken(getTokenRequest).observe(this, token -> {
+            if(!token.equals("")){
+                CodeActivity.startActivity(context);
+                finish();
+            }
+        });
     }
 
     public void onDontHaveAccountClicked(View view) {
@@ -80,7 +86,7 @@ public class LoginActivity extends AppCompatActivity {
 
 
     private void cacheViews(){
-        this.editTextLoginUsername = findViewById(R.id.editTextLoginUsername);
+        this.editTextLoginEmail = findViewById(R.id.editTextLoginEmail);
         this.editTextLoginPassword = findViewById(R.id.editTextLoginPassword);
         this.showHidePassword = findViewById(R.id.textViewLoginPasswordShowOrHide1);
     }

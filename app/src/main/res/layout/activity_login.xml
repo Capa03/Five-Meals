@@ -18,7 +18,7 @@
         app:layout_constraintTop_toTopOf="@+id/editTextLoginPassword" />
 
     <EditText
-        android:id="@+id/editTextLoginUsername"
+        android:id="@+id/editTextLoginEmail"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="64dp"
@@ -26,7 +26,7 @@
         android:layout_marginEnd="64dp"
         android:autofillHints=""
         android:ems="10"
-        android:hint="@string/login_username_text"
+        android:hint="@string/login_email_text"
         android:inputType="textPersonName"
         android:minHeight="48dp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -43,9 +43,9 @@
         android:hint="@string/login_password_text"
         android:inputType="textPassword"
         android:minHeight="48dp"
-        app:layout_constraintEnd_toEndOf="@+id/editTextLoginUsername"
-        app:layout_constraintStart_toStartOf="@+id/editTextLoginUsername"
-        app:layout_constraintTop_toBottomOf="@+id/editTextLoginUsername" />
+        app:layout_constraintEnd_toEndOf="@+id/editTextLoginEmail"
+        app:layout_constraintStart_toStartOf="@+id/editTextLoginEmail"
+        app:layout_constraintTop_toBottomOf="@+id/editTextLoginEmail" />
 
     <Button
         android:id="@+id/buttonLoginSignUp"

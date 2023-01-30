@@ -8,25 +8,17 @@ import androidx.lifecycle.LiveData;
 
 import com.example.fivemealsmobileproject.datasource.models.auth.GetTokenRequest;
 import com.example.fivemealsmobileproject.datasource.repository.auth.AuthRepository;
-import com.example.fivemealsmobileproject.datasource.models.auth.UserCreateDTO;
 
-public class ViewModelCreateAccount extends AndroidViewModel {
+public class ViewModelLogin extends AndroidViewModel {
 
     private final AuthRepository repository;
-
-    public ViewModelCreateAccount(@NonNull Application application) {
+    public ViewModelLogin(@NonNull Application application) {
         super(application);
         this.repository = new AuthRepository(application.getApplicationContext());
     }
 
-    public LiveData<Boolean> createUser(UserCreateDTO user) {
-        return this.repository.createUser(user);
-    }
+    public LiveData<String> getToken(GetTokenRequest getTokenRequest) {
 
-    public LiveData<String> getToken() {
-        GetTokenRequest getTokenRequest = new GetTokenRequest(
-                this.repository.getSavedEmail(),
-                this.repository.getSavedPasswordHash());
         return this.repository.fetchToken(getTokenRequest);
     }
 }

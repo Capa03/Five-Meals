@@ -1,4 +1,4 @@
-package com.example.fivemealsmobileproject.domain.models;
+package com.example.fivemealsmobileproject.datasource.models;
 
 public class OrderProductCreateDTO {
 
