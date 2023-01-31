@@ -68,6 +68,7 @@ public class HomeProductDetailsFragment extends Fragment {
         super.onCreate(savedInstanceState);
         this.productID = HomeProductDetailsFragmentArgs.fromBundle(getArguments()).getProductId();
         this.viewModel = new ViewModelProvider(requireActivity()).get(HomeProductDetailsFragmentViewModel.class);
+        this.viewModel.initializeRepositories(requireActivity());
 
         OnBackPressedCallback callback = new OnBackPressedCallback(true /* enabled by default */) {
             @Override
@@ -100,8 +101,7 @@ public class HomeProductDetailsFragment extends Fragment {
             textViewPrice.setText(String.format("%s $", product.getPrice()));
             imageViewProduct.setClipToOutline(true);
 
-            // TODO remover o prefixo do link
-            Glide.with(view.getContext()).load("https://docs.google.com/uc?id=" + product.getImgLink()).into(imageViewProduct);
+            Glide.with(view.getContext()).load(product.getImgLink()).into(imageViewProduct);
 
             viewModel.resetQuantity();
             viewModel.getQuantity().observe(requireActivity(), quantity -> {
@@ -118,9 +118,7 @@ public class HomeProductDetailsFragment extends Fragment {
 
                 // Remove Quantity
                 buttonRemoveQuantity.setOnClickListener(buttonRemoveQuantityView -> viewModel.decrementQuantity());
-
             });
-
         });
 
         buttonAddToOrder.setOnClickListener(buttonAddToOrderView -> {
@@ -129,8 +127,6 @@ public class HomeProductDetailsFragment extends Fragment {
             Navigation.findNavController(view).popBackStack();
         });
         mainActivityNavBar.hideNavBar();
-
-
 
         this.viewModel.getFavoriteProduct().observe(requireActivity(), favoriteProduct -> {
             if(favoriteProduct != null){

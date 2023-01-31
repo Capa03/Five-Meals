@@ -46,8 +46,8 @@ public class ProductListAdapter extends RecyclerView.Adapter<ProductListAdapter.
         Product product = this.products.get(position);
 
         holder.setName(product.getName());
-        int minTime = (int) product.getMinAverageTime();
-        int maxTime = (int) product.getMaxAverageTime();
+        int minTime = (int) product.getMinTime();
+        int maxTime = (int) product.getMaxTime();
         holder.setTime(TimeHelper.getTimeToString(minTime, maxTime));
         holder.setPrice(product.getPrice());
 
@@ -104,10 +104,8 @@ public class ProductListAdapter extends RecyclerView.Adapter<ProductListAdapter.
             this.textViewTime.setText(time + " min");
         }
 
-        public void setImage(String imageID){
-            // https://drive.google.com/uc?id=
-            String link = "https://docs.google.com/uc?id=" + imageID;
-            Glide.with(this.context).load(link).listener(new RequestListener<Drawable>() {
+        public void setImage(String imageLink){
+            Glide.with(this.context).load(imageLink).listener(new RequestListener<Drawable>() {
                 @Override
                 public boolean onLoadFailed(@Nullable GlideException e, Object model, Target<Drawable> target, boolean isFirstResource) {
                     System.out.println(e.getMessage());

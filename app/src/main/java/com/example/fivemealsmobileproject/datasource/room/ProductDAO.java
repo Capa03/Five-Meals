@@ -4,6 +4,7 @@ import androidx.lifecycle.LiveData;
 import androidx.room.Dao;
 import androidx.room.Delete;
 import androidx.room.Insert;
+import androidx.room.OnConflictStrategy;
 import androidx.room.Query;
 import androidx.room.Update;
 
@@ -13,7 +14,7 @@ import java.util.List;
 public interface ProductDAO {
 
 
-    @Query("SELECT * FROM Product WHERE category = :category AND restaurantId = :restaurantId")
+    @Query("SELECT * FROM Product WHERE categoryName = :category AND restaurantId = :restaurantId")
     LiveData<List<Product>> getAllFromCategoryAndRestaurant(String category, long restaurantId);
 
     @Query("SELECT * FROM Product WHERE id = :id")
@@ -22,13 +23,7 @@ public interface ProductDAO {
     @Query("SELECT * FROM Product WHERE id = :id")
     Product getById(long id);
 
-    @Delete
-    void deleteProduct(Product product);
-
-    @Update
-    void updateProduct(Product product);
-
-    @Insert
-    void insertProduct(Product product);
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    void insertProducts(List<Product> products);
 
 }

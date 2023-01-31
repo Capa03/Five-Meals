@@ -10,19 +10,19 @@ public class Product {
 
     private String name;
     private String description;
-    private String category;
+    private String categoryName;
     private Float price;
-    private float minAverageTime;
-    private float maxAverageTime;
+    private float minTime;
+    private float maxTime;
     private String imgLink;
     private long restaurantId;
 
-    public Product(String name, Float price, float minAverageTime, float maxAverageTime,  String category, long restaurantId, String imgLink, String description) {
+    public Product(String name, Float price, float minTime, float maxTime, String categoryName, long restaurantId, String imgLink, String description) {
         this.name = name;
         this.price = price;
-        this.minAverageTime = minAverageTime;
-        this.maxAverageTime = maxAverageTime;
-        this.category = category;
+        this.minTime = minTime;
+        this.maxTime = maxTime;
+        this.categoryName = categoryName;
         this.imgLink = imgLink;
         this.description = description;
         this.restaurantId = restaurantId;
@@ -44,20 +44,20 @@ public class Product {
         return description;
     }
 
-    public String getCategory() {
-        return category;
+    public String getCategoryName() {
+        return categoryName;
     }
 
     public Float getPrice() {
         return price;
     }
 
-    public float getMinAverageTime() {
-        return minAverageTime;
+    public float getMinTime() {
+        return minTime;
     }
 
-    public float getMaxAverageTime() {
-        return maxAverageTime;
+    public float getMaxTime() {
+        return maxTime;
     }
 
     public String getImgLink() {

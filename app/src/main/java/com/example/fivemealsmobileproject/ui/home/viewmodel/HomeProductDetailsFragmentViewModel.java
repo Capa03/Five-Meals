@@ -1,5 +1,6 @@
 package com.example.fivemealsmobileproject.ui.home.viewmodel;
 
+import android.app.Activity;
 import android.app.Application;
 import android.content.Context;
 
@@ -8,6 +9,7 @@ import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
+import com.example.fivemealsmobileproject.datasource.repository.product.ProductsRepository;
 import com.example.fivemealsmobileproject.datasource.room.AppDataBase;
 import com.example.fivemealsmobileproject.datasource.room.FavoriteProduct;
 import com.example.fivemealsmobileproject.datasource.room.FavoriteProductDAO;
@@ -20,7 +22,6 @@ import com.example.fivemealsmobileproject.ui.login.SessionManager;
 import com.example.fivemealsmobileproject.ui.main.TableInfo;
 
 public class HomeProductDetailsFragmentViewModel extends AndroidViewModel {
-    private final ProductDAO productDAO;
     private final OrderProductDAO orderProductDAO;
     private final FavoriteProductDAO favoriteProductDAO;
     private final RestaurantDAO restaurantDAO;
@@ -29,19 +30,23 @@ public class HomeProductDetailsFragmentViewModel extends AndroidViewModel {
     private int quantity;
     private long productID;
 
+    private ProductsRepository productsRepository;
+
     public HomeProductDetailsFragmentViewModel(@NonNull Application application) {
         super(application);
         this.context = application;
-        this.productDAO = AppDataBase.getInstance(application).getProductDAO();
         this.orderProductDAO = AppDataBase.getInstance(application).getOrderProductDAO();
         this.favoriteProductDAO = AppDataBase.getInstance(application).getFavoriteProductDAO();
         this.restaurantDAO = AppDataBase.getInstance(application).getRestaurantDAO();
         this.quantityLiveData = new MutableLiveData<>();
     }
 
+    public void initializeRepositories(Activity activity){
+        this.productsRepository = new ProductsRepository(activity);
+    }
+
     public LiveData<Product> getProduct(long productId){
-        this.productID = productId;
-        return this.productDAO.getLiveDataById(productId);
+        return this.productsRepository.getProductById(productId);
     }
 
     public LiveData<Integer> getQuantity() { return this.quantityLiveData; }
@@ -56,22 +61,7 @@ public class HomeProductDetailsFragmentViewModel extends AndroidViewModel {
     }
     public void addProducts(boolean forLater){
         int state = forLater ? OrderProduct.WAITING_APPROVAL_STATE : OrderProduct.PENDING_STATE;
-        // Erro null com : this.productDAO.getLiveDataById(productID).getValue()
-        Product product = this.productDAO.getById(this.productID);
-        for (int i = 1; i <= quantity; i++) {
-            orderProductDAO.insertOrderProduct(new OrderProduct(
-                    SessionManager.getActiveSession(context),
-                    TableInfo.getTable().getTableID(),
-                    state,
-                    System.currentTimeMillis(),
-                    productID,
-                    product.getName(),
-                    product.getPrice(),
-                    product.getMinAverageTime(),
-                    product.getMaxAverageTime(),
-                    product.getImgLink())
-            );
-        }
+        //TODO adicionar o produto
     }
 
     public LiveData<FavoriteProduct> getFavoriteProduct(){
@@ -80,19 +70,6 @@ public class HomeProductDetailsFragmentViewModel extends AndroidViewModel {
 
 
     public void favoriteClicked() {
-        FavoriteProduct favorite = this.favoriteProductDAO.getFavoriteFromId(this.productID);
-        if (favorite != null) {
-            this.favoriteProductDAO.deleteFavorite(favorite);
-        } else {
-            Product product = this.productDAO.getById(this.productID);
-            FavoriteProduct favoriteProduct = new FavoriteProduct(
-                    this.productID,
-                    product.getName(),
-                    product.getPrice(),
-                    product.getImgLink(),
-                    product.getRestaurantId(),
-                    this.restaurantDAO.getRestaurantFromID(product.getRestaurantId()).getRestaurantName());
-            this.favoriteProductDAO.insertFavorite(favoriteProduct);
-        }
+
     }
 }

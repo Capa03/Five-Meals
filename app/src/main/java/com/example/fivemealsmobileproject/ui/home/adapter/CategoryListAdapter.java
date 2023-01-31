@@ -59,8 +59,7 @@ public class CategoryListAdapter extends RecyclerView.Adapter<CategoryListAdapte
 
     public void updateData(List<Category> categories){
         this.categories = categories;
-        notifyItemRangeInserted(0, this.categories.size() - 1);
-        // notifyDataSetChanged();
+        notifyDataSetChanged();
     }
 
     @Override

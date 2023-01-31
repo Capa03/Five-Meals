@@ -8,6 +8,7 @@ import android.view.View;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.fragment.NavHostFragment;
 import androidx.navigation.ui.NavigationUI;
 
@@ -25,6 +26,7 @@ import com.example.fivemealsmobileproject.ui.order.ParentProductDB;
 public class MainActivity extends AppCompatActivity implements HomeFragment.MainActivityNavBar, HomeProductDetailsFragment.MainActivityNavBar, FavoritesFragment.MainActivityNavBar {
 
     ActivityMainBinding binding;
+    private MainActivityViewModel viewModel;
 
     public static void startActivity(Context context) {
         Intent intent = new Intent(context, com.example.fivemealsmobileproject.ui.main.MainActivity.class);
@@ -37,6 +39,11 @@ public class MainActivity extends AppCompatActivity implements HomeFragment.Main
 
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+
+        this.viewModel = new ViewModelProvider(this).get(MainActivityViewModel.class);
+        this.viewModel.initializeRepository(this);
+
+        this.viewModel.refreshDataSet();
 
         NavHostFragment navHostFragment = (NavHostFragment) getSupportFragmentManager().findFragmentById(binding.fragmentContainerView.getId());
         NavigationUI.setupWithNavController(binding.bottomNavigationView, navHostFragment.getNavController());

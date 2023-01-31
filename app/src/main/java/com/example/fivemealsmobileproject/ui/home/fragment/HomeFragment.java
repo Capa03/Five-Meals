@@ -61,6 +61,7 @@ public class HomeFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         this.viewModel = new ViewModelProvider(requireActivity()).get(HomeFragmentViewModel.class);
+        this.viewModel.initializeRepository(requireActivity());
 
         // Hide go back button
         view.findViewById(R.id.imageViewToolBarGoBack).setVisibility(View.GONE);

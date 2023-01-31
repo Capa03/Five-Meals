@@ -7,14 +7,15 @@ import androidx.room.PrimaryKey;
 @Entity
 public class Category {
 
-    @PrimaryKey (autoGenerate = true)
+    @PrimaryKey (autoGenerate = false)
     private long categoryID;
 
     private long restaurantID;
     @NonNull
     private String categoryName;
 
-    public Category(long restaurantID, @NonNull String categoryName) {
+    public Category(long categoryID, long restaurantID, @NonNull String categoryName) {
+        this.categoryID = categoryID;
         this.restaurantID = restaurantID;
         this.categoryName = categoryName;
     }
