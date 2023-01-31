@@ -7,11 +7,11 @@ import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
 
-import com.example.fivemealsmobileproject.datasource.repository.LocalizationRepository;
+import com.example.fivemealsmobileproject.datasource.repository.localization.LocalizationRepository;
 
 public class QrCodeActivityViewModel extends AndroidViewModel {
 
-    private LocalizationRepository repository;
+    private LocalizationRepository localizationRepository;
 
 
     public QrCodeActivityViewModel(@NonNull Application application) {
@@ -19,10 +19,14 @@ public class QrCodeActivityViewModel extends AndroidViewModel {
     }
 
     public void initializeRepository(Activity activity){
-        this.repository = new LocalizationRepository(activity);
+        this.localizationRepository = new LocalizationRepository(activity);
     }
 
     public LiveData<Boolean> getTableFromId(int tableId){
-        return repository.fetchTableById(tableId);
+        return localizationRepository.fetchTableById(tableId);
+    }
+
+    public void getOrderFromTable() {
+
     }
 }

@@ -10,15 +10,13 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.lifecycle.LifecycleOwner;
-import androidx.lifecycle.Observer;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.example.fivemealsmobileproject.R;
-import com.example.fivemealsmobileproject.datasource.room.AppDataBase;
 import com.example.fivemealsmobileproject.datasource.room.OrderProduct;
-import com.example.fivemealsmobileproject.ui.main.TimeHelper;
+import com.example.fivemealsmobileproject.ui.main.ProgressHelper;
 import com.example.fivemealsmobileproject.ui.order.ParentOrderProduct;
 
 
@@ -63,7 +61,7 @@ public class CurrentOrderAdapter extends RecyclerView.Adapter<CurrentOrderAdapte
             int minTime = (int) parentOrderProduct.getProductMinTime();
             int maxTime = (int) parentOrderProduct.getProductMaxTime();
 
-            holder.setTime(TimeHelper.getTimeToString(minTime, maxTime));
+            holder.setTime(ProgressHelper.getTimeToString(minTime, maxTime));
             holder.setPrice(parentOrderProduct.getProductPrice() * holder.adapter.getItemCount());
             holder.setImage(parentOrderProduct.getImgLink());
             holder.recyclerView.setVisibility(parentOrderProduct.getState());
@@ -145,9 +143,7 @@ public class CurrentOrderAdapter extends RecyclerView.Adapter<CurrentOrderAdapte
             this.textViewTime.setText(time + " min");
         }
 
-        public void setImage(String imageID) {
-            // https://drive.google.com/uc?id=
-            String link = "https://docs.google.com/uc?id=" + imageID;
+        public void setImage(String link) {
             Glide.with(this.context).load(link).into(this.currentOrderImage);
         }
 

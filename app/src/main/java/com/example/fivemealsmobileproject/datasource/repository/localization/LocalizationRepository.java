@@ -1,4 +1,4 @@
-package com.example.fivemealsmobileproject.datasource.repository;
+package com.example.fivemealsmobileproject.datasource.repository.localization;
 
 import android.app.Activity;
 import android.content.Context;
@@ -8,7 +8,6 @@ import android.widget.Toast;
 import androidx.lifecycle.LifecycleOwner;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
-import androidx.lifecycle.Observer;
 
 import com.example.fivemealsmobileproject.datasource.models.auth.GetTokenRequest;
 import com.example.fivemealsmobileproject.datasource.remote.LocalizationService;
@@ -79,7 +78,7 @@ public class LocalizationRepository {
                     //TODO Make strings
                     Toast.makeText(activity, "Table does not exist", Toast.LENGTH_SHORT).show();
                 }else if(response.isSuccessful()){
-                    saveTableId(response.body().getTableID());
+                    saveTableId(response.body().getId());
                     saveRestaurantId(response.body().getRestaurantID());
                     successLiveData.postValue(true);
                 }

@@ -2,35 +2,23 @@ package com.example.fivemealsmobileproject.ui.home.fragment;
 
 import android.content.Context;
 import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 import androidx.activity.OnBackPressedCallback;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.Navigation;
 
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.Button;
-import android.widget.CheckBox;
-import android.widget.ImageView;
-import android.widget.TextView;
-
 import com.bumptech.glide.Glide;
 import com.example.fivemealsmobileproject.R;
-import com.example.fivemealsmobileproject.datasource.room.AppDataBase;
-import com.example.fivemealsmobileproject.datasource.room.FavoriteProduct;
-import com.example.fivemealsmobileproject.datasource.room.OrderProduct;
-import com.example.fivemealsmobileproject.datasource.room.OrderProductDAO;
-import com.example.fivemealsmobileproject.datasource.room.Product;
 import com.example.fivemealsmobileproject.ui.home.viewmodel.HomeProductDetailsFragmentViewModel;
-import com.example.fivemealsmobileproject.ui.login.SessionManager;
-import com.example.fivemealsmobileproject.ui.main.TableInfo;
-import com.example.fivemealsmobileproject.ui.order.ParentProductDB;
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.Locale;
 
@@ -50,12 +38,11 @@ public class HomeProductDetailsFragment extends Fragment {
     private TextView textViewQuantity;
     private Button buttonAddQuantity;
     private Button buttonRemoveQuantity;
-    private CheckBox forLater;
+
     private Button buttonAddToOrder;
     private ImageView imageViewGoBack;
-    private Context context;
+
     private ImageView favorite;
-    private boolean favoriteOn = true;
     private View view;
 
     public HomeProductDetailsFragment() {
@@ -83,7 +70,6 @@ public class HomeProductDetailsFragment extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        this.context = container.getContext();
         return inflater.inflate(R.layout.fragment_home_product_details, container, false);
     }
 
@@ -123,7 +109,7 @@ public class HomeProductDetailsFragment extends Fragment {
 
         buttonAddToOrder.setOnClickListener(buttonAddToOrderView -> {
             // forLater.isChecked();
-            viewModel.addProducts(false);
+            viewModel.addProducts();
             Navigation.findNavController(view).popBackStack();
         });
         mainActivityNavBar.hideNavBar();
@@ -162,7 +148,7 @@ public class HomeProductDetailsFragment extends Fragment {
         this.textViewQuantity = view.findViewById(R.id.textViewProductDetailsQuantity);
         this.buttonAddQuantity = view.findViewById(R.id.buttonProductDetailsAddQuantity);
         this.buttonRemoveQuantity = view.findViewById(R.id.buttonProductDetailsRemoveQuantity);
-        this.forLater = view.findViewById(R.id.checkBoxProductDetailsOrderLater);
+        //this.forLater = view.findViewById(R.id.checkBoxProductDetailsOrderLater);
         this.buttonAddToOrder = view.findViewById(R.id.buttonProductDetailsAddToOrder);
         this.imageViewGoBack = view.findViewById(R.id.imageViewToolBarGoBack);
         this.favorite = view.findViewById(R.id.toggleButtonProductDetailsFavorite);

@@ -9,6 +9,10 @@ import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
+import com.example.fivemealsmobileproject.datasource.models.order.InsertOrderProductRequest;
+import com.example.fivemealsmobileproject.datasource.repository.auth.AuthRepository;
+import com.example.fivemealsmobileproject.datasource.repository.localization.LocalizationRepository;
+import com.example.fivemealsmobileproject.datasource.repository.order.OrderRepository;
 import com.example.fivemealsmobileproject.datasource.repository.product.ProductsRepository;
 import com.example.fivemealsmobileproject.datasource.room.AppDataBase;
 import com.example.fivemealsmobileproject.datasource.room.FavoriteProduct;
@@ -21,31 +25,32 @@ import com.example.fivemealsmobileproject.datasource.room.RestaurantDAO;
 import com.example.fivemealsmobileproject.ui.login.SessionManager;
 import com.example.fivemealsmobileproject.ui.main.TableInfo;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class HomeProductDetailsFragmentViewModel extends AndroidViewModel {
-    private final OrderProductDAO orderProductDAO;
     private final FavoriteProductDAO favoriteProductDAO;
-    private final RestaurantDAO restaurantDAO;
-    private MutableLiveData<Integer> quantityLiveData;
-    private Context context;
+    private final MutableLiveData<Integer> quantityLiveData = new MutableLiveData<>();
     private int quantity;
     private long productID;
 
     private ProductsRepository productsRepository;
+    private OrderRepository orderRepository;
+    private AuthRepository authRepository;
 
     public HomeProductDetailsFragmentViewModel(@NonNull Application application) {
         super(application);
-        this.context = application;
-        this.orderProductDAO = AppDataBase.getInstance(application).getOrderProductDAO();
         this.favoriteProductDAO = AppDataBase.getInstance(application).getFavoriteProductDAO();
-        this.restaurantDAO = AppDataBase.getInstance(application).getRestaurantDAO();
-        this.quantityLiveData = new MutableLiveData<>();
     }
 
     public void initializeRepositories(Activity activity){
         this.productsRepository = new ProductsRepository(activity);
+        this.orderRepository = new OrderRepository(activity);
+        this.authRepository = new AuthRepository(activity);
     }
 
     public LiveData<Product> getProduct(long productId){
+        this.productID = productId;
         return this.productsRepository.getProductById(productId);
     }
 
@@ -59,9 +64,16 @@ public class HomeProductDetailsFragmentViewModel extends AndroidViewModel {
         this.quantity = 1;
         this.quantityLiveData.postValue(quantity);
     }
-    public void addProducts(boolean forLater){
-        int state = forLater ? OrderProduct.WAITING_APPROVAL_STATE : OrderProduct.PENDING_STATE;
-        //TODO adicionar o produto
+    public void addProducts(){
+        List<InsertOrderProductRequest> productsToAdd = new ArrayList<>();
+        for(int i = 1; i<= quantity; i++){
+            productsToAdd.add(new InsertOrderProductRequest(
+                    this.authRepository.getSavedEmail(),
+                    this.orderRepository.getSavedOrderId(),
+                    this.productID
+            ));
+        }
+        this.orderRepository.insertOrderProducts(productsToAdd);
     }
 
     public LiveData<FavoriteProduct> getFavoriteProduct(){

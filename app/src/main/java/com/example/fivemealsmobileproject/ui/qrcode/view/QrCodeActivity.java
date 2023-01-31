@@ -51,6 +51,7 @@ public class QrCodeActivity extends AppCompatActivity {
                         int code = Integer.parseInt(result.getText());
                         viewModel.getTableFromId(code).observe(lifecycleOwner, success -> {
                             if(success){
+                                viewModel.getOrderFromTable();
                                 MainActivity.startActivity(context);
                             }else {
                                 Toast.makeText(context, "Invalid code", Toast.LENGTH_SHORT).show();

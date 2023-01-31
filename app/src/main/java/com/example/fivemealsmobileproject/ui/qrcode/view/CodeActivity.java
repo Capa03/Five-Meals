@@ -59,6 +59,7 @@ public class CodeActivity extends AppCompatActivity {
                 if(s.length() == 8){
                     viewModel.getTableFromId(Integer.parseInt(s.toString())).observe(lifecycleOwner, success -> {
                         if(success){
+                            viewModel.getOrderFromTable();
                             MainActivity.startActivity(context);
                         }else {
                             Toast.makeText(context, "Invalid code", Toast.LENGTH_SHORT).show();

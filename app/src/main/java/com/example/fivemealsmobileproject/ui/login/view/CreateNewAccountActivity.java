@@ -27,6 +27,8 @@ public class CreateNewAccountActivity extends AppCompatActivity {
     private TextView showHidePassword;
     private TextView showHideConfirmPassword;
 
+    private Context context;
+
     private ViewModelCreateAccount viewModel;
     public static void startActivity(Context context) {
         Intent intent = new Intent(context, CreateNewAccountActivity.class);
@@ -39,6 +41,8 @@ public class CreateNewAccountActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create_new_account);
         cacheViews();
+
+        this.context = this;
 
         this.viewModel = new ViewModelProvider(this).get(ViewModelCreateAccount.class);
 
@@ -110,7 +114,7 @@ public class CreateNewAccountActivity extends AppCompatActivity {
                 if(success){
                     this.viewModel.getToken().observe(this, tokenSuccess -> {
                         if(tokenSuccess){
-                            CodeActivity.startActivity(getApplicationContext());
+                            CodeActivity.startActivity(context);
                             finish();
                         }
                     });

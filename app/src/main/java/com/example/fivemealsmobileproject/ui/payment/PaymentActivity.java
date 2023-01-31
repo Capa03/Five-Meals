@@ -47,10 +47,14 @@ public class PaymentActivity extends AppCompatActivity implements AdapterView.On
             spinnerMethod.setOnItemSelectedListener(this);
         }
 
+        //TODO FIX THIS
+        /*
         this.paymentProducts = AppDataBase.getInstance(this).getOrderProductDAO().getAllPaymentProducts(
                 SessionManager.getActiveSession(this),
                 TableInfo.getRestaurant().getRestaurantID()
         );
+        */
+
 
         RecyclerView recyclerView = findViewById(R.id.recyclerViewActivityPayment);
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this);

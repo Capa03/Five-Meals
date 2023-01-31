@@ -1,20 +1,17 @@
 package com.example.fivemealsmobileproject.datasource.models;
 
 
-import androidx.room.Entity;
-import androidx.room.PrimaryKey;
-
 public class Table {
-    private final int tableID;
+    private final int id;
     private final int restaurantID;
 
-    public Table(int tableID, int restaurantID) {
-        this.tableID = tableID;
+    public Table(int id, int restaurantID) {
+        this.id = id;
         this.restaurantID = restaurantID;
     }
 
-    public int getTableID() {
-        return tableID;
+    public int getId() {
+        return id;
     }
     public int getRestaurantID() {
         return restaurantID;

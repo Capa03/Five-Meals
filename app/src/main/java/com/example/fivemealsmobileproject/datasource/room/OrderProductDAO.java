@@ -4,6 +4,7 @@ import androidx.lifecycle.LiveData;
 import androidx.room.Dao;
 import androidx.room.Delete;
 import androidx.room.Insert;
+import androidx.room.OnConflictStrategy;
 import androidx.room.Query;
 import androidx.room.Update;
 
@@ -17,8 +18,8 @@ public interface OrderProductDAO {
     @Query("SELECT * FROM OrderProduct")
     List<OrderProduct> getAllProducts();
 
-    @Query("SELECT * FROM OrderProduct WHERE tableID = :tableID GROUP BY productID")
-    LiveData<List<OrderProduct>> getAllProductsNoDupes(long tableID);
+    @Query("SELECT * FROM OrderProduct WHERE orderId = :orderId GROUP BY productID")
+    LiveData<List<OrderProduct>> getAllProductsNoDupes(long orderId);
 
     @Query("SELECT COUNT(productID) FROM OrderProduct WHERE productID = :productID GROUP BY productID")
     LiveData<Integer> getQuantityFromID(long productID);
@@ -29,6 +30,7 @@ public interface OrderProductDAO {
     @Query("DELETE FROM OrderProduct")
     void clearCurrentOrder();
 
+    /*
     @Query("SELECT Product.name as productName, COUNT(OrderProduct.productID) as quantity, Product.price as unitPrice " +
             "FROM OrderProduct " +
             "INNER JOIN Product ON " +
@@ -36,11 +38,11 @@ public interface OrderProductDAO {
             "WHERE OrderProduct.username = :username AND OrderProduct.tableID = :restaurantId " +
             "GROUP BY productID")
     List<PaymentProduct> getAllPaymentProducts(String username, long restaurantId);
+    */
 
 
-
-    @Insert
-    void insertOrderProduct(OrderProduct orderProduct);
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    void insertOrderProducts(List<OrderProduct> orderProduct);
 
     @Update
     void updateOrderProduct(OrderProduct orderProduct);

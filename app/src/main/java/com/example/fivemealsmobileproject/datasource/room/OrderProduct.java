@@ -6,29 +6,27 @@ import androidx.room.PrimaryKey;
 @Entity
 public class OrderProduct {
 
-    public static int PROCESSING_STATE = 0;
-    public static int PENDING_STATE = 1;
-    public static int WAITING_APPROVAL_STATE = 2;
-    public static int DELIVERED_STATE = 3;
+    @PrimaryKey(autoGenerate = false)
+    private final long orderProductID;
+    private final long orderId;
+    private final String userEmail;
+    private final String orderedTime;
 
-    @PrimaryKey(autoGenerate = true)
-    private long orderProductID;
-    private String username;
-    private long tableID;
-    private int state;
-    private long orderedTime;
+    private final long productID;
+    private final String productName;
+    private final Float productPrice;
+    private final float productMinAverageTime;
+    private final float productMaxAverageTime;
+    private final String imgLink;
 
-    private long productID;
-    private String productName;
-    private Float productPrice;
-    private float productMinAverageTime;
-    private float productMaxAverageTime;
-    private String imgLink;
+    private final int stepsMade;
+    private final int maxSteps;
+    private final boolean paid;
 
-    public OrderProduct(String username, long tableID, int state, long orderedTime, long productID, String productName, float productPrice, float productMinAverageTime, float productMaxAverageTime, String imgLink) {
-        this.username = username;
-        this.tableID = tableID;
-        this.state = state;
+    public OrderProduct(long orderProductID, long orderId, String userEmail, String orderedTime, long productID, String productName, Float productPrice, float productMinAverageTime, float productMaxAverageTime, String imgLink, int stepsMade, int maxSteps, boolean paid) {
+        this.orderProductID = orderProductID;
+        this.orderId = orderId;
+        this.userEmail = userEmail;
         this.orderedTime = orderedTime;
         this.productID = productID;
         this.productName = productName;
@@ -36,33 +34,24 @@ public class OrderProduct {
         this.productMinAverageTime = productMinAverageTime;
         this.productMaxAverageTime = productMaxAverageTime;
         this.imgLink = imgLink;
-    }
-
-    public void setOrderProductID(long orderProductID) {
-        this.orderProductID = orderProductID;
-    }
-
-    public String getImgLink() {
-        return imgLink;
+        this.stepsMade = stepsMade;
+        this.maxSteps = maxSteps;
+        this.paid = paid;
     }
 
     public long getOrderProductID() {
         return orderProductID;
     }
 
-    public String getUsername() {
-        return username;
+    public long getOrderId() {
+        return orderId;
     }
 
-    public long getTableID() {
-        return tableID;
+    public String getUserEmail() {
+        return userEmail;
     }
 
-    public int getState() {
-        return state;
-    }
-
-    public long getOrderedTime() {
+    public String getOrderedTime() {
         return orderedTime;
     }
 
@@ -84,5 +73,21 @@ public class OrderProduct {
 
     public float getProductMaxAverageTime() {
         return productMaxAverageTime;
+    }
+
+    public String getImgLink() {
+        return imgLink;
+    }
+
+    public int getStepsMade() {
+        return stepsMade;
+    }
+
+    public int getMaxSteps() {
+        return maxSteps;
+    }
+
+    public boolean isPaid() {
+        return paid;
     }
 }

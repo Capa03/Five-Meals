@@ -115,6 +115,7 @@ public class OrderFragment extends Fragment {
         };
         handler.post(runnable);
         */
+        this.viewModel.fetchData();
         checkIfIsEmpty();
     }
 

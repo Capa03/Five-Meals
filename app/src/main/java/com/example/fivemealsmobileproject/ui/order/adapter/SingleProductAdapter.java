@@ -1,8 +1,6 @@
 package com.example.fivemealsmobileproject.ui.order.adapter;
 
-import android.app.AlertDialog;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,7 +14,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.fivemealsmobileproject.R;
 import com.example.fivemealsmobileproject.datasource.room.OrderProduct;
-import com.example.fivemealsmobileproject.ui.main.TimeHelper;
+import com.example.fivemealsmobileproject.ui.main.ProgressHelper;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -39,37 +37,21 @@ public class SingleProductAdapter extends RecyclerView.Adapter<SingleProductAdap
     @Override
     public BaseProductViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         this.context = parent.getContext();
-
-        if (viewType == OrderProduct.PENDING_STATE) {
-            View layout = LayoutInflater.from(parent.getContext()).inflate(R.layout.card_order_single_product_type_pending, parent, false);
-            return new PendingProductViewHolder(layout);
-        } else if (viewType == OrderProduct.WAITING_APPROVAL_STATE) {
-            View layout = LayoutInflater.from(parent.getContext()).inflate(R.layout.card_order_single_product_type_waiting_for_approval, parent, false);
-            return new WaitingProductViewHolder(layout);
-        } else if (viewType == OrderProduct.PROCESSING_STATE) {
-            View layout = LayoutInflater.from(parent.getContext()).inflate(R.layout.card_order_single_product_type_processing, parent, false);
-            return new ProcessingProductViewHolder(layout);
-        } else {
-            View layout = LayoutInflater.from(parent.getContext()).inflate(R.layout.card_order_single_product_type_delivered, parent, false);
-            return new DeliveredProductViewHolder(layout);
-        }
-    }
-
-    @Override
-    public int getItemViewType(int position) {
-        return products.get(position).getState();
+        View layout = LayoutInflater.from(parent.getContext()).inflate(R.layout.card_order_single_product_type_processing, parent, false);
+        return new ProcessingProductViewHolder(layout);
     }
 
     @Override
     public void onBindViewHolder(@NonNull BaseProductViewHolder holder, int position) {
         OrderProduct orderProduct = products.get(position);
 
-        holder.setName(orderProduct.getProductName());
-        holder.setPrice(orderProduct.getProductPrice());
-        PendingProductViewHolder pendingProductViewHolder  = (PendingProductViewHolder) holder;
-        pendingProductViewHolder.removeButton.setOnClickListener(view -> {
-            singleProductEventListener.onRemoveProductClick(orderProduct, position);
-        });
+        ProcessingProductViewHolder processingProductViewHolder = (ProcessingProductViewHolder) holder;
+        processingProductViewHolder.setName(orderProduct.getProductName());
+        processingProductViewHolder.setPrice(orderProduct.getProductPrice());
+        int progress = ProgressHelper.getProgressInPercentage(orderProduct.getStepsMade(),orderProduct.getMaxSteps());
+
+        processingProductViewHolder.setProgressbar(progress);
+        processingProductViewHolder.setProgressText(progress + "%");
 
         // TODO rever os states
         /*
@@ -268,12 +250,12 @@ public class SingleProductAdapter extends RecyclerView.Adapter<SingleProductAdap
             this.textViewPrice.setText((price + " €"));
         }
 
-        public void setProgress(int progress) {
+        public void setProgressbar(int progress) {
             this.progressBar.setProgress(progress);
         }
 
-        public void setTime(String time) {
-            this.textViewTimePassed.setText(time);
+        public void setProgressText(String text) {
+            this.textViewTimePassed.setText(text);
         }
     }
 

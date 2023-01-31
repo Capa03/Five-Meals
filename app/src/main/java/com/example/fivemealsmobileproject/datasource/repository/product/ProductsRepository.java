@@ -1,19 +1,15 @@
 package com.example.fivemealsmobileproject.datasource.repository.product;
 
 import android.app.Activity;
-import android.content.Context;
-import android.content.SharedPreferences;
 import android.widget.Toast;
 
 import androidx.lifecycle.LifecycleOwner;
 import androidx.lifecycle.LiveData;
-import androidx.lifecycle.MutableLiveData;
 
 import com.example.fivemealsmobileproject.datasource.models.CategoryWithProducts;
 import com.example.fivemealsmobileproject.datasource.models.auth.GetTokenRequest;
-import com.example.fivemealsmobileproject.datasource.remote.AuthService;
 import com.example.fivemealsmobileproject.datasource.remote.ProductsService;
-import com.example.fivemealsmobileproject.datasource.repository.LocalizationRepository;
+import com.example.fivemealsmobileproject.datasource.repository.localization.LocalizationRepository;
 import com.example.fivemealsmobileproject.datasource.repository.auth.AuthRepository;
 import com.example.fivemealsmobileproject.datasource.room.AppDataBase;
 import com.example.fivemealsmobileproject.datasource.room.Category;

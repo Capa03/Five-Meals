@@ -20,7 +20,7 @@ import com.bumptech.glide.request.RequestListener;
 import com.bumptech.glide.request.target.Target;
 import com.example.fivemealsmobileproject.R;
 import com.example.fivemealsmobileproject.datasource.room.Product;
-import com.example.fivemealsmobileproject.ui.main.TimeHelper;
+import com.example.fivemealsmobileproject.ui.main.ProgressHelper;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -48,7 +48,7 @@ public class ProductListAdapter extends RecyclerView.Adapter<ProductListAdapter.
         holder.setName(product.getName());
         int minTime = (int) product.getMinTime();
         int maxTime = (int) product.getMaxTime();
-        holder.setTime(TimeHelper.getTimeToString(minTime, maxTime));
+        holder.setTime(ProgressHelper.getTimeToString(minTime, maxTime));
         holder.setPrice(product.getPrice());
 
         holder.setImage(product.getImgLink());

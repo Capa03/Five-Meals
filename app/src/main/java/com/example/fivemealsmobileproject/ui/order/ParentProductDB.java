@@ -1,11 +1,14 @@
 package com.example.fivemealsmobileproject.ui.order;
 
+import android.app.Activity;
 import android.content.Context;
 
 import androidx.lifecycle.LifecycleOwner;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
+import com.example.fivemealsmobileproject.datasource.repository.localization.LocalizationRepository;
+import com.example.fivemealsmobileproject.datasource.repository.order.OrderRepository;
 import com.example.fivemealsmobileproject.datasource.room.AppDataBase;
 import com.example.fivemealsmobileproject.datasource.room.OrderProduct;
 import com.example.fivemealsmobileproject.datasource.room.OrderProductDAO;
@@ -18,13 +21,15 @@ import java.util.List;
 public class ParentProductDB {
 
     private static ParentProductDB INSTANCE;
+    private static OrderRepository orderRepository;
+
     private MutableLiveData<List<ParentOrderProduct>> parentOrderProductLiveData = new MutableLiveData<>();
     private OrderProductDAO orderProductDAO;
 
-    private ParentProductDB(Context context, LifecycleOwner observerOwner){
-        this.orderProductDAO = AppDataBase.getInstance(context).getOrderProductDAO();
-        this.orderProductDAO.getAllProductsNoDupes(TableInfo.getTable().getTableID()).
-                observe(observerOwner, orderProducts -> {
+    private ParentProductDB(Activity activity){
+        this.orderProductDAO = AppDataBase.getInstance(activity).getOrderProductDAO();
+        this.orderProductDAO.getAllProductsNoDupes(orderRepository.getSavedOrderId()).
+                observe((LifecycleOwner) activity, orderProducts -> {
                     List<ParentOrderProduct> results = new ArrayList<>();
                     for (OrderProduct queryOrderProduct: orderProducts) {
                         boolean exists = false;
@@ -60,9 +65,10 @@ public class ParentProductDB {
         return parentOrderProductLiveData;
     }
 
-    public static ParentProductDB getInstance(Context context, LifecycleOwner observerOwner){
+    public static ParentProductDB getInstance(Activity activity){
         if(INSTANCE == null){
-            INSTANCE = new ParentProductDB(context, observerOwner);
+            orderRepository = new OrderRepository(activity);
+            INSTANCE = new ParentProductDB(activity);
         }
         return INSTANCE;
     }
