@@ -10,5 +10,5 @@ public class ProgressHelper {
     public static int getProgressInPercentage(int stepsMade, int maxSteps){
         return (stepsMade*100/maxSteps);
     }
-    
+
 }

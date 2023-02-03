@@ -131,6 +131,7 @@ public class OrderRepository {
                         }
                     });
                 } else {
+
                     orderproductDAO.insertOrderProducts(response.body());
                 }
             }

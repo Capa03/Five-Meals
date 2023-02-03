@@ -83,8 +83,8 @@ public class CreateNewAccountActivity extends AppCompatActivity {
         boolean somethingEmpty = false;
         String username = this.username.getText().toString();
         String email = this.email.getText().toString();
-        int password = this.password.getText().toString().hashCode();
-        int confirmPassword = this.confirmPassword.getText().toString().hashCode();
+        String password = this.password.getText().toString();
+        String confirmPassword = this.confirmPassword.getText().toString();
 
         if (username.isEmpty()) {
             this.username.setError("Empty Username");
@@ -94,16 +94,16 @@ public class CreateNewAccountActivity extends AppCompatActivity {
             this.email.setError("Empty Email");
             somethingEmpty = true;
         }
-        if (password == 0) {
+        if (password.equals("")) {
             this.password.setError("Empty Password");
             somethingEmpty = true;
         }
-        if (confirmPassword == 0) {
+        if (confirmPassword.equals("")) {
             this.confirmPassword.setError("Password empty");
             somethingEmpty = true;
         }
 
-        if (confirmPassword != password) {
+        if (!confirmPassword.equals(password)) {
             this.confirmPassword.setError("Password does not match");
             somethingEmpty = true;
         }

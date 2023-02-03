@@ -62,8 +62,8 @@ public class LoginActivity extends AppCompatActivity {
     public void onSignIn(View view) {
 
         String email = this.editTextLoginEmail.getText().toString();
-        int password = this.editTextLoginPassword.getText().toString().hashCode();
-        GetTokenRequest getTokenRequest = new GetTokenRequest(email, String.valueOf(password));
+        String password = this.editTextLoginPassword.getText().toString();
+        GetTokenRequest getTokenRequest = new GetTokenRequest(email, password);
         this.viewModel.getToken(getTokenRequest).observe(this, tokenSuccess -> {
             if(tokenSuccess){
                 CodeActivity.startActivity(context);
