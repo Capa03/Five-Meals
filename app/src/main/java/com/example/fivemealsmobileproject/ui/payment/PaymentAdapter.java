@@ -10,15 +10,16 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.fivemealsmobileproject.R;
+import com.example.fivemealsmobileproject.datasource.room.OrderProduct;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class PaymentAdapter extends RecyclerView.Adapter<PaymentAdapter.PaymentViewHolder> {
 
-    private List<PaymentProduct> paymentProducts;
+    private List<OrderProduct> orderProducts = new ArrayList<>();
 
-    public PaymentAdapter(List<PaymentProduct> paymentMethods){
-        this.paymentProducts = paymentMethods;
+    public PaymentAdapter(){
     }
 
     @NonNull
@@ -31,18 +32,19 @@ public class PaymentAdapter extends RecyclerView.Adapter<PaymentAdapter.PaymentV
 
     @Override
     public void onBindViewHolder(@NonNull PaymentViewHolder holder, int position) {
-      PaymentProduct paymentProduct = this.paymentProducts.get(position);
+      OrderProduct orderProduct = this.orderProducts.get(position);
+      holder.setName(orderProduct.getProductName());
+      holder.setUnitPrice(orderProduct.getProductPrice());
+    }
 
-      holder.setQuantity(paymentProduct.getQuantity());
-      holder.setName(paymentProduct.getProductName());
-      holder.setUnitPrice(paymentProduct.getUnitPrice());
-      holder.setTotalPrice(paymentProduct.getUnitPrice() * paymentProduct.getQuantity());
-
+    public void updateDate(List<OrderProduct> orderProducts){
+        this.orderProducts = orderProducts;
+        notifyDataSetChanged();
     }
 
     @Override
     public int getItemCount() {
-        return paymentProducts.size();
+        return this.orderProducts.size();
     }
 
     public class PaymentViewHolder extends RecyclerView.ViewHolder {
@@ -56,9 +58,7 @@ public class PaymentAdapter extends RecyclerView.Adapter<PaymentAdapter.PaymentV
             super(itemView);
             this.context = itemView.getContext();
             this.name = itemView.findViewById(R.id.textViewPaymentActivityNameProduct);
-            this.quantity = itemView.findViewById(R.id.textViewPaymentActivityQuantity);
             this.priceUnit = itemView.findViewById(R.id.textViewPaymentActivityUnitPrice);
-            this.priceTotal = itemView.findViewById(R.id.textViewPaymentActivityTotalPrice);
         }
 
         public void setQuantity(int quantity){

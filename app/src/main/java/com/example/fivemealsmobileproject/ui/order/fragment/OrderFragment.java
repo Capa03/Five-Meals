@@ -78,12 +78,10 @@ public class OrderFragment extends Fragment {
         });
 
 
-        this.orderedProductsAdapter = new CurrentOrderAdapter(requireActivity(), new CurrentOrderAdapter.ParentProductEventListener() {
-            @Override
-            public void onRemoveProductClick(OrderProduct orderProduct, int position) {
-                AppDataBase.getInstance(view.getContext()).getOrderProductDAO().deleteOrderProduct(orderProduct);
-                checkIfIsEmpty();
-            }
+        this.orderedProductsAdapter = new CurrentOrderAdapter(requireActivity(), orderProduct -> {
+            // TODO DELETE REQUEST
+            viewModel.deleteOrderProduct(orderProduct);
+            checkIfIsEmpty();
         });
         RecyclerView orderedRecyclerView = view.findViewById(R.id.recyclerViewOrderFragment);
         orderedRecyclerView.setAdapter(orderedProductsAdapter);

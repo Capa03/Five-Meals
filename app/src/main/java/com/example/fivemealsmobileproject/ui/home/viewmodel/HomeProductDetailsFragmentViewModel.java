@@ -2,7 +2,6 @@ package com.example.fivemealsmobileproject.ui.home.viewmodel;
 
 import android.app.Activity;
 import android.app.Application;
-import android.content.Context;
 
 import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
@@ -11,19 +10,12 @@ import androidx.lifecycle.MutableLiveData;
 
 import com.example.fivemealsmobileproject.datasource.models.order.InsertOrderProductRequest;
 import com.example.fivemealsmobileproject.datasource.repository.auth.AuthRepository;
-import com.example.fivemealsmobileproject.datasource.repository.localization.LocalizationRepository;
 import com.example.fivemealsmobileproject.datasource.repository.order.OrderRepository;
 import com.example.fivemealsmobileproject.datasource.repository.product.ProductsRepository;
 import com.example.fivemealsmobileproject.datasource.room.AppDataBase;
 import com.example.fivemealsmobileproject.datasource.room.FavoriteProduct;
 import com.example.fivemealsmobileproject.datasource.room.FavoriteProductDAO;
-import com.example.fivemealsmobileproject.datasource.room.OrderProduct;
-import com.example.fivemealsmobileproject.datasource.room.OrderProductDAO;
 import com.example.fivemealsmobileproject.datasource.room.Product;
-import com.example.fivemealsmobileproject.datasource.room.ProductDAO;
-import com.example.fivemealsmobileproject.datasource.room.RestaurantDAO;
-import com.example.fivemealsmobileproject.ui.login.SessionManager;
-import com.example.fivemealsmobileproject.ui.main.TableInfo;
 
 import java.util.ArrayList;
 import java.util.List;

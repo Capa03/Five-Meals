@@ -1,6 +1,8 @@
 package com.example.fivemealsmobileproject.ui.payment;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -15,7 +17,10 @@ import android.widget.TextView;
 
 import com.example.fivemealsmobileproject.R;
 import com.example.fivemealsmobileproject.datasource.room.AppDataBase;
+import com.example.fivemealsmobileproject.datasource.room.OrderProduct;
+import com.example.fivemealsmobileproject.datasource.room.Product;
 import com.example.fivemealsmobileproject.ui.login.SessionManager;
+import com.example.fivemealsmobileproject.ui.main.MainActivityViewModel;
 import com.example.fivemealsmobileproject.ui.main.TableInfo;
 
 import java.util.ArrayList;
@@ -24,11 +29,10 @@ import java.util.List;
 public class PaymentActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
 
     private Spinner spinnerMethod;
-    private ArrayList<PaymentMethod> paymentMethods;
-    private PaymentAdapter adapter;
     private TextView totalSummary;
-    private TextView taxSummary;
-    private List<PaymentProduct> paymentProducts;
+    private PaymentActivityViewModel viewModel;
+    private List<OrderProduct> orderProductsToPay;
+
     public static void startActivity(Context context) {
         Intent intent = new Intent(context, PaymentActivity.class);
         context.startActivity(intent);
@@ -39,51 +43,39 @@ public class PaymentActivity extends AppCompatActivity implements AdapterView.On
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_payment);
         this.cacheViews();
-        this.paymentMethods = PaymentMethodsDB.getPaymentMethods();
+        ArrayList<PaymentMethod> paymentMethods = PaymentMethodsDB.getPaymentMethods();
 
-        SpinnerAdapter adapterSpinner = new SpinnerAdapter(this,paymentMethods);
+        this.viewModel = new ViewModelProvider(this).get(PaymentActivityViewModel.class);
+        viewModel.initializeRepository(this);
+
+        SpinnerAdapter adapterSpinner = new SpinnerAdapter(this, paymentMethods);
         if(spinnerMethod != null){
             spinnerMethod.setAdapter(adapterSpinner);
             spinnerMethod.setOnItemSelectedListener(this);
         }
 
-        //TODO FIX THIS
-        /*
-        this.paymentProducts = AppDataBase.getInstance(this).getOrderProductDAO().getAllPaymentProducts(
-                SessionManager.getActiveSession(this),
-                TableInfo.getRestaurant().getRestaurantID()
-        );
-        */
 
-
+        // TODO Pay all and update to the api
         RecyclerView recyclerView = findViewById(R.id.recyclerViewActivityPayment);
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this);
-        this.adapter = new PaymentAdapter(paymentProducts);
+        PaymentAdapter adapter = new PaymentAdapter();
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(layoutManager);
 
-        this.calculateTotalPrice();
-        Context context = this;
+        viewModel.getOrderProducts().observe(this, orderProducts -> {
+            orderProductsToPay = orderProducts;
+            adapter.updateDate(orderProducts);
+            totalSummary.setText(String.format("Total: %s€", viewModel.calculateTotalPrice(orderProducts)));
+        });
+
         ImageView imageViewGoBack = findViewById(R.id.imageViewToolBarGoBack);
-        imageViewGoBack.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                finish();
-            }
+        imageViewGoBack.setOnClickListener(imageViewGoBackView -> {
+            finish();
         });
 
     }
 
-    private void calculateTotalPrice(){
-        float total = 0;
-        for (PaymentProduct paymentProduct : this.paymentProducts) {
-            float unitPrice = paymentProduct.getUnitPrice();
-            float quantityProduct = paymentProduct.getQuantity();
-            float totalPriceProduct = unitPrice * quantityProduct;
-            total = total + totalPriceProduct;
-            this.totalSummary.setText(String.format("Total: %s€", total));
-        }
-    }
+
 
     @Override
     public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
@@ -96,5 +88,10 @@ public class PaymentActivity extends AppCompatActivity implements AdapterView.On
     private void cacheViews(){
         this.spinnerMethod = findViewById(R.id.spinnerActivityPaymentPaymentMethod);
         this.totalSummary = findViewById(R.id.textViewActivityPaymentTotal);
+    }
+
+    public void onPayAllClick(View view) {
+        this.viewModel.payAll(orderProductsToPay);
+        finish();
     }
 }

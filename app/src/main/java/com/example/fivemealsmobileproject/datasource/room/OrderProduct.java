@@ -22,8 +22,9 @@ public class OrderProduct {
     private final int stepsMade;
     private final int maxSteps;
     private final boolean paid;
+    private final boolean delivered;
 
-    public OrderProduct(long orderProductID, long orderId, String userEmail, String orderedTime, long productID, String productName, Float productPrice, float productMinAverageTime, float productMaxAverageTime, String imgLink, int stepsMade, int maxSteps, boolean paid) {
+    public OrderProduct(long orderProductID, long orderId, String userEmail, String orderedTime, long productID, String productName, Float productPrice, float productMinAverageTime, float productMaxAverageTime, String imgLink, int stepsMade, int maxSteps, boolean paid, boolean delivered) {
         this.orderProductID = orderProductID;
         this.orderId = orderId;
         this.userEmail = userEmail;
@@ -37,6 +38,7 @@ public class OrderProduct {
         this.stepsMade = stepsMade;
         this.maxSteps = maxSteps;
         this.paid = paid;
+        this.delivered = delivered;
     }
 
     public long getOrderProductID() {
@@ -89,5 +91,9 @@ public class OrderProduct {
 
     public boolean isPaid() {
         return paid;
+    }
+
+    public boolean isDelivered() {
+        return delivered;
     }
 }

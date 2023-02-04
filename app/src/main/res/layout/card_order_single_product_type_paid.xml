@@ -3,7 +3,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="64dp">
+    android:layout_height="64dp"
+    android:background="#65EAD948">
 
     <TextView
         android:id="@+id/textViewOrderSingleProductName"
@@ -32,26 +33,23 @@
         app:layout_constraintTop_toTopOf="@+id/textViewOrderSingleProductName" />
 
     <ImageView
-        android:id="@+id/imageViewOrderRemoveSingleProductButton"
-        android:layout_width="32dp"
-        android:layout_height="32dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="16dp"
-        android:layout_marginBottom="8dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/ic_baseline_cancel_24" />
-
-    <CheckBox
-        android:id="@+id/checkBoxSingleProductOrderNow"
+        android:id="@+id/imageView6"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="16dp"
-        android:text="Order Now"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="@+id/imageViewOrderRemoveSingleProductButton"
-        app:layout_constraintEnd_toStartOf="@+id/imageViewOrderRemoveSingleProductButton"
-        app:layout_constraintTop_toTopOf="@+id/imageViewOrderRemoveSingleProductButton" />
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/imageView7"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/ic_baseline_euro_24" />
+
+    <ImageView
+        android:id="@+id/imageView7"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="16dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/ic_baseline_check_box_24" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

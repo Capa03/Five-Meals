@@ -8,15 +8,13 @@ import androidx.room.OnConflictStrategy;
 import androidx.room.Query;
 import androidx.room.Update;
 
-import com.example.fivemealsmobileproject.ui.payment.PaymentProduct;
-
 import java.util.List;
 
 @Dao
 public interface OrderProductDAO {
 
-    @Query("SELECT * FROM OrderProduct")
-    List<OrderProduct> getAllProducts();
+    @Query("SELECT * FROM OrderProduct WHERE orderId = :orderId AND NOT OrderProduct.paid AND OrderProduct.delivered")
+    LiveData<List<OrderProduct>> getAllUnpaidDeliveredProducts(long orderId);
 
     @Query("SELECT * FROM OrderProduct WHERE orderId = :orderId GROUP BY productID")
     LiveData<List<OrderProduct>> getAllProductsNoDupes(long orderId);
@@ -29,17 +27,6 @@ public interface OrderProductDAO {
 
     @Query("DELETE FROM OrderProduct")
     void clearCurrentOrder();
-
-    /*
-    @Query("SELECT Product.name as productName, COUNT(OrderProduct.productID) as quantity, Product.price as unitPrice " +
-            "FROM OrderProduct " +
-            "INNER JOIN Product ON " +
-            "Product.id = OrderProduct.productID " +
-            "WHERE OrderProduct.username = :username AND OrderProduct.tableID = :restaurantId " +
-            "GROUP BY productID")
-    List<PaymentProduct> getAllPaymentProducts(String username, long restaurantId);
-    */
-
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     void insertOrderProducts(List<OrderProduct> orderProduct);

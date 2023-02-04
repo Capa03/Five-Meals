@@ -17,6 +17,7 @@ import com.example.fivemealsmobileproject.datasource.room.OrderProductDAO;
 import com.example.fivemealsmobileproject.ui.order.ParentOrderProduct;
 import com.example.fivemealsmobileproject.ui.order.ParentProductDB;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class OrderFragmentViewModel extends AndroidViewModel {
@@ -37,5 +38,11 @@ public class OrderFragmentViewModel extends AndroidViewModel {
 
     public void fetchData(){
         this.orderRepository.refreshOrderProducts();
+    }
+
+    public void deleteOrderProduct(OrderProduct orderProduct) {
+        List<OrderProduct> requestOrderProducts = new ArrayList<>();
+        requestOrderProducts.add(orderProduct);
+        this.orderRepository.deleteOrderProduct(requestOrderProducts);
     }
 }

@@ -92,12 +92,12 @@ public class CurrentOrderAdapter extends RecyclerView.Adapter<CurrentOrderAdapte
     }
 
     @Override
-    public void onRemoveProductClick(OrderProduct orderProduct, int position) {
-        parentProductEventListener.onRemoveProductClick(orderProduct, position);
+    public void onRemoveProductClick(OrderProduct orderProduct) {
+        parentProductEventListener.onRemoveProductClick(orderProduct);
     }
 
     public interface ParentProductEventListener{
-        void onRemoveProductClick(OrderProduct orderProduct, int position);
+        void onRemoveProductClick(OrderProduct orderProduct);
     }
 
     public class CurrentOrderViewHolder extends RecyclerView.ViewHolder {

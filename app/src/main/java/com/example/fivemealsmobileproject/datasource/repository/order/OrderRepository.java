@@ -7,18 +7,19 @@ import android.widget.Toast;
 
 import androidx.lifecycle.LifecycleOwner;
 import androidx.lifecycle.LiveData;
-import androidx.lifecycle.MutableLiveData;
 
 import com.example.fivemealsmobileproject.datasource.models.auth.GetTokenRequest;
 import com.example.fivemealsmobileproject.datasource.models.order.GetOrderRequest;
 import com.example.fivemealsmobileproject.datasource.models.order.GetOrderResponse;
 import com.example.fivemealsmobileproject.datasource.models.order.InsertOrderProductRequest;
+import com.example.fivemealsmobileproject.datasource.models.order.OrderProductPatchDTO;
 import com.example.fivemealsmobileproject.datasource.remote.OrderService;
 import com.example.fivemealsmobileproject.datasource.repository.auth.AuthRepository;
 import com.example.fivemealsmobileproject.datasource.room.AppDataBase;
 import com.example.fivemealsmobileproject.datasource.room.OrderProduct;
 import com.example.fivemealsmobileproject.datasource.room.OrderProductDAO;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import retrofit2.Call;
@@ -131,7 +132,7 @@ public class OrderRepository {
                         }
                     });
                 } else {
-
+                    orderproductDAO.clearCurrentOrder();
                     orderproductDAO.insertOrderProducts(response.body());
                 }
             }
@@ -145,7 +146,86 @@ public class OrderRepository {
         });
     }
 
-    public LiveData<List<OrderProduct>> getOrderProductsLiveData(){
+    public LiveData<List<OrderProduct>> getOrderProductsNoDupesLiveData(){
         return this.orderproductDAO.getAllProductsNoDupes(getSavedOrderId());
+    }
+
+    public LiveData<List<OrderProduct>> getOrderProductsLiveData(){
+        return this.orderproductDAO.getAllUnpaidDeliveredProducts(getSavedOrderId());
+    }
+
+
+
+
+    public void payAll(List<OrderProduct> orderProductsToPay) {
+        List<OrderProductPatchDTO> requestList = new ArrayList<>();
+        for (OrderProduct orderproduct: orderProductsToPay) {
+            requestList.add(new OrderProductPatchDTO(
+                    orderproduct.getOrderId(),
+                    orderproduct.getOrderProductID(),
+                    orderproduct.getStepsMade(),
+                    true,
+                    orderproduct.isDelivered()
+            ));
+        }
+
+        this.orderService.updateOrderProducts(requestList, this.authRepository.getSavedToken()).enqueue(new Callback<Void>() {
+            @Override
+            public void onResponse(Call<Void> call, Response<Void> response) {
+                if(response.code() == 401){
+                    Toast.makeText(activity, "Fetching new token", Toast.LENGTH_LONG).show();
+                    GetTokenRequest getTokenRequest = new GetTokenRequest(
+                            authRepository.getSavedEmail(),
+                            authRepository.getSavedPasswordHash());
+                            authRepository.fetchToken(getTokenRequest).observe((LifecycleOwner) activity, tokenSuccess -> {
+                        if(tokenSuccess){
+                            payAll(orderProductsToPay);
+                        }
+                    });
+                }else {
+                    refreshOrderProducts();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<Void> call, Throwable t) {
+                t.getStackTrace();
+                //TODO Make strings
+                Toast.makeText(activity, "There was a connection Error", Toast.LENGTH_LONG).show();
+            }
+        });
+    }
+
+    public void deleteOrderProduct(List<OrderProduct> orderProductList){
+        List<Long> idList = new ArrayList<>();
+        for (OrderProduct orderProduct: orderProductList) {
+            idList.add(orderProduct.getOrderProductID());
+        }
+
+        this.orderService.deleteOrderProducts(idList, this.authRepository.getSavedToken()).enqueue(new Callback<Void>() {
+            @Override
+            public void onResponse(Call<Void> call, Response<Void> response) {
+                if(response.code() == 401){
+                    Toast.makeText(activity, "Fetching new token", Toast.LENGTH_LONG).show();
+                    GetTokenRequest getTokenRequest = new GetTokenRequest(
+                            authRepository.getSavedEmail(),
+                            authRepository.getSavedPasswordHash());
+                    authRepository.fetchToken(getTokenRequest).observe((LifecycleOwner) activity, tokenSuccess -> {
+                        if(tokenSuccess){
+                            deleteOrderProduct(orderProductList);
+                        }
+                    });
+                }else {
+                    refreshOrderProducts();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<Void> call, Throwable t) {
+                t.getStackTrace();
+                //TODO Make strings
+                Toast.makeText(activity, "There was a connection Error", Toast.LENGTH_LONG).show();
+            }
+        });
     }
 }

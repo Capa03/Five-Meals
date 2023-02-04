@@ -24,4 +24,11 @@
     <string name="email">Email</string>
     <string name="logout">Logout</string>
     <string name="changePassword"><![CDATA[Change password >]]></string>
+    <string name="waiting_queue">Waiting in queue…</string>
+    <string name="delete_order">Delete order product</string>
+    <string name="delete_order_confirmation">Do you wish do delete this order product?</string>
+    <string name="yes">Yes</string>
+    <string name="cancel">Cancel</string>
+    <string name="delivered">Delivered</string>
+    <string name="pay_all">Pay All</string>
 </resources>
