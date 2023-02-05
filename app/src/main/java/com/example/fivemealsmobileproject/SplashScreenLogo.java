@@ -6,8 +6,9 @@ import android.os.Handler;
 
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.ViewModelProvider;
 
-import com.example.fivemealsmobileproject.ui.login.SessionManager;
+import com.example.fivemealsmobileproject.ui.SplashScreenLogoViewModel;
 import com.example.fivemealsmobileproject.ui.login.view.PreLoginActivity;
 import com.example.fivemealsmobileproject.ui.qrcode.view.CodeActivity;
 
@@ -20,16 +21,16 @@ public class SplashScreenLogo extends AppCompatActivity {
         setContentView(R.layout.activity_launch);
         Context context = this;
 
-        //SingleUseDataBase.populateRestaurantTables(this);
-        //SingleUseDataBase.populateCategoryTable(this);
-
         ActionBar actionBar = getSupportActionBar();
         if (actionBar != null) {
             actionBar.hide();
         }
 
+        SplashScreenLogoViewModel viewModel = new ViewModelProvider(this).get(SplashScreenLogoViewModel.class);
+
         Runnable r = () -> {
-            if(SessionManager.sessionExists(context)){
+            String email = viewModel.getSavedEmail();
+            if(!email.equals("")){
                 CodeActivity.startActivity(context);
             }else {
                 PreLoginActivity.startActivity(context);

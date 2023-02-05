@@ -46,6 +46,10 @@ public class FavoriteRepository {
         this.favoriteProductDAO = AppDataBase.getInstance(activity).getFavoriteProductDAO();
     }
 
+    public void clearFavorites(){
+        this.favoriteProductDAO.clearTable();
+    }
+
     public void refreshFavorites(){
         this.favoriteService.getAllFavoritesFromEmail(authRepository.getSavedEmail(), authRepository.getSavedToken()).enqueue(new Callback<List<FavoriteProduct>>() {
             @Override

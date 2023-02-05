@@ -9,11 +9,8 @@ import androidx.room.RoomDatabase;
 import com.example.fivemealsmobileproject.datasource.models.Table;
 
 
-@Database(entities = {User.class, Restaurant.class, Product.class, Category.class, OrderProduct.class, FavoriteProduct.class}, version = 1)
+@Database(entities = {Product.class, Category.class, OrderProduct.class, FavoriteProduct.class}, version = 1)
     public abstract class AppDataBase extends RoomDatabase {
-
-        public abstract UserDAO getUserDAO();
-        public abstract RestaurantDAO getRestaurantDAO();
         public abstract ProductDAO getProductDAO();
         public abstract CategoryDAO getCategoryDAO();
         public abstract OrderProductDAO getOrderProductDAO();

@@ -52,6 +52,11 @@ public class ProductsRepository {
         this.activity = activity;
     }
 
+    public void clearData(){
+        this.productDAO.clearProducts();
+        this.categoryDAO.clearCategories();
+    }
+
     public void refreshDataSet(){
         this.productsService.getCategoriesWithProductsByRestaurantId(
                 this.localizationRepository.getSavedRestaurantId(),

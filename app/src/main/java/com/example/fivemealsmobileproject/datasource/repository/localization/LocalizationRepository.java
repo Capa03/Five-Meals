@@ -52,12 +52,20 @@ public class LocalizationRepository {
         this.sharedPreferences.edit().putInt(KEY_RESTAURANT_ID, restaurantId).apply();
     }
 
+    public void clearTableId(){
+        this.sharedPreferences.edit().putInt(KEY_TABLE_ID, 0).apply();
+    }
+
     public int getSavedTableId(){
         return this.sharedPreferences.getInt(KEY_TABLE_ID, 0);
     }
 
     public int getSavedRestaurantId(){
         return this.sharedPreferences.getInt(KEY_RESTAURANT_ID, 0);
+    }
+
+    public void clearRestaurantId(){
+        this.sharedPreferences.edit().putInt(KEY_RESTAURANT_ID, 0).apply();
     }
 
     public LiveData<Boolean> fetchTableById(int tableId){

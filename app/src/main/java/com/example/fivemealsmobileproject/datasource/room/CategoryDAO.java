@@ -13,17 +13,12 @@ import java.util.List;
 @Dao
 public interface CategoryDAO {
 
-    @Query("SELECT * FROM Category")
-    List<Category> getAllCategories();
-
     @Query("SELECT * FROM Category WHERE RestaurantID = :restaurantID")
     LiveData<List<Category>> getAllCategoriesFromRestaurant(long restaurantID);
-
-    @Query("SELECT categoryID FROM Category WHERE RestaurantID = :restaurantID AND categoryName = :categoryName")
-    long getCategoryIDFromRestaurantIdAndCategoryName(long restaurantID, String categoryName);
-
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     void insertCategory(Category category);
 
+    @Query("DELETE FROM Category")
+    void clearCategories();
 }

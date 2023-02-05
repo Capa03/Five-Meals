@@ -53,6 +53,10 @@ public class AuthRepository {
     public String getSavedEmail(){
         return this.sharedPreferences.getString(KEY_EMAIL, "");
     }
+    public void clearEmail(){
+        this.sharedPreferences.edit().putString(KEY_EMAIL, "").apply();
+    }
+
 
     private void savePasswordHash(String hash){
         this.sharedPreferences.edit().putString(KEY_PASS, hash).apply();
@@ -62,16 +66,20 @@ public class AuthRepository {
         return this.sharedPreferences.getString(KEY_PASS, "");
     }
 
+    public void clearPassword(){
+        this.sharedPreferences.edit().putString(KEY_PASS, "").apply();
+    }
+
     private void saveToken(String token){
         this.sharedPreferences.edit().putString(KEY_TOKEN, token).apply();
     }
 
-    public void clearToken(){
-        this.sharedPreferences.edit().putString(KEY_TOKEN, "").apply();
-    }
-
     public String getSavedToken(){
         return "Bearer " + this.sharedPreferences.getString(KEY_TOKEN, "");
+    }
+
+    public void clearToken(){
+        this.sharedPreferences.edit().putString(KEY_TOKEN, "").apply();
     }
 
     public LiveData<Boolean> createUser(UserCreateDTO userIn){

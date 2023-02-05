@@ -62,6 +62,14 @@ public class OrderRepository {
         return this.sharedPreferences.getInt(KEY_ORDER_ID, 0);
     }
 
+    public void clearOrderId(){
+        this.sharedPreferences.edit().putInt(KEY_ORDER_ID, 0).apply();
+    }
+
+    public void clearOrderProducts(){
+        this.orderproductDAO.clearCurrentOrder();
+    }
+
 
     public void fetchOrder(int tableId){
         this.orderService.getActiveOrder(new GetOrderRequest(tableId), this.authRepository.getSavedToken()).enqueue(new Callback<GetOrderResponse>() {

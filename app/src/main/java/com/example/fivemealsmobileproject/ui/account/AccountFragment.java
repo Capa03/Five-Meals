@@ -12,14 +12,12 @@ import androidx.activity.OnBackPressedCallback;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.navigation.NavDirections;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.Navigation;
 
 import com.example.fivemealsmobileproject.R;
-import com.example.fivemealsmobileproject.datasource.room.AppDataBase;
-import com.example.fivemealsmobileproject.datasource.room.User;
+import com.example.fivemealsmobileproject.ui.home.fragment.HomeFragment;
 import com.example.fivemealsmobileproject.ui.login.view.PreLoginActivity;
-import com.example.fivemealsmobileproject.ui.login.SessionManager;
 
 import java.util.Random;
 
@@ -28,6 +26,7 @@ public class AccountFragment extends Fragment {
 
     private Context context;
     private View view;
+    private AccountFragmentLogOut accountFragmentLogOut;
 
     public AccountFragment() {
         // Required empty public constructor
@@ -61,44 +60,37 @@ public class AccountFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         this.view = view;
+
+        AccountFragmentViewModel viewModel = new ViewModelProvider(requireActivity()).get(AccountFragmentViewModel.class);
+        viewModel.initializeRepository(requireActivity());
         ImageView imageView = view.findViewById(R.id.imageViewAccountImage);
-        TextView username = view.findViewById(R.id.textViewAccountUsername);
         TextView email = view.findViewById(R.id.textViewAccountEmail);
-        TextView password = view.findViewById(R.id.textViewAccountChangePassword);
         TextView logout = view.findViewById(R.id.textViewAccountLogout);
-        TextView help = view.findViewById(R.id.textViewAccountHelp);
 
         imageView.setImageResource(R.drawable.profile_picture);
-        String user = SessionManager.getActiveSession(this.context);
-        username.setText(user);
 
-        User userActive = AppDataBase.getInstance(this.context).getUserDAO().getUserByUsername(user);
-        email.setText(userActive.getEmail());
-
-        password.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                NavDirections action = (NavDirections) AccountFragmentDirections.actionAccountFragmentToChangePasswordFragment2();
-                Navigation.findNavController(view).navigate(action);
-            }
-        });
+        email.setText(viewModel.getSavedEmail());
 
         logout.setOnClickListener(new View.OnClickListener() {
-
             @Override
             public void onClick(View view) {
-                    SessionManager.clearSession(context);
+                    viewModel.CLEAR_ALL_DATA();
                     PreLoginActivity.startActivity(context);
+                    accountFragmentLogOut.onLogoutClick();
             }
         });
 
-        help.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                NavDirections action = (NavDirections) AccountFragmentDirections.actionAccountFragmentToHelpFragment();
-                Navigation.findNavController(view).navigate(action);
-            }
-        });
     }
 
+
+    @Override
+    public void onAttach(@NonNull Context context) {
+        super.onAttach(context);
+        if (context instanceof AccountFragmentLogOut){
+            this.accountFragmentLogOut = (AccountFragmentLogOut) context;
+        }
+    }
+    public interface AccountFragmentLogOut{
+        void onLogoutClick();
+    }
 }

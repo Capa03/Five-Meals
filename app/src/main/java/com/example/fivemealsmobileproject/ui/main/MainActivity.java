@@ -13,14 +13,14 @@ import androidx.navigation.ui.NavigationUI;
 
 import com.example.fivemealsmobileproject.R;
 import com.example.fivemealsmobileproject.databinding.ActivityMainBinding;
+import com.example.fivemealsmobileproject.ui.account.AccountFragment;
 import com.example.fivemealsmobileproject.ui.favorites.fragment.FavoritesFragment;
 import com.example.fivemealsmobileproject.ui.home.fragment.HomeFragment;
 import com.example.fivemealsmobileproject.ui.home.fragment.HomeProductDetailsFragment;
-import com.example.fivemealsmobileproject.ui.login.SessionManager;
 import com.example.fivemealsmobileproject.ui.login.view.PreLoginActivity;
 import com.example.fivemealsmobileproject.ui.order.ParentProductDB;
 
-public class MainActivity extends AppCompatActivity implements HomeFragment.MainActivityNavBar, HomeProductDetailsFragment.MainActivityNavBar, FavoritesFragment.MainActivityNavBar {
+public class MainActivity extends AppCompatActivity implements HomeFragment.MainActivityNavBar, HomeProductDetailsFragment.MainActivityNavBar, FavoritesFragment.MainActivityNavBar, AccountFragment.AccountFragmentLogOut {
 
     ActivityMainBinding binding;
     private MainActivityViewModel viewModel;
@@ -56,7 +56,6 @@ public class MainActivity extends AppCompatActivity implements HomeFragment.Main
     }
 
     public void onLogOutClick(View view) {
-        SessionManager.clearSession(this);
         PreLoginActivity.startActivity(this);
         finish();
     }
@@ -70,5 +69,10 @@ public class MainActivity extends AppCompatActivity implements HomeFragment.Main
     @Override
     public void showNavBar() {
         binding.bottomNavigationView.setVisibility(View.VISIBLE);
+    }
+
+    @Override
+    public void onLogoutClick() {
+        finish();
     }
 }

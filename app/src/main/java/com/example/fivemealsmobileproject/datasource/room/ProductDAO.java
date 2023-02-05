@@ -26,4 +26,6 @@ public interface ProductDAO {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     void insertProducts(List<Product> products);
 
+    @Query("DELETE FROM Product")
+    void clearProducts();
 }
