@@ -61,6 +61,7 @@ public class CodeActivity extends AppCompatActivity {
                         if(success){
                             viewModel.getOrderFromTable();
                             MainActivity.startActivity(context);
+                            finish();
                         }else {
                             Toast.makeText(context, "Invalid code", Toast.LENGTH_SHORT).show();
                         }

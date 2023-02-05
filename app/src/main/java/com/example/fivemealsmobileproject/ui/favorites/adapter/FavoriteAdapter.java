@@ -79,10 +79,8 @@ public class FavoriteAdapter extends RecyclerView.Adapter<FavoriteAdapter.Favori
             this.textViewName.setText(name);
         }
 
-        public void setImage(String imageID){
-            // https://drive.google.com/uc?id=
-            String link = "https://docs.google.com/uc?id=" + imageID;
-            Glide.with(this.context).load(link).into(this.productImage);
+        public void setImage(String imgLink){
+            Glide.with(this.context).load(imgLink).into(this.productImage);
         }
     }
     public interface FavoriteEventListener{

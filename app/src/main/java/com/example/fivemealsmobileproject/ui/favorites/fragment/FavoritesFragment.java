@@ -71,7 +71,7 @@ public class FavoritesFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         this.view = view;
         this.viewModel = new ViewModelProvider(requireActivity()).get(FavoritesFragmentViewModel.class);
-
+        this.viewModel.initializeRepository(requireActivity());
         mainActivityNavBar.showNavBar();
 
         view.findViewById(R.id.imageViewToolBarGoBack).setOnClickListener(
@@ -101,6 +101,11 @@ public class FavoritesFragment extends Fragment {
         }
     }
 
+    @Override
+    public void onStart() {
+        super.onStart();
+        this.viewModel.refreshData();
+    }
 
     private void checkIfIsEmpty(){
         TextView empty = view.findViewById(R.id.textViewEmptyFavoritesMessage);
