@@ -1,19 +1,15 @@
 package com.example.fivemealsmobileproject.ui.order;
 
 import android.app.Activity;
-import android.content.Context;
 
 import androidx.lifecycle.LifecycleOwner;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
-import com.example.fivemealsmobileproject.datasource.repository.localization.LocalizationRepository;
 import com.example.fivemealsmobileproject.datasource.repository.order.OrderRepository;
 import com.example.fivemealsmobileproject.datasource.room.AppDataBase;
 import com.example.fivemealsmobileproject.datasource.room.OrderProduct;
 import com.example.fivemealsmobileproject.datasource.room.OrderProductDAO;
-import com.example.fivemealsmobileproject.ui.login.SessionManager;
-import com.example.fivemealsmobileproject.ui.main.TableInfo;
 
 import java.util.ArrayList;
 import java.util.List;

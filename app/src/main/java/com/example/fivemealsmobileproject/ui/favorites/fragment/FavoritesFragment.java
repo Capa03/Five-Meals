@@ -7,7 +7,6 @@ import androidx.activity.OnBackPressedCallback;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.NavDirections;
 import androidx.navigation.Navigation;
@@ -17,18 +16,11 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.fivemealsmobileproject.R;
-import com.example.fivemealsmobileproject.datasource.room.AppDataBase;
-import com.example.fivemealsmobileproject.datasource.room.FavoriteProduct;
 import com.example.fivemealsmobileproject.ui.favorites.adapter.FavoriteAdapter;
 import com.example.fivemealsmobileproject.ui.favorites.viewmodel.FavoritesFragmentViewModel;
-import com.example.fivemealsmobileproject.ui.home.viewmodel.HomeFragmentViewModel;
-import com.example.fivemealsmobileproject.ui.main.TableInfo;
-
-import java.util.List;
 
 public class FavoritesFragment extends Fragment {
     private FavoriteAdapter adapter;

@@ -1,7 +1,6 @@
 package com.example.fivemealsmobileproject.ui.payment;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -16,12 +15,7 @@ import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.example.fivemealsmobileproject.R;
-import com.example.fivemealsmobileproject.datasource.room.AppDataBase;
 import com.example.fivemealsmobileproject.datasource.room.OrderProduct;
-import com.example.fivemealsmobileproject.datasource.room.Product;
-import com.example.fivemealsmobileproject.ui.login.SessionManager;
-import com.example.fivemealsmobileproject.ui.main.MainActivityViewModel;
-import com.example.fivemealsmobileproject.ui.main.TableInfo;
 
 import java.util.ArrayList;
 import java.util.List;

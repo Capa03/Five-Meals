@@ -8,10 +8,7 @@ import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
 
 import com.example.fivemealsmobileproject.datasource.repository.favorite.FavoriteRepository;
-import com.example.fivemealsmobileproject.datasource.room.AppDataBase;
 import com.example.fivemealsmobileproject.datasource.room.FavoriteProduct;
-import com.example.fivemealsmobileproject.datasource.room.FavoriteProductDAO;
-import com.example.fivemealsmobileproject.ui.main.TableInfo;
 
 import java.util.List;
 
