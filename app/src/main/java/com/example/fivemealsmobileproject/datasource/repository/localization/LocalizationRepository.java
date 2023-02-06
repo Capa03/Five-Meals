@@ -23,6 +23,8 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class LocalizationRepository {
     private final String CAPA = "http://10.0.2.2:5168/";
     private final String LUIS = "http://192.168.1.70:5168";
+    private final String API = "https://fivemealsapi.azurewebsites.net";
+
 
     private final SharedPreferences sharedPreferences;
     private final String KEY_TABLE_ID = "keyTableId";
@@ -35,7 +37,7 @@ public class LocalizationRepository {
 
     public LocalizationRepository(Activity activity) {
         Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl(LUIS)
+                .baseUrl(API)
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
         this.authRepository = new AuthRepository(activity);

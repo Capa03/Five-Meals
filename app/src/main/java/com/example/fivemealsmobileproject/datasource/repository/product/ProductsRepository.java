@@ -29,6 +29,8 @@ public class ProductsRepository {
 
     private final String CAPA = "http://10.0.2.2:5168/";
     private final String LUIS = "http://192.168.1.70:5168";
+    private final String API = "https://fivemealsapi.azurewebsites.net";
+
 
     private CategoryDAO categoryDAO;
     private ProductDAO productDAO;
@@ -39,7 +41,7 @@ public class ProductsRepository {
 
     public ProductsRepository(Activity activity) {
         Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl(LUIS)
+                .baseUrl(API)
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
 
