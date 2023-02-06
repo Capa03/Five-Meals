@@ -54,7 +54,10 @@ public class CurrentOrderAdapter extends RecyclerView.Adapter<CurrentOrderAdapte
             });
 
             parentOrderProduct.getQuantity().observe(this.observerOwner, quantity -> {
-                if(quantity != null) holder.setQuantity(quantity);
+                if(quantity != null){
+                    holder.setQuantity(quantity);
+                    holder.setPrice(parentOrderProduct.getProductPrice() * quantity);
+                }
             });
 
             holder.setName(parentOrderProduct.getProductName());
@@ -62,7 +65,6 @@ public class CurrentOrderAdapter extends RecyclerView.Adapter<CurrentOrderAdapte
             int maxTime = (int) parentOrderProduct.getProductMaxTime();
 
             holder.setTime(ProgressHelper.getTimeToString(minTime, maxTime));
-            holder.setPrice(parentOrderProduct.getProductPrice() * holder.adapter.getItemCount());
             holder.setImage(parentOrderProduct.getImgLink());
             holder.recyclerView.setVisibility(parentOrderProduct.getState());
 

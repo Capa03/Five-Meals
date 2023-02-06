@@ -74,9 +74,9 @@ public class AccountFragment extends Fragment {
         logout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                    viewModel.CLEAR_ALL_DATA();
                     PreLoginActivity.startActivity(context);
                     accountFragmentLogOut.onLogoutClick();
+                    viewModel.CLEAR_ALL_DATA();
             }
         });
 

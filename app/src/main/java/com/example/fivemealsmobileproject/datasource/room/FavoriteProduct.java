@@ -11,15 +11,13 @@ public class FavoriteProduct {
     private float productPrice;
     private String productImage;
     private long restaurantID;
-    private String restaurantName;
 
-    public FavoriteProduct(long productID, String productName, float productPrice, String productImage, long restaurantID, String restaurantName) {
+    public FavoriteProduct(long productID, String productName, float productPrice, String productImage, long restaurantID) {
         this.productID = productID;
         this.productName = productName;
         this.productPrice = productPrice;
         this.productImage = productImage;
         this.restaurantID = restaurantID;
-        this.restaurantName = restaurantName;
     }
 
     public long getProductID() {
@@ -42,7 +40,4 @@ public class FavoriteProduct {
         return restaurantID;
     }
 
-    public String getRestaurantName() {
-        return restaurantName;
-    }
 }

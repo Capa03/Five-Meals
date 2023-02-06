@@ -1,8 +1,6 @@
 package com.example.fivemealsmobileproject.datasource.repository.favorite;
 
 import android.app.Activity;
-import android.content.Context;
-import android.content.SharedPreferences;
 import android.widget.Toast;
 
 import androidx.lifecycle.LifecycleOwner;
@@ -107,8 +105,8 @@ public class FavoriteRepository {
         });
     }
 
-    public LiveData<List<FavoriteProduct>> getFavoritesLiveData(){
-        return this.favoriteProductDAO.getAllFavorites();
+    public LiveData<List<FavoriteProduct>> getFavoritesLiveData(int restaurantId){
+        return this.favoriteProductDAO.getAllFavoritesFromRestaurant(restaurantId);
     }
 
     public LiveData<FavoriteProduct> getFavoriteLiveDataById(long productId){
