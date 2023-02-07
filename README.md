@@ -4,15 +4,13 @@
 
 ## Descrição do Projeto
 
-No presente projeto foi desenvolvida uma aplicação que visa servir de protótipo/base 
-para uma futura expansão da mesma, cujo objetivo será diminuir o tempo da realização de um pedido 
+No presente projeto foi desenvolvida uma aplicação que visa servir de ponto de acesso aos utilizadores, cujo objetivo será diminuir o tempo da realização de um pedido 
 em um restaurante tradicional, mediante uma solução de evoluir o processo, melhorando e 
 agilizando o pedido através da utilização da tecnologia. Como 
 observado nos grandes centros urbanos, estes experienciam um grande problema ligado à mobilidade e 
 agilidade social, existem poucas soluções no mercado que resolvem este problema da mesma maneira que nós. 
 Perante o desafio, o objetivo da nossa aplicação é diminuir todo esse processo, através da utilização de 
-uma app mobile que servirá de comunicação direta entre o cliente e a cozinha do restaurante melhorando a 
-qualidade e velocidade da informação em ambos.
+uma app mobile que servirá de ponto de entrada no que seria uma comunicação direta entre o cliente e a cozinha do restaurante onde estará presente [FiveMealWebApp](https://github.com/Capa03/FiveMealsWeb) e onde todos os dados e lógica estariam na [FiveMealsAPI](https://github.com/Capa03/FiveMealsAPI).
 
 ## Elementos da equipa:
 * David Capa
@@ -40,10 +38,7 @@ qualidade e velocidade da informação em ambos.
 > - Favorite Product
 > - OrderProduct
 > - Product
-> - Restuarant
-> - SingleUse
-> - Table
-> - User
+
 
 ### Requesitos Avançados
 #### Localização Restaurante / Mesa: 
@@ -60,13 +55,21 @@ Qr Code Reader | |X
 Manual Code Insert | |X
 Bottom Navigation and Fragments | |X
 Home Fragments | |X
-Order Fragments | |X
-Favorites Fragments | |X
-Account Fragments | |X
+Order Fragment | |X
+Favorites Fragment | |X
+Account Fragment | |X
 Change Handling back Button | |X
-Add Description for Products | |X
+Aplicar a arquitetura proposta pelo Android | |X
+Utilização de um fonte única de verdade | |X
 
 #### Para mais informação do processo de desenvolvimento ver [Desenvolvimento do projeto](https://github.com/Capa03/Five-Meals/projects/1)
+
+
+## Links Importantes - Documentação
+
+* [Retrofit](https://square.github.io/retrofit/)
+* [Arquitectura proposta pelo Android](https://developer.android.com/topic/architecture)
+
 
 ## Links Importantes - StackOverFlow
 
@@ -82,8 +85,9 @@ Add Description for Products | |X
 ## Aplicações e Plugins Usados
 Applicação | Versão
 -----------|--------
-[Android Studio](https://developer.android.com/studio/) | 2021.2.1
+[Android Studio](https://developer.android.com/studio/) | 2022.1.19
 [AdobeXD](https://www.adobe.com/pt/products/xd.html) | 2022
-[Room](https://developer.android.com/jetpack/androidx/releases/room) | 2.4.2
-[Glide](https://github.com/bumptech/glide) | v4.13.2 
+[Room](https://developer.android.com/jetpack/androidx/releases/room) | v2.4.1
+[Glide](https://github.com/bumptech/glide) | v4.13.0 
+[Retrofit](https://square.github.io/retrofit/) | v2.9.0
 
